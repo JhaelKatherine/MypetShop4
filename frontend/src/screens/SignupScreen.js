@@ -55,95 +55,88 @@ export default function SignupScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <div>
-    <Helmet>
-      <title>Register</title>
-    </Helmet>
-    <form className="form" onSubmit={submitHandler} noValidate>
-      <p className="title">Register</p>
-      <p className="message">Register now and get full access to other features</p>
-      <div className="form-fields">
-        <div className="form-field">
-          <label htmlFor="firstName">First Name</label>
-          <input
-            required
-            type="text"
-            id="firstName"
-            className="input"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            required
-            type="text"
-            id="lastName"
-            className="input"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="username">Username</label>
-          <input
-            required
-            type="text"
-            id="username"
-            className="input"
-            value={userName}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="email">Email</label>
-          <input
-            required
-            type="email"
-            id="email"
-            className="input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="password">Password</label>
-          <input
-            required
-            type="password"
-            id="password"
-            className="input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+    <>
+      <Header />
+      <div className="form-container">
+        <Helmet>
+          <title>Sign Up</title>
+        </Helmet>
+        <h1 className="my-3">Sign Up</h1>
+        <form onSubmit={submitHandler} className="custom-form">
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              className="form-control"
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              className="form-control"
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="userName">User Name</label>
+            <input
+              type="text"
+              id="userName"
+              className="form-control"
+              onChange={(e) => setUserName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              className="form-control"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              className="form-control"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              className="form-control"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <button type="submit" className="btn btn-primary">
+              Sign Up
+            </button>
+          </div>
+          <div className="mb-3">
+            Already have an account?{' '}
+            <Link to={`/signin?redirect=${redirect}`} className="custom-link">
+              Sign-In
+            </Link>
+          </div>
+        </form>
       </div>
-      <button className="submit" type="submit">
-        Sign Up
-      </button>
-      <p className="signin">Register with</p>
-      <div className="social-buttons-container">
-        <button className="social-button google-button">
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg"
-            alt="Google"
-          />
-          Google
-        </button>
-        <button className="social-button facebook-button">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png"
-            alt="Facebook"
-          />
-          Facebook
-        </button>
-      </div>
-      <p className="signin">
-        Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign In</Link>
-      </p>
-    </form>
-  </div>
-);
+      <Footer />
+    </>
+  );
 };
-  
