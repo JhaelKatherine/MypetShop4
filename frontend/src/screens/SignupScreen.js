@@ -128,13 +128,11 @@ export default function SignupScreen() {
             />
           </div>
           <div className="mb-3">
-            <button type="submit" className="btn btn-primary">
-              Sign Up
-            </button>
+          
           </div>
           <div className="mb-3">
             Already have an account?{' '}
-            <Link to={`/signin?redirect=${redirect}`} className="custom-link">
+            <Link to={`/signin?redirect=${redirect}`} className="btn btn-primary">
               Sign-In
             </Link>
           </div>
