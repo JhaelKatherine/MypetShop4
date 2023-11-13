@@ -47,6 +47,7 @@ userRouter.put(
       res.send({
         _id: updatedUser._id,
         name: updatedUser.name,
+        lastName: updatedUser.lastName,
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
         token: generateToken(updatedUser),
@@ -165,6 +166,7 @@ userRouter.post(
         res.send({
           _id: user._id,
           name: user.name,
+          lastName: user.lastName,
           email: user.email,
           isAdmin: user.isAdmin,
           token: generateToken(user),
@@ -181,6 +183,7 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const newUser = new User({
       name: req.body.name,
+      lastName: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
     });
@@ -188,6 +191,7 @@ userRouter.post(
     res.send({
       _id: user._id,
       name: user.name,
+      lastName: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user),
