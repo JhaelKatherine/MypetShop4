@@ -55,59 +55,95 @@ export default function SignupScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <Container className="small-container">
-      <Helmet>
-        <title>Sign Up</title>
-      </Helmet>
-      <h1 className="my-3">Sign Up</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control onChange={(e) => setName(e.target.value)} required />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="lastName">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control onChange={(e) => setLastName(e.target.value)} required />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="userName">
-          <Form.Label>User Name</Form.Label>
-          <Form.Control onChange={(e) => setUserName(e.target.value)} required />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
+    <div>
+    <Helmet>
+      <title>Register</title>
+    </Helmet>
+    <form className="form" onSubmit={submitHandler} noValidate>
+      <p className="title">Register</p>
+      <p className="message">Register now and get full access to other features</p>
+      <div className="form-fields">
+        <div className="form-field">
+          <label htmlFor="firstName">First Name</label>
+          <input
             required
+            type="text"
+            id="firstName"
+            className="input"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div className="form-field">
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            required
+            type="text"
+            id="lastName"
+            className="input"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div className="form-field">
+          <label htmlFor="username">Username</label>
+          <input
+            required
+            type="text"
+            id="username"
+            className="input"
+            value={userName}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="form-field">
+          <label htmlFor="email">Email</label>
+          <input
+            required
+            type="email"
+            id="email"
+            className="input"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
+        </div>
+        <div className="form-field">
+          <label htmlFor="password">Password</label>
+          <input
             required
+            type="password"
+            id="password"
+            className="input"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Form.Group className="mb-3" controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-        </Form.Group>
-        <div className="mb-3">
-          <Button type="submit">Sign Up</Button>
         </div>
-        <div className="mb-3">
-          Already have an account?{' '}
-          <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
-        </div>
-      </Form>
-    </Container>
-  );
-}
+      </div>
+      <button className="submit" type="submit">
+        Sign Up
+      </button>
+      <p className="signin">Register with</p>
+      <div className="social-buttons-container">
+        <button className="social-button google-button">
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg"
+            alt="Google"
+          />
+          Google
+        </button>
+        <button className="social-button facebook-button">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png"
+            alt="Facebook"
+          />
+          Facebook
+        </button>
+      </div>
+      <p className="signin">
+        Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign In</Link>
+      </p>
+    </form>
+  </div>
+);
+};
+  
