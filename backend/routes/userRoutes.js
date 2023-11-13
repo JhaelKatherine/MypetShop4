@@ -54,6 +54,7 @@ userRouter.put(
         token: generateToken(updatedUser),
       });
     } else {
+
       res.status(404).send({ message: 'User not found' });
     }
   })
@@ -186,6 +187,7 @@ userRouter.post(
     const newUser = new User({
       name: req.body.name,
       lastName: req.body.name,
+      userName: req.body.userName,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
     });
