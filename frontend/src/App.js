@@ -42,13 +42,7 @@ function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { fullBox, cart, userInfo } = state;
 
-  const signoutHandler = () => {
-    ctxDispatch({ type: 'USER_SIGNOUT' });
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('shippingAddress');
-    localStorage.removeItem('paymentMethod');
-    window.location.href = '/signin';
-  };
+
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -66,15 +60,7 @@ function App() {
   return (
     <BrowserRouter>
       <div
-        className={
-          sidebarIsOpen
-            ? fullBox
-              ? 'site-container active-cont d-flex flex-column full-box'
-              : 'site-container active-cont d-flex flex-column'
-            : fullBox
-            ? 'site-container d-flex flex-column full-box'
-            : 'site-container d-flex flex-column'
-        }
+
       >
         <ToastContainer position="bottom-center" limit={1} />
         <header>
@@ -122,11 +108,7 @@ function App() {
           </Navbar>
         </header>
         <div
-          className={
-            sidebarIsOpen
-              ? 'active-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
-              : 'side-navbar d-flex justify-content-between flex-wrap flex-column'
-          }
+
         >
           <Nav className="flex-column text-white w-100 p-2">
             <Nav.Item>
@@ -148,7 +130,6 @@ function App() {
           <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
-              <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SignupScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
 
