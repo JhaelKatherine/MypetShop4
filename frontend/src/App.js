@@ -97,12 +97,12 @@ function App() {
                 <SearchBox />
                 <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
-                    Cart
-                    {cart.cartItems.length > 0 && (
-                      <Badge pill bg="danger">
-                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                      </Badge>
-                    )}
+                  <img
+            alt="cart"
+            src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
+            height="50"
+            className="d-inline-block align-top"
+            />
                   </Link>
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
@@ -123,8 +123,12 @@ function App() {
                     </NavDropdown>
                   ) : (
                     <Link className="nav-link" to="/signin">
-                      Sign In
-                    </Link>
+                  <img
+            alt="signin"
+            src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+            height="50"
+            className="d-inline-block align-top"
+            />                    </Link>
                   )}
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
