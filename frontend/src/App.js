@@ -80,12 +80,6 @@ function App() {
         <header>
           <Navbar >
             <Container>
-              <Button
-                variant="dark"
-                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
-              >
-                <i className="fas fa-bars"></i>
-              </Button>
 
               <LinkContainer to="/">
                 <Navbar.Brand>
