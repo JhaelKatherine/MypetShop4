@@ -52,3 +52,22 @@
         margin-right: 0;
     }
 }
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajusta el espacio según sea necesario */
+  }
+  
+  .image-container img {
+    width: 100%; /* El ancho de la imagen será el 100% del contenedor */
+    max-width: 9100px; /* Ancho máximo de la imagen, ajusta según sea necesario */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin: 0 10px; /* Ajusta el margen según sea necesario */
+  }
+  
+  @media (max-width: 768px) {
+    .image-container img {
+      max-width: 100%; /* Ajusta el ancho máximo para pantallas más pequeñas */
+    }
+  }

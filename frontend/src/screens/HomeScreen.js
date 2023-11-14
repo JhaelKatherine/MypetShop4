@@ -77,6 +77,12 @@ function HomeScreen() {
 
 
       </label>
+
+      <div className="image-container">
+      <img src="https://coderi.mx/wp-content/uploads/slider2/Banner_Latas1.jpeg" alt="promotion" />
+      {/* Agrega más imágenes según sea necesario */}
+    </div>
+
       <h1>Featured Products</h1>
 
       <div className="products">
