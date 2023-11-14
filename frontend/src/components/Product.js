@@ -30,9 +30,9 @@ function Product(props) {
 
   return (
     <Card>
-
+      <img src={product.image} className="card-img-top" alt={product.name} />
       <Card.Body>
-
+        <Card.Title>{product.name}</Card.Title>
         <Rating rating={product.rating} numReviews={product.numReviews} />
         <Card.Text>${product.price}</Card.Text>
         {product.countInStock === 0 ? (
@@ -40,7 +40,7 @@ function Product(props) {
             Out of stock
           </Button>
         ) : (
-          <Button onClick>Add to cart</Button>
+          <Button onClick={addToCartHandler}>Add to cart</Button>
         )}
       </Card.Body>
     </Card>
