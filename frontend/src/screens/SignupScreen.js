@@ -8,8 +8,6 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
-import Header from './Header.js'; 
-import Footer from "./Footer.js";
 import '../Css/AddUser.css';
 
 
@@ -60,7 +58,6 @@ export default function SignupScreen() {
 
   return (
     <>
-      <Header />
       <div className="form-container">
         <Helmet>
           <title>Sign Up</title>
@@ -147,7 +144,6 @@ export default function SignupScreen() {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };
