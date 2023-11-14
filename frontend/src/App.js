@@ -251,14 +251,6 @@ function App() {
                 }
               ></Route>
               <Route
-                path="/admin/products"
-                element={
-                  <AdminRoute>
-                    <ProductListScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
                 path="/admin/product/:id"
                 element={
                   <AdminRoute>
