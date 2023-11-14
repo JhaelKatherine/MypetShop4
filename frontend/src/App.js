@@ -96,14 +96,12 @@ function App() {
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
                 <Nav className="me-auto  w-100  justify-content-end">
-                  <Link to="/cart" className="nav-link">
                   <img
             alt="cart"
             src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
             height="50"
             className="d-inline-block align-top"
             />
-                  </Link>
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">
