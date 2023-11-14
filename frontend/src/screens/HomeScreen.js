@@ -1,4 +1,5 @@
-import { useEffect, useReducer, useState } from "react";
+import React, { useState } from "react";
+import { useEffect, useReducer } from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,7 +7,7 @@ import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-// import data from '../data';
+import "../Css/homeScreen.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -27,7 +28,9 @@ function HomeScreen() {
     loading: true,
     error: "",
   });
-  // const [products, setProducts] = useState([]);
+
+  const [buttonContainerColor, setButtonContainerColor] = useState("#4180AB");
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -37,17 +40,45 @@ function HomeScreen() {
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
-
-      // setProducts(result.data);
     };
     fetchData();
   }, []);
+
+  const categoryButtons = [
+    { label: " DOG", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png", onClick: () => console.log("Filtrar por gato") },
+    { label: " CAT", imageUrl: "https://cdn.icon-icons.com/icons2/2242/PNG/512/gato_icon_134883.png", onClick: () => console.log("Filtrar por perro") },
+    { label: " RODENTS", imageUrl: "https://cdn-icons-png.flaticon.com/512/1905/1905235.png", onClick: () => console.log("Filtrar por ave") },
+    { label: " BIRDS", imageUrl: "https://cdn-icons-png.flaticon.com/512/6622/6622649.png", onClick: () => console.log("Filtrar por reptil") },
+    { label: " REPTILES", imageUrl: "https://cdn-icons-png.flaticon.com/512/2809/2809783.png", onClick: () => console.log("Filtrar por roedores") },
+  ];
+
+  const handleButtonClick = (color) => {
+    setButtonContainerColor(color);
+  };
+
   return (
     <div>
       <Helmet>
         <title>Amazona</title>
       </Helmet>
+
+      {/* Checkbox for toggling buttons */}
+
+      {/* Button container inside the label for the checkbox */}
+      <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
+      {categoryButtons.map((button, index) => (
+  <button key={index} onClick={() => handleButtonClick("#4CAF50")} className="image-button">
+    <div className="button-content">
+      <img src={button.imageUrl} alt={button.label} />
+      <span style={{ marginBottom: '5px' }}>{button.label}</span>
+    </div>
+  </button>
+))}
+
+
+      </label>
       <h1>Featured Products</h1>
+
       <div className="products">
         {loading ? (
           <LoadingBox />
