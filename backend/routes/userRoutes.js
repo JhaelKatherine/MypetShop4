@@ -47,11 +47,14 @@ userRouter.put(
       res.send({
         _id: updatedUser._id,
         name: updatedUser.name,
+        lastName: updatedUser.lastName,
+        userName:updatedUser.userName,
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
         token: generateToken(updatedUser),
       });
     } else {
+
       res.status(404).send({ message: 'User not found' });
     }
   })
@@ -165,6 +168,8 @@ userRouter.post(
         res.send({
           _id: user._id,
           name: user.name,
+          lastName: user.lastName,
+          userName: user.userName,
           email: user.email,
           isAdmin: user.isAdmin,
           token: generateToken(user),
@@ -181,6 +186,8 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const newUser = new User({
       name: req.body.name,
+      lastName: req.body.name,
+      userName: req.body.userName,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
     });
@@ -188,6 +195,8 @@ userRouter.post(
     res.send({
       _id: user._id,
       name: user.name,
+      lastName: user.name,
+      userName: user.userName,
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user),
