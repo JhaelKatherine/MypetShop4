@@ -36,6 +36,8 @@ import UserEditScreen from './screens/UserEditScreen';
 import MapScreen from './screens/MapScreen';
 import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import './App.css';
+
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -77,7 +79,7 @@ function App() {
       >
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <Navbar bg="dark" variant="dark" expand="lg">
+          <Navbar >
             <Container>
               <Button
                 variant="dark"
@@ -87,7 +89,15 @@ function App() {
               </Button>
 
               <LinkContainer to="/">
-                <Navbar.Brand>amazona</Navbar.Brand>
+                <Navbar.Brand>
+
+                <img
+            alt="My Pet Shop Logo"
+            src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
+            height="70"
+            className="d-inline-block align-top"
+            />
+                </Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">

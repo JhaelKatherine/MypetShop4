@@ -1,0 +1,21 @@
+/* search-box.css */
+
+.d-flex {
+    margin-bottom: 0; /* Ajusta según sea necesario */
+  }
+  
+  /* Estilo para el input de búsqueda */
+  #q {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 250px; /* Ajusta el ancho según sea necesario */
+  }
+  
+  /* Estilo para el botón de búsqueda */
+  #button-search {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 23;
+  }
+  
+  /* Ajusta el estilo según tus necesidades */
+  
