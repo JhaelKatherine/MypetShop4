@@ -47,11 +47,12 @@ export default function SignupScreen() {
 
   return (
     <>
+    <div className="blue-background"> {/* Agregar esta línea */}
+
       <div className="form-container">
-        <Helmet>
-          <title>Sign Up</title>
-        </Helmet>
-        <h1 className="my-3">Sign Up</h1>
+      <div className="centered-title">
+         <h1>Sign Up</h1>
+      </div>
         <form onSubmit={submitHandler} className="custom-form">
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -126,11 +127,13 @@ export default function SignupScreen() {
                 </button>
           </div>
           <div className="mb-3">
-            Already have an account?{' '}
-              Sign-In
-          </div>
+            Already have an account? <Link to="/signin" className="signin">Sign-In</Link>
+            </div>
         </form>
       </div>
+
+      </div>
+
     </>
   );
 };
