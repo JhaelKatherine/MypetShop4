@@ -1,154 +1,83 @@
-import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Axios from 'axios';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import Container from 'react-bootstrap/Container';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
-import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
 
-const reducer = (state, action) => {
-    switch (action.type) {
-      case 'FETCH_REQUEST':
-        return { ...state, loading: true };
-      case 'FETCH_SUCCESS':
-        return { ...state, loading: false };
-      case 'FETCH_FAIL':
-        return { ...state, loading: false, error: action.payload };
-      case 'UPDATE_REQUEST':
-        return { ...state, loadingUpdate: true };
-      case 'UPDATE_SUCCESS':
-        return { ...state, loadingUpdate: false };
-      case 'UPDATE_FAIL':
-        return { ...state, loadingUpdate: false };
-      case 'UPLOAD_REQUEST':
-        return { ...state, loadingUpload: true, errorUpload: '' };
-      case 'UPLOAD_SUCCESS':
-        return {
-          ...state,
-          loadingUpload: false,
-          errorUpload: '',
-        };
-      case 'UPLOAD_FAIL':
-        return { ...state, loadingUpload: false, errorUpload: action.payload };
-  
-      default:
-        return state;
+export default function AddProductScreen() {
+  const navigate = useNavigate();
+
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [image, setImage] = useState('');
+  const [category, setCategory] = useState('');
+  const [countInStock, setCountInStock] = useState('');
+  const [brand, setBrand] = useState('');
+  const [description, setDescription] = useState('');
+  const [loadingUpload, setLoadingUpload] = useState(false);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const { data } = await Axios.post('/api/products', {
+        name,
+        image,
+        brand,
+        category,
+        description,
+        price,
+        countInStock,
+      });
+      setLoading(false);
+      toast.success('Producto agregado exitosamente');
+      // Redirige a la página de detalles del nuevo producto, si es necesario.
+      navigate(`/product/${data._id}`);
+    } catch (err) {
+      setLoading(false);
+      toast.error(getError(err));
     }
   };
 
-  export default function ProductEditScreen() {
-    const navigate = useNavigate();
-    const params = useParams(); // /product/:id
-    const { id: productId } = params;
-  
-    const { state } = useContext(Store);
-    const { userInfo } = state;
-    const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
-      useReducer(reducer, {
-        loading: true,
-        error: '',
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      setLoading(true);
+      const { data } = await Axios.post('/api/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
       });
-  
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
-    const [image, setImage] = useState('');
-    const [category, setCategory] = useState('');
-    const [countInStock, setCountInStock] = useState('');
-    const [brand, setBrand] = useState('');
-    const [description, setDescription] = useState('');
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          dispatch({ type: 'FETCH_REQUEST' });
-          const { data } = await Axios.get(`/api/products/${productId}`);
-          setName(data.name);
-          setPrice(data.price);
-          setImage(data.image);
-          setCategory(data.category);
-          setCountInStock(data.countInStock);
-          setBrand(data.brand);
-          setDescription(data.description);
-          dispatch({ type: 'FETCH_SUCCESS' });
-        } catch (err) {
-          dispatch({
-            type: 'FETCH_FAIL',
-            payload: getError(err),
-          });
-        }
-      };
-      fetchData();
-    }, [productId]);
-  
-    const submitHandler = async (e) => {
-      e.preventDefault();
-      
-      try {
-        const { data } = await Axios.post('/api/products/', {
-          name,
-          image,
-          brand,
-          category,
-          description,
-          price,
-          countInStock,
-        });
-        toast.success('Product updated successfully');
-      } catch (err) {
-        toast.error(getError(err));
-      }
+      setLoading(false);
+      setImage(data.secure_url);
+      toast.success('Imagen cargada exitosamente. Haz clic en "Agregar" para aplicarla.');
+    } catch (err) {
+      setLoading(false);
+      toast.error(getError(err));
+    }
+  };
 
-    };
-    const uploadFileHandler = async (e, forImages) => {
-      const file = e.target.files[0];
-      const bodyFormData = new FormData();
-      bodyFormData.append('file', file);
-      try {
-        dispatch({ type: 'UPLOAD_REQUEST' });
-        const { data } = await Axios.post('/api/upload', bodyFormData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        });
-        dispatch({ type: 'UPLOAD_SUCCESS' });
-  
-        if (forImages) {
-          //setImages([...images, data.secure_url]);
-        } else {
-          setImage(data.secure_url);
-        }
-        toast.success('Image uploaded successfully. click Update to apply it');
-      } catch (err) {
-        toast.error(getError(err));
-        dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
-      }
-    };
-    const deleteFileHandler = async (fileName, f) => {
-      console.log(fileName, f);
-      toast.success('Image removed successfully. click Update to apply it');
-    };
-
-    return (
-        <Container className="small-container">
-<Helmet>
-  <title>{`Add Product ${productId}`}</title>
-</Helmet>
-
-          <h1>Add Product {productId}</h1>
+  return (
     
-          {loading ? (
-            <LoadingBox></LoadingBox>
-          ) : error ? (
-            <MessageBox variant="danger">{error}</MessageBox>
-          ) : (
-            <Form onSubmit={submitHandler}>
+    <Container className="small-container">
+      <title>Añadir Producto</title>
+      <h1>Añadir Producto</h1>
+      {loading ? (
+        <LoadingBox />
+      ) : (
+        <Form onSubmit={submitHandler}>
               <Form.Group className="mb-3" controlId="name">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
@@ -203,23 +132,15 @@ const reducer = (state, action) => {
                   required
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <div className="mb-3">
-                <Button disabled={loadingUpdate} type="submit">
-                  Update
-                </Button>
-                {loadingUpdate && <LoadingBox></LoadingBox>}
-              </div>
-            </Form>
-          )}
-        </Container>
-      );
-
+              <Form.Group className="mb-3" controlId="imageFile">
+            <Form.Label>Subir Imagen</Form.Label>
+            <Form.Control type="file" onChange={uploadFileHandler} />
+          </Form.Group>
+          <div className="mb-3">
+            <Button type="submit">Agregar</Button>
+          </div>
+        </Form>
+      )}
+    </Container>
+  );
 }
