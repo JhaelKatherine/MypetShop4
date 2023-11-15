@@ -57,7 +57,6 @@ export default function ShippingAddressScreen() {
         <title>Shipping and Payment</title>
       </Helmet>
 
-      <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="row">
         {/* Left side for ShippingAddressScreen */}
         <div className="col-md-6">
@@ -132,12 +131,13 @@ export default function ShippingAddressScreen() {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
               </div>
-              <div className="mb-3">
-                <Button variant="primary" type="submit">Continue</Button>
-              </div>
               <div>
                 <CartScreen/>
               </div>
+              <div className="mb-3">
+                <Button variant="primary" type="submit">Continue</Button>
+              </div>
+            
             </Form>
           </div>
         </div>
