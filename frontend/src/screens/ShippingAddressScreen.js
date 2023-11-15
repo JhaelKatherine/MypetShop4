@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
-import CartScreen from './CartScreen';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -22,6 +22,12 @@ export default function ShippingAddressScreen() {
   const [country, setCountry] = useState(shippingAddress.country || '');
 
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/signin?redirect=/shipping');
+    }
+  }, [userInfo, navigate]);
 
   const submitShippingHandler = (e) => {
     e.preventDefault();
@@ -56,6 +62,7 @@ export default function ShippingAddressScreen() {
         <title>Shipping and Payment</title>
       </Helmet>
 
+      <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="row">
         {/* Left side for ShippingAddressScreen */}
         <div className="col-md-6">
@@ -130,13 +137,9 @@ export default function ShippingAddressScreen() {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
               </div>
-              <div>
-                <CartScreen/>
-              </div>
               <div className="mb-3">
                 <Button variant="primary" type="submit">Continue</Button>
               </div>
-            
             </Form>
           </div>
         </div>
