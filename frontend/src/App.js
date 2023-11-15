@@ -11,7 +11,9 @@ import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useContext, useEffect, useState } from 'react';
 import { Store } from './Store';
+
 import SignupScreen from './screens/SignupScreen';
+
 import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
@@ -58,20 +60,17 @@ function App() {
             height="50"
             className="d-inline-block align-top"
             />
-                  {userInfo 
-  
-                  (
-                    <Link className="nav-link" to="/signin">
-                  <img
-            alt="signin"
-            src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-            height="50"
-            className="d-inline-block align-top"
-            />                    </Link>
-                  )}
-
-                </Nav>
-              </Navbar.Collapse>
+            {/* Mostrar siempre el enlace de inicio de sesión */}
+            <Link className="nav-link" to="/signin">
+              <img
+                alt="signin"
+                src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+                height="50"
+                className="d-inline-block align-top"
+              />
+            </Link>
+          </Nav>
+        </Navbar.Collapse>
             </Container>
           </Navbar>
         </header>
