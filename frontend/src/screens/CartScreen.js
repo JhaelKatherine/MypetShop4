@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../Css/CartScreen.';
+import '../Css/CartScreen.css';
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -53,40 +53,46 @@ export default function CartScreen() {
             <ListGroup>
             {cartItems.map((item) => (
               <ListGroup.Item key={item._id}>
-              <div className="cart-item-container">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="cart-item-image img-fluid rounded img-thumbnail"
-                />
-                <div className="cart-item-description">
-                  <strong>{item.name}</strong>
-                  <p>{item.description}</p>
-                  <p>Price: ${item.price}</p> {/* Agrega esta línea para mostrar el precio */}
+                <div className="cart-item-container">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="cart-item-image img-fluid rounded img-thumbnail"
+                  />
+                  <div className="cart-item-description">
+                    <strong>{item.name}</strong>
+                    <p>{item.description}</p>
+                    <p>{item.price}</p>
+                  </div>
+                  <div className="cart-item-buttons">
+                    <Button
+                      onClick={() =>
+                        updateCartHandler(item, item.quantity - 1)
+                      }
+                      variant="light"
+                      disabled={item.quantity === 1}
+                    >
+                      <i className="fas fa-minus-circle"></i>
+                    </Button>{' '}
+                    <span>{item.quantity}</span>{' '}
+                    <Button
+                      variant="light"
+                      onClick={() =>
+                        updateCartHandler(item, item.quantity + 1)
+                      }
+                      disabled={item.quantity === item.countInStock}
+                    >
+                      <i className="fas fa-plus-circle"></i>
+                    </Button>
+                    <Button
+                      onClick={() => removeItemHandler(item)}
+                      variant="light"
+                    >
+                      <i className="fas fa-trash"></i>
+                    </Button>
+                  </div>
                 </div>
-                <div className="cart-item-buttons">
-                  <Button
-                    onClick={() => updateCartHandler(item, item.quantity - 1)}
-                    variant="light"
-                    disabled={item.quantity === 1}
-                  >
-                    <i className="fas fa-minus-circle"></i>
-                  </Button>{' '}
-                  <span>{item.quantity}</span>{' '}
-                  <Button
-                    variant="light"
-                    onClick={() => updateCartHandler(item, item.quantity + 1)}
-                    disabled={item.quantity === item.countInStock}
-                  >
-                    <i className="fas fa-plus-circle"></i>
-                  </Button>
-                  <Button onClick={() => removeItemHandler(item)} variant="light">
-                    <i className="fas fa-trash"></i>
-                  </Button>
-                </div>
-              </div>
-            </ListGroup.Item>
-            
+              </ListGroup.Item>
             ))}
           </ListGroup>
         )}
