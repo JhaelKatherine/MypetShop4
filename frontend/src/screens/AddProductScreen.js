@@ -17,6 +17,7 @@ export default function AddProductScreen() {
   const { userInfo } = state;
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
+  const [slug, setSlug] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
@@ -31,6 +32,7 @@ export default function AddProductScreen() {
       setLoading(true);
       const { data } = await Axios.post('/api/products', {
         name,
+        slug,
         image,
         brand,
         category,
@@ -86,6 +88,16 @@ export default function AddProductScreen() {
                   onChange={(e) => setName(e.target.value)}
                   required
                 />
+
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="slug">
+                 <Form.Label>Slug</Form.Label>
+                 <Form.Control
+                   value={slug}
+                   onChange={(e) => setSlug(e.target.value)}
+                   required
+                />
+
               </Form.Group>
               <Form.Group className="mb-3" controlId="price">
                 <Form.Label>Price</Form.Label>

@@ -16,6 +16,7 @@ productRouter.post(
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
       name: req.body.name,
+      slug: req.body.slug,
       image: req.body.image,
       price: req.body.price,
       category: req.body.category,
