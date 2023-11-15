@@ -63,7 +63,7 @@ export default function CartScreen() {
                     <strong>{item.name}</strong>
                   </div>
                   <div className="cart-item-quality">
-                  <p>{tem.price * item.quantity}</p>
+                  <p>{item.price}</p>
                   </div>
                 </div>
               </ListGroup.Item>
