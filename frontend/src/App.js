@@ -62,26 +62,26 @@ function App() {
             />
             {/* Mostrar siempre el enlace de inicio de sesión */}
             {userInfo ? (
-                    <Link className="nav-link" to="/signin">
-                      <img
-                        alt="signin"
-                        src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-                        height="50"
-                        className="d-inline-block align-top"
-                      />
-                    </Link>
-                  ) : (
-                    <LinkContainer to="/signin">
-                      <Nav.Link>
-                        <img
-                          alt="signin"
-                          src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-                          height="50"
-                          className="d-inline-block align-top"
-                        />
-                      </Nav.Link>
-                    </LinkContainer>
-                  )}
+  <Link className="nav-link" to="/signin">
+    <img
+      alt="signin"
+      src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+      height="50"
+      className="d-inline-block align-top"
+    />
+  </Link>
+) : (
+  <LinkContainer to="/signin">
+    <Nav.Link>
+      <img
+        alt="signin"
+        src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+        height="50"
+        className="d-inline-block align-top"
+      />
+    </Nav.Link>
+  </LinkContainer>
+)}
           </Nav>
         </Navbar.Collapse>
             </Container>
