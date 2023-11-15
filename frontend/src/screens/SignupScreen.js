@@ -14,8 +14,6 @@ import '../Css/AddUser.css';
 export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
 
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -42,18 +40,10 @@ export default function SignupScreen() {
         email,
         password,
       });
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (err) {
       toast.error(getError(err));
     }
   };
-
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [navigate, redirect, userInfo]);
 
   return (
     <>
