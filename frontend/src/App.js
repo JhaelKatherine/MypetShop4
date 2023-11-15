@@ -40,7 +40,7 @@ function App() {
               <Nav className="mx-auto" style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
                 <SearchBox />
               </Nav>
-              <Nav className="ml-auto align-items-center">
+              <Nav className="me-auto  w-100  justify-content-end">
                 <Link to="/cart" className="nav-link">
                   <img
                     alt="cart"
