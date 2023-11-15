@@ -25,6 +25,7 @@ function App() {
       <header>
         <Navbar>
           <Container>
+            <LinkContainer to="/">
             <Navbar.Brand>
               <img
                 alt="My Pet Shop Logo"
@@ -33,6 +34,7 @@ function App() {
                 className="d-inline-block align-top"
               />
             </Navbar.Brand>
+            </LinkContainer>
 
 <Nav className="mx-auto" style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
   <SearchBox />
