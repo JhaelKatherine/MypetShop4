@@ -16,8 +16,7 @@ import SearchBox from './components/SearchBox';
 import './App.css';
 
 function App() {
-  const { state } = useContext(Store);
-  const { userInfo } = state;
+
 
   return (
     <BrowserRouter>
@@ -46,30 +45,17 @@ function App() {
                     height="50"
                     className="d-inline-block align-top"
                   />
-                  {userInfo ? (
-                    <LinkContainer to="/signin">
-                    <Nav.Link>
-                      <img
-                        alt="signin"
-                        src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-                        height="50"
-                        className="d-inline-block align-top"
-                      />
-                    </Nav.Link>
-                  </LinkContainer>
-                  ) : (
-                    <LinkContainer to="/signin">
-                      <Nav.Link>
-                        <img
-                          alt="signin"
-                          src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-                          height="50"
-                          className="d-inline-block align-top"
-                        />
-                      </Nav.Link>
-                    </LinkContainer>
-                  )}
-                </Nav>
+              <LinkContainer to="/signup">
+              <Nav.Link>
+                <img
+                  alt="signup"
+                  src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+                  height="50"
+                  className="d-inline-block align-top"
+                />
+              </Nav.Link>
+            </LinkContainer>
+          </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
