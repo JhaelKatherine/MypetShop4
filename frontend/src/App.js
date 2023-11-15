@@ -20,32 +20,32 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <ToastContainer position="bottom-center" limit={1} />
-        <header>
-          <Navbar>
-            <Container>
-              <LinkContainer to="/">
-                <Navbar.Brand>
-                  <img
-                    alt="My Pet Shop Logo"
-                    src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
-                    height="70"
-                    className="d-inline-block align-top"
-                  />
-                </Navbar.Brand>
-              </LinkContainer>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <SearchBox />
-                <Nav className="me-auto  w-100  justify-content-end">
-                  <img
-                    alt="cart"
-                    src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
-                    height="50"
-                    className="d-inline-block align-top"
-                  />
-              <LinkContainer to="/signup">
+    <div>
+      <ToastContainer position="bottom-center" limit={1} />
+      <header>
+        <Navbar>
+          <Container>
+            <Navbar.Brand>
+              <img
+                alt="My Pet Shop Logo"
+                src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
+                height="70"
+                className="d-inline-block align-top"
+              />
+            </Navbar.Brand>
+
+<Nav className="mx-auto" style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
+  <SearchBox />
+</Nav>
+<Nav className="ml-auto align-items-center">
+            <img
+              alt="cart"
+              src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
+              height="50"
+              className="d-inline-block align-top mr-2"
+              style={{ marginRight: '25px' }}
+            />
+            <LinkContainer to="/signup">
               <Nav.Link>
                 <img
                   alt="signup"
@@ -56,33 +56,25 @@ function App() {
               </Nav.Link>
             </LinkContainer>
           </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
-        </header>
-        <div>
-          <Nav className="flex-column text-white w-100 p-2">
-            <Nav.Item>
-              <strong>Categories</strong>
-            </Nav.Item>
-          </Nav>
-        </div>
-        <main>
-          <Container className="mt-3">
-            <Routes>
-              <Route path="/product/:slug" element={<ProductScreen />} />
-              <Route path="/signin" element={<SignupScreen />} />
-              <Route path="/signup" element={<SignupScreen />} />
-              <Route path="/" element={<HomeScreen />} />
-            </Routes>
           </Container>
-        </main>
-        <footer>
-          <div className="text-center">All rights reserved</div>
-        </footer>
-      </div>
-    </BrowserRouter>
-  );
+        </Navbar>
+      </header>
+      <main>
+        <Container className="mt-3">
+          <Routes>
+            <Route path="/product/:slug" element={<ProductScreen />} />
+            <Route path="/signin" element={<SignupScreen />} />
+            <Route path="/signup" element={<SignupScreen />} />
+            <Route path="/" element={<HomeScreen />} />
+          </Routes>
+        </Container>
+      </main>
+      <footer>
+        <div className="text-center">All rights reserved</div>
+      </footer>
+    </div>
+  </BrowserRouter>
+);
 }
 
 export default App;

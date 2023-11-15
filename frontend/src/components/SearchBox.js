@@ -1,3 +1,4 @@
+// SearchBox.js
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -14,21 +15,21 @@ export default function SearchBox() {
   };
 
   return (
-    <Form className="d-flex me-auto">
-      <InputGroup>
-        <FormControl
-          type="text"
-          name="q"
-          id="q"
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="search products..."
-          aria-label="Search Products"
-          aria-describedby="button-search"
-        ></FormControl>
-        <Button variant="outline-primary" type="button" id="button-search">
-          <i className="fas fa-search"></i>
-        </Button>
-      </InputGroup>
-    </Form>
+  <FormControl
+  type="text"
+  name="q"
+  id="q"
+  onChange={(e) => setQuery(e.target.value)}
+  placeholder="search products..."
+  aria-label="Search Products"
+  aria-describedby="button-search"
+  className="w-100" // Esta clase Bootstrap puede ajustar el ancho
+  style={{
+    borderRadius: '20px',
+    maxWidth: '950px', // Modifica el maxWidth según tu preferencia
+    width: 'calc(100% - 44px)', // Ancho restante luego de considerar el botón
+  }}
+/>
+
   );
 }
