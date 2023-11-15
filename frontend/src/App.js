@@ -73,9 +73,6 @@ function App() {
         </header>
         <div>
           <Nav className="flex-column text-white w-100 p-2">
-            <Nav.Item>
-              <strong>Categories</strong>
-            </Nav.Item>
           </Nav>
         </div>
         <main>

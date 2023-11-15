@@ -62,7 +62,7 @@ export default function CartScreen() {
                   <div className="cart-item-description">
                     <strong>{item.name}</strong>
                     <p>{item.description}</p>
-                    <p>{item.price}</p>
+                    <p>{"$"+item.price}</p>
                   </div>
                   <div className="cart-item-buttons">
                     <Button
@@ -104,22 +104,21 @@ export default function CartScreen() {
                 <ListGroup.Item>
                   <h3>
                     Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                    items) : $
+                    Product) : $
                     {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                   </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
                <div className="d-grid">
     {/* Comenta o elimina la línea siguiente para desactivar la funcionalidad */}
-    {/* <Button
+    {<Button
       type="button"
       variant="primary"
-      onClick={checkoutHandler}
       disabled={cartItems.length === 0}
     >
-      Proceed to Checkout
-    </Button> */}
-                Proceed to Checkout
+      Payment
+    </Button> }
+                
                </div>
              </ListGroup.Item>
 
