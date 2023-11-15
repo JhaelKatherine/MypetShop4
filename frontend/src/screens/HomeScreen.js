@@ -67,7 +67,7 @@ function HomeScreen() {
       {/* Button container inside the label for the checkbox */}
       <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
       {categoryButtons.map((button, index) => (
-  <button key={index} onClick={() => handleButtonClick("#4CAF50")} className="image-button">
+  <button key={index} onClick={() => handleButtonClick("#4180AB")} className="image-button">
     <div className="button-content">
       <img src={button.imageUrl} alt={button.label} />
       <span style={{ marginBottom: '5px' }}>{button.label}</span>
