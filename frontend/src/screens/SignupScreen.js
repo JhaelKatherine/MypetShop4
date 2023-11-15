@@ -1,9 +1,5 @@
 import Axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { Helmet } from 'react-helmet-async';
 import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
@@ -129,14 +125,15 @@ export default function SignupScreen() {
           <button className="submit" type="submit">Sign Up</button>
                 <p className="signin">Register with</p>
                 <div className="social-buttons-container">
-                <button className="social-button google-button">
-                    <img src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg" alt="Google" />
-                    Google
-                </button>
-                <button className="social-button facebook-button">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
-                    Facebook
-                </button>
+    <button className="social-button google-button" onClick={(e) => e.preventDefault()}>
+        <img src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg" alt="Google" />
+        Google
+    </button>
+    <button className="social-button facebook-button" onClick={(e) => e.preventDefault()}>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
+        Facebook
+    </button>
+                
           </div>
           <div className="mb-3">
             Already have an account? <Link to="/signin" className="signin">Sign-In</Link>
