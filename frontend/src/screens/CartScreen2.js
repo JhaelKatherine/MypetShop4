@@ -59,11 +59,9 @@ export default function CartScreen() {
                     alt={item.name}
                     className="cart-item-image img-fluid rounded img-thumbnail"
                   />
-                  <div className="cart-item-description">
+                  <div className="cart-item-quality">
                     <strong>{item.name}</strong>
                     <p>{tem.price * item.quantity}</p>
-                  </div>
-                  <div className="cart-item-buttons">
                   </div>
                 </div>
               </ListGroup.Item>
