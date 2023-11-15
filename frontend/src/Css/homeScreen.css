@@ -1,0 +1,73 @@
+.image-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 185px;
+    height: 55px;
+    margin-right: 30px;
+    border-radius: 10px;
+    transition: background-color 0.3s; /* Agregamos una transición de color para que sea suave */
+}
+
+.button-content {
+    margin-top: 5px;
+}
+
+.button-container {
+    margin-bottom: 20px;
+    display: flex;
+    width: 85%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button-container button {
+    color: black;
+    cursor: pointer;
+    border: none;
+}
+
+.button-container button img {
+    width: 30%;
+}
+
+.button-container button:hover {
+    background-color: #87CEFA; /* Cambiamos el color al azul celeste cuando el ratón está encima */
+}
+
+.button-container {
+    align-items: center;
+}
+
+.button-container button {
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-button {
+        margin-right: 0;
+    }
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajusta el espacio según sea necesario */
+  }
+  
+  .image-container img {
+    width: 100%; /* El ancho de la imagen será el 100% del contenedor */
+    max-width: 9100px; /* Ancho máximo de la imagen, ajusta según sea necesario */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin: 0 10px; /* Ajusta el margen según sea necesario */
+  }
+  
+  @media (max-width: 768px) {
+    .image-container img {
+      max-width: 100%; /* Ajusta el ancho máximo para pantallas más pequeñas */
+    }
+  }
