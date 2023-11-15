@@ -119,7 +119,7 @@ export default function ShippingAddressScreen() {
             <Form onSubmit={submitPaymentHandler}>
               {/* Payment method radio buttons */}
               <div>
-                <CartScreen/>
+                <CartScreen2/>
               </div>
               <div className="mb-3">
                 <Form.Check
