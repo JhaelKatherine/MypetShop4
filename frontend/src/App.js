@@ -26,17 +26,7 @@ function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get(`/api/products/categories`);
-        setCategories(data);
-      } catch (err) {
-        toast.error(getError(err));
-      }
-    };
-    fetchCategories();
-  }, []);
+
   return (
     <BrowserRouter>
       <div
@@ -68,11 +58,9 @@ function App() {
             height="50"
             className="d-inline-block align-top"
             />
-                  {userInfo ? (
-                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                      
-                    </NavDropdown>
-                  ) : (
+                  {userInfo 
+  
+                  (
                     <Link className="nav-link" to="/signin">
                   <img
             alt="signin"
