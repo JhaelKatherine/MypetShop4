@@ -86,21 +86,23 @@ export default function AddProductScreen() {
                   required
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="name">
+              <Form.Group className="mb-3" controlId="price">
                 <Form.Label>Price</Form.Label>
                 <Form.Control
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   required
                 />
+
               </Form.Group>
-              <Form.Group className="mb-3" controlId="image">
-                <Form.Label>Image File</Form.Label>
+              <Form.Group className="mb-3" controlId="description">
+                <Form.Label>Description</Form.Label>
                 <Form.Control
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   required
                 />
+
               </Form.Group>
               <Form.Group className="mb-3" controlId="imageFile">
                 <Form.Label>Upload Image</Form.Label>
