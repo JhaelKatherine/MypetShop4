@@ -48,18 +48,19 @@ export default function AddProductScreen() {
     }
   };
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append('file', file);
+  const uploadFileHandler = async (imageUrl) => {
     try {
       setLoading(true);
-      const { data } = await Axios.post('/api/upload', bodyFormData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          authorization: `Bearer ${userInfo.token}`,
-        },
-      });
+      const { data } = await Axios.post(
+        '/api/upload',
+        { url: imageUrl },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
       setLoading(false);
       setImage(data.secure_url);
       toast.success('Imagen cargada exitosamente. Haz clic en "Agregar" para aplicarla.');
@@ -136,7 +137,9 @@ export default function AddProductScreen() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="imageFile">
             <Form.Label>Subir Imagen</Form.Label>
-            <Form.Control type="file" onChange={uploadFileHandler} />
+            <Form.Control type="text" onChange={(e) => setImage(e.target.value)}
+              value={image}
+              required />
           </Form.Group>
           <div className="mb-3">
             <Button type="submit">Agregar</Button>
