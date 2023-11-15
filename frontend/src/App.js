@@ -16,8 +16,7 @@ import SearchBox from './components/SearchBox';
 import './App.css';
 
 function App() {
-  const { state } = useContext(Store);
-  const { userInfo } = state;
+
 
   return (
     <BrowserRouter>
