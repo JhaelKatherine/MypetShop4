@@ -71,3 +71,57 @@
       max-width: 100%; /* Ajusta el ancho máximo para pantallas más pequeñas */
     }
   }
+
+  /* styles.css (o el nombre que prefieras) */
+
+/* Estilos para el contenedor de los botones de categoría de mascotas */
+.category-Pets-buttons-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px; /* Ajusta según sea necesario */
+    flex-wrap: wrap;
+
+  }
+  
+  /* Estilos para cada botón de categoría de mascotas */
+  .category-Pet-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 10px; /* Espacio entre botones */
+
+  }
+  
+  /* Estilos para el contenido dentro de cada botón */
+  .button-Pet-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Estilos para la imagen dentro de cada botón */
+  .button-Pet-content img {
+    width: 220px; /* Ajusta según sea necesario */
+    height: 220px; /* Ajusta según sea necesario */
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px; /* Ajusta según sea necesario */
+  }
+  
+  /* Estilos para el texto dentro de cada botón */
+  .button-Pet-content span {
+    font-size: 20px; /* Ajusta según sea necesario */
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .category-Pets-buttons-container {
+      justify-content: center;
+    }
+  
+    .category-Pet-button {
+      flex-basis: 100%; /* Ocupa todo el ancho disponible */
+    }
+  }
