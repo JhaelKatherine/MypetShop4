@@ -75,8 +75,8 @@ export default function AddProductScreen() {
   return (
     
     <Container className="small-container">
-      <title>Añadir Producto</title>
-      <h1>Añadir Producto</h1>
+      <title>Add Product</title>
+      <h1>Add Product</h1>
       {loading ? (
         <LoadingBox />
       ) : (
@@ -116,12 +116,6 @@ export default function AddProductScreen() {
                   required
                 />
 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="imageFile">
-                <Form.Label>Upload Image</Form.Label>
-                <Form.Control type="file" onChange={uploadFileHandler} />
-                {loadingUpload && <LoadingBox></LoadingBox>}
-
               </Form.Group>    
               <Form.Group className="mb-3" controlId="category">
                 <Form.Label>Category</Form.Label>
@@ -154,7 +148,7 @@ export default function AddProductScreen() {
               required />
           </Form.Group>
           <div className="mb-3">
-            <Button type="submit">Agregar</Button>
+            <Button type="submit">Add</Button>
           </div>
         </Form>
       )}
