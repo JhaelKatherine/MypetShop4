@@ -44,6 +44,7 @@ export default function CartScreen() {
       </Helmet>
       <h1>Shopping Cart</h1>
       <Row>
+        <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
               Cart is empty. <Link to="/">Go Shopping</Link>
@@ -69,6 +70,7 @@ export default function CartScreen() {
             ))}
           </ListGroup>
         )}
+      </Col>
       </Row>
     </div>
   );
