@@ -6,18 +6,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useContext } from 'react';
 import { Store } from './Store';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import SearchBox from './components/SearchBox';
+import CartScreen from './screens/CartScreen';
+import { useContext, useEffect, useState } from 'react';
+import Badge from 'react-bootstrap/Badge';
 
 import './App.css';
 
 function App() {
+  const { state, dispatch: ctxDispatch } = useContext(Store);
 
-
+  const { fullBox, cart, userInfo } = state;
   return (
     <BrowserRouter>
       <div>
@@ -39,12 +42,20 @@ function App() {
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
                 <Nav className="me-auto  w-100  justify-content-end">
-                  <img
+                <Link to="/cart" className="nav-link">
+                <img
                     alt="cart"
                     src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
                     height="50"
                     className="d-inline-block align-top"
                   />
+                    {cart.cartItems.length > 0 && (
+                      <Badge pill bg="danger">
+                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      </Badge>
+                    )}
+                  </Link>
+
               <LinkContainer to="/signup">
               <Nav.Link>
                 <img
@@ -71,6 +82,7 @@ function App() {
           <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
+              <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SignupScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/" element={<HomeScreen />} />
