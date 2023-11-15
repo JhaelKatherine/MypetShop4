@@ -45,7 +45,7 @@ function App() {
               <Link to="/addproduct" className="nav-link">
                   <img
                     alt="addProduct"
-                    src="https://cdn.create.vista.com/api/media/small/218194330/stock-vector-add-icon-trendy-design-style"
+                    src="https://i.ibb.co/VpttTSt/add1-removebg-preview.png"
                     height="50"
                     className="d-inline-block align-top"
                   />
