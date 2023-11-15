@@ -44,7 +44,6 @@ export default function CartScreen() {
       </Helmet>
       <h1>Shopping Cart</h1>
       <Row>
-        <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
               Cart is empty. <Link to="/">Go Shopping</Link>
@@ -61,42 +60,15 @@ export default function CartScreen() {
                   />
                   <div className="cart-item-description">
                     <strong>{item.name}</strong>
-                    <p>{item.description}</p>
-                    <p>{"$"+item.price}</p>
+                    <p>{tem.price * item.quantity}</p>
                   </div>
                   <div className="cart-item-buttons">
-                    <Button
-                      onClick={() =>
-                        updateCartHandler(item, item.quantity - 1)
-                      }
-                      variant="light"
-                      disabled={item.quantity === 1}
-                    >
-                      <i className="fas fa-minus-circle"></i>
-                    </Button>{' '}
-                    <span>{item.quantity}</span>{' '}
-                    <Button
-                      variant="light"
-                      onClick={() =>
-                        updateCartHandler(item, item.quantity + 1)
-                      }
-                      disabled={item.quantity === item.countInStock}
-                    >
-                      <i className="fas fa-plus-circle"></i>
-                    </Button>
-                    <Button
-                      onClick={() => removeItemHandler(item)}
-                      variant="light"
-                    >
-                      <i className="fas fa-trash"></i>
-                    </Button>
                   </div>
                 </div>
               </ListGroup.Item>
             ))}
           </ListGroup>
         )}
-      </Col>
       </Row>
     </div>
   );
