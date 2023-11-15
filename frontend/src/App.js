@@ -57,6 +57,7 @@ function App() {
                   </Link>
 
               <LinkContainer to="/signup">
+
               <Nav.Link>
                 <img
                   alt="signup"
@@ -84,14 +85,15 @@ function App() {
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
-          </Container>
-        </main>
-        <footer>
-          <div className="text-center">All rights reserved</div>
-        </footer>
-      </div>
-    </BrowserRouter>
-  );
+
+        </Container>
+      </main>
+      <footer>
+        <div className="text-center">All rights reserved</div>
+      </footer>
+    </div>
+  </BrowserRouter>
+);
 }
 
 export default App;

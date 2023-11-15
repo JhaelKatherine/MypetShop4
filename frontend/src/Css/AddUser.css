@@ -13,6 +13,11 @@
     margin-bottom: 30px;
 
   }
+  .centered-title {
+    text-align: center; /* Centrar el texto */
+    margin-top: 20px; /* Ajustar margen superior según sea necesario */
+  }
+  
   
   .title {
     font-size: 28px;
@@ -57,6 +62,7 @@
     position: relative;
   }
   
+  
   .form-field label {
     font-size: 18px;
     color: rgb(0, 0, 0);
@@ -73,6 +79,10 @@
     border-radius: 10px;
     font-size: 16px;
   }
+  .form-group{
+    margin-bottom: 15px; /* Agregar margen inferior entre los campos de texto */
+
+  }
   
   .submit {
     display: flex;
@@ -83,8 +93,12 @@
     padding: 8px 20px; 
     border-radius: 10px;
     font-size: 16px;
-    background-color: #BDD1DE;
+    background-color: #B9C4CB;
     color: #fff;
+    display: block; /* Cambiar el botón a un elemento de bloque */
+  margin: 0 auto; /* Hacer que el margen horizontal sea automático para centrarlo */
+  margin-top: 13px;
+
   }
   
   .google-button {
@@ -92,7 +106,6 @@
     color: #fff;
     border-radius: 10px;
     
-
   }
   
   .facebook-button {
@@ -103,7 +116,7 @@
   }
   
   .submit:hover {
-    background-color: rgb(56, 90, 194);
+    background-color: #BCC6CF;
   }
   
   @keyframes pulse {
@@ -150,5 +163,22 @@
     display: flex;
     justify-content: space-between; 
     gap: 10px; 
+  }
+  
+ 
+  .blue-background {
+    background-color: #C9D4DB; /* Cambiar el color de fondo a azul */
+    padding: 20px; /* Opcional: agregar padding al contenedor */
+    border-radius: 15px; /* Añadir bordes redondos */
+    max-width: 700px; /* Establecer un ancho máximo para hacerlo más pequeño */
+    margin: 0 auto; /* Centrar horizontalmente */
+  }
+  .mb-3 {
+    text-align: center; /* Centrar el texto */
+    margin: 0 auto;
+  }
+  
+  .mb-3 .signin a {
+    color: royalblue; /* Cambiar el color del texto "Sign-In" a azul */
   }
   

@@ -1,9 +1,5 @@
 import Axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { Helmet } from 'react-helmet-async';
 import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
@@ -14,8 +10,6 @@ import '../Css/AddUser.css';
 export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
 
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -42,27 +36,19 @@ export default function SignupScreen() {
         email,
         password,
       });
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
     } catch (err) {
       toast.error(getError(err));
     }
   };
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [navigate, redirect, userInfo]);
-
   return (
     <>
+    <div className="blue-background"> {/* Agregar esta línea */}
+
       <div className="form-container">
-        <Helmet>
-          <title>Sign Up</title>
-        </Helmet>
-        <h1 className="my-3">Sign Up</h1>
+      <div className="centered-title">
+         <h1>Sign Up</h1>
+      </div>
         <form onSubmit={submitHandler} className="custom-form">
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -71,6 +57,8 @@ export default function SignupScreen() {
               id="name"
               className="form-control"
               onChange={(e) => setName(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -81,6 +69,8 @@ export default function SignupScreen() {
               id="lastName"
               className="form-control"
               onChange={(e) => setLastName(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -91,6 +81,8 @@ export default function SignupScreen() {
               id="userName"
               className="form-control"
               onChange={(e) => setUserName(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -101,6 +93,8 @@ export default function SignupScreen() {
               id="email"
               className="form-control"
               onChange={(e) => setEmail(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -111,6 +105,8 @@ export default function SignupScreen() {
               id="password"
               className="form-control"
               onChange={(e) => setPassword(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -121,27 +117,32 @@ export default function SignupScreen() {
               id="confirmPassword"
               className="form-control"
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
           <button className="submit" type="submit">Sign Up</button>
                 <p className="signin">Register with</p>
                 <div className="social-buttons-container">
-                <button className="social-button google-button">
-                    <img src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg" alt="Google" />
-                    Google
-                </button>
-                <button className="social-button facebook-button">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
-                    Facebook
-                </button>
+    <button className="social-button google-button" onClick={(e) => e.preventDefault()}>
+        <img src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg" alt="Google" />
+        Google
+    </button>
+    <button className="social-button facebook-button" onClick={(e) => e.preventDefault()}>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
+        Facebook
+    </button>
+                
           </div>
           <div className="mb-3">
-            Already have an account?{' '}
-              Sign-In
-          </div>
+            Already have an account? <Link to="/signin" className="signin">Sign-In</Link>
+            </div>
         </form>
       </div>
+
+      </div>
+
     </>
   );
 };
