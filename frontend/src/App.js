@@ -46,10 +46,10 @@ function App() {
                     height="50"
                     className="d-inline-block align-top"
                   />
- <LinkContainer to="/signin">
+              <LinkContainer to="/signup">
               <Nav.Link>
                 <img
-                  alt="signin"
+                  alt="signup"
                   src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
                   height="50"
                   className="d-inline-block align-top"
