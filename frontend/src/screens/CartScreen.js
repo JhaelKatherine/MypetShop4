@@ -59,7 +59,10 @@ export default function CartScreen() {
                         alt={item.name}
                         className="img-fluid rounded img-thumbnail"
                       ></img>{' '}
-                       {item.name}
+                         <div>
+                          <strong>{item.name}</strong>
+                           <p>{item.description}</p> {/* Agrega esta línea para mostrar la descripción */}
+                      </div>
                     </Col>
                     <Col md={3}>
                       <Button
@@ -109,17 +112,20 @@ export default function CartScreen() {
                   </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <div className="d-grid">
-                    <Button
-                      type="button"
-                      variant="primary"
-                      onClick={checkoutHandler}
-                      disabled={cartItems.length === 0}
-                    >
-                      Proceed to Checkout
-                    </Button>
-                  </div>
-                </ListGroup.Item>
+               <div className="d-grid">
+    {/* Comenta o elimina la línea siguiente para desactivar la funcionalidad */}
+    {/* <Button
+      type="button"
+      variant="primary"
+      onClick={checkoutHandler}
+      disabled={cartItems.length === 0}
+    >
+      Proceed to Checkout
+    </Button> */}
+                Proceed to Checkout
+               </div>
+             </ListGroup.Item>
+
               </ListGroup>
             </Card.Body>
           </Card>
