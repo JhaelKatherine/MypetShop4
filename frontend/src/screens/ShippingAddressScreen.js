@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
+import CartScreen from './CartScreen';
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -22,12 +23,6 @@ export default function ShippingAddressScreen() {
   const [country, setCountry] = useState(shippingAddress.country || '');
 
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
-
-  useEffect(() => {
-    if (!userInfo) {
-      navigate('/signin?redirect=/shipping');
-    }
-  }, [userInfo, navigate]);
 
   const submitShippingHandler = (e) => {
     e.preventDefault();
@@ -139,6 +134,9 @@ export default function ShippingAddressScreen() {
               </div>
               <div className="mb-3">
                 <Button variant="primary" type="submit">Continue</Button>
+              </div>
+              <div>
+                <CartScreen/>
               </div>
             </Form>
           </div>

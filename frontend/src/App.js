@@ -13,7 +13,7 @@ import ProductScreen from './screens/ProductScreen';
 import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
 import Badge from 'react-bootstrap/Badge';
-
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import './App.css';
 
 function App() {
@@ -81,6 +81,11 @@ function App() {
               <Route path="/signin" element={<SignupScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/" element={<HomeScreen />} />
+              <Route
+path="/shipping"
+element={<ShippingAddressScreen />}
+></Route>
+<Route path="/payment" element={<PaymentMethodScreen />}></Route>
             </Routes>
           </Container>
         </main>
