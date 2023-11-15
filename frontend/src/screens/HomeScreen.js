@@ -67,7 +67,7 @@ function HomeScreen() {
   return (
     <div>
       <Helmet>
-        <title>Amazona</title>
+        <title>MY PET SHOP</title>
       </Helmet>
 
       {/* Checkbox for toggling buttons */}
