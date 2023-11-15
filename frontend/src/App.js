@@ -14,6 +14,7 @@ import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
 import Badge from 'react-bootstrap/Badge';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import PaymentMethodScreen from "./screens/PaymentMethodScreen"
 import './App.css';
 
 function App() {
@@ -85,7 +86,6 @@ function App() {
 path="/shipping"
 element={<ShippingAddressScreen />}
 ></Route>
-<Route path="/payment" element={<PaymentMethodScreen />}></Route>
             </Routes>
           </Container>
         </main>
