@@ -51,36 +51,6 @@ export default function CartScreen() {
           </ListGroup>
         )}
       </Col>
-        <Col md={4}>
-          <Card>
-            <Card.Body>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <h3>
-                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                    Product) : $
-                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
-                  </h3>
-                </ListGroup.Item>
-                <ListGroup.Item>
-               <div className="d-grid">
-    {/* Comenta o elimina la línea siguiente para desactivar la funcionalidad */}
-    {<Button
-      type="button"
-      variant="primary"
-      onClick={checkoutHandler}
-      disabled={cartItems.length === 0}
-    >
-      Payment
-    </Button> }
-                
-               </div>
-             </ListGroup.Item>
-
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        </Col>
       </Row>
     </div>
   );
