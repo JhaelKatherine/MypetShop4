@@ -52,17 +52,18 @@ export default function CartScreen() {
             <ListGroup>
               {cartItems.map((item) => (
                 <ListGroup.Item key={item._id}>
-                  <Row className="align-items-center">
-                    <Col md={4}>
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="img-fluid rounded img-thumbnail"
-                      ></img>{' '}
-                         <div>
-                          <strong>{item.name}</strong>
-                           <p>{item.description}</p> {/* Agrega esta línea para mostrar la descripción */}
-                      </div>
+                 <Row className="align-items-center">
+                   <Col md={4} className="d-flex align-items-center">
+                 <img
+                   src={item.image}
+                   alt={item.name}
+                       className="img-fluid rounded img-thumbnail"
+                       style={{ maxWidth: '150px' }}
+                     />
+                   <div className="ms-3">
+                     <strong>{item.name}</strong>
+                   <p>{item.description}</p>
+                          </div>
                     </Col>
                     <Col md={3}>
                       <Button
