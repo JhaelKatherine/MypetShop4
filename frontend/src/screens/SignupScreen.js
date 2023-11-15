@@ -61,6 +61,8 @@ export default function SignupScreen() {
               id="name"
               className="form-control"
               onChange={(e) => setName(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -71,6 +73,8 @@ export default function SignupScreen() {
               id="lastName"
               className="form-control"
               onChange={(e) => setLastName(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -81,6 +85,8 @@ export default function SignupScreen() {
               id="userName"
               className="form-control"
               onChange={(e) => setUserName(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -91,6 +97,8 @@ export default function SignupScreen() {
               id="email"
               className="form-control"
               onChange={(e) => setEmail(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -101,6 +109,8 @@ export default function SignupScreen() {
               id="password"
               className="form-control"
               onChange={(e) => setPassword(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
@@ -111,6 +121,8 @@ export default function SignupScreen() {
               id="confirmPassword"
               className="form-control"
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
             />
           </div>
