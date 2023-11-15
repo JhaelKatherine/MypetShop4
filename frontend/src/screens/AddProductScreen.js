@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import Axios from 'axios';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import Container from 'react-bootstrap/Container';
@@ -67,7 +67,7 @@ const reducer = (state, action) => {
       const fetchData = async () => {
         try {
           dispatch({ type: 'FETCH_REQUEST' });
-          const { data } = await axios.get(`/api/products/${productId}`);
+          const { data } = await Axios.get(`/api/products/${productId}`);
           setName(data.name);
           setPrice(data.price);
           setImage(data.image);
@@ -111,7 +111,7 @@ const reducer = (state, action) => {
       bodyFormData.append('file', file);
       try {
         dispatch({ type: 'UPLOAD_REQUEST' });
-        const { data } = await axios.post('/api/upload', bodyFormData, {
+        const { data } = await Axios.post('/api/upload', bodyFormData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             authorization: `Bearer ${userInfo.token}`,
@@ -120,7 +120,7 @@ const reducer = (state, action) => {
         dispatch({ type: 'UPLOAD_SUCCESS' });
   
         if (forImages) {
-          setImages([...images, data.secure_url]);
+          //setImages([...images, data.secure_url]);
         } else {
           setImage(data.secure_url);
         }
@@ -132,17 +132,15 @@ const reducer = (state, action) => {
     };
     const deleteFileHandler = async (fileName, f) => {
       console.log(fileName, f);
-      console.log(images);
-      console.log(images.filter((x) => x !== fileName));
-      setImages(images.filter((x) => x !== fileName));
       toast.success('Image removed successfully. click Update to apply it');
     };
 
     return (
         <Container className="small-container">
-          <Helmet>
-            <title>Add Product ${productId}</title>
-          </Helmet>
+<Helmet>
+  <title>{`Add Product ${productId}`}</title>
+</Helmet>
+
           <h1>Add Product {productId}</h1>
     
           {loading ? (
@@ -223,5 +221,5 @@ const reducer = (state, action) => {
           )}
         </Container>
       );
-      
+
 }
