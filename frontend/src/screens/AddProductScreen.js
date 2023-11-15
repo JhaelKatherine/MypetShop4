@@ -41,7 +41,7 @@ export default function AddProductScreen() {
       setLoading(false);
       toast.success('Producto agregado exitosamente');
       // Redirige a la página de detalles del nuevo producto, si es necesario.
-      navigate(`/product/${data._id}`);
+
     } catch (err) {
       setLoading(false);
       toast.error(getError(err));
@@ -103,12 +103,6 @@ export default function AddProductScreen() {
                   onChange={(e) => setDescription(e.target.value)}
                   required
                 />
-
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="imageFile">
-                <Form.Label>Upload Image</Form.Label>
-                <Form.Control type="file" onChange={uploadFileHandler} />
-                {loadingUpload && <LoadingBox></LoadingBox>}
 
               </Form.Group>    
               <Form.Group className="mb-3" controlId="category">
