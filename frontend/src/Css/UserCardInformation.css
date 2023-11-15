@@ -1,0 +1,41 @@
+
+
+.user-card-info-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .user-card-info-container h1 {
+    text-align: center;
+  }
+  
+  .user-card-info-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-card-info-container label {
+    margin-bottom: 5px;
+  }
+  
+  .user-card-info-container input {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .user-card-info-container .proceed-btn {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-card-info-container .proceed-btn:hover {
+    background-color: #0056b3;
+  }
+  
