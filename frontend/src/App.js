@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,14 +12,12 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
-import { useContext } from 'react';  // No es necesario importar useEffect y useState si no los estás utilizando
 import Badge from 'react-bootstrap/Badge';
 
 import './App.css';
 
 function App() {
   const { state } = useContext(Store);
-
   const { cart } = state;
 
   return (
@@ -79,6 +77,7 @@ function App() {
           <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
+              <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SignupScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/" element={<HomeScreen />} />
@@ -94,3 +93,4 @@ function App() {
 }
 
 export default App;
+
