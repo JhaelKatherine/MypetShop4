@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
+import CartScreen from './CartScreen';
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -117,6 +118,9 @@ export default function ShippingAddressScreen() {
             <h1 className="my-3">Payment Method</h1>
             <Form onSubmit={submitPaymentHandler}>
               {/* Payment method radio buttons */}
+              <div>
+                <CartScreen/>
+              </div>
               <div className="mb-3">
                 <Form.Check
                   type="radio"
@@ -137,6 +141,7 @@ export default function ShippingAddressScreen() {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
               </div>
+              
               <div className="mb-3">
                 <Button variant="primary" type="submit">Continue</Button>
               </div>
