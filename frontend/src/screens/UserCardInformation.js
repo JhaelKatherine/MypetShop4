@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../Css/UserCardInformation.css';
 import ProductList from '../components/ProductList';
 import { Store } from '../Store';
-import ProductList from '../components/ProductList';
 
 
 export default function CartScreen() {
