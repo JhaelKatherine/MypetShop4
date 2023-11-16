@@ -1,3 +1,45 @@
+
+.gray-background {
+  background-color: #ccc; /* Color gris de fondo */
+}
+
+.cart-item-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Ajusta este valor para cambiar el espaciado entre elementos */
+}
+
+.cart-item-image {
+  width: 100px; /* Ajusta el tamaño de la imagen según tu preferencia */
+  margin-right: 20px; /* Espacio entre la imagen y el nombre */
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-price {
+  margin-top: 10px; /* Espacio entre el nombre y los detalles */
+}
+
+.cart-item{
+  margin-left: 10px;
+}
+/* Otros estilos... */
+.title-text {
+  font-weight: bold;
+  text-align: center;
+  padding: 3px;
+  margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
+}
+
+.title-text2 {
+  font-weight: bold;
+  text-align: center;
+  padding: 3px;
+  margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -185,43 +227,3 @@
 
   /* CartScreen.css */
  
-.gray-background {
-  background-color: #ccc; /* Color gris de fondo */
-}
-
-.cart-item-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px; /* Ajusta este valor para cambiar el espaciado entre elementos */
-}
-
-.cart-item-image {
-  width: 100px; /* Ajusta el tamaño de la imagen según tu preferencia */
-  margin-right: 20px; /* Espacio entre la imagen y el nombre */
-}
-
-.cart-item-details {
-  flex: 1;
-}
-
-.cart-item-price {
-  margin-top: 10px; /* Espacio entre el nombre y los detalles */
-}
-
-.cart-item{
-  margin-left: 10px;
-}
-/* Otros estilos... */
-.title-text {
-  font-weight: bold;
-  text-align: center;
-  padding: 3px;
-  margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
-}
-
-.title-text2 {
-  font-weight: bold;
-  text-align: center;
-  padding: 3px;
-  margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
-}
