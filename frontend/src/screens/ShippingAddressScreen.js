@@ -162,79 +162,82 @@ export default function ShippingAddressScreen() {
   )}
 </div>
 
-  <div className="form-group">
-    <label htmlFor="address">Address(*)</label>
-    <input
-      type="text"
-      id="address"
-      className="form-control"
-      value={address}
-      onChange={(e) => {
-        const regex = /^[A-Za-z\s]+$/; // Expresión regular para aceptar solo letras y espacios
-        if (regex.test(e.target.value) || e.target.value === '') {
-          setAddress(e.target.value);
-        } <div className="form-group">
-        <label htmlFor="nit">Nit</label>
-        <input
-          type="text"
-          id="nit"
-          className="form-control"
-          value={nit}
-          onChange={(e) => {
-            const regex = /^[0-9]+$/; // Expresión regular para aceptar solo números
-            if (regex.test(e.target.value) || e.target.value === '') {
-              setAddress(e.target.value);
-            }
-          }}
-          onInvalid={(e) => e.target.setCustomValidity("Only numbers are allowed")}
-          onInput={(e) => e.target.setCustomValidity('')}
-          pattern="[A-Za-z\s]+"
-          required
-        />
-        <div className="invalid-feedback">Please enter a valid address.</div>
-      </div>
-      }}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
-      required
-      
-    />
-  </div>
-  <div className="form-group">
-    <label htmlFor="city">City(*)</label>
-    <input
-      type="text"
-      id="city"
-      className="form-control"
-      value={city}
-      onChange={(e) => {
-        const regex = /^[A-Za-z\s]+$/; // Expresión regular para aceptar solo letras y espacios
-        if (regex.test(e.target.value) || e.target.value === '') {
-          setCity(e.target.value);
-        }
-      }}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
-      required
-    />
-    </div>
+<div className="form-group">
+  <label htmlFor="address">Address(*)</label>
+  <input
+    type="text"
+    id="address"
+    className="form-control"
+    value={address}
+    onChange={(e) => {
+      const regex = /^[A-Za-z0-9\s]+$/;
+      const value = e.target.value;
+      if (regex.test(value) || value === '') {
+        setAddress(value);
+        e.target.setCustomValidity('');
+        setAddressError('');
+      } else {
+        e.target.setCustomValidity("Please enter valid address");
+        setAddressError('Please enter valid address');
+      }
+    }}
+    required
+  />
+  {addressError && (
+    <div className="error-message">{addressError}</div>
+  )}
+</div>
+  
+<div className="form-group">
+  <label htmlFor="city">City(*)</label>
+  <input
+    type="text"
+    id="city"
+    className="form-control"
+    value={city}
+    onChange={(e) => {
+      const regex = /^[A-Za-z\s]+$/;
+      const value = e.target.value;
+      if (regex.test(value) || value === '') {
+        setCity(value);
+        e.target.setCustomValidity('');
+        setCityError('');
+      } else {
+        e.target.setCustomValidity("Please enter valid city name");
+        setCityError('Please enter valid city name');
+      }
+    }}
+    required
+  />
+  {cityError && (
+    <div className="error-message">{cityError}</div>
+  )}
+</div>
     <div className="form-group">
-    <label htmlFor="cellPhone">Cell Phone(*)</label>
-    <input
-  type="text"
-  id="cellPhone"
-  className="form-control"
-  value={cellPhone}
-  onChange={(e) => {
-    const regex = /^[0-9]*$/; // Acepta solo números
-    const value = e.target.value;
-    if (regex.test(value)) {
-      setCellPhone(value);
-    }
-  }}
-  required
-/>
-  </div>
+  <label htmlFor="cellPhone">Cell Phone(*)</label>
+  <input
+    type="text"
+    id="cellPhone"
+    className="form-control"
+    value={cellPhone}
+    onChange={(e) => {
+      const regex = /^[0-9]*$/;
+      const value = e.target.value;
+      if (regex.test(value) || value === '') {
+        setCellPhone(value);
+        e.target.setCustomValidity('');
+        setCellPhoneError('');
+      } else {
+        e.target.setCustomValidity("Please enter only numbers");
+        setCellPhoneError('Please enter only numbers');
+      }
+    }}
+    required
+  />
+  {cellPhoneError && (
+    <div className="error-message">{cellPhoneError}</div>
+  )}
+</div>
 </form>
 
 
