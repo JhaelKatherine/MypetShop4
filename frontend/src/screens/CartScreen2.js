@@ -72,7 +72,7 @@ export default function CartScreen() {
                 </Col>
                 <Col xs={4}>
                   <div className="cart-item-details">
-                    <strong>{item.name + "X" + item.quantity}</strong>
+                    <p>{item.name + "  x  " + item.quantity}</p>
                   </div>
                 </Col>
                 <Col xs={4}>
