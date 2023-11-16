@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import '../Css/UserCardInformation.css';
 
@@ -19,25 +18,20 @@ export default function UserCardInformation() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-   
+    
     const cardNumberPattern = /^[0-9]*$/;
     if (!formData.cardNumber.match(cardNumberPattern)) {
-      alert('Only numbers are allowed.');
+      alert('Only numbers are allowed for Card Number.');
       return;
     }
 
-    
     const expirationDatePattern = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
     if (!formData.expirationDate.match(expirationDatePattern)) {
-      alert('Only valid data : MM/YY.');
+      alert('Only valid data for Expiration Date: MM/YY.');
       return;
     }
 
-    
-
-    
     console.log('Success', formData);
-   
   };
 
   return (
@@ -65,6 +59,39 @@ export default function UserCardInformation() {
           onChange={handleChange}
           pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
           title="Only valid data : MM/YY."
+          required
+        />
+
+        <label htmlFor="cvv">CVV:</label>
+        <input
+          type="text"
+          id="cvv"
+          name="cvv"
+          value={formData.cvv}
+          onChange={handleChange}
+          
+          required
+        />
+
+        <label htmlFor="postalCode">Postal Code:</label>
+        <input
+          type="text"
+          id="postalCode"
+          name="postalCode"
+          value={formData.postalCode}
+          onChange={handleChange}
+          
+          required
+        />
+
+        <label htmlFor="country">Country:</label>
+        <input
+          type="text"
+          id="country"
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          
           required
         />
 
