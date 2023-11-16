@@ -133,8 +133,10 @@ export default function ShippingAddressScreen() {
           }}
           onInvalid={(e) => e.target.setCustomValidity("Only numbers are allowed")}
           onInput={(e) => e.target.setCustomValidity('')}
+          pattern="[A-Za-z\s]+"
           required
         />
+        <div className="invalid-feedback">Please enter a valid address.</div>
       </div>
       }}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
