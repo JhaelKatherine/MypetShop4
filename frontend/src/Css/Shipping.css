@@ -42,7 +42,11 @@
 
 .error-message {
   color: red;
-  font-size: 12px;
-  /* Otros estilos */
+  font-size: 0.8em;
+  /* Estilos estándar para el mensaje de error */
 }
 
+.error-highlight {
+  border: 1px solid red;
+  /* Estilos de resaltado para el mensaje de error */
+}
