@@ -33,17 +33,34 @@ export default function AddProductScreen() {
     return urlRegex.test(url);
   };
 
+  const checkImageExists = async (url) => {
+    try {
+      const response = await Axios.head(url);
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    if (!isValidImageUrl(image)) {
+      setLoading(false);
+      toast.error('Please enter a valid image URL');
+      return;
+    }
+
+    const imageExists = await checkImageExists(image);
+
+    if (!imageExists) {
+      setLoading(false);
+      toast.error('Image not found at the provided URL');
+      return;
+    }
+
     try {
-      setLoading(true);
-
-      if (!isValidImageUrl(image)) {
-        setLoading(false);
-        toast.error('Please enter a valid image URL');
-        return;
-      }
-
       const { data } = await Axios.post('/api/products', {
         name,
         slug,
@@ -54,13 +71,14 @@ export default function AddProductScreen() {
         price,
         countInStock,
       });
+
       setLoading(false);
       toast.success('Product successfully added');
       // Redirige a la página de detalles del nuevo producto, si es necesario.
 
     } catch (err) {
       setLoading(false);
-      toast.error(getError(err));
+      toast.error('Error adding product');
     }
   };
 
@@ -207,7 +225,7 @@ export default function AddProductScreen() {
                   }}
                   min="1"
                   onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';'].includes(e.key)) {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
                       e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
                     }
                   }}
