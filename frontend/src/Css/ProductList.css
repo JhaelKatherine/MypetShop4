@@ -1,0 +1,40 @@
+/* En tu archivo CSS */
+.cart-item-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .cart-item-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+  
+  .cart-item-description {
+    flex: 1;
+  }
+  
+  .cart-item-description strong {
+    font-weight: bold;
+  }
+  
+  .cart-item-description p {
+    margin: 5px 0;
+  }
+  
+  .cart-item-description p:last-child {
+    font-weight: bold;
+  }
+  
+  .cart-item-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cart-item-buttons button {
+    margin-right: 5px;
+  }
+  
