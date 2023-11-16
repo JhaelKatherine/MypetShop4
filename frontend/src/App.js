@@ -8,13 +8,13 @@ import Nav from 'react-bootstrap/Nav';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Store } from './Store';
 import SignupScreen from './screens/SignupScreen';
+import AddProductScreen from './screens/AddProductScreen'
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
 import UserCardInformation from './screens/UserCardInformation'
 import Badge from 'react-bootstrap/Badge';
-
 
 import './App.css';
 
@@ -43,6 +43,14 @@ function App() {
                 <SearchBox />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
+              <Link to="/addproduct" className="nav-link">
+                  <img
+                    alt="addProduct"
+                    src="https://i.ibb.co/VpttTSt/add1-removebg-preview.png"
+                    height="50"
+                    className="d-inline-block align-top"
+                  />
+                </Link>
                 <Link to="/cart" className="nav-link">
                   <img
                     alt="cart"
@@ -82,6 +90,7 @@ function App() {
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SignupScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
               <Route path="/usercardinformation" element={<UserCardInformation />} /> 
             </Routes>

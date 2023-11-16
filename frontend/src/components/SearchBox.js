@@ -23,7 +23,7 @@ export default function SearchBox() {
   placeholder="search products..."
   aria-label="Search Products"
   aria-describedby="button-search"
-  className="w-100"
+  className="w-100" // Esta clase Bootstrap puede ajustar el ancho
   style={{
     borderRadius: '20px',
     maxWidth: '950px', // Modifica el maxWidth según tu preferencia
