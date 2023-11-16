@@ -2,6 +2,10 @@
   margin-bottom: 30px; /* O cualquier otro valor que desees */
 }
 
+.label-right {
+  text-align: right !important;; 
+}
+
 .margin {
     margin-bottom: 20px;
     align-items: right;
@@ -29,6 +33,4 @@
   text-align: left;
 }
 
-.label-right {
-  text-align: right;
-}
+
