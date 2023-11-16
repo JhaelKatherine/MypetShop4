@@ -48,6 +48,19 @@ export default function CartScreen() {
         </MessageBox>
       ) : (
         <>
+        <ListGroup.Item>
+        <Row>
+          <Col xs={4}>
+            <div className="title-text">Product</div>
+          </Col>
+          <Col xs={4}>
+            <div className="title-text">Description</div>
+          </Col>
+          <Col xs={4}>
+            <div className="title-text">Subtotal</div>
+          </Col>
+        </Row>
+      </ListGroup.Item>
           {cartItems.map((item) => (
             <ListGroup.Item key={item._id}>
               <Row>
