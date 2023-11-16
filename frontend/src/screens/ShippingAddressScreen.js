@@ -76,8 +76,8 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={fullName}
       onChange={(e) => setFullName(e.target.value)}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
+      pattern="[A-Za-z\s]+"
+      title="Only letters and spaces are allowed"
       required
     />
   </div>
@@ -89,8 +89,8 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={address}
       onChange={(e) => setAddress(e.target.value)}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
+      pattern="[0-9]+"
+      title="Only numbers are allowed"
       required
     />
   </div>
@@ -102,8 +102,8 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={address}
       onChange={(e) => setAddress(e.target.value)}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
+      pattern="[A-Za-z0-9\s]+"
+      title="Only letters, numbers, and spaces are allowed"
       required
     />
   </div>
@@ -115,8 +115,8 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={city}
       onChange={(e) => setCity(e.target.value)}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
+      pattern="[A-Za-z\s]+"
+      title="Only letters and spaces are allowed"
       required
     />
   </div>
@@ -128,12 +128,13 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={postalCode}
       onChange={(e) => setPostalCode(e.target.value)}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
+      pattern="[0-9]+"
+      title="Only numbers are allowed"
       required
     />
   </div>
 </form>
+
 
                   </div>
                 </div>
