@@ -40,19 +40,30 @@
   }
   
   .custom-listgroup .list-group-item {
-    border-width: 2px;
     border-color: #000000;
     /* Otros estilos */
     text-align: left; /* Alineación a la izquierda para los elementos individuales del ListGroup */
   }
 
-  .custom-listgroup .gray-background {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
   
   .custom-listgroup .title-text {
     text-align: center;
   }
+
+  /* Estilos CSS */
+.custom-listgroup .gray-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-listgroup .gray-background .row {
+  display: flex;
+  justify-content: center;
+}
+
+.custom-listgroup .title-text {
+  text-align: center;
+}
+
   
