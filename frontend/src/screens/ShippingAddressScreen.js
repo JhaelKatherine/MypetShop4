@@ -84,8 +84,9 @@ export default function ShippingAddressScreen() {
       e.target.setCustomValidity("Please enter only letters and spaces");
     }
   }}
+  pattern="^[A-Za-z\s]+$"
+  title="Please enter only letters and spaces"
 />
-
   </div>
 
   <div className="form-group">
@@ -103,7 +104,7 @@ export default function ShippingAddressScreen() {
       onInvalid={(e) => e.target.setCustomValidity("Only numbers are allowed")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
-    />
+    />cellPhone
   </div>
   
   <div className="form-group">
@@ -116,7 +117,7 @@ export default function ShippingAddressScreen() {
       onChange={(e) => {
         const regex = /^[A-Za-z\s]+$/; // Expresión regular para aceptar solo letras y espacios
         if (regex.test(e.target.value) || e.target.value === '') {
-          setCity(e.target.value);
+          setAddress(e.target.value);
         } <div className="form-group">
         <label htmlFor="nit">Nit</label>
         <input
@@ -127,7 +128,7 @@ export default function ShippingAddressScreen() {
           onChange={(e) => {
             const regex = /^[0-9]+$/; // Expresión regular para aceptar solo números
             if (regex.test(e.target.value) || e.target.value === '') {
-              setNit(e.target.value);
+              setAddress(e.target.value);
             }
           }}
           onInvalid={(e) => e.target.setCustomValidity("Only numbers are allowed")}
@@ -139,7 +140,6 @@ export default function ShippingAddressScreen() {
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
-    
       
     />
   </div>
