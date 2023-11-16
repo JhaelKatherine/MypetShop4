@@ -20,9 +20,9 @@ export default function ShippingAddressScreen() {
   } = state;
 
   const [fullName, setFullName] = useState(shippingAddress.fullName || '');
+  const [nit, setPostalCode] = useState(shippingAddress.postalCode || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
   const [city, setCity] = useState(shippingAddress.city || '');
-  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
   const [country, setCountry] = useState(shippingAddress.country || '');
 
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
@@ -37,9 +37,9 @@ export default function ShippingAddressScreen() {
     e.preventDefault();
     ctxDispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
-      payload: { fullName, address, city, postalCode, country, location: shippingAddress.location },
+      payload: { fullName, address, city, nit, country, location: shippingAddress.location },
     });
-    localStorage.setItem('shippingAddress', JSON.stringify({ fullName, address, city, postalCode, country, location: shippingAddress.location }));
+    localStorage.setItem('shippingAddress', JSON.stringify({ fullName, address, city, nit, country, location: shippingAddress.location }));
   };
 
   const submitPaymentHandler = (e) => {
@@ -119,26 +119,36 @@ export default function ShippingAddressScreen() {
                 <CartScreen2/>
               </div>
               <div className='margin'>
-              <div className="mb-3">
-                <Form.Check
-                  type="radio"
-                  id="PayPal"
-                  label="PayPal"
-                  value="PayPal"
-                  checked={paymentMethodName === 'PayPal'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <Form.Check
-                  type="radio"
-                  id="Stripe"
-                  label="Stripe"
-                  value="Stripe"
-                  checked={paymentMethodName === 'Stripe'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                />
-              </div>
+              <ListGroup variant="flush">
+  {/* ...otros elementos del ListGroup */}
+  
+  <ListGroup.Item>
+    <div className="mb-3">
+      <Form.Check
+        type="radio"
+        id="PayPal"
+        label="PayPal"
+        value="PayPal"
+        checked={paymentMethodName === 'PayPal'}
+        onChange={(e) => setPaymentMethod(e.target.value)}
+      />
+    </div>
+  </ListGroup.Item>
+  
+  <ListGroup.Item>
+    <div className="mb-3">
+      <Form.Check
+        type="radio"
+        id="Stripe"
+        label="Stripe"
+        value="Stripe"
+        checked={paymentMethodName === 'Stripe'}
+        onChange={(e) => setPaymentMethod(e.target.value)}
+      />
+    </div>
+  </ListGroup.Item>
+</ListGroup>
+
               </div>
               
               <div className="mb-3">
