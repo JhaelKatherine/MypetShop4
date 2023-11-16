@@ -78,7 +78,7 @@ export default function CartScreen() {
                 </Col>
                 <Col xs={4}>
                   <div className="cart-item-details">
-                    <p>Subtotal: ${item.price * item.quantity}</p>
+                    <p>${item.price * item.quantity}</p>
                   </div>
                 </Col>
               </Row>
@@ -94,7 +94,7 @@ export default function CartScreen() {
       <div className="title-text"> </div>
     </Col>
     <Col xs={4}>
-      <div className="title-text">{calculateTotal()}</div> {/* Aquí usamos llaves para mostrar el resultado */}
+      <div className="title-text">{calculateTotal()}</div> 
     </Col>
   </Row>
 </ListGroup.Item>
