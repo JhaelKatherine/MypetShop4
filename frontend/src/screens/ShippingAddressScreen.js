@@ -67,7 +67,7 @@ export default function ShippingAddressScreen() {
             <h1 className="my-3">Billing Details</h1>
             <p className='rojo'>Field are (* )required</p>
             
-            <form onSubmit={submitPaymentHandler} className="custom-form">
+            <form onSubmit={submitShippingHandler} className="custom-form">
   <div className="form-group">
     <label htmlFor="fullName">Full Name(*)</label>
     <input
