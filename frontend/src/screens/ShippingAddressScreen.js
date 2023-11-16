@@ -118,6 +118,7 @@ export default function ShippingAddressScreen() {
               <div className='.customCartScreen'>
                 <CartScreen2/>
               </div>
+              <div className='margin'>
               <div className="mb-3">
                 <Form.Check
                   type="radio"
@@ -137,6 +138,7 @@ export default function ShippingAddressScreen() {
                   checked={paymentMethodName === 'Stripe'}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
+              </div>
               </div>
               
               <div className="mb-3">
