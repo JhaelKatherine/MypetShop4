@@ -7,7 +7,7 @@ form {
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(3, auto); 
+  grid-template-rows: auto auto auto auto; 
 }
 
 label {
@@ -18,7 +18,7 @@ input[type="text"] {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
+  width: calc(100% - 12px);
 }
 
 #cardNumber {
@@ -26,10 +26,14 @@ input[type="text"] {
 }
 
 #cvv,
-#expirationDate,
+#expirationDate {
+  grid-column: span 1;
+}
+
 #postalCode,
 #country {
-  grid-column: span 1; 
+  grid-column: span 1;
+  grid-row-start: 4;
 }
 
 button.proceed-btn {
@@ -40,3 +44,4 @@ button.proceed-btn {
   border-radius: 4px;
   cursor: pointer;
 }
+
