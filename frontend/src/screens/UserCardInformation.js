@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../Css/UserCardInformation.css';
 import ProductList from '../components/ProductList';
 import { Store } from '../Store';
 
-
-export default function CartScreen() {
+export default function UserCardInformation() {
   const { state } = useContext(Store);
   const {
     cart: { cartItems },
-  } = state;}
+  } = state;
 
-export default function UserCardInformation() {
   const [formData, setFormData] = useState({
     cardNumber: '',
     expirationDate: '',
@@ -18,7 +16,6 @@ export default function UserCardInformation() {
     postalCode: '',
     country: '',
   });
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +25,6 @@ export default function UserCardInformation() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
     const cardNumberPattern = /^[0-9]*$/;
     if (!formData.cardNumber.match(cardNumberPattern)) {
       alert('Only numbers are allowed for Card Number.');
