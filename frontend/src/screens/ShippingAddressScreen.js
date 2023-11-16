@@ -87,19 +87,7 @@ export default function ShippingAddressScreen() {
 />
 
   </div>
-  <div className="form-group">
-    <label htmlFor="nit">Nit</label>
-    <input
-      type="text"
-      id="nit"
-      className="form-control"
-      value={nit}
-      onChange={(e) => setNit(e.target.value)}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
-      required
-    />
-  </div>
+  
   <div className="form-group">
     <label htmlFor="address">Address(*)</label>
     <input
@@ -108,16 +96,33 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={address}
       onChange={(e) => {
-        const regex = /^[A-Za-z\s\d]+$/; // Expresión regular para aceptar letras, espacios y números
-        if (!regex.test(e.target.value)) {
-          setAddress(e.target.value.replace(/[^A-Za-z\s]/g, '')); // Elimina los números del valor ingresado
-        } else {
-          setAddress(e.target.value);
-        }
+        const regex = /^[A-Za-z\s]+$/; // Expresión regular para aceptar solo letras y espacios
+        if (regex.test(e.target.value) || e.target.value === '') {
+          setCity(e.target.value);
+        } <div className="form-group">
+        <label htmlFor="nit">Nit</label>
+        <input
+          type="text"
+          id="nit"
+          className="form-control"
+          value={nit}
+          onChange={(e) => {
+            const regex = /^[0-9]+$/; // Expresión regular para aceptar solo números
+            if (regex.test(e.target.value) || e.target.value === '') {
+              setNit(e.target.value);
+            }
+          }}
+          onInvalid={(e) => e.target.setCustomValidity("Only numbers are allowed")}
+          onInput={(e) => e.target.setCustomValidity('')}
+          required
+        />
+      </div>
       }}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
+    
+      
     />
   </div>
   <div className="form-group">
@@ -137,15 +142,20 @@ export default function ShippingAddressScreen() {
       onInput={(e) => e.target.setCustomValidity('')}
       required
     />
-  </div>
-  <div className="form-group">
+    </div>
+    <div className="form-group">
     <label htmlFor="cellPhone">Cell Phone(*)</label>
     <input
       type="text"
       id="cellPhone"
       className="form-control"
-      onChange={(e) => setCellPhone(e.target.value)}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onChange={(e) => {
+        const regex = /^[0-9]+$/; // Expresión regular para aceptar solo números
+        if (regex.test(e.target.value) || e.target.value === '') {
+          setCellPhone(e.target.value);
+        }
+      }}
+      onInvalid={(e) => e.target.setCustomValidity("Only numbers are allowed")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
     />
