@@ -46,30 +46,35 @@ export default function CartScreen() {
               Cart is empty. <Link to="/">Go Shopping</Link>
             </MessageBox>
           ) : (
-            <ListGroup>
+            <ListGroup variant="flush">
             {cartItems.map((item) => (
               <ListGroup.Item key={item._id}>
-                <div className="cart-item-container">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="cart-item-image img-fluid rounded img-thumbnail"
-                  />
-                  <div className="cart-item-">
-                    <strong>{item.name}</strong>
-                  </div>
-                  <div >
-                  <div key={item._id} className="cart-item-price">
-                     <p>Subtotal: ${item.price * item.quantity}</p>
-                 </div>
-                  </div>
-                  <div className="total-cost">
-        </div>
-        <p>Total Cost: ${calculateTotal()}</p>
-
-                </div>
+                <Row>
+                  <Col xs={4}>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="cart-item-image img-fluid rounded img-thumbnail"
+                    />
+                  </Col>
+                  <Col xs={8}>
+                    <div className="cart-item-details">
+                      <h5>{item.name}</h5>
+                      <p>Subtotal: ${item.price * item.quantity}</p>
+                    </div>
+                  </Col>
+                </Row>
               </ListGroup.Item>
             ))}
+            <ListGroup.Item>
+              <Row>
+                <Col xs={12}>
+                  <div className="total-cost">
+                    <h5>Total Cost: ${calculateTotal()}</h5>
+                  </div>
+                </Col>
+              </Row>
+            </ListGroup.Item>
           </ListGroup>
         )}
       </Row>
