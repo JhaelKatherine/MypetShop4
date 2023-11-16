@@ -132,7 +132,8 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
+                    onkeydown="return event.keyCode !== 69"
+                    const enteredValue = e.target.value;
                     const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
                     if (regex.test(enteredValue)) {
                       setPrice(enteredValue);
