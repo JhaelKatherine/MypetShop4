@@ -1,6 +1,6 @@
 import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
-import ProductList from '../Css/ProductList';
+import '../Css/ProductList';
 
 const ProductList = ({ products }) => {
   return (

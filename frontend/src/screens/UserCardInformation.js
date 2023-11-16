@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import '../Css/UserCardInformation.css';
 import ProductList from '../components/ProductList';
+import { Store } from '../Store';
+import ProductList from '../components/ProductList';
+
+
+export default function CartScreen() {
+  const { state } = useContext(Store);
+  const {
+    cart: { cartItems },
+  } = state;}
 
 export default function UserCardInformation() {
   const [formData, setFormData] = useState({
@@ -10,6 +19,7 @@ export default function UserCardInformation() {
     postalCode: '',
     country: '',
   });
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -101,6 +111,7 @@ export default function UserCardInformation() {
         </button>
       </form>
       <ProductList products={formData.products} />
+      <ProductList products={cartItems} />
     </div>
   );
 }
