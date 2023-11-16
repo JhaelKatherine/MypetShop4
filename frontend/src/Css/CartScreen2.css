@@ -33,3 +33,13 @@
     padding: 3px;
     margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
   }
+
+  .custom-listgroup {
+    /* Otros estilos */
+    text-align: center; /* Centro de todo el texto dentro del ListGroup */
+  }
+  
+  .custom-listgroup .list-group-item {
+    /* Otros estilos */
+    text-align: left; /* Alineación a la izquierda para los elementos individuales del ListGroup */
+  }
