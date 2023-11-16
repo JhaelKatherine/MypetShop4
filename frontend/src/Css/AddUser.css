@@ -1,44 +1,4 @@
 
-.gray-background {
-  background-color: #ccc; /* Color gris de fondo */
-}
-
-.cart-item-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px; /* Ajusta este valor para cambiar el espaciado entre elementos */
-}
-
-.cart-item-image {
-  width: 100px; /* Ajusta el tamaño de la imagen según tu preferencia */
-  margin-right: 20px; /* Espacio entre la imagen y el nombre */
-}
-
-.cart-item-details {
-  flex: 1;
-}
-
-.cart-item-price {
-  margin-top: 10px; /* Espacio entre el nombre y los detalles */
-}
-
-.cart-item{
-  margin-left: 10px;
-}
-/* Otros estilos... */
-.title-text {
-  font-weight: bold;
-  text-align: center;
-  padding: 3px;
-  margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
-}
-
-.title-text2 {
-  font-weight: bold;
-  text-align: center;
-  padding: 3px;
-  margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
-}
 
 .form {
     display: flex;
@@ -55,11 +15,6 @@
     margin-bottom: 30px;
 
   }
-  .centered-title {
-    text-align: center; /* Centrar el texto */
-    margin-top: 20px; /* Ajustar margen superior según sea necesario */
-  }
-  
   
   .title {
     font-size: 28px;
@@ -73,24 +28,6 @@
     padding-left: 30px;
   }
   
-  .message,
-  .signin {
-    margin-bottom: 6px;
-    color: rgba(88, 87, 87, 0.822);
-    font-size: 14px;
-  }
-  
-  .signin {
-    text-align: center;
-  }
-  
-  .signin a {
-    color: royalblue;
-  }
-  
-  .signin a:hover {
-    text-decoration: underline royalblue;
-  }
   
   .form-fields {
     display: flex;

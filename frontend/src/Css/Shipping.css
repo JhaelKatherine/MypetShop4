@@ -1,4 +1,4 @@
-/* .customCartScreen {
+.customCartScreen {
   margin-bottom: 30px; 
 }
 
@@ -37,7 +37,7 @@
 .custom-label {
   font-size: 18px;
   color: #333;
-}*/
+}
 .form {
   display: flex;
   flex-direction: column;
