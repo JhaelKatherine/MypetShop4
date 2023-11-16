@@ -139,7 +139,7 @@ export default function ShippingAddressScreen() {
     <div className="mb-3">
       <Form.Check
         type="radio"
-        id="Stripe"
+        id="Stripe"SS
         label="Stripe"
         value="Stripe"
         checked={paymentMethodName === 'Stripe'}
