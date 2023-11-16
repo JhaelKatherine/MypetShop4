@@ -34,21 +34,4 @@
     margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
   }
   
-
-  /* Estilos CSS */
-.custom-listgroup .gray-background {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.custom-listgroup .gray-background .row {
-  display: flex;
-  justify-content: center;
-}
-
-.custom-listgroup .title-text {
-  text-align: center;
-}
-
   
