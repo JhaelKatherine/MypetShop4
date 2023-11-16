@@ -120,32 +120,50 @@ const submitShippingHandler = (e) => {
 };
 
 
+// ...
 
-  const submitPaymentHandler = (e) => {
-    e.preventDefault();
+const submitPaymentHandler = (e) => {
+  e.preventDefault();
 
-    if (validateForm()) {
-      ctxDispatch({
-        type: 'SAVE_SHIPPING_ADDRESS',
-        payload: { fullName, nit, address, city, cellPhone },
-      });
-      localStorage.setItem('shippingAddress', JSON.stringify({ fullName, nit, address, city, cellPhone }));
-      navigate('/invoice', {
-        state: {
-          invoiceData: {
-            fullName,
-            nit,
-            address,
-            city,
-            cellPhone,
-            // Puedes agregar más datos según sea necesario
-          },
+  if (validateForm()) {
+    const userInformation = {
+      fullName,
+      nit,
+      address,
+      city,
+      cellPhone,
+      // Otros campos de información del usuario según sea necesario
+    };
+
+    ctxDispatch({
+      type: 'SAVE_SHIPPING_ADDRESS',
+      payload: userInformation,
+    });
+
+    localStorage.setItem('shippingAddress', JSON.stringify(userInformation));
+
+    // Aquí pasas la información del usuario a la pantalla de la factura
+    navigate('/invoice', {
+      state: {
+        invoiceData: {
+          ...userInformation,
+          invoiceNumber: '123', // Esto debe ser reemplazado con el número de factura real
+          // Puedes agregar más campos según sea necesario
+          products: [
+            // Agrega los productos según sea necesario
+            { name: 'Product 1', quantity: 2, unitPrice: 10.00 },
+            { name: 'Product 2', quantity: 1, unitPrice: 15.00 },
+          ],
         },
-      });
-    } else {
-      console.log('Please complete the required fields correctly.');
-    }
-  };
+      },
+    });
+  } else {
+    console.log('Please complete the required fields correctly.');
+  }
+};
+
+// ...
+
 
 
   return (
