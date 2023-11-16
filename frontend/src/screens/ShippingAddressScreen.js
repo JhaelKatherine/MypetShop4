@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import CartScreen2 from './CartScreen2';
-import '../Css/AddUser.css';
+import '../Css/Shipping.css';
 
 import { Row, Col, ListGroup } from 'react-bootstrap';
 
@@ -68,32 +68,29 @@ export default function ShippingAddressScreen() {
             <p className='rojo'>Field are (* )required</p>
             
             <form onSubmit={submitPaymentHandler} className="custom-form">
-            <div className="form-group">
-  <label htmlFor="fullName">Full Name(*)</label>
-  <input
-    type="text"
-    id="fullName"
-    className="form-control"
-    value={fullName}
-    onChange={(e) => setFullName(e.target.value)}
-    pattern="[A-Za-z\s]+"
-    title="Only letters and spaces are allowed"
-    required
-  />
-  {fullName.length > 0 && !/^[A-Za-z\s]+$/.test(fullName) && (
-    <span className="error-message">Only letters and spaces are allowed</span>
-  )}
-</div>
   <div className="form-group">
-    <label htmlFor="nit">Nit</label>
+    <label htmlFor="fullName">Full Name(*)</label>
     <input
       type="text"
-      id="nit"
+      id="fullName"
+      className="form-control"
+      value={fullName}
+      onChange={(e) => setFullName(e.target.value)}
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
+      required
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="address">Nit</label>
+    <input
+      type="text"
+      id="address"
       className="form-control"
       value={address}
       onChange={(e) => setAddress(e.target.value)}
-      pattern="[0-9]+"
-      title="Only numbers are allowed"
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
       required
     />
   </div>
@@ -105,8 +102,8 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={address}
       onChange={(e) => setAddress(e.target.value)}
-      pattern="[A-Za-z0-9\s]+"
-      title="Only letters, numbers, and spaces are allowed"
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
       required
     />
   </div>
@@ -118,8 +115,8 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={city}
       onChange={(e) => setCity(e.target.value)}
-      pattern="[A-Za-z\s]+"
-      title="Only letters and spaces are allowed"
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
       required
     />
   </div>
@@ -131,13 +128,12 @@ export default function ShippingAddressScreen() {
       className="form-control"
       value={postalCode}
       onChange={(e) => setPostalCode(e.target.value)}
-      pattern="[0-9]+"
-      title="Only numbers are allowed"
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
       required
     />
   </div>
 </form>
-
 
                   </div>
                 </div>
@@ -188,4 +184,5 @@ export default function ShippingAddressScreen() {
                 </div>
               </div>
             </div>
-          );}
+          );
+  }
