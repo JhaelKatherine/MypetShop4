@@ -1,26 +1,72 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import '../Css/UserCardInformation.css';
 
 export default function UserCardInformation() {
+  const [formData, setFormData] = useState({
+    cardNumber: '',
+    expirationDate: '',
+    cvv: '',
+    postalCode: '',
+    country: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+   
+    const cardNumberPattern = /^[0-9]*$/;
+    if (!formData.cardNumber.match(cardNumberPattern)) {
+      alert('Only numbers are allowed.');
+      return;
+    }
+
+    
+    const expirationDatePattern = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
+    if (!formData.expirationDate.match(expirationDatePattern)) {
+      alert('Only valid data : MM/YY.');
+      return;
+    }
+
+    
+
+    
+    console.log('Success', formData);
+   
+  };
+
   return (
     <div className="user-card-info-container">
       <h1>User Card Information</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="cardNumber">Card Number:</label>
-        <input type="text" id="cardNumber" name="cardNumber" required />
+        <input
+          type="text"
+          id="cardNumber"
+          name="cardNumber"
+          value={formData.cardNumber}
+          onChange={handleChange}
+          pattern="[0-9]*"
+          title="Put only numbers"
+          required
+        />
 
-        <label htmlFor="expirationDate">Expiration Date:</label>
-        <input type="text" id="expirationDate" name="expirationDate" required />
-
-        <label htmlFor="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv" required />
-
-        <label htmlFor="postalCode">Postal Code (Optional):</label>
-        <input type="text" id="postalCode" name="postalCode" />
-
-        <label htmlFor="country">Country:</label>
-        <input type="text" id="country" name="country" required />
+        <label htmlFor="expirationDate">Expiration Date (MM/YY):</label>
+        <input
+          type="text"
+          id="expirationDate"
+          name="expirationDate"
+          value={formData.expirationDate}
+          onChange={handleChange}
+          pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
+          title="Only valid data : MM/YY."
+          required
+        />
 
         <button type="submit" className="proceed-btn">
           Proceed
