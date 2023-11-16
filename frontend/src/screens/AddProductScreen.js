@@ -144,6 +144,7 @@ export default function AddProductScreen() {
                       e.preventDefault(); // Evita la entrada del carácter 'e'/'E'
                     }
                   }}
+                
                 required
               />
             </div>
@@ -198,14 +199,18 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
-                    onkeydown="return event.keyCode !== 69"
-                    const enteredValue = e.target.value;
-                    const intValue = parseInt(enteredValue, 10);
-              
-                    if (!isNaN(intValue) && Number.isInteger(intValue)) {
-                      setCountInStock(intValue.toString());
-                    }
-                  }}
+                const enteredValue = e.target.value.replace(/[e+\-*/]/gi, ''); // Elimina los signos matemáticos
+                const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                if (regex.test(enteredValue)) {
+                  setPrice(enteredValue);
+                }
+              }}
+              min="1"
+              onKeyDown={(e) => {
+                if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ',', ';'].includes(e.key)) {
+                  e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                }
+              }}
                 required
               />
             </div>
