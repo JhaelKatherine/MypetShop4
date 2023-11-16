@@ -76,6 +76,7 @@ export default function AddProductScreen() {
       toast.success('Product successfully added');
       // Redirige a la página de detalles del nuevo producto, si es necesario.
 
+      
     } catch (err) {
       setLoading(false);
       toast.error('Error adding product');
@@ -146,24 +147,32 @@ export default function AddProductScreen() {
             <div className="form-group">
               <label htmlFor="price">Price</label>
               <input
-                type="number"
+                type="text"
                 id="price"
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
-                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
-                    if (regex.test(enteredValue)) {
+                    const enteredValue = e.target.value;
+                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
+                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
                       setPrice(enteredValue);
                     }
                   }}
-                  min="1"
                   onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';'].includes(e.key)) {
-                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    // Evita caracteres que no sean números o puntos decimales
+                    if (
+                      !(
+                        (e.key >= '0' && e.key <= '9') ||
+                        e.key === '.' ||
+                        e.key === 'Backspace' ||
+                        e.key === 'Delete' ||
+                        e.key === 'ArrowLeft' ||
+                        e.key === 'ArrowRight'
+                      )
+                    ) {
+                      e.preventDefault();
                     }
                   }}
-                
                 required
               />
             </div>
