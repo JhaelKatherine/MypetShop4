@@ -14,6 +14,7 @@ export default function SignupScreen() {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
+  const [emailExistsError, setEmailExistsError] = useState('');
 
 
   const [email, setEmail] = useState('');
@@ -29,6 +30,13 @@ export default function SignupScreen() {
       return;
     }
     try {
+      const { data: { emailExists } } = await Axios.get(`/api/users/check-email?email=${email}`);
+
+    if (emailExists) {
+      // Si el correo electrónico ya existe, mostrar un mensaje de error
+      setEmailExistsError('Email already exists');
+    } else {
+      // Si el correo electrónico no existe, realizar la solicitud de registro
       const { data } = await Axios.post('/api/users/signup', {
         name,
         lastName,
@@ -36,10 +44,23 @@ export default function SignupScreen() {
         email,
         password,
       });
-    } catch (err) {
+
+      // Limpiar el error de correo electrónico si estaba configurado anteriormente
+      setEmailExistsError('');
+
+      // Resto del código después de un registro exitoso
+    }
+  } catch (err) {
+    // Verificar el tipo de error
+    if (err.response && err.response.status === 409) {
+      // Código 409 generalmente indica un conflicto, que podría ser un correo electrónico duplicado
+      setEmailExistsError('Email already exists');
+    } else {
+      // Si no es un error relacionado con el correo electrónico, mostrar el error general
       toast.error(getError(err));
     }
-  };
+  }
+};
 
   return (
     <>
