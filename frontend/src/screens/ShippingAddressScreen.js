@@ -71,94 +71,94 @@ export default function ShippingAddressScreen() {
             
             <Form onSubmit={submitPaymentHandler }>
               <Form.Group className="mb-3" controlId="fullName">
-                <Form.Label className="form-label">Full Name(*)</Form.Label>
+                <Form.Label >Full Name(*)</Form.Label>
                 <Form.Control value={fullName} onChange={(e) => setFullName(e.target.value)} required />
               </Form.Group>
-         <Form.Group className="mb-3" controlId="address">
-           <Form.Label>Nit</Form.Label>
-           <Form.Control
-             value={address}
-             onChange={(e) => setAddress(e.target.value)}
-             required
-           />
-           </Form.Group>
+                <Form.Group className="mb-3" controlId="address">
+                  <Form.Label>Nit</Form.Label>
+                  <Form.Control
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                  />
+                  </Form.Group>
 
 
-         <Form.Group className="mb-3" controlId="address">
-           <Form.Label className="form-label">Address(*)</Form.Label>
-           <Form.Control
-             value={address}
-             onChange={(e) => setAddress(e.target.value)}
-             required
-           />
-         </Form.Group>
-         <Form.Group className="mb-3" controlId="city">
-           <Form.Label className="form-label">City(*)</Form.Label>
-           <Form.Control
-             value={city}
-             onChange={(e) => setCity(e.target.value)}
-             required
-           />
-         </Form.Group>
-         <Form.Group className="mb-3" controlId="postalCode">
-           <Form.Label className="form-label">Cell Phone(*)</Form.Label>
-           <Form.Control
-             value={postalCode}
-             onChange={(e) => setPostalCode(e.target.value)}
-             required
-           />
-         </Form.Group>
-            </Form>
-          </div>
-        </div>
-        
-        {/* Right side for PaymentMethodScreen */}
-        <div className="col-md-6">
-          <div className="small-container">
-            <Form onSubmit={submitPaymentHandler}>
-              {/* Payment method radio buttons */}
-              <div className='customCartScreen'>
-                <CartScreen2/>
+                <Form.Group className="mb-3" controlId="address">
+                  <Form.Label >Address(*)</Form.Label>
+                  <Form.Control
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="city">
+                  <Form.Label >City(*)</Form.Label>
+                  <Form.Control
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="postalCode">
+                  <Form.Label >Cell Phone(*)</Form.Label>
+                  <Form.Control
+                    value={postalCode}
+                    onChange={(e) => setPostalCode(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                    </Form>
+                  </div>
+                </div>
+                
+                {/* Right side for PaymentMethodScreen */}
+                <div className="col-md-6">
+                  <div className="small-container">
+                    <Form onSubmit={submitPaymentHandler}>
+                      {/* Payment method radio buttons */}
+                      <div className='customCartScreen'>
+                        <CartScreen2/>
+                      </div>
+                      <div>
+                      
+                      <ListGroup variant="flush">
+                        
+                        <ListGroup.Item className='gray-background'>
+                          <div className="mb-3">
+                            <Form.Check
+                              type="radio"
+                              id="PayPal"
+                              label="PayPal"
+                              value="PayPal"
+                              checked={paymentMethodName === 'PayPal'}
+                              onChange={(e) => setPaymentMethod(e.target.value)}
+                            />
+                          </div>
+                        </ListGroup.Item>
+                        
+                        <ListGroup.Item className='gray-background'>
+                          <div className="mb-3">
+                            <Form.Check
+                              type="radio"
+                              id="Stripe"
+                              label="Stripe"
+                              value="Stripe"
+                              checked={paymentMethodName === 'Stripe'}
+                              onChange={(e) => setPaymentMethod(e.target.value)}
+                            />
+                          </div>
+                        </ListGroup.Item>
+                      </ListGroup>
+                      </div>
+                      
+                      <div className="margin">
+                        <Button variant="primary" type="submit">Continue</Button>
+                      </div>
+                    </Form>
+                  </div>
+                </div>
               </div>
-              <div>
-              
-              <ListGroup variant="flush">
-  
-  <ListGroup.Item className='gray-background'>
-    <div className="mb-3">
-      <Form.Check
-        type="radio"
-        id="PayPal"
-        label="PayPal"
-        value="PayPal"
-        checked={paymentMethodName === 'PayPal'}
-        onChange={(e) => setPaymentMethod(e.target.value)}
-      />
-    </div>
-  </ListGroup.Item>
-  
-  <ListGroup.Item className='gray-background'>
-    <div className="mb-3">
-      <Form.Check
-        type="radio"
-        id="Stripe"
-        label="Stripe"
-        value="Stripe"
-        checked={paymentMethodName === 'Stripe'}
-        onChange={(e) => setPaymentMethod(e.target.value)}
-      />
-    </div>
-  </ListGroup.Item>
-</ListGroup>
-</div>
-              
-              <div className="margin">
-                <Button variant="primary" type="submit">Continue</Button>
-              </div>
-            </Form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+            </div>
+          );
+        }
