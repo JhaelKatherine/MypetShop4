@@ -41,13 +41,12 @@ export default function ShippingAddressScreen() {
   const validateForm = () => {
     let isValid = true;
 
-   if (!fullName.trim()) {
-    setFullName('Full Name requiredis ');
-    isValid = false;
-  } else {
-    setFullNameError('');
-  }
-
+    if (!fullName.trim()) {
+      setFullNameError('Full Name is required');
+      isValid = false;
+    } else {
+      setFullNameError('');
+    }
 
     if (!address.trim()) {
       setAddressError('Address is required');
