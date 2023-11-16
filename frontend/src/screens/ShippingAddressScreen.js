@@ -70,20 +70,22 @@ export default function ShippingAddressScreen() {
   <div className="form-group">
     <label htmlFor="fullName">Full Name(*)</label>
     <input
-      type="text"
-      id="fullName"
-      className="form-control"
-      value={fullName}
-      onChange={(e) => {
-        const regex = /^[A-Za-z\s]+$/; // Expresión regular para aceptar solo letras y espacios
-        if (regex.test(e.target.value) || e.target.value === '') {
-          setFullName(e.target.value);
-        }
-      }}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-      onInput={(e) => e.target.setCustomValidity('')}
-      required
-    />
+  type="text"
+  id="fullName"
+  className="form-control"
+  value={fullName}
+  onChange={(e) => {
+    const regex = /^[A-Za-z\s]+$/;
+    const value = e.target.value;
+    if (regex.test(value) || value === '') {
+      setFullName(value);
+      e.target.setCustomValidity(''); // Restablece el mensaje de error
+    } else {
+      e.target.setCustomValidity("Please enter only letters and spaces");
+    }
+  }}
+/>
+
   </div>
   <div className="form-group">
     <label htmlFor="nit">Nit</label>
