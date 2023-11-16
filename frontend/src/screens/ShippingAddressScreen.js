@@ -6,7 +6,7 @@ import { Store } from '../Store';
 import CartScreen2 from './CartScreen2';
 import '../Css/Shipping.css';
 
-import { Row, Col, ListGroup } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 
 
 export default function ShippingAddressScreen() {
@@ -81,10 +81,10 @@ export default function ShippingAddressScreen() {
     />
   </div>
   <div className="form-group">
-    <label htmlFor="address">Nit</label>
+    <label htmlFor="nit">Nit</label>
     <input
       type="text"
-      id="address"
+      id="nit"
       className="form-control"
       value={address}
       onChange={(e) => setNit(e.target.value)}
@@ -120,12 +120,11 @@ export default function ShippingAddressScreen() {
     />
   </div>
   <div className="form-group">
-    <label htmlFor="postalCode">Cell Phone(*)</label>
+    <label htmlFor="cellPhone">Cell Phone(*)</label>
     <input
       type="text"
-      id="postalCode"
+      id="cellPhone"
       className="form-control"
-      value={postalCode}
       onChange={(e) => setCellPhone(e.target.value)}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
