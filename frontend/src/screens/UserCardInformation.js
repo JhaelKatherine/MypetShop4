@@ -39,7 +39,7 @@ export default function UserCardInformation() {
         <h1>Credit Card</h1>
         <form onSubmit={handleSubmit} className="form-container">
           <div className="form-group">
-            <div className="form-field">
+            <div className="form-field-full">
               <label htmlFor="cardNumber">Card Number:</label>
               <input
                 type="text"
@@ -52,51 +52,55 @@ export default function UserCardInformation() {
                 required
               />
             </div>
-            <div className="form-field">
-              <label htmlFor="expirationDate">Expiration Date:</label>
-              <input
-                type="text"
-                id="expirationDate"
-                name="expirationDate"
-                value={formData.expirationDate}
-                onChange={handleChange}
-                pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
-                title="Only valid data : MM/YY."
-                required
-              />
+            <div className="form-field-half">
+              <div className="form-field">
+                <label htmlFor="expirationDate">Expiration Date:</label>
+                <input
+                  type="text"
+                  id="expirationDate"
+                  name="expirationDate"
+                  value={formData.expirationDate}
+                  onChange={handleChange}
+                  pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
+                  title="Only valid data: MM/YY."
+                  required
+                />
+              </div>
+              <div className="form-field">
+                <label htmlFor="cvv">CVV:</label>
+                <input
+                  type="text"
+                  id="cvv"
+                  name="cvv"
+                  value={formData.cvv}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
-            <div className="form-field">
-              <label htmlFor="cvv">CVV:</label>
-              <input
-                type="text"
-                id="cvv"
-                name="cvv"
-                value={formData.cvv}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-field">
-              <label htmlFor="postalCode">Postal Code:</label>
-              <input
-                type="text"
-                id="postalCode"
-                name="postalCode"
-                value={formData.postalCode}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-field">
-              <label htmlFor="country">Country:</label>
-              <input
-                type="text"
-                id="country"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                required
-              />
+            <div className="form-field-half">
+              <div className="form-field">
+                <label htmlFor="postalCode">Postal Code:</label>
+                <input
+                  type="text"
+                  id="postalCode"
+                  name="postalCode"
+                  value={formData.postalCode}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-field">
+                <label htmlFor="country">Country:</label>
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
           </div>
         </form>
@@ -112,3 +116,4 @@ export default function UserCardInformation() {
     </div>
   );
 }
+
