@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
 import CartScreen2 from './CartScreen2';
+import '../Css/Shipping.css';
+
+
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -118,7 +121,7 @@ export default function ShippingAddressScreen() {
             <h1 className="my-3">Payment Method</h1>
             <Form onSubmit={submitPaymentHandler}>
               {/* Payment method radio buttons */}
-              <div>
+              <div className='.customCartScreen'>
                 <CartScreen2/>
               </div>
               <div className="mb-3">
