@@ -44,7 +44,13 @@ export default function ShippingAddressScreen() {
     <div className={`error-message${fullNameError && !fullName.trim() ? ' error-highlight' : ''}`}>
     {fullNameError || 'Full Name is required'} 
   </div>
-  
+   if (!fullName.trim()) {
+    setFullName('Address is required');
+    isValid = false;
+  } else {
+    setFullNameError('');
+  }
+
 
     if (!address.trim()) {
       setAddressError('Address is required');
