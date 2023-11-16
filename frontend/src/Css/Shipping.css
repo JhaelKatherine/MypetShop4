@@ -11,3 +11,9 @@ margin {
 rojo {
     color: red;
 }
+
+ 
+.gray-background {
+  background-color: #ccc; /* Color gris de fondo */
+  padding: 20px; /* Ajusta el espaciado interno según sea necesario */
+}

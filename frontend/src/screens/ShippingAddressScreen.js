@@ -67,6 +67,7 @@ export default function ShippingAddressScreen() {
         <div className="col-md-6">
           <div className="small-container">
             <h1 className="my-3">Billing Details</h1>
+            <p>Field are (* )required</p>
             <Form onSubmit={submitPaymentHandler }>
               <Form.Group className="mb-3" controlId="fullName">
                 <Form.Label>Full Name(*)</Form.Label>
@@ -121,7 +122,7 @@ export default function ShippingAddressScreen() {
               <ListGroup variant="flush">
   {/* ...otros elementos del ListGroup */}
   
-  <ListGroup.Item>
+  <ListGroup.Item className='gray-background'>
     <div className="mb-3">
       <Form.Check
         type="radio"
@@ -134,7 +135,7 @@ export default function ShippingAddressScreen() {
     </div>
   </ListGroup.Item>
   
-  <ListGroup.Item>
+  <ListGroup.Item className='gray-background'>
     <div className="mb-3">
       <Form.Check
         type="radio"
