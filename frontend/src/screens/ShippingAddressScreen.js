@@ -178,7 +178,7 @@ export default function ShippingAddressScreen() {
     className="form-control"
     value={address}
     onChange={(e) => {
-      const regex = /^[A-Za-z0-9\s]+$/;
+      const regex = /^[A-Za-z\s]+$/;
       const value = e.target.value;
       if (regex.test(value) || value === '') {
         setAddress(value);
