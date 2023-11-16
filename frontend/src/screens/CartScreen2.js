@@ -39,45 +39,45 @@ export default function CartScreen() {
 
   return (
     <div>
-      <h1>YOUR ORDER</h1>
-      <ListGroup variant="flush">
-        {cartItems.length === 0 ? (
-          <MessageBox>
-            Cart is empty. <Link to="/">Go Shopping</Link>
-          </MessageBox>
-        ) : (
-          <>
-            {cartItems.map((item) => (
-              <ListGroup.Item key={item._id}>
-                <Row>
-                  <Col xs={4}>
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="cart-item-image img-fluid rounded img-thumbnail"
-                    />
-                  </Col>
-                  <Col xs={8}>
-                    <div className="cart-item-details">
-                      <strong>{item.name}</strong>
-                      <p>Subtotal: ${item.price * item.quantity}</p>
-                    </div>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-            <ListGroup.Item>
+    <h1>YOUR ORDER</h1>
+    <ListGroup variant="flush" className="bg-gray"> {/* Agrega una clase personalizada */}
+      {cartItems.length === 0 ? (
+        <MessageBox>
+          Cart is empty. <Link to="/">Go Shopping</Link>
+        </MessageBox>
+      ) : (
+        <>
+          {cartItems.map((item) => (
+            <ListGroup.Item key={item._id}>
               <Row>
-                <Col xs={12}>
-                  <div className="total-cost">
-                    <p>Total Cost: ${calculateTotal()}</p>
+                <Col xs={4}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="cart-item-image img-fluid rounded img-thumbnail"
+                  />
+                </Col>
+                <Col xs={8}>
+                  <div className="cart-item-details">
+                    <strong>{item.name}</strong>
+                    <p>Subtotal: ${item.price * item.quantity}</p>
                   </div>
                 </Col>
               </Row>
             </ListGroup.Item>
-          </>
-        )}
-      </ListGroup>
+          ))}
+          <ListGroup.Item>
+            <Row>
+              <Col xs={12}>
+                <div className="total-cost">
+                  <p>Total Cost: ${calculateTotal()}</p>
+                </div>
+              </Col>
+            </Row>
+          </ListGroup.Item>
+        </>
+      )}
+    </ListGroup>
     </div>
   );
 }
