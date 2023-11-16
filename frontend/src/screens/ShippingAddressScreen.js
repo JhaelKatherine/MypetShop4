@@ -106,27 +106,33 @@ export default function ShippingAddressScreen() {
             <h1 className="my-3">Billing Details</h1>
             <p className='rojo'>Field are (*)required</p>
             <form onSubmit={submitPaymentHandler} className="custom-form">
-  <div className="form-group">
-    <label htmlFor="fullName">Full Name(*)</label>
-    <input
-  type="text"
-  id="fullName"
-  className="form-control"
-  value={fullName}
-  onChange={(e) => {
-    const regex = /^[A-Za-z\s]+$/;
-    const value = e.target.value;
-    if (regex.test(value) || value === '') {
-      setFullName(value);
-      e.target.setCustomValidity(''); // Restablece el mensaje de error
-    } else {
-      e.target.setCustomValidity("Please enter only letters and spaces");
-    }
-  }}
-  pattern="^[A-Za-z\s]+$"
-  title="Please enter only letters and spaces"
-/>
-  </div>
+            <div className="form-group">
+  <label htmlFor="fullName">Full Name(*)</label>
+  <input
+    type="text"
+    id="fullName"
+    className="form-control"
+    value={fullName}
+    onChange={(e) => {
+      const regex = /^[A-Za-z\s]+$/;
+      const value = e.target.value;
+      if (regex.test(value) || value === '') {
+        setFullName(value);
+        e.target.setCustomValidity(''); // Restablece el mensaje de error
+        setFullNameError(''); // Reset the error message
+      } else {
+        e.target.setCustomValidity("Please enter only letters and spaces");
+        setFullNameError('Please enter only letters and spaces');
+      }
+    }}
+    pattern="^[A-Za-z\s]+$"
+    title="Please enter only letters and spaces"
+  />
+  {fullNameError && (
+    <div className="error-message">{fullNameError}</div>
+  )}
+</div>
+
 
   <div className="form-group">
     <label htmlFor="nit">Nit</label>
@@ -263,9 +269,9 @@ export default function ShippingAddressScreen() {
                       </ListGroup>
                       </div>
                       
-                      <div className="margin">
-                        <Button variant="primary" type="submit">Continue</Button>
-                      </div>
+                      <div className="d-flex justify-content-end mt-3">
+        <Button variant="primary" type="submit">Continue</Button>
+      </div>
                     </Form>
                   </div>
                 </div>
