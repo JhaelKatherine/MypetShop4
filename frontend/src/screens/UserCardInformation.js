@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Css/UserCardInformation.css';
+import CartScreen2 from './CartScreen2';
 
 export default function UserCardInformation() {
   const [formData, setFormData] = useState({
@@ -113,7 +114,13 @@ export default function UserCardInformation() {
           </button>
         </div>
       </div>
+      <div className="col-md-6">
+      <div className="small-container">
+          <CartScreen2/>
+      </div>
+      </div>
     </div>
+     
   );
 }
 
