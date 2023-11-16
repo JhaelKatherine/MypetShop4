@@ -116,11 +116,11 @@ export default function ShippingAddressScreen() {
           <div className="small-container">
             <Form onSubmit={submitPaymentHandler}>
               {/* Payment method radio buttons */}
-              <div className='.customCartScreen'>
+              <div className='customCartScreen'>
                 <CartScreen2/>
               </div>
+              
               <ListGroup variant="flush">
-  {/* ...otros elementos del ListGroup */}
   
   <ListGroup.Item className='gray-background'>
     <div className="mb-3">
