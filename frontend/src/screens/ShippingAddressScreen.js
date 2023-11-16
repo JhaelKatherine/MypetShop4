@@ -119,36 +119,26 @@ export default function ShippingAddressScreen() {
                 <CartScreen2/>
               </div>
               <div className='margin'>
-              <ListGroup variant="flush">
-  {/* ...otros elementos del ListGroup */}
-  
-  <ListGroup.Item>
-    <div className="mb-3">
-      <Form.Check
-        type="radio"
-        id="PayPal"
-        label="PayPal"
-        value="PayPal"
-        checked={paymentMethodName === 'PayPal'}
-        onChange={(e) => setPaymentMethod(e.target.value)}
-      />
-    </div>
-  </ListGroup.Item>
-  
-  <ListGroup.Item>
-    <div className="mb-3">
-      <Form.Check
-        type="radio"
-        id="Stripe"SS
-        label="Stripe"
-        value="Stripe"
-        checked={paymentMethodName === 'Stripe'}
-        onChange={(e) => setPaymentMethod(e.target.value)}
-      />
-    </div>
-  </ListGroup.Item>
-</ListGroup>
-
+              <div className="mb-3">
+                <Form.Check
+                  type="radio"
+                  id="PayPal"
+                  label="PayPal"
+                  value="PayPal"
+                  checked={paymentMethodName === 'PayPal'}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <Form.Check
+                  type="radio"
+                  id="Stripe"
+                  label="Stripe"
+                  value="Stripe"
+                  checked={paymentMethodName === 'Stripe'}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+              </div>
               </div>
               
               <div className="mb-3">
