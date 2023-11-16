@@ -82,16 +82,14 @@ export default function ShippingAddressScreen() {
     />
   </div>
   <div className="form-group">
-    <label htmlFor="address">Nit</label>
+    <label htmlFor="nit">Nit</label>
     <input
       type="text"
-      id="address"
+      id="nit"
       className="form-control"
       value={address}
       onChange={(e) => setAddress(e.target.value)}
-      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
-      required
     />
   </div>
   <div className="form-group">
