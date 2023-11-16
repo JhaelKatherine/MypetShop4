@@ -115,6 +115,7 @@ export default function CartScreen() {
     {<Button
       type="button"
       variant="primary"
+      onClick={checkoutHandler}
       disabled={cartItems.length === 0}
     >
       Payment
