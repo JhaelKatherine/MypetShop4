@@ -97,7 +97,7 @@ export default function CartScreen() {
             <div className="title-text">calculateTotal()</div>
           </Col>
         </Row>
-      </ListGroup.Item>
+      </ListGroup.Item>s
         </>
       )}
     </ListGroup>
