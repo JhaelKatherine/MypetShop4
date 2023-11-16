@@ -152,19 +152,24 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
-                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
-                    if (regex.test(enteredValue)) {
-                      setPrice(enteredValue);
-                    }
+                    const enteredValue = e.target.value.replace(/[^\d.]/g, '');
+                    setPrice(enteredValue);
                   }}
                   min="1"
                   onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';'].includes(e.key)) {
-                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    if (
+                      !(
+                        (e.key >= '0' && e.key <= '9') ||
+                        e.key === '.' ||
+                        e.key === 'Backspace' ||
+                        e.key === 'Delete' ||
+                        e.key === 'ArrowLeft' ||
+                        e.key === 'ArrowRight'
+                      )
+                    ) {
+                      e.preventDefault();
                     }
                   }}
-                
                 required
               />
             </div>
