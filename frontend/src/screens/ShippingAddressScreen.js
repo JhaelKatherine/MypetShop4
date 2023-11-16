@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
-import CheckoutSteps from '../components/CheckoutSteps';
 import CartScreen2 from './CartScreen2';
 import '../Css/Shipping.css';
 
@@ -71,11 +69,11 @@ export default function ShippingAddressScreen() {
             
             <Form onSubmit={submitPaymentHandler }>
               <Form.Group className="mb-3" controlId="fullName">
-                <Form.Label >Full Name(*)</Form.Label>
+                <Form.Label className="label-right">Full Name(*)</Form.Label>
                 <Form.Control value={fullName} onChange={(e) => setFullName(e.target.value)} required />
               </Form.Group>
                 <Form.Group className="mb-3" controlId="address">
-                  <Form.Label>Nit</Form.Label>
+                  <Form.Label className="label-right">Nit</Form.Label>
                   <Form.Control
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
@@ -85,7 +83,7 @@ export default function ShippingAddressScreen() {
 
 
                 <Form.Group className="mb-3" controlId="address">
-                  <Form.Label >Address(*)</Form.Label>
+                  <Form.Label className="label-right" >Address(*)</Form.Label>
                   <Form.Control
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
@@ -93,7 +91,7 @@ export default function ShippingAddressScreen() {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="city">
-                  <Form.Label >City(*)</Form.Label>
+                  <Form.Label className="label-right" >City(*)</Form.Label>
                   <Form.Control
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
@@ -101,7 +99,7 @@ export default function ShippingAddressScreen() {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="postalCode">
-                  <Form.Label >Cell Phone(*)</Form.Label>
+                  <Form.Label className="label-right" >Cell Phone(*)</Form.Label>
                   <Form.Control
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}
