@@ -112,15 +112,15 @@ export default function CartScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                <div className="d-grid">
-     <Button
-            type="button"
-            variant="primary"
-            disabled={cartItems.length === 0}
-            onClick={checkoutHandler}
-          >
-      Payment
-    </Button> 
-                
+               <Link to="/usercardinformation">
+            <Button
+              type="button"
+              variant="primary"
+              disabled={cartItems.length === 0}
+            >
+              Payment
+            </Button>
+          </Link>
                </div>
              </ListGroup.Item>
 
