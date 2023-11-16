@@ -113,7 +113,6 @@ export default function ShippingAddressScreen() {
         {/* Right side for PaymentMethodScreen */}
         <div className="col-md-6">
           <div className="small-container">
-            <h1 className="my-3">Payment Method</h1>
             <Form onSubmit={submitPaymentHandler}>
               {/* Payment method radio buttons */}
               <div className='.customCartScreen'>
