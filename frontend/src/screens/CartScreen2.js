@@ -39,68 +39,66 @@ export default function CartScreen() {
 
   return (
     <div>
-    <h1>YOUR ORDER</h1>
-    <ListGroup variant="flush" className='custom-listgroup'>
-      {cartItems.length === 0 ? (
-        <MessageBox>
-          Cart is empty. <Link to="/">Go Shopping</Link>
-        </MessageBox>
-      ) : (
-        <>
-        <ListGroup.Item className='gray-background'>
-        <Row>
-          <Col xs={4}>
-            <div className="title-text">Product</div>
-          </Col>
-          <Col xs={4}>
-            <div className="title-text">Name</div>
-          </Col>
-          <Col xs={4}>
-            <div className="title-text">Subtotal</div>
-          </Col>
-        </Row>
-      </ListGroup.Item >
-          {cartItems.map((item) => (
-            <ListGroup.Item key={item._id} className='gray-background'>
-              <Row>
-                <Col xs={4}>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="cart-item-image img-fluid rounded img-thumbnail"
-                  />
-                </Col>
-                <Col xs={4}>
-                  <div className="cart-item-details">
-                    <strong>{item.name}</strong>
-                  </div>
-                </Col>
-                <Col xs={4}>
-                  <div className="cart-item-details">
-                    <p>${item.price * item.quantity}</p>
-                  </div>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-          ))}
+    <ListGroup variant="flush" className="custom-listgroup">
+    {cartItems.length === 0 ? (
+      <MessageBox>
+        Cart is empty. <Link to="/">Go Shopping</Link>
+      </MessageBox>
+    ) : (
+      <>
+        <ListGroup.Item className="gray-background">
+          <Row>
+            <Col xs={4}>
+              <div className="title-text">Product</div>
+            </Col>
+            <Col xs={4}>
+              <div className="title-text">Name</div>
+            </Col>
+            <Col xs={4}>
+              <div className="title-text">Subtotal</div>
+            </Col>
+          </Row>
+        </ListGroup.Item>
+        {cartItems.map((item) => (
+          <ListGroup.Item key={item._id} className="gray-background">
+            <Row>
+              <Col xs={4}>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="cart-item-image img-fluid rounded img-thumbnail"
+                />
+              </Col>
+              <Col xs={4}>
+                <div className="cart-item-details">
+                  <strong>{item.name}</strong>
+                </div>
+              </Col>
+              <Col xs={4}>
+                <div className="cart-item-details">
+                  <p>${item.price * item.quantity}</p>
+                </div>
+              </Col>
+            </Row>
+          </ListGroup.Item>
+        ))}
 
-<ListGroup.Item className='gray-background'>
-  <Row>
-    <Col xs={4}>
-      <div className="title-text">Total Cost</div>
-    </Col>
-    <Col xs={4}>
-      <div className="title-text"> </div>
-    </Col>
-    <Col xs={4}>
-      <div className="title-text">{calculateTotal()}</div> 
-    </Col>
-  </Row>
-</ListGroup.Item>
-
-        </>
-      )}
-    </ListGroup>
+        <ListGroup.Item className="gray-background">
+          <Row>
+            <Col xs={4}>
+              <div className="title-text">Total Cost</div>
+            </Col>
+            <Col xs={4}>
+              <div className="title-text"> </div>
+            </Col>
+            <Col xs={4}>
+              <div className="title-text">{calculateTotal()}</div>
+            </Col>
+          </Row>
+        </ListGroup.Item>
+      </>
+    )}
+  </ListGroup>
 
     </div>
   );
