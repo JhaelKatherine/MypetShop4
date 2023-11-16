@@ -194,6 +194,7 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
+                    onkeydown="return event.keyCode !== 69"
                     const enteredValue = e.target.value;
                     const intValue = parseInt(enteredValue, 10);
               
