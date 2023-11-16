@@ -69,7 +69,15 @@ export default function ShippingAddressScreen() {
       setCellPhoneError('');
     }
 
-    return isValid;
+    const nitRegex = /^[0-9]*$/;
+  if (!nitRegex.test(nit) && nit.trim() !== '') {
+    setNitError('Please enter only numbers');
+    isValid = false;
+  } else {
+    setNitError('');
+  }
+
+  return isValid;
   };
 
   const submitShippingHandler = (e) => {
