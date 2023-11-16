@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../Css/CartScreen.css';
+import '../Css/CartScreen2.css';
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ export default function CartScreen() {
                   <div className="cart-item-">
                     <strong>{item.name}</strong>
                   </div>
-                  <div className="cart-item-button">
+                  <div className="cart-item-price">
                   <div key={item._id}>
     <p>Price: ${item.price}</p>
     <p>Quantity: {item.quantity}</p>

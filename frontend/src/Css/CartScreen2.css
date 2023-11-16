@@ -1,0 +1,23 @@
+/* CartScreen.css */
+
+.cart-item-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Ajusta este valor para cambiar el espaciado entre elementos */
+  }
+  
+  .cart-item-image {
+    width: 100px; /* Ajusta el tamaño de la imagen según tu preferencia */
+    margin-right: 20px; /* Espacio entre la imagen y el nombre */
+  }
+  
+  .cart-item-details {
+    flex: 1;
+  }
+  
+  .cart-item-price {
+    margin-top: 10px; /* Espacio entre el nombre y los detalles */
+  }
+  
+  /* Otros estilos... */
+  
