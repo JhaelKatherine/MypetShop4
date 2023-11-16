@@ -283,7 +283,7 @@ export default function ShippingAddressScreen() {
                       </div>
                       
                       <div className="d-flex justify-content-end mt-3">
-        <Button variant="primary" type="submit">Continue</Button>
+        <Button variant="primary" type="submit">Place the Order</Button>
       </div>
                     </Form>
                   </div>
