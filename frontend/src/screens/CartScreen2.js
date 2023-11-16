@@ -85,19 +85,20 @@ export default function CartScreen() {
             </ListGroup.Item>
           ))}
 
-          <ListGroup.Item>
-        <Row>
-          <Col xs={4}>
-            <div className="title-text">Total Cost</div>
-          </Col>
-          <Col xs={4}>
-            <div className="title-text"> </div>
-          </Col>
-          <Col xs={4}>
-            <div className="title-text">calculateTotal()</div>
-          </Col>
-        </Row>
-      </ListGroup.Item>
+<ListGroup.Item>
+  <Row>
+    <Col xs={4}>
+      <div className="title-text">Total Cost</div>
+    </Col>
+    <Col xs={4}>
+      <div className="title-text"> </div>
+    </Col>
+    <Col xs={4}>
+      <div className="title-text">{calculateTotal()}</div> {/* Aquí usamos llaves para mostrar el resultado */}
+    </Col>
+  </Row>
+</ListGroup.Item>
+
         </>
       )}
     </ListGroup>
