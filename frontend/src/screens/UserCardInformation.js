@@ -38,7 +38,7 @@ export default function UserCardInformation() {
 
   return (
     <div className="user-card-info-container">
-      <h1>User Card Information</h1>
+      <h1>Credit Card</h1>
       
       <form onSubmit={handleSubmit}>
         <label htmlFor="cardNumber">Card Number:</label>
@@ -53,7 +53,7 @@ export default function UserCardInformation() {
           required
         />
 
-        <label htmlFor="expirationDate">Expiration Date (MM/YY):</label>
+        <label htmlFor="expirationDate">Expiration Date</label>
         <input
           type="text"
           id="expirationDate"
