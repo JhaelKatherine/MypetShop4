@@ -36,13 +36,14 @@ export default function ShippingAddressScreen() {
     if (!userInfo) {
       navigate('/signin?redirect=/shipping');
     }
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
   }, [userInfo, navigate]);
 
   const validateForm = () => {
     let isValid = true;
 
     <div className={`error-message${fullNameError && !fullName.trim() ? ' error-highlight' : ''}`}>
-    {fullNameError || 'Full Name is required'} 
   </div>
    if (!fullName.trim()) {
     setFullName('Address is required');
