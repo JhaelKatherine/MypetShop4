@@ -93,7 +93,6 @@ export default function ShippingAddressScreen() {
       submitShippingHandler(e);
       ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
       localStorage.setItem('paymentMethod', paymentMethodName);
-      navigate('/placeorder');
     } else {
       console.log('Please complete the required fields correctly.');
     }
@@ -283,7 +282,7 @@ export default function ShippingAddressScreen() {
                       </div>
                       
                       <div className="d-flex justify-content-end mt-3">
-        <Button variant="primary" type="submit" disabled>Place the Order</Button>
+        <Button variant="primary" type="submit">Place the Order</Button>
       </div>
                     </Form>
                   </div>
