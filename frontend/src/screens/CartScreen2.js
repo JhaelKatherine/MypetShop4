@@ -77,7 +77,7 @@ export default function CartScreen() {
                 </Col>
                 <Col xs={4}>
                   <div className="cart-item-details">
-                    <p>${item.price * item.quantity}</p>
+                    <p className="subtotal-text">${item.price * item.quantity}</p>
                   </div>
                 </Col>
               </Row>
