@@ -40,7 +40,7 @@ export default function CartScreen() {
   return (
     <div>
     <h1>YOUR ORDER</h1>
-    <ListGroup variant="flush" className="bg-gray"> 
+    <ListGroup variant="flush" className="bg-gray">
       {cartItems.length === 0 ? (
         <MessageBox>
           Cart is empty. <Link to="/">Go Shopping</Link>
@@ -57,9 +57,13 @@ export default function CartScreen() {
                     className="cart-item-image img-fluid rounded img-thumbnail"
                   />
                 </Col>
-                <Col xs={8}>
+                <Col xs={4}>
                   <div className="cart-item-details">
                     <strong>{item.name}</strong>
+                  </div>
+                </Col>
+                <Col xs={4}>
+                  <div className="cart-item-details">
                     <p>Subtotal: ${item.price * item.quantity}</p>
                   </div>
                 </Col>
