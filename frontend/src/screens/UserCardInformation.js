@@ -39,6 +39,7 @@ export default function UserCardInformation() {
   return (
     <div className="user-card-info-container">
       <h1>User Card Information</h1>
+      <h3 style="color: red;">Fields with * are required</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="cardNumber">Card Number:</label>
         <input
