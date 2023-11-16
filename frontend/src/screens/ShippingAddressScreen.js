@@ -18,11 +18,11 @@ export default function ShippingAddressScreen() {
     cart: { shippingAddress, paymentMethod },
   } = state;
 
-  const [fullName, setFullName] = useState(shippingFullName.fullName || '');
-  const [nit, setNit] = useState(shippingNit.nit || '');
+  const [fullName, setFullName] = useState(shippingAddress.fullName || '');
+  const [nit, setNit] = useState(shippingAddress.nit || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
-  const [city, setCity] = useState(shippingCity.city || '');
-  const [cellPhone, setCellPhone] = useState(shippingCellPhone.cellPhone || '');
+  const [city, setCity] = useState(shippingAddress.city || '');
+  const [cellPhone, setCellPhone] = useState(shippingAddress.cellPhone || '');
 
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
 
