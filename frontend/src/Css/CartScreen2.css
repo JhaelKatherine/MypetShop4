@@ -1,4 +1,9 @@
 /* CartScreen.css */
+ 
+.gray-background {
+    background-color: #ccc; /* Color gris de fondo */
+    padding: 20px; /* Ajusta el espaciado interno según sea necesario */
+  }
 
 .cart-item-container {
     display: flex;
@@ -23,9 +28,4 @@
     margin-left: 10px;
   }
   /* Otros estilos... */
-  
-
-  .bg-gray {
-    background-color: #ccc; /* Puedes ajustar el color según tu preferencia */
-  }
-  
+ 
