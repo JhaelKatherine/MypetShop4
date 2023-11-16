@@ -1,0 +1,52 @@
+.customCartScreen {
+  margin-bottom: 30px; 
+}
+
+.label-right {
+  text-align: left !important;; 
+}
+
+.margin {
+    margin-bottom: 20px;
+    align-items: right;
+    justify-content: right;
+}
+
+.rojo {
+    color: red;
+}
+
+ 
+.gray-background {
+  background-color: #ccc;
+  padding: 20px; 
+}
+
+.title-text {
+  text-align: right;
+}
+.subtotal-text {
+  text-align: right;
+}
+
+.title-text2{
+  text-align: left;
+}
+
+
+.custom-label {
+  font-size: 18px;
+  color: #333;
+}
+
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  /* Estilos estándar para el mensaje de error */
+}
+
+.error-highlight {
+  border: 1px solid red;
+  /* Estilos de resaltado para el mensaje de error */
+}
