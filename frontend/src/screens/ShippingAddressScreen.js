@@ -18,11 +18,11 @@ export default function ShippingAddressScreen() {
     cart: { shippingAddress, paymentMethod },
   } = state;
 
-  const [fullName, setFullName] = useState(shippingAddress.fullName || '');
-  const [nit, setNit] = useState(shippingAddress.nit || '');
+  const [fullName, setFullName] = useState(shippingFullName.fullName || '');
+  const [nit, setNit] = useState(shippingNit.nit || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
-  const [city, setCity] = useState(shippingAddress.city || '');
-  const [cellPhone, setCellPhone] = useState(shippingAddress.cellPhone || '');
+  const [city, setCity] = useState(shippingCity.city || '');
+  const [cellPhone, setCellPhone] = useState(shippingCellPhone.cellPhone || '');
 
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
 
@@ -74,7 +74,12 @@ export default function ShippingAddressScreen() {
       id="fullName"
       className="form-control"
       value={fullName}
-      onChange={(e) => setFullName(e.target.value)}
+      onChange={(e) => {
+        const regex = /^[A-Za-z\s]+$/; // Expresión regular para aceptar solo letras y espacios
+        if (regex.test(e.target.value) || e.target.value === '') {
+          setFullName(e.target.value);
+        }
+      }}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
@@ -100,7 +105,14 @@ export default function ShippingAddressScreen() {
       id="address"
       className="form-control"
       value={address}
-      onChange={(e) => setAddress(e.target.value)}
+      onChange={(e) => {
+        const regex = /^[A-Za-z\s\d]+$/; // Expresión regular para aceptar letras, espacios y números
+        if (!regex.test(e.target.value)) {
+          setAddress(e.target.value.replace(/[^A-Za-z\s]/g, '')); // Elimina los números del valor ingresado
+        } else {
+          setAddress(e.target.value);
+        }
+      }}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
@@ -113,7 +125,12 @@ export default function ShippingAddressScreen() {
       id="city"
       className="form-control"
       value={city}
-      onChange={(e) => setCity(e.target.value)}
+      onChange={(e) => {
+        const regex = /^[A-Za-z\s]+$/; // Expresión regular para aceptar solo letras y espacios
+        if (regex.test(e.target.value) || e.target.value === '') {
+          setCity(e.target.value);
+        }
+      }}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
@@ -132,6 +149,7 @@ export default function ShippingAddressScreen() {
     />
   </div>
 </form>
+
 
                   </div>
                 </div>
