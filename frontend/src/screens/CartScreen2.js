@@ -41,7 +41,7 @@ export default function CartScreen() {
     <div>
     <h1>YOUR ORDER</h1>
     <div className='gray-background'>
-    <ListGroup variant="flush" >
+    <ListGroup variant="flush" className='gray-background'>
       {cartItems.length === 0 ? (
         <MessageBox>
           Cart is empty. <Link to="/">Go Shopping</Link>
