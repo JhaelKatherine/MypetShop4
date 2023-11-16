@@ -14,6 +14,7 @@ export default function SignupScreen() {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
+  const [emailExistsError, setEmailExistsError] = useState('');
 
 
   const [email, setEmail] = useState('');
