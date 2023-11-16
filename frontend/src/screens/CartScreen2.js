@@ -53,7 +53,7 @@ export default function CartScreen() {
                 <div className="title-text">Product</div>
               </Col>
               <Col xs={4}>
-                <div className="title-text">Name</div>
+                <div className="title-text"></div>
               </Col>
               <Col xs={4}>
                 <div className="title-text">Subtotal</div>
@@ -72,7 +72,7 @@ export default function CartScreen() {
                 </Col>
                 <Col xs={4}>
                   <div className="cart-item-details">
-                    <p>{item.name + "  x  " + item.quantity}</p>
+                    <p>{item.name + "    x    " + item.quantity}</p>
                   </div>
                 </Col>
                 <Col xs={4}>
