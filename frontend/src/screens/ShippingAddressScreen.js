@@ -1,10 +1,10 @@
-/*import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import CartScreen2 from './CartScreen2';
-import '../Css/Shipping.css';
+import '../Css/AddUser.css';
 
 import { Row, Col, ListGroup } from 'react-bootstrap';
 
@@ -67,46 +67,74 @@ export default function ShippingAddressScreen() {
             <h1 className="my-3">Billing Details</h1>
             <p className='rojo'>Field are (* )required</p>
             
-            <Form onSubmit={submitPaymentHandler }>
-              <Form.Group className="mb-3" controlId="fullName">
-                <Form.Label className="label-right">Full Name(*)</Form.Label>
-                <Form.Control value={fullName} onChange={(e) => setFullName(e.target.value)} required />
-              </Form.Group>
-                <Form.Group className="mb-3" controlId="address">
-                  <Form.Label className="label-right">Nit</Form.Label>
-                  <Form.Control
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
-                  />
-                  </Form.Group>
+            <form onSubmit={submitPaymentHandler} className="custom-form">
+  <div className="form-group">
+    <label htmlFor="fullName">Full Name(*)</label>
+    <input
+      type="text"
+      id="fullName"
+      className="form-control"
+      value={fullName}
+      onChange={(e) => setFullName(e.target.value)}
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
+      required
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="address">Nit</label>
+    <input
+      type="text"
+      id="address"
+      className="form-control"
+      value={address}
+      onChange={(e) => setAddress(e.target.value)}
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
+      required
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="address">Address(*)</label>
+    <input
+      type="text"
+      id="address"
+      className="form-control"
+      value={address}
+      onChange={(e) => setAddress(e.target.value)}
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
+      required
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="city">City(*)</label>
+    <input
+      type="text"
+      id="city"
+      className="form-control"
+      value={city}
+      onChange={(e) => setCity(e.target.value)}
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
+      required
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="postalCode">Cell Phone(*)</label>
+    <input
+      type="text"
+      id="postalCode"
+      className="form-control"
+      value={postalCode}
+      onChange={(e) => setPostalCode(e.target.value)}
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+      onInput={(e) => e.target.setCustomValidity('')}
+      required
+    />
+  </div>
+</form>
 
-
-                <Form.Group className="mb-3" controlId="address">
-                  <Form.Label className="label-right" >Address(*)</Form.Label>
-                  <Form.Control
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="city">
-                  <Form.Label className="label-right" >City(*)</Form.Label>
-                  <Form.Control
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="postalCode">
-                  <Form.Label className="label-right" >Cell Phone(*)</Form.Label>
-                  <Form.Control
-                    value={postalCode}
-                    onChange={(e) => setPostalCode(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                    </Form>
                   </div>
                 </div>
                 
@@ -156,180 +184,4 @@ export default function ShippingAddressScreen() {
                 </div>
               </div>
             </div>
-          );*/
-          import Axios from 'axios';
-          import { Link, useLocation, useNavigate } from 'react-router-dom';
-          import Container from 'react-bootstrap/Container';
-          import Form from 'react-bootstrap/Form';
-          import Button from 'react-bootstrap/Button';
-          import { Helmet } from 'react-helmet-async';
-          import { useContext, useEffect, useState } from 'react';
-          import { Store } from '../Store';
-          import { toast } from 'react-toastify';
-          import { getError } from '../utils';
-          import '../Css/AddUser.css';
-          
-          
-          export default function ShippingAddressScreen() {
-            const navigate = useNavigate();
-            const { search } = useLocation();
-          
-            const [name, setName] = useState('');
-            const [lastName, setLastName] = useState('');
-            const [userName, setUserName] = useState('');
-          
-          
-            const [email, setEmail] = useState('');
-            const [password, setPassword] = useState('');
-            const [confirmPassword, setConfirmPassword] = useState('');
-          
-            const { state, dispatch: ctxDispatch } = useContext(Store);
-            const { userInfo } = state;
-            const submitHandler = async (e) => {
-              e.preventDefault();
-              if (password !== confirmPassword) {
-                toast.error('Passwords do not match');
-                return;
-              }
-              try {
-                const { data } = await Axios.post('/api/users/signup', {
-                  name,
-                  lastName,
-                  userName,
-                  email,
-                  password,
-                });
-              } catch (err) {
-                toast.error(getError(err));
-              }
-            };
-          
-            return (
-              <div className="container">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="small-container">
-                    <h1 className="my-3">Billing Details</h1>
-                    <p className='rojo'>Field are (* )required</p>          
-                <div className="form-container">
-          
-                  <form onSubmit={submitHandler} className="custom-form">
-                    <div className="form-group">
-                      <label htmlFor="name">Name</label>
-                      <input
-                        type="text"
-                        id="name"
-                        className="form-control"
-                        onChange={(e) => setName(e.target.value)}
-                        onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-                        onInput={(e) => e.target.setCustomValidity('')}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="lastName">Last Name</label>
-                      <input
-                        type="text"
-                        id="lastName"
-                        className="form-control"
-                        onChange={(e) => setLastName(e.target.value)}
-                        onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-                        onInput={(e) => e.target.setCustomValidity('')}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="userName">User Name</label>
-                      <input
-                        type="text"
-                        id="userName"
-                        className="form-control"
-                        onChange={(e) => setUserName(e.target.value)}
-                        onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-                        onInput={(e) => e.target.setCustomValidity('')}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="email">Email</label>
-                      <input
-                        type="email"
-                        id="email"
-                        className="form-control"
-                        onChange={(e) => setEmail(e.target.value)}
-                        onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-                        onInput={(e) => e.target.setCustomValidity('')}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="password">Password</label>
-                      <input
-                        type="password"
-                        id="password"
-                        className="form-control"
-                        onChange={(e) => setPassword(e.target.value)}
-                        onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-                        onInput={(e) => e.target.setCustomValidity('')}
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="confirmPassword">Confirm Password</label>
-                      <input
-                        type="password"
-                        id="confirmPassword"
-                        className="form-control"
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-                        onInput={(e) => e.target.setCustomValidity('')}
-                        required
-                      />
-                    </div>
-                  </form>
-                </div>          
-                </div>          
-
-                </div>   
-                <div className="col-md-6">
-                  <div className="small-container">
-                    <Form onSubmit={submitPaymentHandler}>
-                      <div className='customCartScreen'>
-                        <CartScreen2/>
-                      </div>
-                      <div>
-                      
-                      <ListGroup variant="flush">
-                        
-                        <ListGroup.Item className='gray-background'>
-                          <div className="mb-3">
-                            <Form.Check
-                              type="radio"
-                              id="PayPal"
-                              label="PayPal"
-                              value="PayPal"
-                              checked={paymentMethodName === 'PayPal'}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                            />
-                          </div>
-                        </ListGroup.Item>
-                        
-                        <ListGroup.Item className='gray-background'>
-                          <div className="mb-3">
-                            <Form.Check
-                              type="radio"
-                              id="Stripe"
-                              label="Stripe"
-                              value="Stripe"
-                              checked={paymentMethodName === 'Stripe'}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                            />
-                          </div>
-                        </ListGroup.Item>
-                      </ListGroup>
-                      </div>       
-                </div>          
-                </div>          
-
-            );
-          };
+          );}
