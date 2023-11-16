@@ -4,6 +4,8 @@
 
 .margin {
     margin-bottom: 20px;
+    align-items: right;
+    justify-content: right;
 }
 
 .rojo {
@@ -25,4 +27,8 @@
 }
 .subtotal-text {
   text-align: right;
+}
+
+.title-text2{
+  text-align: left;
 }

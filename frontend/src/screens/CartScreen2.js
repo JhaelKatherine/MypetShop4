@@ -50,7 +50,7 @@ export default function CartScreen() {
           <ListGroup.Item className="gray-background">
             <Row>
               <Col xs={4}>
-                <div className="title-text">Product</div>
+                <div className="title-tex2t">Product</div>
               </Col>
               <Col xs={4}>
                 <div className="title-text"></div>
@@ -87,7 +87,7 @@ export default function CartScreen() {
           <ListGroup.Item className="gray-background">
             <Row>
               <Col xs={4}>
-                <div className="title-text">Total Cost</div>
+                <div className="title-text2">Total Cost</div>
               </Col>
               <Col xs={4}>
                 <div className="title-text"> </div>

@@ -68,6 +68,7 @@ export default function ShippingAddressScreen() {
           <div className="small-container">
             <h1 className="my-3">Billing Details</h1>
             <p className='rojo'>Field are (* )required</p>
+            
             <Form onSubmit={submitPaymentHandler }>
               <Form.Group className="mb-3" controlId="fullName">
                 <Form.Label className="form-label">Full Name(*)</Form.Label>
@@ -119,6 +120,7 @@ export default function ShippingAddressScreen() {
               <div className='customCartScreen'>
                 <CartScreen2/>
               </div>
+              <div>
               
               <ListGroup variant="flush">
   
@@ -148,6 +150,7 @@ export default function ShippingAddressScreen() {
     </div>
   </ListGroup.Item>
 </ListGroup>
+</div>
               
               <div className="margin">
                 <Button variant="primary" type="submit">Continue</Button>
