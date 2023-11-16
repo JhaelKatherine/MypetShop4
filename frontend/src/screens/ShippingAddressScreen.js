@@ -20,9 +20,9 @@ export default function ShippingAddressScreen() {
   } = state;
 
   const [fullName, setFullName] = useState(shippingAddress.fullName || '');
-  const [nit, setPostalCode] = useState(shippingAddress.postalCode || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
   const [city, setCity] = useState(shippingAddress.city || '');
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
   const [country, setCountry] = useState(shippingAddress.country || '');
 
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
@@ -37,9 +37,9 @@ export default function ShippingAddressScreen() {
     e.preventDefault();
     ctxDispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
-      payload: { fullName, address, city, nit, country, location: shippingAddress.location },
+      payload: { fullName, address, city, postalCode, country, location: shippingAddress.location },
     });
-    localStorage.setItem('shippingAddress', JSON.stringify({ fullName, address, city, nit, country, location: shippingAddress.location }));
+    localStorage.setItem('shippingAddress', JSON.stringify({ fullName, address, city, postalCode, country, location: shippingAddress.location }));
   };
 
   const submitPaymentHandler = (e) => {
@@ -118,7 +118,7 @@ export default function ShippingAddressScreen() {
               <div className='.customCartScreen'>
                 <CartScreen2/>
               </div>
-              <div className='margin'>
+              <div>
               <div className="mb-3">
                 <Form.Check
                   type="radio"
@@ -139,7 +139,7 @@ export default function ShippingAddressScreen() {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
               </div>
-              </div>
+              
               
               <div className="mb-3">
                 <Button variant="primary" type="submit">Continue</Button>
