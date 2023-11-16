@@ -19,10 +19,10 @@ export default function ShippingAddressScreen() {
   } = state;
 
   const [fullName, setFullName] = useState(shippingAddress.fullName || '');
+  const [nit, setFullNit] = useState(shippingAddress.nit || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
   const [city, setCity] = useState(shippingAddress.city || '');
-  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
-  const [country, setCountry] = useState(shippingAddress.country || '');
+  const [cellPhone, setCellPhone] = useState(shippingAddress.cellPhone || '');
 
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
 
@@ -36,9 +36,9 @@ export default function ShippingAddressScreen() {
     e.preventDefault();
     ctxDispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
-      payload: { fullName, address, city, postalCode, country, location: shippingAddress.location },
+      payload: { fullName, nit ,address, city, cellPhone},
     });
-    localStorage.setItem('shippingAddress', JSON.stringify({ fullName, address, city, postalCode, country, location: shippingAddress.location }));
+    localStorage.setItem('shippingAddress', JSON.stringify({ fullName, nit ,address, city, cellPhone}));
   };
 
   const submitPaymentHandler = (e) => {
