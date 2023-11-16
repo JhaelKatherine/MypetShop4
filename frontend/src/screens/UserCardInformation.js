@@ -38,70 +38,72 @@ export default function UserCardInformation() {
 
   return (
     <div className="user-card-info-container">
-      <h1>Credit Card</h1>
-      
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="cardNumber">Card Number:</label>
-        <input
-          type="text"
-          id="cardNumber"
-          name="cardNumber"
-          value={formData.cardNumber}
-          onChange={handleChange}
-          pattern="[0-9]*"
-          title="Put only numbers"
-          required
-        />
+  <h1>Credit Card</h1>
 
-        <label htmlFor="expirationDate">Expiration Date</label>
-        <input
-          type="text"
-          id="expirationDate"
-          name="expirationDate"
-          value={formData.expirationDate}
-          onChange={handleChange}
-          pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
-          title="Only valid data : MM/YY."
-          required
-        />
-
-        <label htmlFor="cvv">CVV:</label>
-        <input
-          type="text"
-          id="cvv"
-          name="cvv"
-          value={formData.cvv}
-          onChange={handleChange}
-          
-          required
-        />
-
-        <label htmlFor="postalCode">Postal Code:</label>
-        <input
-          type="text"
-          id="postalCode"
-          name="postalCode"
-          value={formData.postalCode}
-          onChange={handleChange}
-          
-          required
-        />
-
-        <label htmlFor="country">Country:</label>
-        <input
-          type="text"
-          id="country"
-          name="country"
-          value={formData.country}
-          onChange={handleChange}
-          
-          required
-        />
-
-        <button type="submit" className="proceed-btn">
-          Proceed
-        </button>
-      </form>
+  <form onSubmit={handleSubmit} className="form-container">
+    <div className="form-group">
+      <label htmlFor="cardNumber">Card Number:</label>
+      <input
+        type="text"
+        id="cardNumber"
+        name="cardNumber"
+        value={formData.cardNumber}
+        onChange={handleChange}
+        pattern="[0-9]*"
+        title="Put only numbers"
+        required
+      />
     </div>
+
+    <div className="form-group">
+      <label htmlFor="expirationDate">Expiration Date:</label>
+      <input
+        type="text"
+        id="expirationDate"
+        name="expirationDate"
+        value={formData.expirationDate}
+        onChange={handleChange}
+        pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
+        title="Only valid data : MM/YY."
+        required
+      />
+      <label htmlFor="cvv">CVV:</label>
+      <input
+        type="text"
+        id="cvv"
+        name="cvv"
+        value={formData.cvv}
+        onChange={handleChange}
+        required
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="postalCode">Postal Code:</label>
+      <input
+        type="text"
+        id="postalCode"
+        name="postalCode"
+        value={formData.postalCode}
+        onChange={handleChange}
+        required
+      />
+      <label htmlFor="country">Country:</label>
+      <input
+        type="text"
+        id="country"
+        name="country"
+        value={formData.country}
+        onChange={handleChange}
+        required
+      />
+    </div>
+
+    <button type="submit" className="proceed-btn">
+      Proceed
+    </button>
+  </form>
+</div>
+
   );
 }
