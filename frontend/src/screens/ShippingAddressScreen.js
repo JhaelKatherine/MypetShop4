@@ -118,7 +118,6 @@ export default function ShippingAddressScreen() {
               <div className='.customCartScreen'>
                 <CartScreen2/>
               </div>
-              <div>
               <div className="mb-3">
                 <Form.Check
                   type="radio"
