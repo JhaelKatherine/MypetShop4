@@ -1,12 +1,9 @@
+import React from 'react';
 import { useContext } from 'react';
 import { Store } from '../Store';
 import { Helmet } from 'react-helmet-async';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import MessageBox from '../components/MessageBox';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../Css/CartScreen2.css';
@@ -17,6 +14,10 @@ export default function CartScreen() {
   const {
     cart: { cartItems },
   } = state;
+
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+  };
 
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
@@ -29,6 +30,7 @@ export default function CartScreen() {
       payload: { ...item, quantity },
     });
   };
+
   const removeItemHandler = (item) => {
     ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
@@ -39,14 +41,19 @@ export default function CartScreen() {
 
   return (
     <div>
-     <h1>YOUR ORDER</h1>
+      <Helmet>
+        <title>Shopping Cart</title>
+      </Helmet>
+      <h1>YOUR ORDER</h1>
       <Row>
-          {cartItems.length === 0 ? (
+        {cartItems.length === 0 ? (
+          <div className="empty-cart-message">
             <MessageBox>
               Cart is empty. <Link to="/">Go Shopping</Link>
             </MessageBox>
-          ) : (
-            <ListGroup>
+          </div>
+        ) : (
+          <ListGroup>
             {cartItems.map((item) => (
               <ListGroup.Item key={item._id}>
                 <div className="cart-item-container">
@@ -55,15 +62,15 @@ export default function CartScreen() {
                     alt={item.name}
                     className="cart-item-image img-fluid rounded img-thumbnail"
                   />
-                  <div className="cart-item-">
+                  <div className="cart-item-details">
                     <strong>{item.name}</strong>
-                  </div>
-                  <div className="cart-item-price">
-                  <div key={item._id}>
-    <p>Price: ${item.price}</p>
-    <p>Quantity: {item.quantity}</p>
-    <p>Subtotal: ${item.price * item.quantity}</p>
-  </div>
+                    <div className="cart-item-price">
+                      <div key={item._id}>
+                        <p>Price: ${item.price}</p>
+                        <p>Quantity: {item.quantity}</p>
+                        <p>Subtotal: ${item.price * item.quantity}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </ListGroup.Item>
@@ -71,6 +78,12 @@ export default function CartScreen() {
           </ListGroup>
         )}
       </Row>
+
+      {cartItems.length > 0 && (
+        <div className="total-cost">
+          <h3>Total Cost: ${calculateTotal()}</h3>
+        </div>
+      )}
     </div>
   );
 }
