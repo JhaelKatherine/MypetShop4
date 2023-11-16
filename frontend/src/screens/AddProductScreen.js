@@ -140,7 +140,7 @@ export default function AddProductScreen() {
                   }}
                   min="1"
                   onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ',', ';', '.'].includes(e.key)) {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';'].includes(e.key)) {
                       e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
                     }
                   }}
@@ -199,19 +199,19 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
-                const enteredValue = e.target.value.replace(/[e+\-*/]/gi, ''); // Elimina los signos matemáticos
-                const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
-                if (regex.test(enteredValue)) {
-                  setPrice(enteredValue);
-                }
-              }}
-              min="1"
-              onKeyDown={(e) => {
-                if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ',', ';', '.'].includes(e.key)) {
-                  e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
-                }
-              }}
-              
+                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
+                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                    if (regex.test(enteredValue)) {
+                      setPrice(enteredValue);
+                    }
+                  }}
+                  min="1"
+                  onKeyDown={(e) => {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ',', ';', '.'].includes(e.key)) {
+                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    }
+                  }}
+                
                 required
               />
             </div>
