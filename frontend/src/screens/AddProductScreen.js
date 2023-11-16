@@ -153,7 +153,10 @@ export default function AddProductScreen() {
                 value={price}
                 onChange={(e) => {
                     const enteredValue = e.target.value.replace(/[^\d.]/g, '');
-                    setPrice(enteredValue);
+                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
+                        setPrice(enteredValue);
+                      }
+                    //setPrice(enteredValue);
                   }}
                   min="1"
                   onKeyDown={(e) => {
