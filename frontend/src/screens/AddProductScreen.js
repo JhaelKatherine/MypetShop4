@@ -187,11 +187,8 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
-                    const value = e.target.value;
-                    const regex = /^[0-9\b]+$/; // Expresión regular para permitir solo números enteros
-                    if (value === '' || regex.test(value)) {
-                      setCountInStock(value);
-                    }
+                    const value = e.target.value.replace(/\D/g, ''); // Remueve caracteres no numéricos
+                    setCountInStock(value);
                   }}
                 required
               />
