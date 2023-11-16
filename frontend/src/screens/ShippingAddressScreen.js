@@ -19,7 +19,7 @@ export default function ShippingAddressScreen() {
   } = state;
 
   const [fullName, setFullName] = useState(shippingAddress.fullName || '');
-  const [nit, setFullNit] = useState(shippingAddress.nit || '');
+  const [nit, setNit] = useState(shippingAddress.nit || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
   const [city, setCity] = useState(shippingAddress.city || '');
   const [cellPhone, setCellPhone] = useState(shippingAddress.cellPhone || '');
@@ -65,8 +65,7 @@ export default function ShippingAddressScreen() {
         <div className="col-md-6">
           <div className="small-container">
             <h1 className="my-3">Billing Details</h1>
-            <p className='rojo'>Field are (* )required</p>
-            
+            <p className='rojo'>Field are (*)required</p>
             <form onSubmit={submitPaymentHandler} className="custom-form">
   <div className="form-group">
     <label htmlFor="fullName">Full Name(*)</label>
@@ -88,7 +87,7 @@ export default function ShippingAddressScreen() {
       id="address"
       className="form-control"
       value={address}
-      onChange={(e) => setAddress(e.target.value)}
+      onChange={(e) => setNit(e.target.value)}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
@@ -127,7 +126,7 @@ export default function ShippingAddressScreen() {
       id="postalCode"
       className="form-control"
       value={postalCode}
-      onChange={(e) => setPostalCode(e.target.value)}
+      onChange={(e) => setCellPhone(e.target.value)}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
       required
