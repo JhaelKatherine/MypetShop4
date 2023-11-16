@@ -2,7 +2,7 @@
 .user-card-info-container {
   display: flex;
   flex-direction: column;
-  width: 350px; 
+  width: 500px; 
 }
 
 form {
@@ -30,12 +30,12 @@ input[type="text"] {
 
 #expirationDate,
 #cvv {
-  width: calc(45% - 5px);
+  width: calc(150px - 5px);
 }
 
 #postalCode,
 #country {
-  width: calc(45% - 5px);
+  width: calc(150px - 5px);
 }
 
 .proceed-btn {
