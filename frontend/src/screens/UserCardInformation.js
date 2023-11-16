@@ -1,14 +1,7 @@
-import React, { useState, useContext } from 'react';
-import ProductList from '../components/ProductList';
-import { Store } from '../Store';
+import React, { useState } from 'react';
 import '../Css/UserCardInformation.css';
 
 export default function UserCardInformation() {
-  const { state } = useContext(Store);
-  const {
-    cart: { cartItems },
-  } = state;
-
   const [formData, setFormData] = useState({
     cardNumber: '',
     expirationDate: '',
@@ -25,6 +18,7 @@ export default function UserCardInformation() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    
     const cardNumberPattern = /^[0-9]*$/;
     if (!formData.cardNumber.match(cardNumberPattern)) {
       alert('Only numbers are allowed for Card Number.');
@@ -36,6 +30,8 @@ export default function UserCardInformation() {
       alert('Only valid data for Expiration Date: MM/YY.');
       return;
     }
+
+    
 
     console.log('Success', formData);
   };
@@ -105,8 +101,6 @@ export default function UserCardInformation() {
           Proceed
         </button>
       </form>
-      <ProductList products={formData.products} />
-      <ProductList products={cartItems} />
     </div>
   );
 }
