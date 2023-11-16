@@ -35,8 +35,7 @@ export default function CartScreen() {
   };
 
   const checkoutHandler = () => {
-    
-    navigate('./UserCardInformation');
+    navigate('/shipping');
   };
 
   return (
@@ -112,15 +111,15 @@ export default function CartScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                <div className="d-grid">
-               <Link to="/usercardinformation">
-            <Button
-              type="button"
-              variant="primary"
-              disabled={cartItems.length === 0}
-            >
-              Payment
-            </Button>
-          </Link>
+    {/* Comenta o elimina la línea siguiente para desactivar la funcionalidad */}
+    {<Button
+      type="button"
+      variant="primary"
+      disabled={cartItems.length === 0}
+    >
+      Payment
+    </Button> }
+                
                </div>
              </ListGroup.Item>
 

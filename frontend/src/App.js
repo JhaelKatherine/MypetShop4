@@ -15,7 +15,7 @@ import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
 import UserCardInformation from './screens/UserCardInformation'
 import Badge from 'react-bootstrap/Badge';
-
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import './App.css';
 
 function App() {
@@ -92,6 +92,10 @@ function App() {
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
+              <Route
+path="/shipping"
+element={<ShippingAddressScreen />}
+></Route>
               <Route path="/usercardinformation" element={<UserCardInformation />} /> 
             </Routes>
           </Container>
