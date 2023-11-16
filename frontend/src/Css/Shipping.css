@@ -38,3 +38,11 @@
   font-size: 18px;
   color: #333;
 }
+
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  /* Otros estilos */
+}
+
