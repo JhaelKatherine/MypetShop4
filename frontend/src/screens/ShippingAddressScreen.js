@@ -72,8 +72,13 @@ export default function ShippingAddressScreen() {
     return isValid;
   };
   const checkoutHandler = () => {
-    navigate('/invoice');
+    if (validateForm()) {
+      navigate('/invoice');
+    } else {
+      console.log('Please complete the required fields correctly.');
+    }
   };
+  
   const submitShippingHandler = (e) => {
     e.preventDefault();
 
