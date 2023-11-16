@@ -51,15 +51,16 @@ const Invoice = () => {
       <h1 className='invoice-title'>Invoice</h1>
 
       <div className='invoice-subheader'>
-        <div className='invoice-to-subcontainer'>
-          <h3>Bill to</h3>
-          <p>{invoiceData.billTo}</p>
-        </div>
-        <div className='invoice-to-subcontainer'>
-          <h3>Send to</h3>
-          <p>{invoiceData.sendTo}</p>
-        </div>
-      </div>
+  <div className='invoice-to-subcontainer'>
+    <h3>Bill to</h3>
+    <p>{`${invoiceData.fullName} ${invoiceData.lastName}`}</p>
+  </div>
+  <div className='invoice-to-subcontainer'>
+    <h3>Send to</h3>
+    <p>{`${invoiceData.city}, ${invoiceData.address}`}</p>
+  </div>
+</div>
+
 
       <div className='nit-container'>
         <h4>NIT</h4>
