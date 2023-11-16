@@ -26,6 +26,8 @@ export default function ShippingAddressScreen() {
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
 
   const [fullNameError, setFullNameError] = useState('');
+  const [nitError,setNitError] = useState('');
+
   const [addressError, setAddressError] = useState('');
   const [cityError, setCityError] = useState('');
   const [cellPhoneError, setCellPhoneError] = useState('');
@@ -134,24 +136,32 @@ export default function ShippingAddressScreen() {
 </div>
 
 
-  <div className="form-group">
-    <label htmlFor="nit">Nit</label>
-    <input
-  type="text"
-  id="nit"
-  className="form-control"
-  value={nit}
-  onChange={(e) => {
-    const regex = /^[0-9]*$/; // Acepta solo números
-    const value = e.target.value;
-    if (regex.test(value)) {
-      setNit(value);
-    }
-  }}
-  required
-/>
-  </div>
-  
+<div className="form-group">
+  <label htmlFor="nit">Nit</label>
+  <input
+    type="text"
+    id="nit"
+    className="form-control"
+    value={nit}
+    onChange={(e) => {
+      const regex = /^[0-9]*$/;
+      const value = e.target.value;
+      if (regex.test(value) || value === '') {
+        setNit(value);
+        e.target.setCustomValidity('');
+        setNitError('');
+      } else {
+        e.target.setCustomValidity("Please enter only numbers");
+        setNitError('Please enter only numbers');
+      }
+    }}
+    required
+  />
+  {nitError && (
+    <div className="error-message">{nitError}</div>
+  )}
+</div>
+
   <div className="form-group">
     <label htmlFor="address">Address(*)</label>
     <input
