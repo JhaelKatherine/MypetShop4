@@ -64,7 +64,7 @@ export default function AddProductScreen() {
     }
   };
 
-  
+
   const uploadFileHandler = async (imageUrl) => {
     try {
       setLoading(true);
@@ -186,8 +186,13 @@ export default function AddProductScreen() {
                 id="countInStock"
                 className="form-control"
                 value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
-                min="1"
+                onChange={(e) => {
+                    const value = e.target.value;
+                    const regex = /^[0-9\b]+$/; // Expresión regular para permitir solo números enteros
+                    if (value === '' || regex.test(value)) {
+                      setCountInStock(value);
+                    }
+                  }}
                 required
               />
             </div>
