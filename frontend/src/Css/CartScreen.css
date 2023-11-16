@@ -7,7 +7,7 @@
   
   .cart-item-image {
     max-width: 270px; /* Puedes ajustar el tamaño según tus necesidades */
-    margin-right: 20px; /* Ajusta el espacio entre la imagen y el texto */
+    margin-right: 40px; /* Ajusta el espacio entre la imagen y el texto */
   }
   
   .cart-item-description {
@@ -23,3 +23,6 @@
     margin-right: 5px; /* Ajusta el espacio entre los botones */
   }
   
+  .cart-item-price{
+    margin-left: 10px;
+  }
