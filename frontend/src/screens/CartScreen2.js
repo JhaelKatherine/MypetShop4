@@ -93,7 +93,7 @@ export default function CartScreen() {
                 <div className="title-text"> </div>
               </Col>
               <Col xs={4}>
-                <div className="title-text">{calculateTotal()}</div>
+                <div className="title-text">${calculateTotal()}</div>
               </Col>
             </Row>
           </ListGroup.Item>
