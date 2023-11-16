@@ -2,11 +2,11 @@
   margin-bottom: 30px; /* O cualquier otro valor que desees */
 }
 
-margin {
+.margin {
     margin-bottom: 20px;
 }
 
-rojo {
+.rojo {
     color: red;
 }
 
@@ -15,3 +15,4 @@ rojo {
   background-color: #ccc; /* Color gris de fondo */
   padding: 20px; /* Ajusta el espaciado interno según sea necesario */
 }
+
