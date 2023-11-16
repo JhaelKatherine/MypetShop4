@@ -8,6 +8,7 @@ function Header() {
         <img src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png" alt="Logo" />
       </div>
         
+        
       <div className="InputContainer">
       <input
         placeholder="Search.."
