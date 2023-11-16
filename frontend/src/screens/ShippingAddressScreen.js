@@ -67,7 +67,7 @@ export default function ShippingAddressScreen() {
         <div className="col-md-6">
           <div className="small-container">
             <h1 className="my-3">Billing Details</h1>
-            <p>Field are (* )required</p>
+            <p className='rojo'>Field are (* )required</p>
             <Form onSubmit={submitPaymentHandler }>
               <Form.Group className="mb-3" controlId="fullName">
                 <Form.Label>Full Name(*)</Form.Label>
