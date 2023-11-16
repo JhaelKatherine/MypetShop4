@@ -147,19 +147,19 @@ export default function AddProductScreen() {
             <div className="form-group">
               <label htmlFor="price">Price</label>
               <input
-                type="number"
+                type="text"
                 id="price"
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[^\d.]/g, '');
+                    const enteredValue = e.target.value;
+                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
                     if (/^\d+(\.\d*)?$/.test(enteredValue)) {
-                        setPrice(enteredValue);
-                      }
-                    //setPrice(enteredValue);
+                      setPrice(enteredValue);
+                    }
                   }}
-                  min="1"
                   onKeyDown={(e) => {
+                    // Evita caracteres que no sean números o puntos decimales
                     if (
                       !(
                         (e.key >= '0' && e.key <= '9') ||
