@@ -91,7 +91,7 @@ export default function ShippingAddressScreen() {
       type="text"
       id="nit"
       className="form-control"
-      value={address}
+      value={nit}
       onChange={(e) => setNit(e.target.value)}
       onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
