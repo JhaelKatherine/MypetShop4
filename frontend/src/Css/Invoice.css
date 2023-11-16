@@ -1,0 +1,77 @@
+.invoice-subheader{
+    display: flex;
+}
+
+.table-title-details{
+    text-align: right;
+}
+
+.table-value-details{
+    padding-left: 16px;
+    text-align: center;
+}
+
+.invoice-title{
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.invoice-to-subcontainer{
+    padding: 40px;
+    padding-bottom: 10px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nit-container{
+    display: flex;
+    align-items: center;
+}
+
+.nit-container h4{
+    margin-right: 10px;
+    margin-left: 40px
+}
+
+.products-table{
+    margin-top: 50px
+}
+
+.cell-centered{
+    text-align: center;
+}
+
+.products-table th, .products-table td {
+    border-top: 1px solid #4180AB;
+    padding: 14px 22px;
+}
+
+.products-table tr:last-child{
+    border-bottom: 1px solid #4180AB;
+}
+
+.total-container{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 50px;
+}
+
+.total-container h5{
+    margin-right: 30px;
+    margin-bottom: 4px;
+}
+
+.total-container div{
+    font-size: 1.1em
+}
+
+.thank-you-text{
+    margin-top: 100px;
+    margin-left: 10px;
+}

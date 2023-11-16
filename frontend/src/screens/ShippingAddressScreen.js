@@ -71,7 +71,9 @@ export default function ShippingAddressScreen() {
 
     return isValid;
   };
-
+  const checkoutHandler = () => {
+    navigate('/invoice');
+  };
   const submitShippingHandler = (e) => {
     e.preventDefault();
 
@@ -282,7 +284,10 @@ export default function ShippingAddressScreen() {
                       </div>
                       
                       <div className="d-flex justify-content-end mt-3">
-        <Button variant="primary" type="submit">Place the Order</Button>
+        <Button variant="primary" type="submit"
+                onClick={checkoutHandler}
+                >Place the Order</Button>
+ 
       </div>
                     </Form>
                   </div>

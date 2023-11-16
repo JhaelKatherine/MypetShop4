@@ -16,6 +16,7 @@ import CartScreen from './screens/CartScreen';
 import Badge from 'react-bootstrap/Badge';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import './App.css';
+import Invoice from './screens/Invoice';
 
 function App() {
   const { state } = useContext(Store);
@@ -90,6 +91,7 @@ function App() {
               <Route path="/signin" element={<SignupScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
+              <Route path="/invoice" element={<Invoice />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
 path="/shipping"
