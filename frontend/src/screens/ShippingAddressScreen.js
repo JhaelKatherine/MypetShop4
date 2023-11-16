@@ -218,79 +218,47 @@ export default function ShippingAddressScreen() {
 
           return (
             <div>
-              <Helmet>
-                <title>Shipping Address</title>
-              </Helmet>
-        
-              <CheckoutSteps step1 step2></CheckoutSteps>
-                <h1 className="my-3">Shipping Address</h1>
-                <Form onSubmit={submitHandler}>
-                <Form.Group className="mb-3" controlId="fullName">
-                <Form.Label className="text-left custom-label">Full Name</Form.Label>
-                <Form.Control
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="address">
-                <Form.Label className="text-start">Address</Form.Label>
-                <Form.Control
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="city">
-                <Form.Label className="text-start">City</Form.Label>
-                <Form.Control
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="postalCode">
-                <Form.Label className="text-start">Postal Code</Form.Label>
-                <Form.Control
-                  value={postalCode}
-                  onChange={(e) => setPostalCode(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="country">
-                <Form.Label className="text-start">Country</Form.Label>
-                <Form.Control
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                  required
-                />
-              </Form.Group>
+              <Form.Group className="mb-3" controlId="fullName">
+  <Form.Label className="form-field-label">Full Name</Form.Label>
+  <Form.Control
+    type="text"
+    onChange={(e) => setName(e.target.value)}
+    required
+  />
+</Form.Group>
+<Form.Group className="mb-3" controlId="nit">
+  <Form.Label className="form-field-label">NIT</Form.Label>
+  <Form.Control
+    type="text"
+    onChange={(e) => setNIT(e.target.value)}
+    required
+  />
+</Form.Group>
+<Form.Group className="mb-3" controlId="address">
+  <Form.Label className="form-field-label">Address</Form.Label>
+  <Form.Control
+    type="text"
+    onChange={(e) => setAddress(e.target.value)}
+    required
+  />
+</Form.Group>
+<Form.Group className="mb-3" controlId="city">
+  <Form.Label className="form-field-label">City</Form.Label>
+  <Form.Control
+    type="text"
+    onChange={(e) => setCity(e.target.value)}
+    required
+  />
+</Form.Group>
+<Form.Group className="mb-3" controlId="cellPhone">
+  <Form.Label className="form-field-label">Cell Phone</Form.Label>
+  <Form.Control
+    type="text"
+    onChange={(e) => setCellPhone(e.target.value)}
+    required
+  />
+</Form.Group>
 
-                  <div className="mb-3">
-                    <Button
-                      id="chooseOnMap"
-                      type="button"
-                      variant="light"
-                      onClick={() => navigate('/map')}
-                    >
-                      Choose Location On Map
-                    </Button>
-                    {shippingAddress.location && shippingAddress.location.lat ? (
-                      <div>
-                        LAT: {shippingAddress.location.lat}
-                        LNG:{shippingAddress.location.lng}
-                      </div>
-                    ) : (
-                      <div>No location</div>
-                    )}
-                  </div>
-        
-                  <div className="mb-3">
-                    <Button variant="primary" type="submit">
-                      Continue
-                    </Button>
-                  </div>
-                </Form>
               </div>
             
           );
