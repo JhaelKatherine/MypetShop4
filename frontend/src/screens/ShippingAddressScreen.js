@@ -67,7 +67,7 @@ export default function ShippingAddressScreen() {
             <h1 className="my-3">Billing Details</h1>
             <p className='rojo'>Field are (* )required</p>
             
-            <form onSubmit={submitShippingHandler} className="custom-form">
+            <form onSubmit={submitPaymentHandler} className="custom-form">
   <div className="form-group">
     <label htmlFor="fullName">Full Name(*)</label>
     <input
@@ -82,14 +82,16 @@ export default function ShippingAddressScreen() {
     />
   </div>
   <div className="form-group">
-    <label htmlFor="nit">Nit</label>
+    <label htmlFor="address">Nit</label>
     <input
       type="text"
-      id="nit"
+      id="address"
       className="form-control"
       value={address}
       onChange={(e) => setAddress(e.target.value)}
+      onInvalid={(e) => e.target.setCustomValidity("This field is required")}
       onInput={(e) => e.target.setCustomValidity('')}
+      required
     />
   </div>
   <div className="form-group">
