@@ -140,8 +140,8 @@ export default function AddProductScreen() {
                   }}
                   min="1"
                   onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E') {
-                      e.preventDefault(); // Evita la entrada del carácter 'e'/'E'
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ',', ';', '.'].includes(e.key)) {
+                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
                     }
                   }}
                 
@@ -207,10 +207,11 @@ export default function AddProductScreen() {
               }}
               min="1"
               onKeyDown={(e) => {
-                if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ',', ';'].includes(e.key)) {
+                if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ',', ';', '.'].includes(e.key)) {
                   e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
                 }
               }}
+              
                 required
               />
             </div>
