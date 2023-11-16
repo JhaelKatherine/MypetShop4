@@ -33,7 +33,12 @@ input[type="text"] {
 #country {
   grid-column: span 1;
 }
-#proceed-btn{
-  
-  grid-column: 2;
+
+button.proceed-btn {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
