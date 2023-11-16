@@ -130,12 +130,12 @@ export default function ShippingAddressScreen() {
         e.target.setCustomValidity(''); // Restablece el mensaje de error
         setFullNameError(''); // Reset the error message
       } else {
-        e.target.setCustomValidity("Please enter only letters and spaces");
-        setFullNameError('Please enter only letters and spaces');
+        e.target.setCustomValidity("Please enter only letters");
+        setFullNameError('Please enter only letters');
       }
     }}
     pattern="^[A-Za-z\s]+$"
-    title="Please enter only letters and spaces"
+    title="Please enter only letters "
   />
   {fullNameError && (
     <div className="error-message">{fullNameError}</div>
@@ -185,8 +185,8 @@ export default function ShippingAddressScreen() {
         e.target.setCustomValidity('');
         setAddressError('');
       } else {
-        e.target.setCustomValidity("Please enter valid address");
-        setAddressError('Please enter valid address');
+        e.target.setCustomValidity("Please enter only letters");
+        setAddressError('Please enter only letters');
       }
     }}
     required
@@ -211,8 +211,8 @@ export default function ShippingAddressScreen() {
         e.target.setCustomValidity('');
         setCityError('');
       } else {
-        e.target.setCustomValidity("Please enter valid city name");
-        setCityError('Please enter valid city name');
+        e.target.setCustomValidity("Please enter only letters");
+        setCityError('Please enter only letters');
       }
     }}
     required
