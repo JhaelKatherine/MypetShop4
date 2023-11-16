@@ -202,16 +202,15 @@ export default function AddProductScreen() {
                     const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
                     const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
                     if (regex.test(enteredValue)) {
-                      setPrice(enteredValue);
+                      setCountInStock(enteredValue);
                     }
                   }}
                   min="1"
                   onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ',', ';', '.'].includes(e.key)) {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';'].includes(e.key)) {
                       e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
                     }
                   }}
-                
                 required
               />
             </div>
