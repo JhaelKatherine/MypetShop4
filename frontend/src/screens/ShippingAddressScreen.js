@@ -92,9 +92,23 @@ export default function ShippingAddressScreen() {
     e.preventDefault();
 
     if (validateForm()) {
-      submitShippingHandler(e);
-      ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
-      localStorage.setItem('paymentMethod', paymentMethodName);
+      ctxDispatch({
+        type: 'SAVE_SHIPPING_ADDRESS',
+        payload: { fullName, nit, address, city, cellPhone },
+      });
+      localStorage.setItem('shippingAddress', JSON.stringify({ fullName, nit, address, city, cellPhone }));
+      navigate('/invoice', {
+        state: {
+          invoiceData: {
+            fullName,
+            nit,
+            address,
+            city,
+            cellPhone,
+            // Puedes agregar más datos según sea necesario
+          },
+        },
+      });
     } else {
       console.log('Please complete the required fields correctly.');
     }
