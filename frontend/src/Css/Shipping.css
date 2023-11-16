@@ -16,3 +16,6 @@
   padding: 20px; /* Ajusta el espaciado interno según sea necesario */
 }
 
+.form-label {
+  text-align: left;
+}

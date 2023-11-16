@@ -70,7 +70,7 @@ export default function ShippingAddressScreen() {
             <p className='rojo'>Field are (* )required</p>
             <Form onSubmit={submitPaymentHandler }>
               <Form.Group className="mb-3" controlId="fullName">
-                <Form.Label>Full Name(*)</Form.Label>
+                <Form.Label className="form-label">Full Name(*)</Form.Label>
                 <Form.Control value={fullName} onChange={(e) => setFullName(e.target.value)} required />
               </Form.Group>
          <Form.Group className="mb-3" controlId="address">
@@ -84,7 +84,7 @@ export default function ShippingAddressScreen() {
 
 
          <Form.Group className="mb-3" controlId="address">
-           <Form.Label>Address(*)</Form.Label>
+           <Form.Label className="form-label">Address(*)</Form.Label>
            <Form.Control
              value={address}
              onChange={(e) => setAddress(e.target.value)}
@@ -92,7 +92,7 @@ export default function ShippingAddressScreen() {
            />
          </Form.Group>
          <Form.Group className="mb-3" controlId="city">
-           <Form.Label>City(*)</Form.Label>
+           <Form.Label className="form-label">City(*)</Form.Label>
            <Form.Control
              value={city}
              onChange={(e) => setCity(e.target.value)}
@@ -100,7 +100,7 @@ export default function ShippingAddressScreen() {
            />
          </Form.Group>
          <Form.Group className="mb-3" controlId="postalCode">
-           <Form.Label>Cell Phone(*)</Form.Label>
+           <Form.Label className="form-label">Cell Phone(*)</Form.Label>
            <Form.Control
              value={postalCode}
              onChange={(e) => setPostalCode(e.target.value)}
