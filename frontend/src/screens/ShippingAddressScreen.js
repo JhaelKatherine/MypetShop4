@@ -163,7 +163,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
-import CheckoutSteps from '../components/CheckoutSteps';
+import '../Css/Shipping.css';
 
 export default function ShippingAddressScreen() {
   const [name, setName] = useState('');
