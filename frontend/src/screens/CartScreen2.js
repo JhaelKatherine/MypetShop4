@@ -54,7 +54,7 @@ export default function CartScreen() {
             <div className="title-text">Product</div>
           </Col>
           <Col xs={4}>
-            <div className="title-text">Description</div>
+            <div className="title-text">Name</div>
           </Col>
           <Col xs={4}>
             <div className="title-text">Subtotal</div>
@@ -84,15 +84,20 @@ export default function CartScreen() {
               </Row>
             </ListGroup.Item>
           ))}
+
           <ListGroup.Item>
-            <Row>
-              <Col xs={12}>
-                <div className="total-cost">
-                  <p>Total Cost: ${calculateTotal()}</p>
-                </div>
-              </Col>
-            </Row>
-          </ListGroup.Item>
+        <Row>
+          <Col xs={4}>
+            <div className="title-text">Total Cost</div>
+          </Col>
+          <Col xs={4}>
+            <div className="title-text"> </div>
+          </Col>
+          <Col xs={4}>
+            <div className="title-text">$calculateTotal()</div>
+          </Col>
+        </Row>
+      </ListGroup.Item>
         </>
       )}
     </ListGroup>

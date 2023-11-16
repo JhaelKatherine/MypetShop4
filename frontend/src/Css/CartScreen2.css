@@ -31,7 +31,6 @@
   .title-text {
     font-weight: bold;
     text-align: center;
-    background-color: #f0f0f0; /* Color de fondo para los títulos */
-    padding: 10px;
-    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+    padding: 3px;
+    margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
   }
