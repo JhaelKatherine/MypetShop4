@@ -33,17 +33,34 @@ export default function AddProductScreen() {
     return urlRegex.test(url);
   };
 
+  const checkImageExists = async (url) => {
+    try {
+      const response = await Axios.head(url);
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    if (!isValidImageUrl(image)) {
+      setLoading(false);
+      toast.error('Please enter a valid image URL');
+      return;
+    }
+
+    const imageExists = await checkImageExists(image);
+
+    if (!imageExists) {
+      setLoading(false);
+      toast.error('Image not found at the provided URL');
+      return;
+    }
+
     try {
-      setLoading(true);
-
-      if (!isValidImageUrl(image)) {
-        setLoading(false);
-        toast.error('Please enter a valid image URL');
-        return;
-      }
-
       const { data } = await Axios.post('/api/products', {
         name,
         slug,
@@ -54,17 +71,20 @@ export default function AddProductScreen() {
         price,
         countInStock,
       });
+
       setLoading(false);
       toast.success('Product successfully added');
       // Redirige a la página de detalles del nuevo producto, si es necesario.
 
     } catch (err) {
       setLoading(false);
-      toast.error(getError(err));
+      toast.error('Error adding product');
     }
   };
 
+
   const uploadFileHandler = async (imageUrl) => {
+    
     try {
       setLoading(true);
       const { data } = await Axios.post(
@@ -130,8 +150,20 @@ export default function AddProductScreen() {
                 id="price"
                 className="form-control"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                min="1"
+                onChange={(e) => {
+                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
+                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                    if (regex.test(enteredValue)) {
+                      setPrice(enteredValue);
+                    }
+                  }}
+                  min="1"
+                  onKeyDown={(e) => {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';'].includes(e.key)) {
+                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    }
+                  }}
+                
                 required
               />
             </div>
@@ -185,8 +217,19 @@ export default function AddProductScreen() {
                 id="countInStock"
                 className="form-control"
                 value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
-                min="1"
+                onChange={(e) => {
+                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
+                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                    if (regex.test(enteredValue)) {
+                      setCountInStock(enteredValue);
+                    }
+                  }}
+                  min="1"
+                  onKeyDown={(e) => {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
+                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    }
+                  }}
                 required
               />
             </div>
