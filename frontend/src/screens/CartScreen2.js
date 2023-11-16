@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import { Store } from '../Store';
-import Row from 'react-bootstrap/Row';
+import { Row, Col, ListGroup } from 'react-bootstrap';
 import MessageBox from '../components/MessageBox';
-import ListGroup from 'react-bootstrap/ListGroup';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../Css/CartScreen2.css';
@@ -29,6 +28,7 @@ export default function CartScreen() {
       payload: { ...item, quantity },
     });
   };
+
   const removeItemHandler = (item) => {
     ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
@@ -39,14 +39,14 @@ export default function CartScreen() {
 
   return (
     <div>
-     <h1>YOUR ORDER</h1>
-      <Row>
-          {cartItems.length === 0 ? (
-            <MessageBox>
-              Cart is empty. <Link to="/">Go Shopping</Link>
-            </MessageBox>
-          ) : (
-            <ListGroup variant="flush">
+      <h1>YOUR ORDER</h1>
+      <ListGroup variant="flush">
+        {cartItems.length === 0 ? (
+          <MessageBox>
+            Cart is empty. <Link to="/">Go Shopping</Link>
+          </MessageBox>
+        ) : (
+          <>
             {cartItems.map((item) => (
               <ListGroup.Item key={item._id}>
                 <Row>
@@ -59,7 +59,7 @@ export default function CartScreen() {
                   </Col>
                   <Col xs={8}>
                     <div className="cart-item-details">
-                      <h5>{item.name}</h5>
+                      <strong>{item.name}</strong>
                       <p>Subtotal: ${item.price * item.quantity}</p>
                     </div>
                   </Col>
@@ -70,17 +70,14 @@ export default function CartScreen() {
               <Row>
                 <Col xs={12}>
                   <div className="total-cost">
-                    <h5>Total Cost: ${calculateTotal()}</h5>
+                    <p>Total Cost: ${calculateTotal()}</p>
                   </div>
                 </Col>
               </Row>
             </ListGroup.Item>
-          </ListGroup>
+          </>
         )}
-      </Row>
-      <div>
-
-      </div>
+      </ListGroup>
     </div>
   );
 }
