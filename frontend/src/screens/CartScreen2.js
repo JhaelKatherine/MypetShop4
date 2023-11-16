@@ -40,7 +40,6 @@ export default function CartScreen() {
   return (
     <div>
     <h1>YOUR ORDER</h1>
-    <div className='gray-background'>
     <ListGroup variant="flush" className='gray-background'>
       {cartItems.length === 0 ? (
         <MessageBox>
@@ -102,7 +101,7 @@ export default function CartScreen() {
         </>
       )}
     </ListGroup>
-    </div>
+
     </div>
   );
 }
