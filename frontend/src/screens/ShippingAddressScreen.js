@@ -62,13 +62,7 @@ export default function ShippingAddressScreen() {
 
   return (
     <div className="container">
-      <Helmet>
-        <title>Shipping and Payment</title>
-      </Helmet>
-
-      <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="row">
-        {/* Left side for ShippingAddressScreen */}
         <div className="col-md-6">
           <div className="small-container">
             <h1 className="my-3">Billing Details</h1>

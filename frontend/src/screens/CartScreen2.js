@@ -39,10 +39,7 @@ export default function CartScreen() {
 
   return (
     <div>
-      <Helmet>
-        <title>Shopping Cart</title>
-      </Helmet>
-      <h1>Shopping Cart</h1>
+     <h1>YOUR ORDER</h1>
       <Row>
           {cartItems.length === 0 ? (
             <MessageBox>
