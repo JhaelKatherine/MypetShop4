@@ -131,8 +131,14 @@ export default function AddProductScreen() {
                 id="price"
                 className="form-control"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                min="1"
+                onChange={(e) => {
+                    const enteredValue = e.target.value;
+                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                    if (regex.test(enteredValue)) {
+                      setPrice(enteredValue);
+                    }
+                  }}
+                  min="1"
                 required
               />
             </div>
