@@ -64,16 +64,12 @@ export default function CartScreen() {
                   </div>
                   <div >
                   <div key={item._id} className="cart-item-price">
-    <p>Price: ${item.price}</p>
-    <p>Quantity: {item.quantity}</p>
-    <p>Subtotal: ${item.price * item.quantity}</p>
-  </div>
-  {cartItems.length > 0 && (
-        <div className="total-cost">
-          <h3>Total Cost: ${calculateTotal()}</h3>
-        </div>
-      )}
+                     <p>Subtotal: ${item.price * item.quantity}</p>
+                 </div>
                   </div>
+                  <div className="total-cost">
+          <p>Total Cost: ${calculateTotal()}</p>
+        </div>
                 </div>
               </ListGroup.Item>
             ))}
