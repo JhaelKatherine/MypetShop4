@@ -21,7 +21,7 @@ input[type="text"] {
 }
 
 #cardNumber {
-  grid-column: span 1;
+  grid-column: span 2;
 }
 
 #cvv {
@@ -32,4 +32,8 @@ input[type="text"] {
 #postalCode,
 #country {
   grid-column: span 1;
+}
+#proceed-btn{
+  
+  grid-column: 2;
 }
