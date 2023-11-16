@@ -98,11 +98,12 @@ export default function UserCardInformation() {
         required
       />
     </div>
-
-    <button type="submit" className="proceed-btn">
-      Proceed
-    </button>
   </form>
+  <div className="proceed-btn-container">
+        <button type="submit" className="proceed-btn" onClick={handleSubmit}>
+          Proceed
+        </button>
+      </div>
 </div>
 
   );
