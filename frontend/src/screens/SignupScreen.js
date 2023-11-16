@@ -57,7 +57,7 @@ export default function SignupScreen() {
               type="text"
               id="name"
               className="form-control"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => handleInputChange(e, setName)}
               onInvalid={(e) => e.target.setCustomValidity("This field is required")}
               onInput={(e) => e.target.setCustomValidity('')}
               required
@@ -69,7 +69,7 @@ export default function SignupScreen() {
               type="text"
               id="lastName"
               className="form-control"
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={(e) => handleInputChange(e, setLastName)}
               onInvalid={(e) => e.target.setCustomValidity("This field is required")}
               onInput={(e) => e.target.setCustomValidity('')}
               required
@@ -81,7 +81,7 @@ export default function SignupScreen() {
               type="text"
               id="userName"
               className="form-control"
-              onChange={(e) => setUserName(e.target.value)}
+              onChange={(e) => handleInputChange(e, setUserName)}
               onInvalid={(e) => e.target.setCustomValidity("This field is required")}
               onInput={(e) => e.target.setCustomValidity('')}
               required
@@ -93,7 +93,7 @@ export default function SignupScreen() {
               type="email"
               id="email"
               className="form-control"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleInputChange(e, setEmail)}
               onInvalid={(e) => e.target.setCustomValidity("This field is required")}
               onInput={(e) => e.target.setCustomValidity('')}
               required
@@ -105,7 +105,7 @@ export default function SignupScreen() {
               type="password"
               id="password"
               className="form-control"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handleInputChange(e, setPassword)}
               onInvalid={(e) => e.target.setCustomValidity("This field is required")}
               onInput={(e) => e.target.setCustomValidity('')}
               required
@@ -117,7 +117,7 @@ export default function SignupScreen() {
               type="password"
               id="confirmPassword"
               className="form-control"
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => handleInputChange(e, setConfirmPassword)}
               onInvalid={(e) => e.target.setCustomValidity("This field is required")}
               onInput={(e) => e.target.setCustomValidity('')}
               required
