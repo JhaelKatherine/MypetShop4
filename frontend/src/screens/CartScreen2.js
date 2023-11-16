@@ -39,7 +39,7 @@ export default function CartScreen() {
 
   return (
     <div>
-      <h1>YOUR ORDER</h1>
+      <h1>Your Order</h1>
      <ListGroup variant="flush" className="custom-listgroup">
       {cartItems.length === 0 ? (
         <MessageBox>
