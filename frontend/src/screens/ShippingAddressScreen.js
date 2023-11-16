@@ -205,13 +205,9 @@ export default function ShippingAddressScreen() {
             };
           
             return (
-              <>
-              <div className="blue-background"> {/* Agregar esta línea */}
-          
+              <>          
                 <div className="form-container">
-                <div className="centered-title">
-                   <h1>Sign Up</h1>
-                </div>
+          
                   <form onSubmit={submitHandler} className="custom-form">
                     <div className="form-group">
                       <label htmlFor="name">Name</label>
@@ -301,10 +297,7 @@ export default function ShippingAddressScreen() {
                       Already have an account? <Link to="/signin" className="signin">Sign-In</Link>
                       </div>
                   </form>
-                </div>
-          
-                </div>
-          
+                </div>          
               </>
             );
           };
