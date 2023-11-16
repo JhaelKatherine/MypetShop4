@@ -64,6 +64,7 @@ export default function AddProductScreen() {
     }
   };
 
+  
   const uploadFileHandler = async (imageUrl) => {
     try {
       setLoading(true);
