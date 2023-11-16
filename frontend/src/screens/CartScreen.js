@@ -35,7 +35,7 @@ export default function CartScreen() {
   };
 
   const checkoutHandler = () => {
-    navigate('/signin?redirect=/shipping');
+    navigate('/shipping');
   };
 
   return (
@@ -115,6 +115,7 @@ export default function CartScreen() {
     {<Button
       type="button"
       variant="primary"
+      onClick={checkoutHandler}
       disabled={cartItems.length === 0}
     >
       Payment
