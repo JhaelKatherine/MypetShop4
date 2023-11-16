@@ -34,4 +34,9 @@
     margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
   }
   
-  
+  .title-text2 {
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    margin-bottom: 3x; /* Ajusta el margen inferior según sea necesario */
+  }
