@@ -187,9 +187,11 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
-                    const value = e.target.value;
-                    if (/^\d*$/.test(value)) {
-                      setCountInStock(value);
+                    const enteredValue = e.target.value;
+                    const intValue = parseInt(enteredValue, 10);
+              
+                    if (!isNaN(intValue) && Number.isInteger(intValue)) {
+                      setCountInStock(intValue.toString());
                     }
                   }}
                 required
