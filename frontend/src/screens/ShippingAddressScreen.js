@@ -148,7 +148,7 @@ export default function ShippingAddressScreen() {
       if (regex.test(value) || value === '') {
         setNit(value);
         e.target.setCustomValidity('');
-        setNitError('');
+        setNitError(''); // Limpiar el mensaje de error cuando el valor es válido
       } else {
         e.target.setCustomValidity("Please enter only numbers");
         setNitError('Please enter only numbers');
@@ -160,6 +160,7 @@ export default function ShippingAddressScreen() {
     <div className="error-message">{nitError}</div>
   )}
 </div>
+
 
 <div className="form-group">
   <label htmlFor="address">Address(*)</label>
