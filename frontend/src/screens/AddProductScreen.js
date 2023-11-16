@@ -9,6 +9,8 @@ import Form from 'react-bootstrap/Form';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
+import '../Css/AddUser.css';
+
 
 export default function AddProductScreen() {
   const navigate = useNavigate();
@@ -26,10 +28,22 @@ export default function AddProductScreen() {
   const [description, setDescription] = useState('');
   const [loadingUpload, setLoadingUpload] = useState(false);
 
+  const isValidImageUrl = (url) => {
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlRegex.test(url);
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
+
+      if (!isValidImageUrl(image)) {
+        setLoading(false);
+        toast.error('Please enter a valid image URL');
+        return;
+      }
+
       const { data } = await Axios.post('/api/products', {
         name,
         slug,
@@ -41,7 +55,7 @@ export default function AddProductScreen() {
         countInStock,
       });
       setLoading(false);
-      toast.success('Producto agregado exitosamente');
+      toast.success('Product successfully added');
       // Redirige a la página de detalles del nuevo producto, si es necesario.
 
     } catch (err) {
@@ -73,85 +87,125 @@ export default function AddProductScreen() {
   };
 
   return (
-    
-    <Container className="small-container">
-      <title>Add Product</title>
-      <h1>Add Product</h1>
-      {loading ? (
-        <LoadingBox />
-      ) : (
-        <Form onSubmit={submitHandler}>
-              <Form.Group className="mb-3" controlId="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
+    <div className="blue-background">
+      <div className="form-container">
+        <div className="centered-title">
+          <h1>Add Product</h1>
+        </div>
+        {loading ? (
+          <LoadingBox />
+        ) : (
+          <form onSubmit={submitHandler} className="custom-form">
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                className="form-control"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="slug">Slug</label>
+              <input
+                type="text"
+                id="slug"
+                className="form-control"
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
+              />
+            </div>
 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="slug">
-                 <Form.Label>Slug</Form.Label>
-                 <Form.Control
-                   value={slug}
-                   onChange={(e) => setSlug(e.target.value)}
-                   required
-                />
+            <div className="form-group">
+              <label htmlFor="price">Price</label>
+              <input
+                type="number"
+                id="price"
+                className="form-control"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                min="1"
+                required
+              />
+            </div>
 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="price">
-                <Form.Label>Price</Form.Label>
-                <Form.Control
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                  required
-                />
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                className="form-control"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
+              />
+            </div>
 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  required
-                />
+            <div className="form-group">
+              <label htmlFor="category">Category</label>
+              <input
+                type="text"
+                id="category"
+                className="form-control"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
+              />
+            </div>
 
-              </Form.Group>    
-              <Form.Group className="mb-3" controlId="category">
-                <Form.Label>Category</Form.Label>
-                <Form.Control
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="brand">
-                <Form.Label>Brand</Form.Label>
-                <Form.Control
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="countInStock">
-                <Form.Label>Count In Stock</Form.Label>
-                <Form.Control
-                  value={countInStock}
-                  onChange={(e) => setCountInStock(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="imageFile">
-            <Form.Label>Subir Imagen</Form.Label>
-            <Form.Control type="text" onChange={(e) => setImage(e.target.value)}
-              value={image}
-              required />
-          </Form.Group>
-          <div className="mb-3">
-            <Button type="submit">Add</Button>
-          </div>
-        </Form>
-      )}
-    </Container>
+            <div className="form-group">
+              <label htmlFor="brand">Brand</label>
+              <input
+                type="text"
+                id="brand"
+                className="form-control"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="countInStock">Count In Stock</label>
+              <input
+                type="number"
+                id="countInStock"
+                className="form-control"
+                value={countInStock}
+                onChange={(e) => setCountInStock(e.target.value)}
+                min="1"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="imageURL">Image URL</label>
+              <input
+                type="text"
+                id="imageURL"
+                className="form-control"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                required
+              />
+            </div>
+            <button className="submit" type="submit">Add</button>
+          </form>
+        )}
+      </div>
+    </div>
   );
 }
