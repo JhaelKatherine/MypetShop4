@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Css/UserCardInformation.css';
+import ProductList from '../components/ProductList';
 
 export default function UserCardInformation() {
   const [formData, setFormData] = useState({
@@ -99,6 +100,7 @@ export default function UserCardInformation() {
           Proceed
         </button>
       </form>
+      <ProductList products={formData.products} />
     </div>
   );
 }
