@@ -81,17 +81,48 @@ export default function ShippingAddressScreen() {
   
   const submitShippingHandler = (e) => {
     e.preventDefault();
-
+  
     if (validateForm()) {
       ctxDispatch({
         type: 'SAVE_SHIPPING_ADDRESS',
-        payload: { fullName, nit, address, city, cellPhone },
+        payload: {
+          fullName,
+          nit,
+          address,
+          city,
+          cellPhone,
+          products: [
+            // Agrega los productos según sea necesario
+            { name: 'Product 1', quantity: 2, unitPrice: 10.00 },
+            { name: 'Product 2', quantity: 1, unitPrice: 15.00 },
+          ],
+        },
       });
-      localStorage.setItem('shippingAddress', JSON.stringify({ fullName, nit, address, city, cellPhone }));
+      localStorage.setItem(
+        'shippingAddress',
+        JSON.stringify({ fullName, nit, address, city, cellPhone })
+      );
+      navigate('/invoice', {
+        state: {
+          invoiceData: {
+            fullName,
+            nit,
+            address,
+            city,
+            cellPhone,
+            products: [
+              // Agrega los productos según sea necesario
+              { name: 'Product 1', quantity: 2, unitPrice: 10.00 },
+              { name: 'Product 2', quantity: 1, unitPrice: 15.00 },
+            ],
+          },
+        },
+      });
     } else {
       console.log('Please complete the required fields correctly.');
     }
   };
+  
 
   const submitPaymentHandler = (e) => {
     e.preventDefault();
