@@ -76,6 +76,7 @@ export default function AddProductScreen() {
       toast.success('Product successfully added');
       // Redirige a la página de detalles del nuevo producto, si es necesario.
 
+      
     } catch (err) {
       setLoading(false);
       toast.error('Error adding product');
