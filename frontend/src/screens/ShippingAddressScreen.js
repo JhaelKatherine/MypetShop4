@@ -290,7 +290,44 @@ export default function ShippingAddressScreen() {
                 </div>          
                 </div>          
 
-                </div>          
+                </div>   
+                <div className="col-md-6">
+                  <div className="small-container">
+                    <Form onSubmit={submitPaymentHandler}>
+                      <div className='customCartScreen'>
+                        <CartScreen2/>
+                      </div>
+                      <div>
+                      
+                      <ListGroup variant="flush">
+                        
+                        <ListGroup.Item className='gray-background'>
+                          <div className="mb-3">
+                            <Form.Check
+                              type="radio"
+                              id="PayPal"
+                              label="PayPal"
+                              value="PayPal"
+                              checked={paymentMethodName === 'PayPal'}
+                              onChange={(e) => setPaymentMethod(e.target.value)}
+                            />
+                          </div>
+                        </ListGroup.Item>
+                        
+                        <ListGroup.Item className='gray-background'>
+                          <div className="mb-3">
+                            <Form.Check
+                              type="radio"
+                              id="Stripe"
+                              label="Stripe"
+                              value="Stripe"
+                              checked={paymentMethodName === 'Stripe'}
+                              onChange={(e) => setPaymentMethod(e.target.value)}
+                            />
+                          </div>
+                        </ListGroup.Item>
+                      </ListGroup>
+                      </div>       
                 </div>          
                 </div>          
 
