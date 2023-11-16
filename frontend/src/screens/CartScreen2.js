@@ -40,14 +40,14 @@ export default function CartScreen() {
   return (
     <div>
     <h1>YOUR ORDER</h1>
-    <ListGroup variant="flush" className='gray-background'>
+    <ListGroup variant="flush" >
       {cartItems.length === 0 ? (
         <MessageBox>
           Cart is empty. <Link to="/">Go Shopping</Link>
         </MessageBox>
       ) : (
         <>
-        <ListGroup.Item>
+        <ListGroup.Item className='gray-background'>
         <Row>
           <Col xs={4}>
             <div className="title-text">Product</div>
@@ -59,9 +59,9 @@ export default function CartScreen() {
             <div className="title-text">Subtotal</div>
           </Col>
         </Row>
-      </ListGroup.Item>
+      </ListGroup.Item >
           {cartItems.map((item) => (
-            <ListGroup.Item key={item._id}>
+            <ListGroup.Item key={item._id} className='gray-background'>
               <Row>
                 <Col xs={4}>
                   <img
@@ -84,7 +84,7 @@ export default function CartScreen() {
             </ListGroup.Item>
           ))}
 
-<ListGroup.Item>
+<ListGroup.Item className='gray-background'>
   <Row>
     <Col xs={4}>
       <div className="title-text">Total Cost</div>
