@@ -44,7 +44,6 @@ export default function CartScreen() {
       </Helmet>
       <h1>Shopping Cart</h1>
       <Row>
-        <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
               Cart is empty. <Link to="/">Go Shopping</Link>
@@ -64,7 +63,6 @@ export default function CartScreen() {
                   </div>
                   <div className="cart-item-button">
                   <div key={item._id}>
-    <h4>{item.name}</h4>
     <p>Price: ${item.price}</p>
     <p>Quantity: {item.quantity}</p>
     <p>Subtotal: ${item.price * item.quantity}</p>
@@ -75,7 +73,6 @@ export default function CartScreen() {
             ))}
           </ListGroup>
         )}
-      </Col>
       </Row>
     </div>
   );
