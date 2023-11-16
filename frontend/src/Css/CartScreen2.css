@@ -1,26 +1,14 @@
-/* CartScreen2.css */
+/* CartScreen.css */
 
-/* Estilos para el contenedor principal */
-div {
-    text-align: center; /* Centra el contenido */
-    margin: 20px; /* Espacio alrededor del contenedor */
-  }
-  
-  h1 {
-    margin-bottom: 20px; /* Espacio debajo del título */
-  }
-  
-  /* Estilos para cada elemento del carrito */
-  .cart-item-container {
+.cart-item-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 20px; /* Espacio entre elementos */
+    margin-bottom: 20px; /* Ajusta este valor para cambiar el espaciado entre elementos */
   }
   
   .cart-item-image {
-    width: 100px; /* Tamaño de la imagen */
-    margin-right: 20px; /* Espacio entre la imagen y el texto */
+    width: 100px; /* Ajusta el tamaño de la imagen según tu preferencia */
+    margin-right: 20px; /* Espacio entre la imagen y el nombre */
   }
   
   .cart-item-details {
@@ -28,11 +16,8 @@ div {
   }
   
   .cart-item-price {
-    text-align: left; /* Alinea el texto a la izquierda */
-    margin-top: 10px; /* Espacio encima de los detalles del producto */
+    margin-top: 10px; /* Espacio entre el nombre y los detalles */
   }
   
-  .total-cost {
-    margin-top: 20px; /* Espacio encima del total */
-  }
+  /* Otros estilos... */
   

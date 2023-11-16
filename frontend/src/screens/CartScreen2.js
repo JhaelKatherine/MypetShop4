@@ -62,8 +62,8 @@ export default function CartScreen() {
                   <div className="cart-item-">
                     <strong>{item.name}</strong>
                   </div>
-                  <div className="cart-item-price">
-                  <div key={item._id}>
+                  <div >
+                  <div key={item._id} className="cart-item-price">
     <p>Price: ${item.price}</p>
     <p>Quantity: {item.quantity}</p>
     <p>Subtotal: ${item.price * item.quantity}</p>
