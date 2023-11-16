@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import '../Css/UserCardInformation.css';
 import ProductList from '../components/ProductList';
 import { Store } from '../Store';
+import '../Css/UserCardInformation.css';
 
 export default function UserCardInformation() {
   const { state } = useContext(Store);
