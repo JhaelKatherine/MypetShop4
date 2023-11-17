@@ -11,6 +11,7 @@
 
 .button-content {
     margin-top: 5px;
+
 }
 
 .button-container {
@@ -19,6 +20,8 @@
     width: 85%;
     justify-content: center;
     margin-top: 10px;
+    margin-left: 80px;
+
 }
 
 .button-container button {
