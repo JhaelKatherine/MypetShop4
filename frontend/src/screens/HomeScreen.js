@@ -87,7 +87,7 @@ function HomeScreen() {
       </label>
 
       <div className="image-container">
-      <img src="https://coderi.mx/wp-content/uploads/slider2/Banner_Latas1.jpeg" alt="promotion" />
+      <img src="https://i0.wp.com/www.russellfeedandsupply.com/wp-content/uploads/2022/01/canidae-25-off-may-23-banner-1.jpg?ssl=1" alt="promotion" />
       {/* Agrega más imágenes según sea necesario */}
     </div>
     <h1>Featured Categories</h1>
