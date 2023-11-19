@@ -74,18 +74,15 @@ export default function ProductListScreen() {
   const sp = new URLSearchParams(search);
   const page = sp.get('page') || 1;
 
-  const { state } = useContext(Store);
-  const { userInfo } = state;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products/admin?page=${page} `, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
-
+        const { data } = await axios.get(`/api/products?page=${page}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch (err) {}
+      } catch (err) {
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+      }
     };
 
     if (successDelete) {
@@ -93,7 +90,7 @@ export default function ProductListScreen() {
     } else {
       fetchData();
     }
-  }, [page, userInfo, successDelete]);
+  }, [page, successDelete]);
 
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
@@ -102,9 +99,7 @@ export default function ProductListScreen() {
         const { data } = await axios.post(
           '/api/products',
           {},
-          {
-            headers: { Authorization: `Bearer ${userInfo.token}` },
-          }
+
         );
         toast.success('product created successfully');
         dispatch({ type: 'CREATE_SUCCESS' });
@@ -119,15 +114,13 @@ export default function ProductListScreen() {
   };
 
   const deleteHandler = async (product) => {
-    if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('¿Estás seguro de eliminar?')) {
       try {
-        await axios.delete(`/api/products/${product._id}`, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
-        toast.success('product deleted successfully');
+        await axios.delete(`/api/products/${product._id}`);
+        toast.success('Producto eliminado exitosamente');
         dispatch({ type: 'DELETE_SUCCESS' });
       } catch (err) {
-        toast.error(getError(error));
+        toast.error(getError(err));
         dispatch({
           type: 'DELETE_FAIL',
         });
