@@ -172,7 +172,7 @@ export default function ProductEditScreen() {
           <input
                 type="text"
                 id="name"
-                className="form-control"
+                className="form-control custom-width"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 pattern="[A-Za-z ]+" 
@@ -185,7 +185,7 @@ export default function ProductEditScreen() {
             <Form.Control
                 type="text"
                 id="slug"
-                className="form-control"
+                className="form-control custom-width"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
                 pattern="[A-Za-z ]+" 
@@ -198,7 +198,7 @@ export default function ProductEditScreen() {
             <Form.Control
                 type="text"
                 id="price"
-                className="form-control"
+                className="form-control custom-width"
                 value={price}
                 onChange={(e) => {
                     const enteredValue = e.target.value;
@@ -230,7 +230,7 @@ export default function ProductEditScreen() {
             <Form.Control
               type="text"
               id="imageURL"
-              className="form-control"
+              className="form-control custom-width"
               value={image}
               onChange={(e) => setImage(e.target.value)}
               required
@@ -242,7 +242,7 @@ export default function ProductEditScreen() {
             <Form.Control     
                 type="text"
                 id="category"
-                className="form-control"
+                className="form-control custom-width"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 pattern="[A-Za-z ]+" 
@@ -255,7 +255,7 @@ export default function ProductEditScreen() {
             <Form.Control
                type="text"
                id="brand"
-               className="form-control"
+               className="form-control custom-width"
                value={brand}
                onChange={(e) => setBrand(e.target.value)}
                pattern="[A-Za-z ]+" 
@@ -268,7 +268,7 @@ export default function ProductEditScreen() {
             <Form.Control
                 type="number"
                 id="countInStock"
-                className="form-control"
+                className="form-control custom-width"
                 value={countInStock}
                 onChange={(e) => {
                     const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
@@ -291,7 +291,7 @@ export default function ProductEditScreen() {
             <Form.Control
                 type="text"
                 id="description"
-                className="form-control"
+                className="form-control custom-width"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 pattern="[A-Za-z ]+" 
