@@ -167,9 +167,9 @@ export default function ProductEditScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <Form onSubmit={submitHandler}>
+        <Form className="form" onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Name</Form.Label>
+          <Form.Label className="form-label">Name</Form.Label>
             <Form.Control
                 type="text"
                 id="name"
@@ -301,7 +301,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <div className="mb-3">
-            <Button disabled={loadingUpdate} type="submit">
+          <Button disabled={loadingUpdate} type="submit" className="submit">
               Update
             </Button>
             {loadingUpdate && <LoadingBox></LoadingBox>}
