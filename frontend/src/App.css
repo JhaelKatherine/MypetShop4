@@ -27,7 +27,11 @@
 .App-link {
   color: #61dafb;
 }
-
+img.admin-image {
+  width: 55px; /* Ancho deseado */
+  height: 50px; /* Altura deseada */
+  object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -54,4 +58,27 @@ header {
 
 .navbar-toggler-icon {
   background-color: white;
+}
+.nav-dropdown {
+  width: 80%; /* Ancho deseado para el contenedor */
+}
+/* styles.css */
+
+/* Otros estilos existentes */
+
+.nav-dropdown-item {
+  width: 100%; /* El ancho es del 100% para ocupar todo el ancho del contenedor */
+
+  transition: background-color 0.2s; /* Transición de color de fondo al asercarse el mouse */
+}
+
+.nav-dropdown-item:hover {
+  background-color: #87CEFA; /* Color de fondo al asercarse el mouse */
+}
+
+img.product-icon {
+  margin-left: 10px; 
+  width: 30px; /* Ancho deseado */
+  height: 30px; /* Altura deseada */
+  object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
 }

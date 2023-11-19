@@ -79,14 +79,16 @@ function App() {
                   </Nav.Link>
                 </LinkContainer>
 
-                 (
-                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                 
+ <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png" alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
+ <LinkContainer to="/admin/products">
+    <NavDropdown.Item className="nav-dropdown-item">
+      Products 
+      <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
 
-                      <LinkContainer to="/admin/products">
-                        <NavDropdown.Item>Products</NavDropdown.Item>
-                      </LinkContainer>
-                    </NavDropdown>
-                  )
+    </NavDropdown.Item>
+  </LinkContainer>
+</NavDropdown>
 
 
               </Nav>
