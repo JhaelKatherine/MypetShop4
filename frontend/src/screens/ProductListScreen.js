@@ -175,32 +175,39 @@ export default function ProductListScreen() {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product.image}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
-                  <td>
-                    <Button
-                      type="button"
-                      variant="light"
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
-                    >
-                      Edit
-                    </Button>
-                    &nbsp;
-                    <Button
-                      type="button"
-                      variant="light"
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+            {products.map((product) => (
+  <tr key={product._id}>
+    <td>
+      <img
+        src={product.image}
+        alt={product.name}
+        style={{ maxWidth: '50px', maxHeight: '50px' }} // Ajusta el tamaño según tus necesidades
+      />
+    </td>
+    <td>{product.name}</td>
+    <td>{product.price}</td>
+    <td>{product.category}</td>
+    <td>{product.brand}</td>
+    <td>
+      <Button
+        type="button"
+        variant="light"
+        onClick={() => navigate(`/admin/product/${product._id}`)}
+      >
+        Edit
+      </Button>
+      &nbsp;
+      <Button
+        type="button"
+        variant="light"
+        onClick={() => deleteHandler(product)}
+      >
+        Delete
+      </Button>
+    </td>
+  </tr>
+))}
+
             </tbody>
           </table>
           <div>

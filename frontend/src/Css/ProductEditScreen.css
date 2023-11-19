@@ -1,0 +1,33 @@
+/* ProductEditScreen.css */
+
+.form-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .centered-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    margin-bottom: 15px;
+  }
+  
+  .submit {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+  }
+  
+  /* Agrega estilos adicionales según sea necesario */
+  

@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
-import '../Css/AddUser.css';
+import '../Css/ProductEditScreen.css';
 
 
 const reducer = (state, action) => {
