@@ -22,10 +22,7 @@ export default function SigninScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (email.trim() === '' || password.trim() === '') {
-      toast.error('Please complete all fields');
-      return;
-    }
+    
     try {
       const { data } = await Axios.post('/api/users/signin', {
         email,
@@ -45,14 +42,13 @@ export default function SigninScreen() {
     }
   }, [navigate, redirect, userInfo]);
 
-
   return (
     <>
     <div className="blue-background"> {/* Agregar esta línea */}
 
       <div className="form-container">
       <div className="centered-title">
-         <h1>Sign Up</h1>
+         <h1>Sign In</h1>
       </div>
         <form onSubmit={submitHandler} className="custom-form">
           <div className="form-group">
