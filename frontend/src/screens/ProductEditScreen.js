@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
-import '../Css/ProductEditScreen.css';
+import '../Css/AddUser.css';
 
 
 const reducer = (state, action) => {
@@ -156,7 +156,8 @@ export default function ProductEditScreen() {
     toast.success('Image removed successfully. click Update to apply it');
   };
   return (
-    <Container className="form-container">
+    <div className="blue-background">
+      <div className="form-container">
         <div className="centered-title">
           <h1>Edit Product</h1>
         </div>
@@ -166,39 +167,39 @@ export default function ProductEditScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <Form className="form" onSubmit={submitHandler}>
-          <Form.Group className="mb-3" controlId="name">
-          <Form.Label className="form-label">Name</Form.Label>
+        <form onSubmit={submitHandler} className="custom-form">
+          <div className="form-group">
+          <label htmlFor="name">Name</label>
           <input
-                type="text"
-                id="name"
-                className="form-control custom-width"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                pattern="[A-Za-z ]+" 
-                title="Please enter only letters" 
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="slug">
-            <Form.Label>Slug</Form.Label>
-            <Form.Control
+            type="text"
+            id="name"
+            className="form-control"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            pattern="[A-Za-z ]+" 
+            title="Please enter only letters" 
+            required
+          />
+            </div>
+            <div className="form-group">
+              <label htmlFor="slug">Slug</label>
+              <input
                 type="text"
                 id="slug"
-                className="form-control custom-width"
+                className="form-control"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Price</Form.Label>
-            <Form.Control
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="price">Price</label>
+              <input
                 type="text"
                 id="price"
-                className="form-control custom-width"
+                className="form-control"
                 value={price}
                 onChange={(e) => {
                     const enteredValue = e.target.value;
@@ -222,53 +223,54 @@ export default function ProductEditScreen() {
                       e.preventDefault();
                     }
                   }}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="image">
-            <Form.Label>Image URL</Form.Label>
-            <Form.Control
-              type="text"
-              id="imageURL"
-              className="form-control custom-width"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="category">
-            <Form.Label>Category</Form.Label>
-            <Form.Control     
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                className="form-control"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="category">Category</label>
+              <input
                 type="text"
                 id="category"
-                className="form-control custom-width"
+                className="form-control"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="brand">
-            <Form.Label>Brand</Form.Label>
-            <Form.Control
-               type="text"
-               id="brand"
-               className="form-control custom-width"
-               value={brand}
-               onChange={(e) => setBrand(e.target.value)}
-               pattern="[A-Za-z ]+" 
-               title="Please enter only letters" 
-               required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="countInStock">
-            <Form.Label>Count In Stock</Form.Label>
-            <Form.Control
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="brand">Brand</label>
+              <input
+                type="text"
+                id="brand"
+                className="form-control"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="countInStock">Count In Stock</label>
+              <input
                 type="number"
                 id="countInStock"
-                className="form-control custom-width"
+                className="form-control"
                 value={countInStock}
                 onChange={(e) => {
                     const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
@@ -284,29 +286,34 @@ export default function ProductEditScreen() {
                     }
                   }}
                 required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="imageURL">Image URL</label>
+              <input
                 type="text"
-                id="description"
-                className="form-control custom-width"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                pattern="[A-Za-z ]+" 
-                title="Please enter only letters" 
+                id="imageURL"
+                className="form-control"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
                 required
-            />
-          </Form.Group>
+              />
+            </div>
+
+
+
+
+          
           <div className="mb-3">
           <Button disabled={loadingUpdate} type="submit" className="submit">
               Update
             </Button>
             {loadingUpdate && <LoadingBox></LoadingBox>}
           </div>
-        </Form>
+        </form>
       )}
-    </Container>
+            </div>
+
+    </div>
   );
 }
