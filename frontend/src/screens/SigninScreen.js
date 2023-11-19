@@ -14,6 +14,8 @@ import '../Css/AddUser.css';
 export default function SigninScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,11 +37,6 @@ export default function SigninScreen() {
     }
   };
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [navigate, redirect, userInfo]);
   return (
     <>
     <div className="blue-background"> {/* Agregar esta línea */}
