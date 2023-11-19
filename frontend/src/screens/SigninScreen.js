@@ -36,6 +36,11 @@ export default function SignipScreen() {
     }
   };
   
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
 
   return (
