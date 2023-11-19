@@ -73,16 +73,20 @@ export default function ProductListScreen() {
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
   const page = sp.get('page') || 1;
+  const { state } = useContext(Store);
+
+  const { userInfo } = state;
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products?page=${page}`);
+        const { data } = await axios.get(`/api/products/admin?page=${page}`, {
+          headers: { Authorization: `Bearer ${userInfo}` },
+        });
+
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
-      }
+      } catch (err) {}
     };
 
     if (successDelete) {
@@ -90,8 +94,7 @@ export default function ProductListScreen() {
     } else {
       fetchData();
     }
-  }, [page, successDelete]);
-
+  }, [page, userInfo, successDelete]);
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
       try {
