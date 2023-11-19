@@ -109,6 +109,8 @@ export default function ProductListScreen() {
         toast.success('product created successfully');
         dispatch({ type: 'CREATE_SUCCESS' });
         navigate(`/admin/product/${data.product._id}`);
+        navigate(`/admin/product/${data.product._id}`);
+
       } catch (err) {
         toast.error(getError(error));
         dispatch({
@@ -143,7 +145,9 @@ export default function ProductListScreen() {
         </Col>
         <Col className="col text-end">
           <div>
-            <Button type="button" onClick={createHandler}>
+            <Button type="button"
+              onClick={() => navigate(`/admin/product/}`)}
+              >
               Create Product
             </Button>
           </div>

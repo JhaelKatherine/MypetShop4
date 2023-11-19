@@ -17,6 +17,7 @@ import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import AdminRoute from './components/AdminRoute';
 import ProductListScreen from './screens/ProductListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
 
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import './App.css';
@@ -122,7 +123,7 @@ function App() {
                 path="/admin/product/:id"
                 element={
                   <AdminRoute>
-                    <AddProductScreen />
+                    <ProductEditScreen />
                   </AdminRoute>
                 }
               ></Route>
