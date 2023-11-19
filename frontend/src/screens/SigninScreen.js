@@ -35,11 +35,7 @@ export default function SignipScreen() {
       toast.error(getError(err));
     }
   };
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [navigate, redirect, userInfo]);
+  
 
 
   return (
