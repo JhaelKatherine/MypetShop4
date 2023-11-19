@@ -130,31 +130,33 @@ export default function ProductListScreen() {
       }
     }
   };
+// ... Importaciones y código anterior ...
 
-  return (
-    <div>
-      <Row>
-        <Col>
-          <h1>Products</h1>
-        </Col>
-        <Col className="col text-end">
-          <div>
-            <Button type="button" onClick={createHandler}>
-              Create Product
-            </Button>
-          </div>
-        </Col>
-      </Row>
+return (
+  <div>
+    <Row>
+      <Col>
+        <h1>Products</h1>
+      </Col>
+      <Col className="col text-end">
+        <div>
+          <Button type="button" onClick={createHandler}>
+            Create Product
+          </Button>
+        </div>
+      </Col>
+    </Row>
 
-      {loadingCreate && <LoadingBox></LoadingBox>}
-      {loadingDelete && <LoadingBox></LoadingBox>}
+    {loadingCreate && <LoadingBox></LoadingBox>}
+    {loadingDelete && <LoadingBox></LoadingBox>}
 
-      {loading ? (
-        <LoadingBox></LoadingBox>
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <>
+    {loading ? (
+      <LoadingBox></LoadingBox>
+    ) : error ? (
+      <MessageBox variant="danger">{error}</MessageBox>
+    ) : (
+      <>
+        {products && (
           <table className="table">
             <thead>
               <tr>
@@ -195,19 +197,22 @@ export default function ProductListScreen() {
               ))}
             </tbody>
           </table>
-          <div>
-            {[...Array(pages).keys()].map((x) => (
-              <Link
-                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
-                key={x + 1}
-                to={`/admin/products?page=${x + 1}`}
-              >
-                {x + 1}
-              </Link>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
+        )}
+
+        <div>
+          {products && [...Array(pages).keys()].map((x) => (
+            <Link
+              className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+              key={x + 1}
+              to={`/admin/products?page=${x + 1}`}
+            >
+              {x + 1}
+            </Link>
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+);
+
 }
