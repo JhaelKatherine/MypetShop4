@@ -7,7 +7,7 @@ import { getError } from '../utils';
 import '../Css/AddUser.css';
 
 
-export default function SignipScreen() {
+export default function SigninScreen() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
