@@ -167,26 +167,19 @@ export default function ProductEditScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <Form className="form" onSubmit={submitHandler}>
-           <Form.Group className="mb-3" controlId="name">
-      <Row>
-    <Col md={3}>
-        <Form.Label>Name</Form.Label>
-        </Col>
-    <Col md={9}>
+          <Form.Group className="mb-3" controlId="name">
+          <Form.Label className="form-label">Name</Form.Label>
           <input
-          type="text"
-          id="name"
-          className="form-control custom-width"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          pattern="[A-Za-z ]+"
-          title="Please enter only letters"
-          required
-       />
-          </Col>
-        </Row>
-         </Form.Group>
-
+                type="text"
+                id="name"
+                className="form-control custom-width"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+              required
+            />
+          </Form.Group>
           <Form.Group className="mb-3" controlId="slug">
             <Form.Label>Slug</Form.Label>
             <Form.Control
