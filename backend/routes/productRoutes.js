@@ -1,7 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
-import { isAuth, isAdmin } from '../utils.js';
+import { isAuth } from '../utils.js';
 
 const productRouter = express.Router();
 
@@ -32,7 +32,6 @@ productRouter.post(
 productRouter.put(
   '/:id',
   isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -57,7 +56,6 @@ productRouter.put(
 productRouter.delete(
   '/:id',
   isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -110,7 +108,6 @@ const PAGE_SIZE = 3;
 productRouter.get(
   '/admin',
   isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
     const page = query.page || 1;
