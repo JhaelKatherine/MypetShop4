@@ -146,7 +146,7 @@ export default function ProductListScreen() {
         <Col className="col text-end">
           <div>
             <Button type="button"
-              onClick={() => navigate(`/admin/product/}`)}
+              onClick={() => navigate(`/addproduct`)}
               >
               Create Product
             </Button>
