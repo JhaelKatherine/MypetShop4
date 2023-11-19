@@ -10,6 +10,7 @@ import '../Css/AddUser.css';
 export default function SignipScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -22,29 +23,15 @@ export default function SignipScreen() {
       toast.error('Please complete all fields');
       return;
     }
-
-    if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
-      return;
-    }
     try {
-      const { data } = await Axios.post('/api/users/signin', {
+      const { data } = await Axios.post('/api/users/signup', {
         email,
         password,
       });
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
     } catch (err) {
       toast.error(getError(err));
     }
   };
-
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [navigate, redirect, userInfo]);
 
   return (
     <>
