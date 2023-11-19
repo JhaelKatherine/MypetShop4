@@ -14,12 +14,16 @@ import ProductScreen from './screens/ProductScreen';
 import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
 import Badge from 'react-bootstrap/Badge';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import AdminRoute from './components/AdminRoute';
+import ProductListScreen from './screens/ProductListScreen';
+
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import './App.css';
 
 function App() {
   const { state } = useContext(Store);
-  const { cart } = state;
+  const { cart, userInfo } = state;
 
   return (
     <BrowserRouter>
@@ -73,6 +77,17 @@ function App() {
                     />
                   </Nav.Link>
                 </LinkContainer>
+
+                 (
+                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+
+                      <LinkContainer to="/admin/products">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )
+
+
               </Nav>
             </Container>
           </Navbar>
@@ -83,7 +98,7 @@ function App() {
           </Nav>
         </div>
         <main>
-          <Container className="mt-3">
+        <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
@@ -92,9 +107,17 @@ function App() {
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
-path="/shipping"
-element={<ShippingAddressScreen />}
-></Route>
+                path="/shipping"
+                element={<ShippingAddressScreen />}
+              ></Route>
+              <Route
+                path="/admin/products"
+                element={
+                  <AdminRoute>
+                    <ProductListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
             </Routes>
           </Container>
         </main>
