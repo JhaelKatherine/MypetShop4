@@ -166,11 +166,10 @@ export default function ProductListScreen() {
           <table className="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>IMAGE</th>
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>CATEGORY</th>
-                <th>BRAND</th>
                 <th>ACTIONS</th>
               </tr>
             </thead>
@@ -185,9 +184,8 @@ export default function ProductListScreen() {
       />
     </td>
     <td>{product.name}</td>
-    <td>{product.price}</td>
+    <td>{"$ "+product.price}</td>
     <td>{product.category}</td>
-    <td>{product.brand}</td>
     <td>
       <Button
         type="button"
