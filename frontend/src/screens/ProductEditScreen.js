@@ -169,7 +169,7 @@ export default function ProductEditScreen() {
         <Form className="form" onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="name">
           <Form.Label className="form-label">Name</Form.Label>
-            <Form.Control
+          <input
                 type="text"
                 id="name"
                 className="form-control"
