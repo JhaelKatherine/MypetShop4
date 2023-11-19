@@ -118,6 +118,14 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+                            <Route
+                path="/admin/product/:id"
+                element={
+                  <AdminRoute>
+                    <AddProductScreen />
+                  </AdminRoute>
+                }
+              ></Route>
             </Routes>
           </Container>
         </main>
