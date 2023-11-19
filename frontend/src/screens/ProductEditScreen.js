@@ -11,6 +11,8 @@ import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
+import '../Css/AddUser.css';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -169,71 +171,133 @@ export default function ProductEditScreen() {
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+                type="text"
+                id="name"
+                className="form-control"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
               required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="slug">
             <Form.Label>Slug</Form.Label>
             <Form.Control
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
+                type="text"
+                id="slug"
+                className="form-control"
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
               required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Price</Form.Label>
             <Form.Control
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+                type="text"
+                id="price"
+                className="form-control"
+                value={price}
+                onChange={(e) => {
+                    const enteredValue = e.target.value;
+                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
+                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
+                      setPrice(enteredValue);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    // Evita caracteres que no sean números o puntos decimales
+                    if (
+                      !(
+                        (e.key >= '0' && e.key <= '9') ||
+                        e.key === '.' ||
+                        e.key === 'Backspace' ||
+                        e.key === 'Delete' ||
+                        e.key === 'ArrowLeft' ||
+                        e.key === 'ArrowRight'
+                      )
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
               required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="image">
-            <Form.Label>Image File</Form.Label>
+            <Form.Label>Image URL</Form.Label>
             <Form.Control
+              type="text"
+              id="imageURL"
+              className="form-control"
               value={image}
               onChange={(e) => setImage(e.target.value)}
               required
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="imageFile">
-            <Form.Label>Upload Image</Form.Label>
-            <Form.Control type="file" onChange={uploadFileHandler} />
-            {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group>
 
           <Form.Group className="mb-3" controlId="category">
             <Form.Label>Category</Form.Label>
-            <Form.Control
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
+            <Form.Control     
+                type="text"
+                id="category"
+                className="form-control"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="brand">
             <Form.Label>Brand</Form.Label>
             <Form.Control
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-              required
+               type="text"
+               id="brand"
+               className="form-control"
+               value={brand}
+               onChange={(e) => setBrand(e.target.value)}
+               pattern="[A-Za-z ]+" 
+               title="Please enter only letters" 
+               required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="countInStock">
             <Form.Label>Count In Stock</Form.Label>
             <Form.Control
-              value={countInStock}
-              onChange={(e) => setCountInStock(e.target.value)}
-              required
+                type="number"
+                id="countInStock"
+                className="form-control"
+                value={countInStock}
+                onChange={(e) => {
+                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
+                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                    if (regex.test(enteredValue)) {
+                      setCountInStock(enteredValue);
+                    }
+                  }}
+                  min="1"
+                  onKeyDown={(e) => {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
+                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    }
+                  }}
+                required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
+                type="text"
+                id="description"
+                className="form-control"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
             />
           </Form.Group>
           <div className="mb-3">
