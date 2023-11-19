@@ -15,6 +15,7 @@ import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
 import Badge from 'react-bootstrap/Badge';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import SigninScreen from './screens/SigninScreen';
 import './App.css';
 
 function App() {
@@ -63,7 +64,7 @@ function App() {
                     </Badge>
                   )}
                 </Link>
-                <LinkContainer to="/signup">
+                <LinkContainer to="/signin">
                   <Nav.Link>
                     <img
                       alt="signup"
@@ -87,7 +88,7 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
-              <Route path="/signin" element={<SignupScreen />} />
+              <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
