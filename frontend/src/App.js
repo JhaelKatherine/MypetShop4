@@ -67,7 +67,7 @@ function App() {
                 <LinkContainer to="/signin">
                   <Nav.Link>
                     <img
-                      alt="signup"
+                      alt="signin"
                       src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
                       height="50"
                       className="d-inline-block align-top"
