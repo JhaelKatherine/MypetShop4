@@ -73,16 +73,15 @@ export default function ProductListScreen() {
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
   const page = sp.get('page') || 1;
+
   const { state } = useContext(Store);
-
   const { userInfo } = state;
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products?page=${page}`, {
-          headers: { Authorization: `Bearer ${userInfo}` },
+        const { data } = await axios.get(`/api/products/admin?page=${page} `, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -95,6 +94,7 @@ export default function ProductListScreen() {
       fetchData();
     }
   }, [page, userInfo, successDelete]);
+
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
       try {
@@ -102,7 +102,9 @@ export default function ProductListScreen() {
         const { data } = await axios.post(
           '/api/products',
           {},
-
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
         );
         toast.success('product created successfully');
         dispatch({ type: 'CREATE_SUCCESS' });
@@ -117,46 +119,46 @@ export default function ProductListScreen() {
   };
 
   const deleteHandler = async (product) => {
-    if (window.confirm('¿Estás seguro de eliminar?')) {
+    if (window.confirm('Are you sure to delete?')) {
       try {
-        await axios.delete(`/api/products/${product._id}`);
-        toast.success('Producto eliminado exitosamente');
+        await axios.delete(`/api/products/${product._id}`, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        toast.success('product deleted successfully');
         dispatch({ type: 'DELETE_SUCCESS' });
       } catch (err) {
-        toast.error(getError(err));
+        toast.error(getError(error));
         dispatch({
           type: 'DELETE_FAIL',
         });
       }
     }
   };
-// ... Importaciones y código anterior ...
 
-return (
-  <div>
-    <Row>
-      <Col>
-        <h1>Products</h1>
-      </Col>
-      <Col className="col text-end">
-        <div>
-          <Button type="button" onClick={createHandler}>
-            Create Product
-          </Button>
-        </div>
-      </Col>
-    </Row>
+  return (
+    <div>
+      <Row>
+        <Col>
+          <h1>Products</h1>
+        </Col>
+        <Col className="col text-end">
+          <div>
+            <Button type="button" onClick={createHandler}>
+              Create Product
+            </Button>
+          </div>
+        </Col>
+      </Row>
 
-    {loadingCreate && <LoadingBox></LoadingBox>}
-    {loadingDelete && <LoadingBox></LoadingBox>}
+      {loadingCreate && <LoadingBox></LoadingBox>}
+      {loadingDelete && <LoadingBox></LoadingBox>}
 
-    {loading ? (
-      <LoadingBox></LoadingBox>
-    ) : error ? (
-      <MessageBox variant="danger">{error}</MessageBox>
-    ) : (
-      <>
-        {products && (
+      {loading ? (
+        <LoadingBox></LoadingBox>
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <>
           <table className="table">
             <thead>
               <tr>
@@ -197,22 +199,19 @@ return (
               ))}
             </tbody>
           </table>
-        )}
-
-        <div>
-          {products && [...Array(pages).keys()].map((x) => (
-            <Link
-              className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
-              key={x + 1}
-              to={`/admin/products?page=${x + 1}`}
-            >
-              {x + 1}
-            </Link>
-          ))}
-        </div>
-      </>
-    )}
-  </div>
-);
-
+          <div>
+            {[...Array(pages).keys()].map((x) => (
+              <Link
+                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+                key={x + 1}
+                to={`/admin/products?page=${x + 1}`}
+              >
+                {x + 1}
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
