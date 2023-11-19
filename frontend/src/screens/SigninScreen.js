@@ -28,10 +28,19 @@ export default function SignipScreen() {
         email,
         password,
       });
+      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      navigate(redirect || '/');
     } catch (err) {
       toast.error(getError(err));
     }
   };
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
+
 
   return (
     <>
