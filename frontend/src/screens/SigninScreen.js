@@ -9,7 +9,6 @@ import '../Css/AddUser.css';
 
 export default function SignipScreen() {
   const navigate = useNavigate();
-  const { search } = useLocation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +23,7 @@ export default function SignipScreen() {
       return;
     }
     try {
-      const { data } = await Axios.post('/api/users/signup', {
+      const { data } = await Axios.post('/api/users/signin', {
         email,
         password,
       });
