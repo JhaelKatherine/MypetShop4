@@ -9,6 +9,7 @@ import { Store } from '../Store';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
+import { Container } from 'react-bootstrap';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -180,44 +181,84 @@ export default function ProductListScreen() {
       <img
         src={product.image}
         alt={product.name}
-        style={{ maxWidth: '50px', maxHeight: '50px' }} // Ajusta el tamaño según tus necesidades
+        style={{ maxWidth: '50px', maxHeight: '50px' }}
       />
     </td>
-    <td>{product.name}</td>
-    <td>{"$ "+product.price}</td>
-    <td>{product.category}</td>
-    <td>
-      <Button
-        type="button"
-        variant="light"
-        onClick={() => navigate(`/admin/product/${product._id}`)}
-      >
-        Edit
-      </Button>
-      &nbsp;
-      <Button
-        type="button"
-        variant="light"
-        onClick={() => deleteHandler(product)}
-      >
-        Delete
-      </Button>
+    <td colSpan="4"> {/* Una celda que abarca todas las columnas restantes */}
+      <div>
+        <strong>Name:</strong> {product.name}
+      </div>
+      <div>
+        <strong>Price:</strong> {"$ " + product.price}
+      </div>
+      <div>
+        <strong>Category:</strong> {product.category}
+      </div>
+      <div>
+        <Button
+          type="button"
+          variant="warning"
+          onClick={() => navigate(`/admin/product/${product._id}`)}
+        >
+          Edit
+        </Button>
+        &nbsp;
+        <Button
+          type="button"
+          variant="danger"
+          onClick={() => deleteHandler(product)}
+        >
+          Delete
+        </Button>
+      </div>
     </td>
   </tr>
 ))}
 
+
             </tbody>
           </table>
-          <div>
-            {[...Array(pages).keys()].map((x) => (
-              <Link
-                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
-                key={x + 1}
-                to={`/admin/products?page=${x + 1}`}
-              >
-                {x + 1}
-              </Link>
-            ))}
+         {/* Pagination */}
+         <div className="d-flex justify-content-center mt-4">
+            <Container>
+              <Row>
+                <Col>
+                  {pages > 5 ? (
+                    <>
+                      {[1, 2, 3].map((x) => (
+                        <Link
+                          className={x === Number(page) ? 'btn text-bold' : 'btn'}
+                          key={x}
+                          to={`/admin/products?page=${x}`}
+                        >
+                          {x}
+                        </Link>
+                      ))}
+                      <span className="mx-2">...</span>
+                      {[...Array(pages).keys()].slice(-3).map((x) => (
+                        <Link
+                          className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+                          key={x + 1}
+                          to={`/admin/products?page=${x + 1}`}
+                        >
+                          {x + 1}
+                        </Link>
+                      ))}
+                    </>
+                  ) : (
+                    [...Array(pages).keys()].map((x) => (
+                      <Link
+                        className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+                        key={x + 1}
+                        to={`/admin/products?page=${x + 1}`}
+                      >
+                        {x + 1}
+                      </Link>
+                    ))
+                  )}
+                </Col>
+              </Row>
+            </Container>
           </div>
         </>
       )}
