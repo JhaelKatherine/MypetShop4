@@ -214,46 +214,54 @@ export default function ProductListScreen() {
           </table>
          {/* Pagination */}
          <div className="d-flex justify-content-center mt-4">
-            <Container>
-              <Row>
-                <Col>
-                  {pages > 5 ? (
-                    <>
-                      {[1, 2, 3].map((x) => (
-                        <Link
-                          className={x === Number(page) ? 'btn text-bold' : 'btn'}
-                          key={x}
-                          to={`/admin/products?page=${x}`}
-                        >
-                          {x}
-                        </Link>
-                      ))}
-                      <span className="mx-2">...</span>
-                      {[...Array(pages).keys()].slice(-3).map((x) => (
-                        <Link
-                          className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
-                          key={x + 1}
-                          to={`/admin/products?page=${x + 1}`}
-                        >
-                          {x + 1}
-                        </Link>
-                      ))}
-                    </>
-                  ) : (
-                    [...Array(pages).keys()].map((x) => (
-                      <Link
-                        className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
-                        key={x + 1}
-                        to={`/admin/products?page=${x + 1}`}
-                      >
-                        {x + 1}
-                      </Link>
-                    ))
-                  )}
-                </Col>
-              </Row>
-            </Container>
-          </div>
+  <Container>
+    <Row>
+      <Col>
+        {pages > 5 ? (
+          <>
+            {page > 1 && (
+              <Link
+                className="btn"
+                to={`/admin/products?page=${Number(page) - 1}`}
+              >
+                {'<'}
+              </Link>
+            )}
+            {[...Array(pages).keys()]
+              .slice(page - 1, page + 2)
+              .map((x) => (
+                <Link
+                  className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+                  key={x + 1}
+                  to={`/admin/products?page=${x + 1}`}
+                >
+                  {x + 1}
+                </Link>
+              ))}
+            {page < pages && (
+              <Link
+                className="btn"
+                to={`/admin/products?page=${Number(page) + 1}`}
+              >
+                {'>'}
+              </Link>
+            )}
+          </>
+        ) : (
+          [...Array(pages).keys()].map((x) => (
+            <Link
+              className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+              key={x + 1}
+              to={`/admin/products?page=${x + 1}`}
+            >
+              {x + 1}
+            </Link>
+          ))
+        )}
+      </Col>
+    </Row>
+  </Container>
+</div>
         </>
       )}
     </div>
