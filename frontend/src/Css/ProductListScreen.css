@@ -13,6 +13,18 @@
     text-align: center; /* Centra el texto dentro de la celda */
 }
 
+/* Estilo para los productos en una fila */
+.table tr {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px; /* Ajusta el espacio entre las filas según tus necesidades */
+}
+
+/* Estilo para cada producto en una fila */
+.table td {
+    flex: 1;
+}
+
 /* Estilo para los botones de paginación */
 .d-flex .btn {
     margin-right: 5px; /* Ajusta el margen según tus necesidades */

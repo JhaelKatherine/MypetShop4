@@ -164,49 +164,10 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <style>
-            {`
-              /* Estilo para las imágenes en la tabla */
-              .table img {
-                max-width: 150px;
-                max-height: 150px;
-              }
-              
-              /* Estilo para la celda que contiene la información del producto */
-              .table td[colspan="4"] {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-              }
-              
-              /* Estilo para los botones de paginación */
-              .d-flex .btn {
-                margin-right: 5px;
-              }
-              
-              .d-flex .btn.text-bold {
-                font-weight: bold;
-              }
-              
-              /* Estilo para los puntos suspensivos */
-              .d-flex .mx-2 {
-                font-weight: bold;
-                font-size: 18px;
-              }
-            `}
-          </style>
+          
+         
+        
 
-          <table className="table">
-            <thead>
-              <tr>
-                <th>IMAGE</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
@@ -250,7 +211,7 @@ export default function ProductListScreen() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          
          {/* Pagination */}
          <div className="d-flex justify-content-center mt-4">
   <Container>
