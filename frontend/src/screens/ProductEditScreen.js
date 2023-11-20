@@ -110,7 +110,7 @@ export default function ProductEditScreen() {
           description,
         },
         {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
+          headers: {},
         }
       );
       dispatch({
