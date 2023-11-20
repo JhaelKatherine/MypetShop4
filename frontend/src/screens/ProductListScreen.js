@@ -164,49 +164,49 @@ export default function ProductListScreen() {
       ) : (
         <>
          
-            <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      style={{ maxWidth: '150px', maxHeight: '150px' }}
-                    />
-                  </td>
-                  <td colSpan="4">
-                    <div>
-                      <strong>Name:</strong> {product.name}
-                    </div>
-                    <div>
-                      <strong>Price:</strong> {"$ " + product.price}
-                    </div>
-                    <div>
-                      <strong>Category:</strong> {product.category}
-                    </div>
-                    <div>
-                      <Button
-                        type="button"
-                        variant="warning"
-                        onClick={() =>
-                          navigate(`/admin/product/${product._id}`)
-                        }
-                      >
-                        Edit
-                      </Button>
-                      &nbsp;
-                      <Button
-                        type="button"
-                        variant="danger"
-                        onClick={() => deleteHandler(product)}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+         <Container>
+  {products.map((product) => (
+    <Col key={product._id} md={4}>
+      <Row>
+        <Col>
+          <img
+            src={product.image}
+            alt={product.name}
+            style={{ maxWidth: '150px', maxHeight: '150px' }}
+          />
+        </Col>
+        <Col>
+          <div>
+            <strong>Name:</strong> {product.name}
+          </div>
+          <div>
+            <strong>Price:</strong> {"$ " + product.price}
+          </div>
+          <div>
+            <strong>Category:</strong> {product.category}
+          </div>
+          <div>
+            <Button
+              type="button"
+              variant="warning"
+              onClick={() => navigate(`/admin/product/${product._id}`)}
+            >
+              Edit
+            </Button>
+            &nbsp;
+            <Button
+              type="button"
+              variant="danger"
+              onClick={() => deleteHandler(product)}
+            >
+              Delete
+            </Button>
+          </div>
+        </Col>
+      </Row>
+    </Col>
+  ))}
+</Container>
          
          {/* Pagination */}
          <div className="d-flex justify-content-center mt-4">
