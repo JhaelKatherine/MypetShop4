@@ -163,7 +163,7 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="table">
+         
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
@@ -207,7 +207,7 @@ export default function ProductListScreen() {
                 </tr>
               ))}
             </tbody>
-          </table>
+         
          {/* Pagination */}
          <div className="d-flex justify-content-center mt-4">
   <Container>
