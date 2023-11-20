@@ -1,0 +1,23 @@
+/* Agrega tus estilos aquí */
+
+/* Estilo para las imágenes en la tabla */
+.table img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+    
+  /* Estilo para los botones de paginación */
+  .d-flex .btn {
+    margin-right: 5px; /* Ajusta el margen según tus necesidades */
+  }
+  
+  .d-flex .btn.text-bold {
+    font-weight: bold; /* Estilo para el botón de la página actual */
+  }
+  
+  /* Estilo para los puntos suspensivos */
+  .d-flex .mx-2 {
+    font-weight: bold;
+    font-size: 18px; /* Ajusta el tamaño según tus necesidades */
+  }
+  

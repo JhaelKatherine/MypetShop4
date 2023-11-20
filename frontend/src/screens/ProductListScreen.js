@@ -10,6 +10,8 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Container } from 'react-bootstrap';
+import '../Css/ProductListScreen.css';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -165,15 +167,7 @@ export default function ProductListScreen() {
       ) : (
         <>
           <table className="table">
-            <thead>
-              <tr>
-                <th>IMAGE</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
+            
             <tbody>
             {products.map((product) => (
   <tr key={product._id}>
@@ -181,7 +175,7 @@ export default function ProductListScreen() {
       <img
         src={product.image}
         alt={product.name}
-        style={{ maxWidth: '50px', maxHeight: '50px' }}
+        style={{ maxWidth: '150px', maxHeight: '150px' }}
       />
     </td>
     <td colSpan="4"> {/* Una celda que abarca todas las columnas restantes */}
