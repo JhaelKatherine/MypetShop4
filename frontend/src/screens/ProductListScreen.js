@@ -138,8 +138,7 @@ export default function ProductListScreen() {
         });
       }
     }
-  };
-  return (
+  };return (
     <div>
       <Row>
         <Col>
@@ -163,57 +162,68 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-         
-         <Container>
-  {products.map((product) => (
-    <Col key={product._id} md={4}>
-      <Row>
-        <Col>
-          <img
-            src={product.image}
-            alt={product.name}
-            style={{ maxWidth: '150px', maxHeight: '150px' }}
-          />
-        </Col>
-        <Col>
-          <div>
-            <strong>Name:</strong> {product.name}
-          </div>
-          <div>
-            <strong>Price:</strong> {"$ " + product.price}
-          </div>
-          <div>
-            <strong>Category:</strong> {product.category}
-          </div>
-          <div>
-            <Button
-              type="button"
-              variant="warning"
-              onClick={() => navigate(`/admin/product/${product._id}`)}
-            >
-              Edit
-            </Button>
-            &nbsp;
-            <Button
-              type="button"
-              variant="danger"
-              onClick={() => deleteHandler(product)}
-            >
-              Delete
-            </Button>
-          </div>
-        </Col>
-      </Row>
-    </Col>
-  ))}
-</Container>
-         
-         {/* Pagination */}
-         <div className="d-flex justify-content-center mt-4">
-  <Container>
-    <Row>
-      <Col>
-        {pages > 5 ? (
+          <Row md={4} className="flex-wrap">
+            {products.map((product) => (
+              <Col key={product._id}>
+                <div className="product-container">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    style={{ maxWidth: '150px', maxHeight: '150px' }}
+                  />
+                  <div>
+                    <strong>Name:</strong> {product.name}
+                  </div>
+                  <div>
+                    <strong>Price:</strong> {"$ " + product.price}
+                  </div>
+                  <div>
+                    <strong>Category:</strong> {product.category}
+                  </div>
+                  <div>
+                    <strong>count In Stock:</strong> {product.stock}
+                  </div>
+                  <div>
+                    <Button
+                      type="button"
+                      variant="warning"
+                      onClick={() => navigate(`/admin/product/${product._id}`)}
+                    >
+                      Edit
+                      <img
+    src="https://cdn-icons-png.flaticon.com/512/2919/2919564.png"
+    alt="Delete"
+    style={{ maxWidth: '15px', maxHeight: '15px', marginLeft: '10px' }}
+  />
+                    </Button>
+                    &nbsp;
+                    <Button
+  type="button"
+  variant="danger"
+  onClick={() => deleteHandler(product)}
+>
+
+  Delete
+  <img
+    src="https://cdn.icon-icons.com/icons2/2645/PNG/512/trash_icon_159796.png"
+    alt="Delete"
+    style={{ maxWidth: '15px', maxHeight: '15px', marginLeft: '10px' }}
+  />
+</Button>
+
+                    
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+
+          {/* Pagination */}
+          <div className="d-flex justify-content-center mt-4">
+            <Container>
+              <Row>
+                <Col>
+                {pages > 5 ? (
           <>
             {page > 1 && (
               <Link
@@ -269,11 +279,10 @@ export default function ProductListScreen() {
               {x + 1}
             </Link>
           ))
-        )}
-      </Col>
-    </Row>
-  </Container>
-</div>
+        )}                </Col>
+              </Row>
+            </Container>
+          </div>
         </>
       )}
     </div>
