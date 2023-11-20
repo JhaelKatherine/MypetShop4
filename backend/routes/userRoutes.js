@@ -3,12 +3,14 @@ import bcrypt from 'bcryptjs';
 import expressAsyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
-import {  generateToken, baseUrl, mailgun } from '../utils.js';
+import { isAuth, isAdmin, generateToken, baseUrl, mailgun } from '../utils.js';
 
 const userRouter = express.Router();
 
 userRouter.get(
   '/',
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const users = await User.find({});
     res.send(users);
@@ -17,6 +19,8 @@ userRouter.get(
 
 userRouter.get(
   '/:id',
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -29,6 +33,7 @@ userRouter.get(
 
 userRouter.put(
   '/profile',
+  isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
@@ -45,6 +50,7 @@ userRouter.put(
         lastName: updatedUser.lastName,
         userName:updatedUser.userName,
         email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin,
         token: generateToken(updatedUser),
       });
     } else {
@@ -119,11 +125,14 @@ userRouter.post(
 
 userRouter.put(
   '/:id',
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      user.isAdmin = Boolean(req.body.isAdmin);
       const updatedUser = await user.save();
       res.send({ message: 'User Updated', user: updatedUser });
     } else {
@@ -134,6 +143,8 @@ userRouter.put(
 
 userRouter.delete(
   '/:id',
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -160,6 +171,7 @@ userRouter.post(
           lastName: user.lastName,
           userName: user.userName,
           email: user.email,
+          isAdmin: user.isAdmin,
           token: generateToken(user),
         });
         return;
@@ -188,6 +200,7 @@ userRouter.post(
       lastName: user.name,
       userName: user.userName,
       email: user.email,
+      isAdmin: user.isAdmin,
       token: generateToken(user),
     });
   } catch (error) {
