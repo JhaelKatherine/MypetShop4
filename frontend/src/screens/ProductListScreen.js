@@ -139,7 +139,6 @@ export default function ProductListScreen() {
       }
     }
   };
-
   return (
     <div>
       <Row>
@@ -209,7 +208,6 @@ export default function ProductListScreen() {
               ))}
             </tbody>
           </table>
-          
          {/* Pagination */}
          <div className="d-flex justify-content-center mt-4">
   <Container>
