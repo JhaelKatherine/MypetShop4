@@ -81,7 +81,7 @@ export default function ProductListScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`/api/products/admin?page=${page} `, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
+          headers: {},
         });
 
         dispatch({ type: 'FETCH_SUCCESS', payload: data });

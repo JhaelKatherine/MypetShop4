@@ -8,19 +8,11 @@ export const baseUrl = () =>
     ? 'http://localhost:3000'
     : 'https://yourdomain.com';
 
-export const generateToken = (user) => {
-  return jwt.sign(
-    {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: '30d',
-    }
-  );
-};
+    export const generateToken = (user) => {
+      // Devolver un token sin incluir información del usuario ni firma
+      return 'token-libre';
+    };
+    
 
 export const isAuth = (req, res, next) => {
   // No se verifica el token, simplemente se llama a next()
