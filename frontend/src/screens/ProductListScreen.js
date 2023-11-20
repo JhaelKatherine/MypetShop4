@@ -148,9 +148,7 @@ export default function ProductListScreen() {
         </Col>
         <Col className="col text-end">
           <div>
-            <Button type="button"
-              onClick={() => navigate(`/addproduct`)}
-              >
+            <Button type="button" onClick={() => navigate(`/addproduct`)}>
               Create Product
             </Button>
           </div>
@@ -166,50 +164,91 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
+          <style>
+            {`
+              /* Estilo para las imágenes en la tabla */
+              .table img {
+                max-width: 150px;
+                max-height: 150px;
+              }
+              
+              /* Estilo para la celda que contiene la información del producto */
+              .table td[colspan="4"] {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+              }
+              
+              /* Estilo para los botones de paginación */
+              .d-flex .btn {
+                margin-right: 5px;
+              }
+              
+              .d-flex .btn.text-bold {
+                font-weight: bold;
+              }
+              
+              /* Estilo para los puntos suspensivos */
+              .d-flex .mx-2 {
+                font-weight: bold;
+                font-size: 18px;
+              }
+            `}
+          </style>
+
           <table className="table">
-            
+            <thead>
+              <tr>
+                <th>IMAGE</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>CATEGORY</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
             <tbody>
-            {products.map((product) => (
-  <tr key={product._id}>
-    <td>
-      <img
-        src={product.image}
-        alt={product.name}
-        style={{ maxWidth: '150px', maxHeight: '150px' }}
-      />
-    </td>
-    <td colSpan="4"> {/* Una celda que abarca todas las columnas restantes */}
-      <div>
-        <strong>Name:</strong> {product.name}
-      </div>
-      <div>
-        <strong>Price:</strong> {"$ " + product.price}
-      </div>
-      <div>
-        <strong>Category:</strong> {product.category}
-      </div>
-      <div>
-        <Button
-          type="button"
-          variant="warning"
-          onClick={() => navigate(`/admin/product/${product._id}`)}
-        >
-          Edit
-        </Button>
-        &nbsp;
-        <Button
-          type="button"
-          variant="danger"
-          onClick={() => deleteHandler(product)}
-        >
-          Delete
-        </Button>
-      </div>
-    </td>
-  </tr>
-))}
-
-
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      style={{ maxWidth: '150px', maxHeight: '150px' }}
+                    />
+                  </td>
+                  <td colSpan="4">
+                    <div>
+                      <strong>Name:</strong> {product.name}
+                    </div>
+                    <div>
+                      <strong>Price:</strong> {'$ ' + product.price}
+                    </div>
+                    <div>
+                      <strong>Category:</strong> {product.category}
+                    </div>
+                    <div>
+                      <Button
+                        type="button"
+                        variant="warning"
+                        onClick={() =>
+                          navigate(`/admin/product/${product._id}`)
+                        }
+                      >
+                        Edit
+                      </Button>
+                      &nbsp;
+                      <Button
+                        type="button"
+                        variant="danger"
+                        onClick={() => deleteHandler(product)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
          {/* Pagination */}
@@ -227,8 +266,16 @@ export default function ProductListScreen() {
                 {'<'}
               </Link>
             )}
+            {page > 2 && (
+              <Link
+                className="btn"
+                to={`/admin/products?page=${1}`}
+              >
+                {'...'}
+              </Link>
+            )}
             {[...Array(pages).keys()]
-              .slice(page - 1, page + 2)
+              .slice(Math.max(0, page - 2), Math.min(pages, page + 1))
               .map((x) => (
                 <Link
                   className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
@@ -238,6 +285,14 @@ export default function ProductListScreen() {
                   {x + 1}
                 </Link>
               ))}
+            {page < pages - 1 && (
+              <Link
+                className="btn"
+                to={`/admin/products?page=${pages}`}
+              >
+                {'...'}
+              </Link>
+            )}
             {page < pages && (
               <Link
                 className="btn"
