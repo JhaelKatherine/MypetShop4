@@ -1,7 +1,7 @@
 /* Estilo para las imágenes en la tabla */
 .table img {
-    max-width: 100%;
-    max-height: 150px; /* Ajusta según tus necesidades */
+    max-width: 150px;
+    max-height: 150px;
 }
 
 /* Estilo para la celda que contiene la información del producto */
@@ -16,15 +16,14 @@
 /* Estilo para los productos en una fila */
 .table tr {
     display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en una nueva línea si no caben en el contenedor */
-    justify-content: space-around; /* Distribuye los elementos con espacio entre ellos */
+    justify-content: space-around;
     margin-bottom: 20px; /* Ajusta el espacio entre las filas según tus necesidades */
 }
 
 /* Estilo para cada producto en una fila */
 .table td {
-    flex-basis: calc(33.33% - 10px); /* Establece el tamaño inicial con márgenes */
-    margin: 5px; /* Márgenes entre productos */
+    flex: 1;
+    margin: 0 10px; /* Ajusta el margen entre los productos según tus necesidades */
 }
 
 /* Estilo para los botones de paginación */
