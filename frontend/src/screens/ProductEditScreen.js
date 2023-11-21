@@ -305,10 +305,6 @@ export default function ProductEditScreen() {
               />
             </div>
 
-
-
-
-          
           <div className="mb-3">
           <Button disabled={loadingUpdate} type="submit" className="submit">
               Update
