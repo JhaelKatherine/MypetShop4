@@ -14,12 +14,17 @@ import ProductScreen from './screens/ProductScreen';
 import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
 import Badge from 'react-bootstrap/Badge';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import AdminRoute from './components/AdminRoute';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
+
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import './App.css';
 
 function App() {
   const { state } = useContext(Store);
-  const { cart } = state;
+  const { cart, userInfo } = state;
 
   return (
     <BrowserRouter>
@@ -42,14 +47,7 @@ function App() {
                 <SearchBox />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
-              <Link to="/addproduct" className="nav-link">
-                  <img
-                    alt="addProduct"
-                    src="https://i.ibb.co/VpttTSt/add1-removebg-preview.png"
-                    height="50"
-                    className="d-inline-block align-top"
-                  />
-                </Link>
+              
                 <Link to="/cart" className="nav-link">
                   <img
                     alt="cart"
@@ -73,6 +71,20 @@ function App() {
                     />
                   </Nav.Link>
                 </LinkContainer>
+
+                 
+ <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png" alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
+ <LinkContainer to="/admin/products">
+    <NavDropdown.Item className="nav-dropdown-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
+
+       Products 
+
+    </NavDropdown.Item>
+  </LinkContainer>
+</NavDropdown>
+
+
               </Nav>
             </Container>
           </Navbar>
@@ -92,9 +104,9 @@ function App() {
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
-                path="/shipping"
-                element={<ShippingAddressScreen />}
-                            ></Route>
+path="/shipping"
+element={<ShippingAddressScreen />}
+></Route>
             </Routes>
           </Container>
         </main>

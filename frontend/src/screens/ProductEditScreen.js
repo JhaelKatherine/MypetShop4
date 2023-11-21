@@ -1,160 +1,186 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Axios from 'axios';
+import axios from 'axios';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import Container from 'react-bootstrap/Container';
+import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
+import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
 import '../Css/AddUser.css';
 
 
-export default function AddProductScreen() {
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'FETCH_REQUEST':
+      return { ...state, loading: true };
+    case 'FETCH_SUCCESS':
+      return { ...state, loading: false };
+    case 'FETCH_FAIL':
+      return { ...state, loading: false, error: action.payload };
+    case 'UPDATE_REQUEST':
+      return { ...state, loadingUpdate: true };
+    case 'UPDATE_SUCCESS':
+      return { ...state, loadingUpdate: false };
+    case 'UPDATE_FAIL':
+      return { ...state, loadingUpdate: false };
+    case 'UPLOAD_REQUEST':
+      return { ...state, loadingUpload: true, errorUpload: '' };
+    case 'UPLOAD_SUCCESS':
+      return {
+        ...state,
+        loadingUpload: false,
+        errorUpload: '',
+      };
+    case 'UPLOAD_FAIL':
+      return { ...state, loadingUpload: false, errorUpload: action.payload };
+
+    default:
+      return state;
+  }
+};
+export default function ProductEditScreen() {
   const navigate = useNavigate();
+  const params = useParams(); // /product/:id
+  const { id: productId } = params;
 
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const [loading, setLoading] = useState(false);
+  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: '',
+    });
+
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('');
 
-  const [loadingUpload, setLoadingUpload] = useState(false);
-
-  const isValidImageUrl = (url) => {
-    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-    return urlRegex.test(url);
-  };
-
-  const checkImageExists = async (url) => {
-    try {
-      const response = await Axios.head(url);
-      return response.status === 200;
-    } catch (error) {
-      return false;
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch({ type: 'FETCH_REQUEST' });
+        const { data } = await axios.get(`/api/products/${productId}`);
+        setName(data.name);
+        setSlug(data.slug);
+        setPrice(data.price);
+        setImage(data.image);
+        setImages(data.images);
+        setCategory(data.category);
+        setCountInStock(data.countInStock);
+        setBrand(data.brand);
+        setDescription(data.description);
+        dispatch({ type: 'FETCH_SUCCESS' });
+      } catch (err) {
+        dispatch({
+          type: 'FETCH_FAIL',
+          payload: getError(err),
+        });
+      }
+    };
+    fetchData();
+  }, [productId]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    if (!isValidImageUrl(image)) {
-      setLoading(false);
-      toast.error('Please enter a valid image URL');
-      return;
-    }
-    if (name.length > 50) {
-      setLoading(false);
-      toast.error('The name field should not exceed 50 characters.');
-      return;
-    }
-    
-    if (slug.length > 50) {
-      setLoading(false);
-      toast.error('The slug field should not exceed 50 characters.');
-      return;
-    }
-    
-    if (category.length > 50) {
-      setLoading(false);
-      toast.error('The category field should not exceed 50 characters.');
-      return;
-    }
-    
-    if (description.length > 210) {
-      setLoading(false);
-      toast.error('The description field should not exceed 210 characters.');
-      return;
-    }
-    const imageExists = await checkImageExists(image);
-
-    if (!imageExists) {
-      setLoading(false);
-      toast.error('Image not found at the provided URL');
-      return;
-    }
-
     try {
-      const { data } = await Axios.post('/api/products', {
-        name,
-        slug,
-        image,
-        brand,
-        category,
-        description,
-        price,
-        countInStock,
-      });
-
-      setLoading(false);
-      toast.success('Product successfully added');
-      // Redirige a la página de detalles del nuevo producto, si es necesario.
-
-      navigate(`/admin/products`); // Ajusta la ruta según tu configuración
-
-    } catch (err) {
-      setLoading(false);
-      toast.error('Error adding product');
-    }
-  };
-
-
-  const uploadFileHandler = async (imageUrl) => {
-    
-    try {
-      setLoading(true);
-      const { data } = await Axios.post(
-        '/api/upload',
-        { url: imageUrl },
+      dispatch({ type: 'UPDATE_REQUEST' });
+      await axios.put(
+        `/api/products/${productId}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-            authorization: `Bearer ${userInfo.token}`,
-          },
+          _id: productId,
+          name,
+          slug,
+          price,
+          image,
+          images,
+          category,
+          brand,
+          countInStock,
+          description,
+        },
+        {
+          headers: {},
         }
       );
-      setLoading(false);
-      setImage(data.secure_url);
-      toast.success('Imagen cargada exitosamente. Haz clic en "Agregar" para aplicarla.');
+      dispatch({
+        type: 'UPDATE_SUCCESS',
+      });
+      toast.success('Product updated successfully');
+      navigate('/admin/products');
     } catch (err) {
-      setLoading(false);
       toast.error(getError(err));
+      dispatch({ type: 'UPDATE_FAIL' });
     }
   };
+  const uploadFileHandler = async (e, forImages) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      dispatch({ type: 'UPLOAD_REQUEST' });
+      const { data } = await axios.post('/api/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOAD_SUCCESS' });
 
+      if (forImages) {
+        setImages([...images, data.secure_url]);
+      } else {
+        setImage(data.secure_url);
+      }
+      toast.success('Image uploaded successfully. click Update to apply it');
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+    }
+  };
+  const deleteFileHandler = async (fileName, f) => {
+    console.log(fileName, f);
+    console.log(images);
+    console.log(images.filter((x) => x !== fileName));
+    setImages(images.filter((x) => x !== fileName));
+    toast.success('Image removed successfully. click Update to apply it');
+  };
   return (
     <div className="blue-background">
       <div className="form-container">
         <div className="centered-title">
-          <h1>Add Product</h1>
+          <h1>Edit Product</h1>
         </div>
-        {loading ? (
-          <LoadingBox />
-        ) : (
-          <form onSubmit={submitHandler} className="custom-form">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                className="form-control"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                pattern="[A-Za-z ]+" 
-                title="Please enter only letters" 
-                maxLength="50" // Limitar a 50 caracteres
-                required
-              />
+
+      {loading ? (
+        <LoadingBox></LoadingBox>
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <form onSubmit={submitHandler} className="custom-form">
+          <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            className="form-control"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            pattern="[A-Za-z ]+" 
+            title="Please enter only letters" 
+            maxLength="50"
+            required
+          />
             </div>
             <div className="form-group">
               <label htmlFor="slug">Slug</label>
@@ -166,12 +192,10 @@ export default function AddProductScreen() {
                 onChange={(e) => setSlug(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
-                maxLength="50" // Limitar a 50 caracteres
-
+                maxLength="50"
                 required
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="price">Price</label>
               <input
@@ -204,7 +228,6 @@ export default function AddProductScreen() {
                 required
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="description">Description</label>
               <textarea
@@ -214,28 +237,25 @@ export default function AddProductScreen() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 pattern="[A-Za-z ]+" 
+                maxLength="210"
                 title="Please enter only letters" 
-                maxLength="210" 
-
                 required
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="category">Category</label>
               <input
                 type="text"
                 id="category"
+                maxLength="50"
                 className="form-control"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
-                maxLength="50"
                 required
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="brand">Brand</label>
               <input
@@ -250,7 +270,6 @@ export default function AddProductScreen() {
                 required
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="countInStock">Count In Stock</label>
               <input
@@ -274,7 +293,6 @@ export default function AddProductScreen() {
                 required
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="imageURL">Image URL</label>
               <input
@@ -286,10 +304,17 @@ export default function AddProductScreen() {
                 required
               />
             </div>
-            <button className="submit" type="submit">Add</button>
-          </form>
-        )}
-      </div>
+
+          <div className="mb-3">
+          <Button disabled={loadingUpdate} type="submit" className="submit">
+              Update
+            </Button>
+            {loadingUpdate && <LoadingBox></LoadingBox>}
+          </div>
+        </form>
+      )}
+            </div>
+
     </div>
   );
 }
