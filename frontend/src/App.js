@@ -65,11 +65,25 @@ function App() {
                   )}
                 </Link>
                 {userInfo ? (
-  <NavDropdown title={<><img src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png" alt="Profile" /> {userInfo.name}</>} id="basic-nav-dropdown">
-    <LinkContainer to="/profile">
+  <NavDropdown
+    title={
+      <>
+        <img
+          src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+          alt="Profile"
+          height="50"
+          className="d-inline-block align-top"
+        />{' '}
+        {userInfo.name}
+      </>
+    }
+    className="d-inline-block align-top"
+    id="basic-nav-dropdown"
+  >
+    <LinkContainer to="">
       <NavDropdown.Item>User Profile</NavDropdown.Item>
     </LinkContainer>
-    <LinkContainer to="/orderhistory">
+    <LinkContainer to="">
       <NavDropdown.Item>Order History</NavDropdown.Item>
     </LinkContainer>
     <NavDropdown.Divider />
@@ -93,6 +107,7 @@ function App() {
     </Nav.Link>
   </LinkContainer>
 )}
+
               </Nav>
             </Container>
           </Navbar>
