@@ -53,9 +53,27 @@ export default function AddProductScreen() {
       toast.error('Please enter a valid image URL');
       return;
     }
-    if (name.length > 50 || slug.length > 50 || category.length > 50 || description.length > 160) {
+    if (name.length > 50) {
       setLoading(false);
-      toast.error('Please ensure that the fields do not exceed the character limits.');
+      toast.error('The name field should not exceed 50 characters.');
+      return;
+    }
+    
+    if (slug.length > 50) {
+      setLoading(false);
+      toast.error('The slug field should not exceed 50 characters.');
+      return;
+    }
+    
+    if (category.length > 50) {
+      setLoading(false);
+      toast.error('The category field should not exceed 50 characters.');
+      return;
+    }
+    
+    if (description.length > 210) {
+      setLoading(false);
+      toast.error('The description field should not exceed 210 characters.');
       return;
     }
     const imageExists = await checkImageExists(image);

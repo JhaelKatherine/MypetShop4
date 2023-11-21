@@ -195,7 +195,7 @@ export default function ProductListScreen() {
                     <strong>Category:</strong> {product.category}
                   </div>
                   <div>
-                    <strong>count In Stock:</strong> {product.countInStock}
+                    <strong>Count in stock:</strong> {product.countInStock}
                   </div>
                   <div>
                     <Button
