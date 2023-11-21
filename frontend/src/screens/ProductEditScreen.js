@@ -55,7 +55,6 @@ export default function ProductEditScreen() {
       loading: true,
       error: '',
     });
-    const [setLoading] = useState(false);
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
@@ -66,29 +65,7 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
-  if (name.length > 50) {
-    setLoading(false);
-    toast.error('The name field should not exceed 50 characters.');
-    return;
-  }
-  
-  if (slug.length > 50) {
-    setLoading(false);
-    toast.error('The slug field should not exceed 50 characters.');
-    return;
-  }
-  
-  if (category.length > 50) {
-    setLoading(false);
-    toast.error('The category field should not exceed 50 characters.');
-    return;
-  }
-  
-  if (description.length > 210) {
-    setLoading(false);
-    toast.error('The description field should not exceed 210 characters.');
-    return;
-  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
