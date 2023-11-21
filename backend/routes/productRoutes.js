@@ -106,33 +106,23 @@ productRouter.post(
 );
 
 const PAGE_SIZE = 9;
+
 productRouter.get(
   '/admin',
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
-    const page = parseInt(query.page, 10) || 1;
-    const pageSize = parseInt(query.pageSize, 10) || PAGE_SIZE;
-
-    const skip = (page - 1) * pageSize;
+    const page = query.page || 1;
+    const pageSize = query.pageSize || PAGE_SIZE;
 
     const products = await Product.find()
-      .skip(skip)
+      .skip(pageSize * (page - 1))
       .limit(pageSize);
-
     const countProducts = await Product.countDocuments();
-    const pages = Math.max(1, Math.ceil(countProducts / pageSize));
-
-    if (page > pages) {
-      // Redirige al usuario a la última página válida
-      res.redirect(`/admin/products?page=${pages}`);
-      return;
-    }
-
     res.send({
       products,
       countProducts,
       page,
-      pages,
+      pages: Math.ceil(countProducts / pageSize),
     });
   })
 );
