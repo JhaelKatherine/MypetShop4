@@ -51,7 +51,7 @@ function App() {
               <Nav className="mx-auto" style={{ flex: 1 }}>
                 <SearchBox />
               </Nav>
-              <Nav>
+              <Nav className="me-auto">
                 <Link to="/addproduct" className="nav-link">
                   <img
                     alt="addProduct"
@@ -73,7 +73,47 @@ function App() {
                     </Badge>
                   )}
                 </Link>
-                {/* Resto de tus elementos de navegación */}
+                {userInfo ? (
+                  <NavDropdown
+                    title={
+                      <>
+                        <div className="d-inline-block align-top">
+                          <img
+                            src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+                            alt="Profile"
+                            height="30"
+                            className="d-inline-block"
+                          />
+                          <span className="d-block small-text">{userInfo.name}</span>
+                        </div>
+                      </>
+                    }
+                    className="d-inline-block align-top"
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Divider />
+                    <Link
+                      className="dropdown-item"
+                      to="#signout"
+                      onClick={signoutHandler}
+                    >
+                      Sign Out
+                    </Link>
+                  </NavDropdown>
+                ) : (
+                  <LinkContainer to="/signin">
+                    <Nav.Link>
+                      <div className="d-inline-block align-top">
+                        <img
+                          alt="signin"
+                          src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+                          height="30"
+                          className="d-inline-block"
+                        />
+                      </div>
+                    </Nav.Link>
+                  </LinkContainer>
+                )}
               </Nav>
             </Container>
           </Navbar>
