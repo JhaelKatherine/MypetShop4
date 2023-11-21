@@ -1,15 +1,20 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
-import Rating from './Rating';
-import axios from 'axios';
 import { useContext } from 'react';
 import { Store } from '../Store';
+import axios from 'axios';
 
 function Product(props) {
   const { product } = props;
 
+  // Mover el hook useContext fuera de la lógica condicional
   const { state, dispatch: ctxDispatch } = useContext(Store);
+
+  // Verificar si el producto tiene la propiedad status y si es true
+  if (!product || !product.status) {
+    return null; // No renderizar si no hay status o no es true
+  }
+
   const {
     cart: { cartItems },
   } = state;
@@ -19,7 +24,7 @@ function Product(props) {
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock');
+      window.alert('Lo siento. El producto está agotado');
       return;
     }
     ctxDispatch({
@@ -36,13 +41,14 @@ function Product(props) {
         <Card.Text>${product.price}</Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>
-            Out of stock
+            Sin stock
           </Button>
         ) : (
-          <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
+          <Button onClick={() => addToCartHandler(product)}>Agregar al carrito</Button>
         )}
       </Card.Body>
     </Card>
   );
 }
+
 export default Product;

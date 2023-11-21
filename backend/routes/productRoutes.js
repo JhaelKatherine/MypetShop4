@@ -51,13 +51,19 @@ productRouter.put(
   })
 );
 
-productRouter.delete(
-  '/:id',
+productRouter.put(
+  '/:id/status',
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
-      await product.remove();
-      res.send({ message: 'Product Deleted' });
+      product.status = req.body.status;
+      const updatedProduct = await product.save();
+      res.send({
+        _id: updatedProduct._id,
+        name: updatedProduct.name,
+        // Otros campos que desees devolver
+        status: updatedProduct.status,
+      });
     } else {
       res.status(404).send({ message: 'Product Not Found' });
     }

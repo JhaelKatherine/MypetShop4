@@ -26,6 +26,8 @@ export default function AddProductScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const [status, setStatus] = useState('');
+
   const [loadingUpload, setLoadingUpload] = useState(false);
 
   const isValidImageUrl = (url) => {

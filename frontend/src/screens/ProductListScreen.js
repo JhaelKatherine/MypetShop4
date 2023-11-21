@@ -86,9 +86,21 @@ export default function ProductListScreen() {
         const { data } = await axios.get(`/api/products/admin?page=${page} `, {
           headers: {},
         });
-
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch (err) {}
+        // Filtrar los productos para mostrar solo aquellos con status true
+        const filteredProducts = data.products.filter(
+          (product) => product.status === true
+        );
+        dispatch({
+          type: 'FETCH_SUCCESS',
+          payload: {
+            products: filteredProducts,
+            page: data.page,
+            pages: data.pages,
+          },
+        });
+      } catch (err) {
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+      }
     };
 
     if (successDelete) {
@@ -126,16 +138,16 @@ export default function ProductListScreen() {
   const deleteHandler = async (product) => {
     if (window.confirm('Are you sure to delete?')) {
       try {
-        await axios.delete(`/api/products/${product._id}`, {
-          headers: {},
+        // En lugar de eliminar, actualiza el estado del producto
+        await axios.put(`/api/products/${product._id}/status`, {
+          status: false,
         });
-        toast.success('product deleted successfully');
+
+        toast.success('Product status changed successfully');
         dispatch({ type: 'DELETE_SUCCESS' });
       } catch (err) {
-        toast.error(getError(error));
-        dispatch({
-          type: 'DELETE_FAIL',
-        });
+        toast.error(getError(err));
+        dispatch({ type: 'DELETE_FAIL' });
       }
     }
   };return (
@@ -162,9 +174,11 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <Row md={4} className="flex-wrap">
+ <Row md={4} className="flex-wrap">
             {products.map((product) => (
-              <Col key={product._id}>
+              // Verificar si el producto tiene la propiedad status y es true
+              product.status ? (
+                <Col key={product._id}>
                 <div className="product-container">
                   <img
                     src={product.image}
@@ -215,6 +229,7 @@ export default function ProductListScreen() {
                   </div>
                 </div>
               </Col>
+                            ) : null
             ))}
           </Row>
 
