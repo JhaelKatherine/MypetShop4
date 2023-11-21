@@ -78,14 +78,14 @@ function App() {
   <NavDropdown
     title={
       <>
-        <div className="d-flex align-items-center">
+        <div className="d-inline-block align-top">
           <img
             src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
             alt="Profile"
             height="30"
-            className="d-inline-block align-top"
+            className="d-inline-block"
           />
-          <span className="ml-2">{userInfo.name}</span>
+          <span className="d-block">{userInfo.name}</span>
         </div>
       </>
     }
@@ -104,12 +104,12 @@ function App() {
 ) : (
   <LinkContainer to="/signin">
     <Nav.Link>
-      <div className="d-flex align-items-center">
+      <div className="d-inline-block align-top">
         <img
           alt="signin"
           src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
           height="30"
-          className="d-inline-block align-top"
+          className="d-inline-block"
         />
       </div>
     </Nav.Link>
