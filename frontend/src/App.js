@@ -84,7 +84,7 @@ function App() {
           height="30"
           className="d-inline-block align-top"
         />
-        <span className="d-block">{userInfo.name}</span>
+        <span className="d-inline-block align-top ml-2">{userInfo.name}</span>
       </>
     }
     className="d-inline-block align-top"
