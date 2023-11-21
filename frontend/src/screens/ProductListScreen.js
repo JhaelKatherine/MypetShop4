@@ -1,0 +1,277 @@
+import React, { useContext, useEffect, useReducer } from 'react';
+import axios from 'axios';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { toast } from 'react-toastify';
+import { Store } from '../Store';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { getError } from '../utils';
+import { Container } from 'react-bootstrap';
+import '../Css/ProductListScreen.css';
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'FETCH_REQUEST':
+      return { ...state, loading: true };
+    case 'FETCH_SUCCESS':
+      return {
+        ...state,
+        products: action.payload.products,
+        page: action.payload.page,
+        pages: action.payload.pages,
+        loading: false,
+      };
+    case 'FETCH_FAIL':
+      return { ...state, loading: false, error: action.payload };
+    case 'CREATE_REQUEST':
+      return { ...state, loadingCreate: true };
+    case 'CREATE_SUCCESS':
+      return {
+        ...state,
+        loadingCreate: false,
+      };
+    case 'CREATE_FAIL':
+      return { ...state, loadingCreate: false };
+
+    case 'DELETE_REQUEST':
+      return { ...state, loadingDelete: true, successDelete: false };
+    case 'DELETE_SUCCESS':
+      return {
+        ...state,
+        loadingDelete: false,
+        successDelete: true,
+      };
+    case 'DELETE_FAIL':
+      return { ...state, loadingDelete: false, successDelete: false };
+
+    case 'DELETE_RESET':
+      return { ...state, loadingDelete: false, successDelete: false };
+    default:
+      return state;
+  }
+};
+
+export default function ProductListScreen() {
+  const [
+    {
+      loading,
+      error,
+      products,
+      pages,
+      loadingCreate,
+      loadingDelete,
+      successDelete,
+    },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: true,
+    error: '',
+  });
+
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search);
+  const page = sp.get('page') || 1;
+
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`/api/products/admin?page=${page}`, {
+        headers: {},
+      });
+      const filteredProducts = data.products.filter(
+        (product) => product.status === true
+      );
+      dispatch({
+        type: 'FETCH_SUCCESS',
+        payload: {
+          products: filteredProducts,
+          page: data.page,
+          pages: data.pages,
+        },
+      });
+    } catch (err) {
+      dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+    }
+  };
+
+  const updateProductStatus = async () => {
+    if (successDelete) {
+      try {
+        const { data } = await axios.get(`/api/products/admin?page=${page}`, {
+          headers: {},
+        });
+        const filteredProducts = data.products.filter(
+          (product) => product.status === true
+        );
+        dispatch({
+          type: 'FETCH_SUCCESS',
+          payload: {
+            products: filteredProducts,
+            page: data.page,
+            pages: data.pages,
+          },
+        });
+      } catch (err) {
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+      }
+      dispatch({ type: 'DELETE_RESET' });
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [page, userInfo, successDelete]);
+
+  useEffect(() => {
+    updateProductStatus();
+  }, [successDelete, page]);
+
+  const deleteHandler = async (product) => {
+    if (window.confirm('Are you sure to delete?')) {
+      try {
+        await axios.put(`/api/products/${product._id}/status`, {
+          status: false,
+        });
+  
+        toast.success('Product status changed successfully');
+        dispatch({ type: 'DELETE_SUCCESS' });
+      } catch (err) {
+        toast.error(getError(err));
+        dispatch({ type: 'DELETE_FAIL' });
+      }
+    }
+  };
+  
+
+  return (
+    <div>
+      <Row>
+        <Col>
+          <h1>Products</h1>
+        </Col>
+        <Col className="col text-end">
+          <div>
+            <Button type="button" onClick={() => navigate(`/addproduct`)}>
+              Create Product
+            </Button>
+          </div>
+        </Col>
+      </Row>
+
+      {loadingCreate && <LoadingBox></LoadingBox>}
+      {loadingDelete && <LoadingBox></LoadingBox>}
+
+      {loading ? (
+        <LoadingBox></LoadingBox>
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <>
+          <Row md={4} className="flex-wrap">
+            {products.map((product) => (
+              <Col
+                key={product._id}
+                style={{ visibility: product.status ? 'visible' : 'hidden' }}
+              >
+                <div className="product-container">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    style={{ maxWidth: '150px', maxHeight: '150px' }}
+                  />
+                  <div>
+                    <strong>Name:</strong> {product.name}
+                  </div>
+                  <div>
+                    <strong>Price:</strong> {"$ " + product.price}
+                  </div>
+                  <div>
+                    <strong>Category:</strong> {product.category}
+                  </div>
+                  <div>
+                    <strong>Count in stock:</strong> {product.countInStock}
+                  </div>
+                  <div>
+                    <Button
+                      type="button"
+                      variant="warning"
+                      onClick={() => navigate(`/admin/product/${product._id}`)}
+                    >
+                      Edit
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/2919/2919564.png"
+                        alt="Delete"
+                        style={{ maxWidth: '15px', maxHeight: '15px', marginLeft: '10px' }}
+                      />
+                    </Button>
+                    &nbsp;
+                    <Button
+                      type="button"
+                      variant="danger"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      Delete
+                      <img
+                        src="https://cdn.icon-icons.com/icons2/2645/PNG/512/trash_icon_159796.png"
+                        alt="Delete"
+                        style={{ maxWidth: '15px', maxHeight: '15px', marginLeft: '10px' }}
+                      />
+                    </Button>
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+
+          {/* Pagination */}
+          <div className="d-flex justify-content-center mt-4">
+            <Container>
+              <Row>
+                <Col>
+                  {page > 1 && (
+                    <>
+                      <Link
+                        className="btn"
+                        to={`/admin/products?page=1`}
+                      >
+                        First
+                      </Link>
+                      <Link
+                        className="btn"
+                        to={`/admin/products?page=${Number(page) - 1}`}
+                      >
+                        {'<'} Previous
+                      </Link>
+                    </>
+                  )}
+                  {page < pages && (
+                    <>
+                      <Link
+                        className="btn"
+                        to={`/admin/products?page=${Number(page) + 1}`}
+                      >
+                        Next {'>'}
+                      </Link>
+                      <Link
+                        className="btn"
+                        to={`/admin/products?page=${pages}`}
+                      >
+                        Last
+                      </Link>
+                    </>
+                  )}
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
