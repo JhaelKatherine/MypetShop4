@@ -80,11 +80,11 @@ export default function SigninScreen() {
             <button className="submit" type="submit">
               Sign In
             </button>
-            <div className="mb-3">
+            <div className="mb-3 d-flex justify-content-start">
               New customer?{' '}
               <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
             </div>
-            <div className="mb-3">
+            <div className="mb-3 d-flex justify-content-start"> 
               Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
             </div>
           </form>
