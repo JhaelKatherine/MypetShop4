@@ -94,8 +94,8 @@ export default function ProductListScreen() {
           type: 'FETCH_SUCCESS',
           payload: {
             products: filteredProducts,
-            page: data.page,
-            pages: data.pages,
+            page: action.payload.page,
+            pages: action.payload.pages,
           },
         });
       } catch (err) {
@@ -240,10 +240,7 @@ export default function ProductListScreen() {
                 <Col>
                   {page > 1 && (
                     <>
-                      <Link
-                        className="btn"
-                        to={`/admin/products?page=1`}
-                      >
+                      <Link className="btn" to={`/admin/products?page=1`}>
                         First
                       </Link>
                       <Link
