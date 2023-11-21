@@ -237,7 +237,7 @@ export default function ProductEditScreen() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 pattern="[A-Za-z ]+" 
-                maxLength="160"
+                maxLength="210"
                 title="Please enter only letters" 
                 required
               />
@@ -261,6 +261,7 @@ export default function ProductEditScreen() {
               <input
                 type="text"
                 id="brand"
+                maxLength="50"
                 className="form-control"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}

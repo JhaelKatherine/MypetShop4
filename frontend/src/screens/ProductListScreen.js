@@ -12,7 +12,6 @@ import { getError } from '../utils';
 import { Container } from 'react-bootstrap';
 import '../Css/ProductListScreen.css';
 
-
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -80,13 +79,33 @@ export default function ProductListScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`/api/products/admin?page=${page}`, {
+        headers: {},
+      });
+      const filteredProducts = data.products.filter(
+        (product) => product.status === true
+      );
+      dispatch({
+        type: 'FETCH_SUCCESS',
+        payload: {
+          products: filteredProducts,
+          page: data.page,
+          pages: data.pages,
+        },
+      });
+    } catch (err) {
+      dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+    }
+  };
+
+  const updateProductStatus = async () => {
+    if (successDelete) {
       try {
-        const { data } = await axios.get(`/api/products/admin?page=${page} `, {
+        const { data } = await axios.get(`/api/products/admin?page=${page}`, {
           headers: {},
         });
-        // Filtrar los productos para mostrar solo aquellos con status true
         const filteredProducts = data.products.filter(
           (product) => product.status === true
         );
@@ -101,48 +120,25 @@ export default function ProductListScreen() {
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
-    };
-
-    if (successDelete) {
       dispatch({ type: 'DELETE_RESET' });
-    } else {
-      fetchData();
-    }
-  }, [page, userInfo, successDelete]);
-
-  const createHandler = async () => {
-    if (window.confirm('Are you sure to create?')) {
-      try {
-        dispatch({ type: 'CREATE_REQUEST' });
-        const { data } = await axios.post(
-          '/api/products',
-          {},
-          {
-            headers: {},
-          }
-        );
-        toast.success('product created successfully');
-        dispatch({ type: 'CREATE_SUCCESS' });
-        navigate(`/admin/product/${data.product._id}`);
-        navigate(`/admin/product/${data.product._id}`);
-
-      } catch (err) {
-        toast.error(getError(error));
-        dispatch({
-          type: 'CREATE_FAIL',
-        });
-      }
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, [page, userInfo, successDelete]);
+
+  useEffect(() => {
+    updateProductStatus();
+  }, [successDelete, page]);
 
   const deleteHandler = async (product) => {
     if (window.confirm('Are you sure to delete?')) {
       try {
-        // En lugar de eliminar, actualiza el estado del producto
         await axios.put(`/api/products/${product._id}/status`, {
           status: false,
         });
-
+  
         toast.success('Product status changed successfully');
         dispatch({ type: 'DELETE_SUCCESS' });
       } catch (err) {
@@ -150,7 +146,10 @@ export default function ProductListScreen() {
         dispatch({ type: 'DELETE_FAIL' });
       }
     }
-  };return (
+  };
+  
+
+  return (
     <div>
       <Row>
         <Col>
@@ -174,11 +173,12 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
- <Row md={4} className="flex-wrap">
+          <Row md={4} className="flex-wrap">
             {products.map((product) => (
-              // Verificar si el producto tiene la propiedad status y es true
-              product.status ? (
-                <Col key={product._id}>
+              <Col
+                key={product._id}
+                style={{ visibility: product.status ? 'visible' : 'hidden' }}
+              >
                 <div className="product-container">
                   <img
                     src={product.image}
@@ -205,31 +205,27 @@ export default function ProductListScreen() {
                     >
                       Edit
                       <img
-    src="https://cdn-icons-png.flaticon.com/512/2919/2919564.png"
-    alt="Delete"
-    style={{ maxWidth: '15px', maxHeight: '15px', marginLeft: '10px' }}
-  />
+                        src="https://cdn-icons-png.flaticon.com/512/2919/2919564.png"
+                        alt="Delete"
+                        style={{ maxWidth: '15px', maxHeight: '15px', marginLeft: '10px' }}
+                      />
                     </Button>
                     &nbsp;
                     <Button
-  type="button"
-  variant="danger"
-  onClick={() => deleteHandler(product)}
->
-
-  Delete
-  <img
-    src="https://cdn.icon-icons.com/icons2/2645/PNG/512/trash_icon_159796.png"
-    alt="Delete"
-    style={{ maxWidth: '15px', maxHeight: '15px', marginLeft: '10px' }}
-  />
-</Button>
-
-                    
+                      type="button"
+                      variant="danger"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      Delete
+                      <img
+                        src="https://cdn.icon-icons.com/icons2/2645/PNG/512/trash_icon_159796.png"
+                        alt="Delete"
+                        style={{ maxWidth: '15px', maxHeight: '15px', marginLeft: '10px' }}
+                      />
+                    </Button>
                   </div>
                 </div>
               </Col>
-                            ) : null
             ))}
           </Row>
 

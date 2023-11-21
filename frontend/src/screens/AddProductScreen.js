@@ -197,7 +197,7 @@ export default function AddProductScreen() {
                 onChange={(e) => setDescription(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
-                maxLength="160" // Limitar a 160 caracteres
+                maxLength="210" // Limitar a 160 caracteres
 
                 required
               />
@@ -223,6 +223,7 @@ export default function AddProductScreen() {
               <input
                 type="text"
                 id="brand"
+                maxLength="50"
                 className="form-control"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}

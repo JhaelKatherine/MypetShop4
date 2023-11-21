@@ -104,7 +104,6 @@ productRouter.post(
     }
   })
 );
-
 const PAGE_SIZE = 6;
 
 productRouter.get(
@@ -114,10 +113,22 @@ productRouter.get(
     const page = query.page || 1;
     const pageSize = query.pageSize || PAGE_SIZE;
 
-    const products = await Product.find()
+    let products = await Product.find({ status: true })
       .skip(pageSize * (page - 1))
-      .limit(pageSize);
-    const countProducts = await Product.countDocuments();
+      .limit(pageSize)
+      .lean();
+
+    const countProducts = await Product.countDocuments({ status: true });
+
+    // Si la página actual tiene menos de 6 elementos, carga elementos adicionales de la página siguiente
+    if (products.length < PAGE_SIZE) {
+      const remainingProducts = await Product.find({ status: true })
+        .skip(pageSize * page)
+        .limit(PAGE_SIZE - products.length)
+        .lean();
+      products = products.concat(remainingProducts);
+    }
+
     res.send({
       products,
       countProducts,
@@ -126,6 +137,12 @@ productRouter.get(
     });
   })
 );
+
+// Resto del código...
+
+
+// Resto del código...
+
 
 productRouter.get(
   '/search',

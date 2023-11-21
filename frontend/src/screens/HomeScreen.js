@@ -28,6 +28,7 @@ function HomeScreen() {
     loading: true,
     error: "",
   });
+  const [successDelete, setSuccessDelete] = useState(false);
 
   const [buttonContainerColor, setButtonContainerColor] = useState("#4180AB");
 
@@ -42,7 +43,8 @@ function HomeScreen() {
       }
     };
     fetchData();
-  }, []);
+  }, [successDelete]); // Asegúrate de incluir successDelete como dependencia
+  
 
   const categoryButtons = [
     { label: " DOG", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png", onClick: () => console.log("Filtrar por gato") },
@@ -72,27 +74,24 @@ function HomeScreen() {
 
       {/* Checkbox for toggling buttons */}
 
-      {/* Button container inside the label for the checkbox */}
       <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
-      {categoryButtons.map((button, index) => (
-  <button key={index} onClick={() => handleButtonClick("#4180AB")} className="image-button">
-    <div className="button-content">
-      <img src={button.imageUrl} alt={button.label} />
-      <span style={{ marginBottom: '5px' }}>{button.label}</span>
-    </div>
-  </button>
-))}
-
-
+        {categoryButtons.map((button, index) => (
+          <button key={index} onClick={() => handleButtonClick("#4180AB")} className="image-button">
+            <div className="button-content">
+              <img src={button.imageUrl} alt={button.label} />
+              <span style={{ marginBottom: '5px' }}>{button.label}</span>
+            </div>
+          </button>
+        ))}
       </label>
 
       <div className="image-container">
-      <img src="https://i0.wp.com/www.russellfeedandsupply.com/wp-content/uploads/2022/01/canidae-25-off-may-23-banner-1.jpg?ssl=1" alt="promotion" />
-      {/* Agrega más imágenes según sea necesario */}
-    </div>
-    <h1>Featured Categories</h1>
+        <img src="https://i0.wp.com/www.russellfeedandsupply.com/wp-content/uploads/2022/01/canidae-25-off-may-23-banner-1.jpg?ssl=1" alt="promotion" />
+        {/* Agrega más imágenes según sea necesario */}
+      </div>
+      <h1>Featured Categories</h1>
 
-    <div className="category-Pets-buttons-container">
+      <div className="category-Pets-buttons-container">
         {categoryButtonsPets.map((button, index) => (
           <button key={index} onClick={button.onClick} className="category-Pet-button">
             <div className="button-Pet-content">
@@ -111,15 +110,18 @@ function HomeScreen() {
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <Row>
-            {products.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                <Product product={product}></Product>
-              </Col>
-            ))}
+            {products
+              .filter((product) => product.status !== false) // Filtra productos con status diferente de false
+              .map((product) => (
+                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+                  <Product product={product}></Product>
+                </Col>
+              ))}
           </Row>
         )}
       </div>
     </div>
   );
 }
+
 export default HomeScreen;

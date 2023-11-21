@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useContext } from 'react';
@@ -11,8 +12,8 @@ function Product(props) {
   const { state, dispatch: ctxDispatch } = useContext(Store);
 
   // Verificar si el producto tiene la propiedad status y si es true
-  if (!product || !product.status) {
-    return null; // No renderizar si no hay status o no es true
+  if (!product || product.status === false) {
+    return null; // No renderizar si no hay status o es false
   }
 
   const {
@@ -52,3 +53,4 @@ function Product(props) {
 }
 
 export default Product;
+

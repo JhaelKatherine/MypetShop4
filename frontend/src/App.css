@@ -77,8 +77,8 @@ header {
 }
 
 img.product-icon {
-  margin-left: 10px; 
-  width: 30px; /* Ancho deseado */
-  height: 30px; /* Altura deseada */
+  margin-right: 10px; 
+  width: 25px; /* Ancho deseado */
+  height: 25px; /* Altura deseada */
   object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
 }
