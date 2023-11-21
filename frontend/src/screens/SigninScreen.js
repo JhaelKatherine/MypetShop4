@@ -8,8 +8,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
-import validator from 'validator'; // Importar validator
 import '../Css/AddUser.css';
+
 
 export default function SigninScreen() {
   const navigate = useNavigate();
@@ -24,12 +24,6 @@ export default function SigninScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      // Validar el formato del correo electrónico antes de enviar la solicitud
-      if (!validator.isEmail(email)) {
-        toast.error('Please enter a valid email address');
-        return;
-      }
-
       const { data } = await Axios.post('/api/users/signin', {
         email,
         password,
@@ -44,52 +38,55 @@ export default function SigninScreen() {
 
   return (
     <>
-      <div className="blue-background"> {/* Agregar esta línea */}
-        <Helmet>
-          <title>Sign In</title>
-        </Helmet>
-        <div className="form-container">
-          <div className="centered-title">
-            <h1>Sign In</h1>
-          </div>
-          <form onSubmit={submitHandler} className="custom-form">
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                className="form-control"
-                onChange={(e) => setEmail(e.target.value)}
-                onInvalid={(e) => e.target.setCustomValidity('Please enter a valid email address')}
-                onInput={(e) => e.target.setCustomValidity('')}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                className="form-control"
-                onChange={(e) => setPassword(e.target.value)}
-                onInvalid={(e) => e.target.setCustomValidity('This field is required')}
-                onInput={(e) => e.target.setCustomValidity('')}
-                required
-              />
-            </div>
-            <button className="submit" type="submit">
-              Sign In
-            </button>
-            <div className="mb-3">
-              New customer?{' '}
-              <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
-            </div>
-            <div className="mb-3">
-              Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
-            </div>
-          </form>
-        </div>
+    <div className="blue-background"> {/* Agregar esta línea */}
+    <Helmet>
+        <title>Sign In</title>
+      </Helmet>
+      <div className="form-container">
+      <div className="centered-title">
+         <h1>Sign In</h1>
       </div>
+        <form onSubmit={submitHandler} className="custom-form">
+         
+      
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              className="form-control"
+              onChange={(e) => setEmail(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              className="form-control"
+              onChange={(e) => setPassword(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
+              required
+            />
+          </div>
+          
+          <button className="submit" type="submit">Sign In</button>
+          <div className="mb-3">
+          New customer?{' '}
+          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+        </div>
+        <div className="mb-3">
+          Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
+        </div>
+        </form>
+      </div>
+
+      </div>
+
     </>
   );
 };
