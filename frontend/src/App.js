@@ -19,7 +19,6 @@ import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -49,11 +48,11 @@ function App() {
                   />
                 </Navbar.Brand>
               </LinkContainer>
-              <Nav className="mx-auto" style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
+              <Nav className="mx-auto" style={{ flex: 1 }}>
                 <SearchBox />
               </Nav>
-              <Nav className="me-auto  w-100  justify-content-end">
-              <Link to="/addproduct" className="nav-link">
+              <Nav>
+                <Link to="/addproduct" className="nav-link">
                   <img
                     alt="addProduct"
                     src="https://i.ibb.co/VpttTSt/add1-removebg-preview.png"
@@ -74,49 +73,7 @@ function App() {
                     </Badge>
                   )}
                 </Link>
-                {userInfo ? (
-  <NavDropdown
-    title={
-      <>
-        <div className="d-inline-block align-top">
-          <img
-            src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-            alt="Profile"
-            height="30"
-            className="d-inline-block"
-          />
-          <span className="d-block small-text">{userInfo.name}</span>
-        </div>
-      </>
-    }
-    className="d-inline-block align-top"
-    id="basic-nav-dropdown"
-  >
-    <NavDropdown.Divider />
-    <Link
-      className="dropdown-item"
-      to="#signout"
-      onClick={signoutHandler}
-    >
-      Sign Out
-    </Link>
-  </NavDropdown>
-) : (
-  <LinkContainer to="/signin">
-    <Nav.Link>
-      <div className="d-inline-block align-top">
-        <img
-          alt="signin"
-          src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-          height="30"
-          className="d-inline-block"
-        />
-      </div>
-    </Nav.Link>
-  </LinkContainer>
-)}
-
-
+                {/* Resto de tus elementos de navegación */}
               </Nav>
             </Container>
           </Navbar>
@@ -135,10 +92,7 @@ function App() {
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
-              <Route
-path="/shipping"
-element={<ShippingAddressScreen />}
-></Route>
+              <Route path="/shipping" element={<ShippingAddressScreen />} />
             </Routes>
           </Container>
         </main>
