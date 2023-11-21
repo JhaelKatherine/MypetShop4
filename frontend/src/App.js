@@ -81,7 +81,7 @@ function App() {
         <img
           src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
           alt="Profile"
-          height="10"
+          height="30"
           className="d-inline-block align-top"
         />{' '}
         {userInfo.name}
