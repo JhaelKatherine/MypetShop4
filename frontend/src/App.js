@@ -20,7 +20,7 @@ import './App.css';
 
 function App() {
   const { state } = useContext(Store);
-  const { cart } = state;
+  const { cart ,userInfo } = state;
 
   return (
     <BrowserRouter>
@@ -64,16 +64,35 @@ function App() {
                     </Badge>
                   )}
                 </Link>
-                <LinkContainer to="/signin">
-                  <Nav.Link>
-                    <img
-                      alt="signin"
-                      src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-                      height="50"
-                      className="d-inline-block align-top"
-                    />
-                  </Nav.Link>
-                </LinkContainer>
+                {userInfo ? (
+  <NavDropdown title={<><img src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png" alt="Profile" /> {userInfo.name}</>} id="basic-nav-dropdown">
+    <LinkContainer to="/profile">
+      <NavDropdown.Item>User Profile</NavDropdown.Item>
+    </LinkContainer>
+    <LinkContainer to="/orderhistory">
+      <NavDropdown.Item>Order History</NavDropdown.Item>
+    </LinkContainer>
+    <NavDropdown.Divider />
+    <Link
+      className="dropdown-item"
+      to="#signout"
+      onClick={signoutHandler}
+    >
+      Sign Out
+    </Link>
+  </NavDropdown>
+) : (
+  <LinkContainer to="/signin">
+    <Nav.Link>
+      <img
+        alt="signin"
+        src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+        height="50"
+        className="d-inline-block align-top"
+      />
+    </Nav.Link>
+  </LinkContainer>
+)}
               </Nav>
             </Container>
           </Navbar>
