@@ -17,10 +17,20 @@ import Badge from 'react-bootstrap/Badge';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 function App() {
-  const { state } = useContext(Store);
-  const { cart ,userInfo } = state;
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+
+  const signoutHandler = () => {
+    ctxDispatch({ type: 'USER_SIGNOUT' });
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
+    window.location.href = '/signin';
+  };
 
   return (
     <BrowserRouter>
