@@ -129,3 +129,26 @@
       flex-basis: 100%; /* Ocupa todo el ancho disponible */
     }
   }
+
+  /* Agrega estos estilos al CSS de tu componente Product */
+
+/* Estilos para el contenedor del producto */
+.Card {
+  margin-bottom: 20px; /* Ajusta según sea necesario para evitar espacio en blanco entre productos */
+}
+
+/* Estilos para la imagen dentro del producto */
+.card-img-top {
+  width: 100%; /* Ajusta según sea necesario */
+  height: auto; /* Altura automática para mantener la proporción */
+}
+
+/* Estilos para el cuerpo del producto */
+.Card.Body {
+  text-align: center; /* Centra el texto dentro del cuerpo del producto */
+}
+
+/* Estilos para el botón del producto */
+.Button {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+}
