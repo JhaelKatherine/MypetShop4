@@ -238,63 +238,39 @@ export default function ProductListScreen() {
             <Container>
               <Row>
                 <Col>
-                {pages > 5 ? (
-          <>
-            {page > 1 && (
-              <Link
-                className="btn"
-                to={`/admin/products?page=${Number(page) - 1}`}
-              >
-                {'<'}
-              </Link>
-            )}
-            {page > 2 && (
-              <Link
-                className="btn"
-                to={`/admin/products?page=${1}`}
-              >
-                {'...'}
-              </Link>
-            )}
-            {[...Array(pages).keys()]
-              .slice(Math.max(0, page - 2), Math.min(pages, page + 1))
-              .map((x) => (
-                <Link
-                  className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
-                  key={x + 1}
-                  to={`/admin/products?page=${x + 1}`}
-                >
-                  {x + 1}
-                </Link>
-              ))}
-            {page < pages - 1 && (
-              <Link
-                className="btn"
-                to={`/admin/products?page=${pages}`}
-              >
-                {'...'}
-              </Link>
-            )}
-            {page < pages && (
-              <Link
-                className="btn"
-                to={`/admin/products?page=${Number(page) + 1}`}
-              >
-                {'>'}
-              </Link>
-            )}
-          </>
-        ) : (
-          [...Array(pages).keys()].map((x) => (
-            <Link
-              className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
-              key={x + 1}
-              to={`/admin/products?page=${x + 1}`}
-            >
-              {x + 1}
-            </Link>
-          ))
-        )}                </Col>
+                  {page > 1 && (
+                    <>
+                      <Link
+                        className="btn"
+                        to={`/admin/products?page=1`}
+                      >
+                        First
+                      </Link>
+                      <Link
+                        className="btn"
+                        to={`/admin/products?page=${Number(page) - 1}`}
+                      >
+                        {'<'} Previous
+                      </Link>
+                    </>
+                  )}
+                  {page < pages && (
+                    <>
+                      <Link
+                        className="btn"
+                        to={`/admin/products?page=${Number(page) + 1}`}
+                      >
+                        Next {'>'}
+                      </Link>
+                      <Link
+                        className="btn"
+                        to={`/admin/products?page=${pages}`}
+                      >
+                        Last
+                      </Link>
+                    </>
+                  )}
+                </Col>
               </Row>
             </Container>
           </div>

@@ -178,6 +178,7 @@ export default function ProductEditScreen() {
             onChange={(e) => setName(e.target.value)}
             pattern="[A-Za-z ]+" 
             title="Please enter only letters" 
+            maxLength="50"
             required
           />
             </div>
@@ -191,6 +192,7 @@ export default function ProductEditScreen() {
                 onChange={(e) => setSlug(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
+                maxLength="50"
                 required
               />
             </div>
@@ -228,13 +230,14 @@ export default function ProductEditScreen() {
             </div>
             <div className="form-group">
               <label htmlFor="description">Description</label>
-              <input
+              <textarea
                 type="text"
                 id="description"
                 className="form-control"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 pattern="[A-Za-z ]+" 
+                maxLength="160"
                 title="Please enter only letters" 
                 required
               />
@@ -244,6 +247,7 @@ export default function ProductEditScreen() {
               <input
                 type="text"
                 id="category"
+                maxLength="50"
                 className="form-control"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}

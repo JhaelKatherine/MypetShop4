@@ -44,7 +44,7 @@ function Product(props) {
             Sin stock
           </Button>
         ) : (
-          <Button onClick={() => addToCartHandler(product)}>Agregar al carrito</Button>
+          <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
         )}
       </Card.Body>
     </Card>

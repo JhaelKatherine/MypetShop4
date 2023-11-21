@@ -53,7 +53,11 @@ export default function AddProductScreen() {
       toast.error('Please enter a valid image URL');
       return;
     }
-
+    if (name.length > 50 || slug.length > 50 || category.length > 50 || description.length > 160) {
+      setLoading(false);
+      toast.error('Please ensure that the fields do not exceed the character limits.');
+      return;
+    }
     const imageExists = await checkImageExists(image);
 
     if (!imageExists) {
@@ -130,6 +134,7 @@ export default function AddProductScreen() {
                 onChange={(e) => setName(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
+                maxLength="50" // Limitar a 50 caracteres
                 required
               />
             </div>
@@ -143,6 +148,8 @@ export default function AddProductScreen() {
                 onChange={(e) => setSlug(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
+                maxLength="50" // Limitar a 50 caracteres
+
                 required
               />
             </div>
@@ -182,7 +189,7 @@ export default function AddProductScreen() {
 
             <div className="form-group">
               <label htmlFor="description">Description</label>
-              <input
+              <textarea
                 type="text"
                 id="description"
                 className="form-control"
@@ -190,6 +197,8 @@ export default function AddProductScreen() {
                 onChange={(e) => setDescription(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
+                maxLength="160" // Limitar a 160 caracteres
+
                 required
               />
             </div>
@@ -204,6 +213,7 @@ export default function AddProductScreen() {
                 onChange={(e) => setCategory(e.target.value)}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
+                maxLength="50"
                 required
               />
             </div>
