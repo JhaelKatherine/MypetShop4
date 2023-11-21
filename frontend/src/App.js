@@ -83,8 +83,8 @@ function App() {
           alt="Profile"
           height="30"
           className="d-inline-block align-top"
-        />{' '}
-        {userInfo.name}
+        />
+        <span className="d-block">{userInfo.name}</span>
       </>
     }
     className="d-inline-block align-top"

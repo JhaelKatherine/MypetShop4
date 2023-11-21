@@ -184,3 +184,13 @@
     color: royalblue; /* Cambiar el color del texto "Sign-In" a azul */
   }
   
+  .form-group {
+    margin-bottom: 20px; /* Aumentar el margen inferior entre grupos */
+  }
+  
+  /* Opción 1: Agregar margen inferior a los elementos individuales */
+  .form-group label,
+  .form-group input {
+    margin-bottom: 10px; /* Ajustar el margen inferior de etiquetas y campos de entrada */
+  }
+  
