@@ -83,7 +83,7 @@ function App() {
           </Nav>
         </div>
         <main>
-          <Container className="mt-3">
+        <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
@@ -92,9 +92,9 @@ function App() {
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
-path="/shipping"
-element={<ShippingAddressScreen />}
-></Route>
+                path="/shipping"
+                element={<ShippingAddressScreen />}
+                            ></Route>
             </Routes>
           </Container>
         </main>

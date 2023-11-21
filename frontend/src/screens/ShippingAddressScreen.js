@@ -31,8 +31,8 @@ export default function ShippingAddressScreen() {
   const [addressError, setAddressError] = useState('');
   const [cityError, setCityError] = useState('');
   const [cellPhoneError, setCellPhoneError] = useState('');
-
-  useEffect(() => {
+  
+    useEffect(() => {
     if (!userInfo) {
       navigate('/shipping');
     }
