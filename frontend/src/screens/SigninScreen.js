@@ -44,7 +44,7 @@ export default function SigninScreen() {
       </Helmet>
       <div className="form-container">
       <div className="centered-title">
-         <h1>Sign Up</h1>
+         <h1>Sign In</h1>
       </div>
         <form onSubmit={submitHandler} className="custom-form">
          
@@ -74,7 +74,7 @@ export default function SigninScreen() {
             />
           </div>
           
-          <button className="submit" type="submit">Sign Up</button>
+          <button className="submit" type="submit">Sign In</button>
           <div className="mb-3">
           New customer?{' '}
           <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>

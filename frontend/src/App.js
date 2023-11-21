@@ -44,7 +44,7 @@ function App() {
                   <img
                     alt="My Pet Shop Logo"
                     src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
-                    height="70"
+                    height="30"
                     className="d-inline-block align-top"
                   />
                 </Navbar.Brand>
@@ -57,7 +57,7 @@ function App() {
                   <img
                     alt="addProduct"
                     src="https://i.ibb.co/VpttTSt/add1-removebg-preview.png"
-                    height="50"
+                    height="30"
                     className="d-inline-block align-top"
                   />
                 </Link>
@@ -65,7 +65,7 @@ function App() {
                   <img
                     alt="cart"
                     src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
-                    height="50"
+                    height="30"
                     className="d-inline-block align-top"
                   />
                   {cart.cartItems.length > 0 && (
@@ -81,7 +81,7 @@ function App() {
         <img
           src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
           alt="Profile"
-          height="50"
+          height="10"
           className="d-inline-block align-top"
         />{' '}
         {userInfo.name}
@@ -90,12 +90,6 @@ function App() {
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    <LinkContainer to="">
-      <NavDropdown.Item>User Profile</NavDropdown.Item>
-    </LinkContainer>
-    <LinkContainer to="">
-      <NavDropdown.Item>Order History</NavDropdown.Item>
-    </LinkContainer>
     <NavDropdown.Divider />
     <Link
       className="dropdown-item"
@@ -111,7 +105,7 @@ function App() {
       <img
         alt="signin"
         src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-        height="50"
+        height="30"
         className="d-inline-block align-top"
       />
     </Nav.Link>
