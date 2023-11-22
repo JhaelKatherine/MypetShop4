@@ -47,6 +47,7 @@ export default function ProductEditScreen() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
   const { id: productId } = params;
+
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
@@ -54,7 +55,6 @@ export default function ProductEditScreen() {
       loading: true,
       error: '',
     });
-  const [setError] = useState('');
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
@@ -65,7 +65,6 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
-  const [setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,41 +91,8 @@ export default function ProductEditScreen() {
     fetchData();
   }, [productId]);
 
-  const isValidImageUrl = (url) => {
-    try {
-      new URL(url); // Try to create a URL object from the given URL
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
-  
-
-  const checkImageExists = async (url) => {
-    try {
-      const response = await axios.head(url);
-      return response.status === 200;
-    } catch (error) {
-      return false;
-    }
-  };
   const submitHandler = async (e) => {
-    setLoading(true);
-
     e.preventDefault();
-    if (!isValidImageUrl(image)) {
-      setLoading(false);
-      toast.error('Please enter a valid image URL');
-      return;
-    }
-    const imageExists = await checkImageExists(image);
-
-    if (!imageExists) {
-      setLoading(false);
-      toast.error('Image not found at the provided URL');
-      return;
-    }
-
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
@@ -157,8 +123,6 @@ export default function ProductEditScreen() {
       dispatch({ type: 'UPDATE_FAIL' });
     }
   };
-
-  
   const uploadFileHandler = async (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -233,21 +197,19 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-            <label htmlFor="price">Price</label>
+              <label htmlFor="price">Price</label>
               <input
                 type="text"
                 id="price"
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                  const enteredValue = e.target.value;
-              
-                  if (enteredValue.trim() === '' || /^\d*(\.\d*)?$/.test(enteredValue)) {
+                    const enteredValue = e.target.value;
+                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
+                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
                       setPrice(enteredValue);
-                  } else {
-                      console.log('Enter a number');
-                  }
-              }}
+                    }
+                  }}
                   onKeyDown={(e) => {
                     // Evita caracteres que no sean números o puntos decimales
                     if (
