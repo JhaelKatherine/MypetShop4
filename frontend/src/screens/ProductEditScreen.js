@@ -67,18 +67,6 @@ export default function ProductEditScreen() {
   const [description, setDescription] = useState('');
   const [setLoading] = useState(false);
 
-  const handleImageChange = (e) => {
-    const imageUrl = e.target.value;
-
-    // Verifica si la cadena es vacía o comienza con "https://"
-    if (imageUrl === '' || imageUrl.startsWith('https://')) {
-      setImage(imageUrl);
-      setError('');
-    } else {
-      setError('Please enter a valid URL starting with "https://".');
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -105,9 +93,14 @@ export default function ProductEditScreen() {
   }, [productId]);
 
   const isValidImageUrl = (url) => {
-    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-    return urlRegex.test(url);
+    try {
+      new URL(url); // Try to create a URL object from the given URL
+      return true;
+    } catch (error) {
+      return false;
+    }
   };
+  
 
   const checkImageExists = async (url) => {
     try {
