@@ -43,7 +43,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default async function ProductEditScreen() {
+export default function ProductEditScreen() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
   const { id: productId } = params;
@@ -63,7 +63,6 @@ export default async function ProductEditScreen() {
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
-  const [setLoading] = useState(false);
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
 
@@ -124,50 +123,8 @@ export default async function ProductEditScreen() {
       dispatch({ type: 'UPDATE_FAIL' });
     }
   };
-  const checkImageExists = async (url) => {
-    try {
-      const response = await Axios.head(url);
-      return response.status === 200;
-    } catch (error) {
-      return false;
-    }
-  };
-  if (!isValidImageUrl(image)) {
-    setLoading(false);
-    toast.error('Please enter a valid image URL');
-    return;
-  }
-  if (name.length > 50) {
-    setLoading(false);
-    toast.error('The name field should not exceed 50 characters.');
-    return;
-  }
-  
-  if (slug.length > 50) {
-    setLoading(false);
-    toast.error('The slug field should not exceed 50 characters.');
-    return;
-  }
-  
-  if (category.length > 50) {
-    setLoading(false);
-    toast.error('The category field should not exceed 50 characters.');
-    return;
-  }
-  
-  if (description.length > 210) {
-    setLoading(false);
-    toast.error('The description field should not exceed 210 characters.');
-    return;
-  }
-  const imageExists = await checkImageExists(image);
 
-  if (!imageExists) {
-    setLoading(false);
-    toast.error('Image not found at the provided URL');
-    return;
-  }
-
+  
   const uploadFileHandler = async (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -242,7 +199,7 @@ export default async function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="price">Price</label>
+            <label htmlFor="price">Price</label>
               <input
                 type="text"
                 id="price"
@@ -257,7 +214,6 @@ export default async function ProductEditScreen() {
                       console.log('Enter a number');
                   }
               }}
-              
                   onKeyDown={(e) => {
                     // Evita caracteres que no sean números o puntos decimales
                     if (
