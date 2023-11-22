@@ -73,6 +73,7 @@ export default function ProductEditScreen() {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     return urlRegex.test(url);
   };
+
   const checkImageExists = async (url) => {
     try {
       const response = await axios.head(url);
@@ -344,16 +345,15 @@ export default function ProductEditScreen() {
 
             </div>
 
-          <div className="mb-3">
-          <Button disabled={loadingUpdate} type="submit" className="submit">
-              Update
-            </Button>
-            {loadingUpdate && <LoadingBox></LoadingBox>}
-          </div>
-        </form>
-      )}
+            <div className="mb-3">
+              <Button disabled={loadingUpdate || !!imageError} type="submit" className="submit">
+                Update
+              </Button>
+              {loadingUpdate && <LoadingBox></LoadingBox>}
             </div>
-
+          </form>
+        )}
+      </div>
     </div>
   );
 }
