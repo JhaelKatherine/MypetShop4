@@ -5,6 +5,9 @@ import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import '../Css/AddUser.css';
+import Googlelogin from 'react-google-login';
+import {gapi} from 'gapi-script';
+import {userEffect} from 'react';
 
 
 export default function SignupScreen() {
@@ -12,7 +15,7 @@ export default function SignupScreen() {
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/';
-
+  const clientID = "193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com";
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
@@ -53,6 +56,22 @@ export default function SignupScreen() {
     }
   };
 
+useEffect(() => {
+  const start = () =>{
+  gapi.auth2.init({
+  clientId:clientID,
+  })
+  }
+  gapi.load("client:auth2", start)
+  },[])
+  
+const onSuccess = (response) => {
+  console.log("something want wrong")
+}
+
+const onFailure = (response) => {
+  console.log("something want wrong2")
+}
   return (
     <>
     <div className="blue-background"> {/* Agregar esta línea */}
@@ -137,10 +156,14 @@ export default function SignupScreen() {
           <button className="submit" type="submit">Sign Up</button>
                 <p className="signin">Register with</p>
                 <div className="social-buttons-container">
-    <button className="social-button google-button" onClick={(e) => e.preventDefault()}>
-        <img src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg" alt="Google" />
-        Google
-    </button>
+    <div className="social-button google-button" onClick={(e) => e.preventDefault()}>
+        <Googlelogin>
+          clientId ={clientID}
+          onSuccess = {onSuccess}
+          onFailure = {onFailure}
+          cookiePolicy = {"single_host_policy"}
+        </Googlelogin>
+    </div>
     <button className="social-button facebook-button" onClick={(e) => e.preventDefault()}>
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
         Facebook
