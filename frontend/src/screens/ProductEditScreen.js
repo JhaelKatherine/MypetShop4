@@ -47,7 +47,6 @@ export default function ProductEditScreen() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
   const { id: productId } = params;
-
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
@@ -55,6 +54,7 @@ export default function ProductEditScreen() {
       loading: true,
       error: '',
     });
+  const [setError] = useState('');
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
@@ -65,7 +65,19 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const handleImageChange = (e) => {
+    const imageUrl = e.target.value;
 
+    // Expresión regular para validar una URL simple
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
+    if (urlRegex.test(imageUrl)) {
+      setImage(imageUrl);
+      setError('');
+    } else {
+      setError('Please enter a valid URL.');
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -302,11 +314,12 @@ export default function ProductEditScreen() {
               <input
                 type="text"
                 id="imageURL"
-                className="form-control"
+                className={`form-control ${error ? 'is-invalid' : ''}`}
                 value={image}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={handleImageChange}
                 required
               />
+              {error && <div className="invalid-feedback">{error}</div>}
             </div>
 
           <div className="mb-3">
