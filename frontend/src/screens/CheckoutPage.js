@@ -274,7 +274,7 @@ const CheckoutPage = () => {
     ]
   };
   
-  const stripePromise = loadStripe(process.env.STRIPE_URI);
+  const stripePromise = loadStripe("pk_test_51OEcs4EBkKqgGPGIRt4fPpcnbJVMT67bhbHjuglghma7GSCohL5BmNQhLQ0CWe2YLlCnktGa6biR9gyJLRDvHx4a00VraXVTUn");
   const navigate = useNavigate();
 
   const reducer = (state, action) => {
