@@ -65,6 +65,20 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const [loadin2, setLoading] = useState(false);
+
+  const isValidImageUrl = (url) => {
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlRegex.test(url);
+  };
+  const checkImageExists = async (url) => {
+    try {
+      const response = await Axios.head(url);
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,7 +104,28 @@ export default function ProductEditScreen() {
     };
     fetchData();
   }, [productId]);
+  const handleImageChange = async (e) => {
+    const inputValue = e.target.value;
 
+    // Validación de la URL solo si hay algún valor
+    if (inputValue.trim() !== '') {
+      if (!isValidImageUrl(inputValue)) {
+        setLoading(false);
+        toast.error('Please enter a valid image URL');
+        return;
+      }
+
+      const imageExists = await checkImageExists(inputValue);
+      if (!imageExists) {
+        setLoading(false);
+        toast.error('Image not found at the provided URL');
+        return;
+      }
+    }
+
+    // Actualizar el estado independientemente de la validación
+    setImage(inputValue);
+  };
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -294,42 +329,16 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-            <label htmlFor="imageURL">Image URL</label>
-<input
-  type="text"
-  id="imageURL"
-  className="form-control"
-  value={image}
-  onChange={(e) => {
-    const inputValue = e.target.value;
-
-    // Validación de la URL solo si hay algún valor
-    if (inputValue.trim() !== '') {
-      try {
-        const url = new URL(inputValue);
-
-        // Verifica si el protocolo es 'https'
-        if (url.protocol !== 'https:') {
-          console.error('La URL debe comenzar con "https://"');
-          return; // Puedes manejar esto como desees (mostrar un mensaje, evitar la actualización, etc.)
-        }
-
-        // La URL es válida, puedes realizar acciones adicionales si es necesario
-      } catch (error) {
-        // La URL no es válida, puedes manejar esto como desees
-        console.error('URL no válida:', inputValue);
-        return; // O muestra un mensaje de error, etc.
-      }
-    }
-
-    // Actualizar el estado independientemente de si la URL es válida o si está vacía
-    setImage(inputValue);
-  }}
-  required
-/>
-
-</div>
-
+              <label htmlFor="imageURL">Image URL</label>
+              <input
+                type="text"
+                id="imageURL"
+                className="form-control"
+                value={image}
+                onChange={handleImageChange}
+                required
+              />
+            </div>
 
           <div className="mb-3">
           <Button disabled={loadingUpdate} type="submit" className="submit">
