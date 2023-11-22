@@ -130,60 +130,57 @@ const CheckoutPage = () => {
     
     const handleSubmit = async (event) => {
       event.preventDefault();
-  
-      if (!stripe || !elements) {
-        return;
-      }
-  
-      if (error) {
-        elements.getElement("card").focus();
-        return;
-      }
-  
-      if (cardComplete) {
-        setProcessing(true);
-      }
-  
-      const payload = await stripe.createPaymentMethod({
-        type: "card",
-        card: elements.getElement(CardElement),
-        billing_details: billingDetails
-      });
-  
-      setProcessing(false);
-  
-      if (payload.error) {
-        setError(payload.error);
-      } else {
-        setPaymentMethod(payload.paymentMethod);
-        
-        try {
+      try {
+        if (!stripe || !elements) {
+          return;
+        }
+    
+        if (error) {
+          elements.getElement("card").focus();
+          return;
+        }
+    
+        if (cardComplete) {
+          setProcessing(true);
+        }
+    
+        const payload = await stripe.createPaymentMethod({
+          type: "card",
+          card: elements.getElement(CardElement),
+          billing_details: billingDetails,
+        });
+    
+        setProcessing(false);
+    
+        if (payload.error) {
+          setError(payload.error);
+        } else {
+          setPaymentMethod(payload.paymentMethod);
+    
           dispatch({ type: 'CREATE_REQUEST' });
     
-          const { data } = await Axios.post(
-            '/api/orders',
-            {
-              orderItems: cart.cartItems,
-              shippingAddress: cart.shippingAddress,
-              paymentMethod: cart.paymentMethod,
-              itemsPrice: cart.itemsPrice,
-              shippingPrice: cart.shippingPrice,
-              taxPrice: cart.taxPrice,
-              totalPrice: cart.totalPrice,
-            },
-          
-          );
+          const { data } = await Axios.post('/api/orders', {
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice,
+          });
+    
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
           localStorage.removeItem('cartItems');
-          
-        } catch (err) {
-          dispatch({ type: 'CREATE_FAIL' });
-          toast.error(getError(err));
         }
+      } catch (err) {
+        console.error("Error en la solicitud POST:", err);
+        dispatch({ type: 'CREATE_FAIL' });
+        toast.error(getError(err));
+        console.log("Detalles del error:", err.response.data); // Agrega esta línea
       }
     };
-  
+    
   
   
   const reset = () => {

@@ -21,6 +21,9 @@ orderRouter.post(
   '/',
   
   expressAsyncHandler(async (req, res) => {
+    try {
+      console.log('Recibida solicitud POST para crear una nueva orden');
+
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
       shippingAddress: req.body.shippingAddress,
@@ -33,10 +36,15 @@ orderRouter.post(
     });
 
     const order = await newOrder.save();
-    res.status(201).send({ message: 'New Order Created', order });
+      console.log('Nueva orden creada con éxito:', order);
+
+      res.status(201).send({ message: 'New Order Created', order });
+    } catch (error) {
+      console.error('Error al procesar la solicitud POST:', error);
+      res.status(500).send({ message: 'Internal Server Error', error: error.message });
+    }
   })
 );
-
 orderRouter.get(
   '/summary',
   isAuth,
