@@ -10,6 +10,8 @@ import '../Css/AddUser.css';
 export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
 
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -22,7 +24,12 @@ export default function SignupScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { userInfo } = state;
+  const handleUserNameChange = (e) => {
+    const inputUserName = e.target.value;
+    if (inputUserName.length <= 6) {
+      setUserName(inputUserName);
+    }
+  };
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -43,6 +50,9 @@ export default function SignupScreen() {
         email,
         password,
       });
+      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      navigate(redirect || '/');
     } catch (err) {
       toast.error(getError(err));
     }
@@ -82,17 +92,19 @@ export default function SignupScreen() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="userName">User Name</label>
-            <input
-              type="text"
-              id="userName"
-              className="form-control"
-              onChange={(e) => setUserName(e.target.value)}
-              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-              onInput={(e) => e.target.setCustomValidity('')}
-              required
-            />
-          </div>
+  <label htmlFor="userName">User Name (Max 6 characters)</label>
+  <input
+    type="text"
+    id="userName"
+    className="form-control"
+    value={userName}
+    onChange={handleUserNameChange}
+    maxLength={6} // Limitar a 6 caracteres
+    onInvalid={(e) => e.target.setCustomValidity("Please enter a maximum of 6 characters")}
+    onInput={(e) => e.target.setCustomValidity('')}
+    required
+  />
+</div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input

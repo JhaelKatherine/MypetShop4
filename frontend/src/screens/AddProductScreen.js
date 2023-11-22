@@ -186,6 +186,8 @@ export default function AddProductScreen() {
                       setPrice(enteredValue);
                     }
                   }}
+                  min="1"
+                  max="1000"
                   onKeyDown={(e) => {
                     // Evita caracteres que no sean números o puntos decimales
                     if (
@@ -266,6 +268,8 @@ export default function AddProductScreen() {
                     }
                   }}
                   min="1"
+                  max="1000"
+
                   onKeyDown={(e) => {
                     if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
                       e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
@@ -280,6 +284,8 @@ export default function AddProductScreen() {
               <input
                 type="text"
                 id="imageURL"
+                maxLength="1500"
+
                 className="form-control"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}

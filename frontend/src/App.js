@@ -18,14 +18,23 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import AdminRoute from './components/AdminRoute';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
-
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import CheckoutPage from './screens/CheckoutPage';
 
+
 function App() {
-  const { state } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+
+  const signoutHandler = () => {
+    ctxDispatch({ type: 'USER_SIGNOUT' });
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
+    window.location.href = '/';
+  };
 
   return (
     <BrowserRouter>
@@ -39,7 +48,7 @@ function App() {
                   <img
                     alt="My Pet Shop Logo"
                     src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
-                    height="70"
+                    height="50"
                     className="d-inline-block align-top"
                   />
                 </Navbar.Brand>
@@ -48,12 +57,11 @@ function App() {
                 <SearchBox />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
-              
                 <Link to="/cart" className="nav-link">
                   <img
                     alt="cart"
                     src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
-                    height="50"
+                    height="30"
                     className="d-inline-block align-top"
                   />
                   {cart.cartItems.length > 0 && (
@@ -62,37 +70,58 @@ function App() {
                     </Badge>
                   )}
                 </Link>
-                <LinkContainer to="/signup">
-                  <Nav.Link>
-                    <img
-                      alt="signup"
-                      src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-                      height="50"
-                      className="d-inline-block align-top"
-                    />
-                  </Nav.Link>
-                </LinkContainer>
-
+               {userInfo ? (
+  <NavDropdown
+    title={
+      <>
+        <img
+          src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+          alt="Profile"
+          height="30"
+          className="d-inline-block align-top"
+        />
+        <span className="d-inline-block align-top ml-2">{userInfo.userName}</span>
+      </>
+    }
+    className="d-inline-block align-top"
+    id="basic-nav-dropdown"
+  >
+    <NavDropdown.Divider />
+    <Link
+      className="dropdown-item"
+      to="#signout"
+      onClick={signoutHandler}
+    >
+      Sign Out
+    </Link>
+  </NavDropdown>
+) : (
+  <LinkContainer to="/signin">
+    <Nav.Link>
+      <img
+        alt="signin"
+        src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+        height="30"
+        className="d-inline-block align-top"
+      />
+    </Nav.Link>
+  </LinkContainer>
+)}
                  
- <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png" alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
+ <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
  <LinkContainer to="/admin/products">
     <NavDropdown.Item className="nav-dropdown-item">
     <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
-
        Products 
-
     </NavDropdown.Item>
   </LinkContainer>
 </NavDropdown>
-
-
               </Nav>
             </Container>
           </Navbar>
         </header>
         <div>
           <Nav className="flex-column text-white w-100 p-2">
-            {/* Puedes agregar elementos aquí si es necesario */}
           </Nav>
         </div>
         <main>
@@ -100,7 +129,7 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
-              <Route path="/signin" element={<SignupScreen />} />
+              <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
