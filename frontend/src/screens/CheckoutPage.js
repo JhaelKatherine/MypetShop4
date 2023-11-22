@@ -167,7 +167,6 @@ const CheckoutPage = () => {
               itemsPrice: cart.itemsPrice,
               shippingAddress: cart.shippingAddress,
               totalPrice: cart.totalPrice,
-              user: userInfo,
             },
             {
               headers: {
