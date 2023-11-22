@@ -32,7 +32,7 @@ function App() {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
     localStorage.removeItem('paymentMethod');
-    window.location.href = '/signin';
+    window.location.href = '/';
   };
 
   return (
@@ -95,7 +95,7 @@ function App() {
     </Link>
   </NavDropdown>
 ) : (
-  <LinkContainer to="/">
+  <LinkContainer to="/signin">
     <Nav.Link>
       <img
         alt="signin"
