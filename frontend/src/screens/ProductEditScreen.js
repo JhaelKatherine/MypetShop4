@@ -108,6 +108,15 @@ export default function ProductEditScreen() {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     return urlRegex.test(url);
   };
+
+  const checkImageExists = async (url) => {
+    try {
+      const response = await Axios.head(url);
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  };
   const submitHandler = async (e) => {
     setLoading(true);
 
@@ -117,6 +126,14 @@ export default function ProductEditScreen() {
       toast.error('Please enter a valid image URL');
       return;
     }
+    const imageExists = await checkImageExists(image);
+
+    if (!imageExists) {
+      setLoading(false);
+      toast.error('Image not found at the provided URL');
+      return;
+    }
+
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
