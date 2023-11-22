@@ -58,6 +58,7 @@ export default function ProductEditScreen() {
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
+  const [imageError, setImageError] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [images, setImages] = useState([]);
@@ -65,7 +66,7 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
-  const [loadin2, setLoading] = useState(false);
+  const [loading2, setLoading] = useState(false);
 
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -106,25 +107,22 @@ export default function ProductEditScreen() {
   }, [productId]);
   const handleImageChange = async (e) => {
     const inputValue = e.target.value;
+    setImage(inputValue);
+    setImageError(''); // Limpiar cualquier mensaje de error existente
 
     // Validación de la URL solo si hay algún valor
     if (inputValue.trim() !== '') {
       if (!isValidImageUrl(inputValue)) {
-        setLoading(false);
-        toast.error('Please enter a valid image URL');
+        setImageError('Please enter a valid image URL');
         return;
       }
 
       const imageExists = await checkImageExists(inputValue);
       if (!imageExists) {
-        setLoading(false);
-        toast.error('Image not found at the provided URL');
+        setImageError('Image not found at the provided URL');
         return;
       }
     }
-
-    // Actualizar el estado independientemente de la validación
-    setImage(inputValue);
   };
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -328,16 +326,18 @@ export default function ProductEditScreen() {
                 required
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="imageURL">Image URL</label>
-              <input
-                type="text"
-                id="imageURL"
-                className="form-control"
-                value={image}
-                onChange={handleImageChange}
-                required
-              />
+            <div>
+      <label htmlFor="imageURL">Image URL</label>
+      <input
+        type="text"
+        id="imageURL"
+        className={`form-control ${imageError ? 'is-invalid' : ''}`}
+        value={image}
+        onChange={handleImageChange}
+        required
+      />
+            {imageError && <div className="invalid-feedback">{imageError}</div>}
+
             </div>
 
           <div className="mb-3">
