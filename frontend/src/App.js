@@ -95,7 +95,7 @@ function App() {
     </Link>
   </NavDropdown>
 ) : (
-  <LinkContainer to="/signin">
+  <LinkContainer to="/">
     <Nav.Link>
       <img
         alt="signin"
