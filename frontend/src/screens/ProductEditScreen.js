@@ -65,6 +65,7 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const [setLoading] = useState(false);
 
   const handleImageChange = (e) => {
     const imageUrl = e.target.value;
@@ -103,8 +104,19 @@ export default function ProductEditScreen() {
     fetchData();
   }, [productId]);
 
+  const isValidImageUrl = (url) => {
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlRegex.test(url);
+  };
   const submitHandler = async (e) => {
+    setLoading(true);
+
     e.preventDefault();
+    if (!isValidImageUrl(image)) {
+      setLoading(false);
+      toast.error('Please enter a valid image URL');
+      return;
+    }
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
@@ -310,18 +322,16 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-      <label htmlFor="imageURL">Image URL</label>
-      <input
-        type="text"
-        id="imageURL"
-        className={`form-control ${error ? 'is-invalid' : ''}`}
-        value={image}
-        onChange={handleImageChange}
-        maxLength="1500"
-        required
-      />
-      {error && <div className="invalid-feedback">{error}</div>}
-    </div>
+              <label htmlFor="imageURL">Image URL</label>
+              <input
+                type="text"
+                id="imageURL"
+                className="form-control"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                required
+              />
+            </div>
 
           <div className="mb-3">
           <Button disabled={loadingUpdate} type="submit" className="submit">
