@@ -105,6 +105,9 @@ export default function ShippingAddressScreen() {
       console.log('Please complete the required fields correctly.');
     }
   };
+  const placeOrder = () => {
+    navigate('/checkoutpage');
+  };
 
 
   return (
@@ -291,7 +294,7 @@ export default function ShippingAddressScreen() {
                       </div>
                       
                       <div className="d-flex justify-content-end mt-3">
-        <Button variant="primary" type="submit">Place the Order</Button>
+                      <Button variant="primary" type="submit" onClick={placeOrder}>Place the Order</Button>
       </div>
                     </Form>
                   </div>

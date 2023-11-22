@@ -15,7 +15,7 @@ import '../Css/AddUser.css';
 export default function AddProductScreen() {
   const navigate = useNavigate();
 
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');

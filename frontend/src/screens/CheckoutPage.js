@@ -7,6 +7,8 @@ import {
   useStripe
 } from "@stripe/react-stripe-js";
 import CartScreen from "./CartScreen2";
+import { Store } from './Store';
+import axios from 'axios';
 import "../Css/StripeForm.css";
 
 const CARD_OPTIONS = {
@@ -104,6 +106,8 @@ const ResetButton = ({ onClick }) => (
 );
 
 const CheckoutForm = () => {
+  const { state } = useContext(Store);
+  const { userInfo } = state;  
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -144,10 +148,34 @@ const CheckoutForm = () => {
       setError(payload.error);
     } else {
       setPaymentMethod(payload.paymentMethod);
+
+      try {
+        const { data } = await Axios.post('/api/orders', {
+            orderItems: [
+                {
+                product:,
+                quantity:,
+            }
+        ],
+            itemsPrice:,
+            totalPrice:,
+            user:,
+        });
+  
+        toast.success('Product successfully added');
+      
+        
+      } catch (err) {
+    
+        toast.error('Error adding product');
+      }
+      
     }
   };
 
-  const reset = () => {
+
+
+const reset = () => {
     setError(null);
     setProcessing(false);
     setPaymentMethod(null);
