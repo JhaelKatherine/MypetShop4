@@ -1,13 +1,16 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
-import { isAuth } from '../utils.js';
+import User from '../models/userModel.js';
+import Product from '../models/productModel.js';
+import { isAuth, isAdmin, mailgun, payOrderEmailTemplate } from '../utils.js';
 
 const orderRouter = express.Router();
 
 orderRouter.get(
   '/',
   isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find().populate('user', 'name');
     res.send(orders);
@@ -19,8 +22,12 @@ orderRouter.post(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const newOrder = new Order({
-      orderItems: req.body.orderItems,
+      orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+      shippingAddress: req.body.shippingAddress,
+      paymentMethod: req.body.paymentMethod,
       itemsPrice: req.body.itemsPrice,
+      shippingPrice: req.body.shippingPrice,
+      taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
       user: req.user._id,
     });
@@ -33,6 +40,7 @@ orderRouter.post(
 orderRouter.get(
   '/summary',
   isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.aggregate([
       {
@@ -115,8 +123,10 @@ orderRouter.put(
   '/:id/pay',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
-
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'email name'
+    );
     if (order) {
       order.isPaid = true;
       order.paidAt = Date.now();
@@ -128,8 +138,23 @@ orderRouter.put(
       };
 
       const updatedOrder = await order.save();
-
-      
+      mailgun()
+        .messages()
+        .send(
+          {
+            from: 'Amazona <amazona@mg.yourdomain.com>',
+            to: `${order.user.name} <${order.user.email}>`,
+            subject: `New order ${order._id}`,
+            html: payOrderEmailTemplate(order),
+          },
+          (error, body) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(body);
+            }
+          }
+        );
 
       res.send({ message: 'Order Paid', order: updatedOrder });
     } else {
@@ -141,6 +166,7 @@ orderRouter.put(
 orderRouter.delete(
   '/:id',
   isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (order) {
@@ -153,4 +179,3 @@ orderRouter.delete(
 );
 
 export default orderRouter;
-
