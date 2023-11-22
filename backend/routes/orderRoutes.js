@@ -19,7 +19,7 @@ orderRouter.get(
 
 orderRouter.post(
   '/',
-  isAuth,
+  
   expressAsyncHandler(async (req, res) => {
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),

@@ -171,11 +171,7 @@ const CheckoutPage = () => {
               taxPrice: cart.taxPrice,
               totalPrice: cart.totalPrice,
             },
-            {
-              headers: {
-                authorization: `Bearer ${userInfo.token}`,
-              },
-            }
+          
           );
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
