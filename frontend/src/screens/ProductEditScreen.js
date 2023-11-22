@@ -317,6 +317,7 @@ export default function ProductEditScreen() {
                 className={`form-control ${error ? 'is-invalid' : ''}`}
                 value={image}
                 onChange={handleImageChange}
+                maxLength="1500"
                 required
               />
               {error && <div className="invalid-feedback">{error}</div>}
