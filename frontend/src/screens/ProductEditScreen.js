@@ -294,16 +294,17 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-  <label htmlFor="imageURL">Image URL</label>
-  <input
-    type="text"
-    id="imageURL"
-    className="form-control"
-    value={image}
-    onChange={(e) => {
-      const inputValue = e.target.value;
+            <label htmlFor="imageURL">Image URL</label>
+<input
+  type="text"
+  id="imageURL"
+  className="form-control"
+  value={image}
+  onChange={(e) => {
+    const inputValue = e.target.value;
 
-      // Validación de la URL
+    // Validación de la URL solo si hay algún valor
+    if (inputValue.trim() !== '') {
       try {
         const url = new URL(inputValue);
 
@@ -319,11 +320,14 @@ export default function ProductEditScreen() {
         console.error('URL no válida:', inputValue);
         return; // O muestra un mensaje de error, etc.
       }
+    }
 
-      setImage(inputValue);
-    }}
-    required
-  />
+    // Actualizar el estado independientemente de si la URL es válida o si está vacía
+    setImage(inputValue);
+  }}
+  required
+/>
+
 </div>
 
 
