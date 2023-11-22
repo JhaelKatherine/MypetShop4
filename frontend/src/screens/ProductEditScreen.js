@@ -48,6 +48,7 @@ export default function ProductEditScreen() {
   const params = useParams(); // /product/:id
   const { id: productId } = params;
 
+
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
@@ -58,6 +59,7 @@ export default function ProductEditScreen() {
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
+  const [imageError, setImageError] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [images, setImages] = useState([]);
@@ -65,6 +67,21 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const [loading2, setLoading] = useState(false);
+
+  const isValidImageUrl = (url) => {
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlRegex.test(url);
+  };
+
+  const checkImageExists = async (url) => {
+    try {
+      const response = await axios.head(url);
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,7 +107,25 @@ export default function ProductEditScreen() {
     };
     fetchData();
   }, [productId]);
+  const handleImageChange = async (e) => {
+    const inputValue = e.target.value;
+    setImage(inputValue);
+    setImageError(''); // Limpiar cualquier mensaje de error existente
 
+    // Validación de la URL solo si hay algún valor
+    if (inputValue.trim() !== '') {
+      if (!isValidImageUrl(inputValue)) {
+        setImageError('Please enter a valid image URL');
+        return;
+      }
+
+      const imageExists = await checkImageExists(inputValue);
+      if (!imageExists) {
+        setImageError('Image not found at the provided URL');
+        return;
+      }
+    }
+  };
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -199,7 +234,7 @@ export default function ProductEditScreen() {
             <div className="form-group">
               <label htmlFor="price">Price</label>
               <input
-                type="text"
+                type="number"
                 id="price"
                 className="form-control"
                 value={price}
@@ -210,6 +245,8 @@ export default function ProductEditScreen() {
                       setPrice(enteredValue);
                     }
                   }}
+                  min="1"
+                  max="1000"
                   onKeyDown={(e) => {
                     // Evita caracteres que no sean números o puntos decimales
                     if (
@@ -285,6 +322,7 @@ export default function ProductEditScreen() {
                     }
                   }}
                   min="1"
+                  max="1000"
                   onKeyDown={(e) => {
                     if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
                       e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
@@ -293,28 +331,33 @@ export default function ProductEditScreen() {
                 required
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="imageURL">Image URL</label>
-              <input
-                type="text"
-                id="imageURL"
-                className="form-control"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-                required
-              />
+            <div>
+            <label htmlFor="imageURL">Image URL</label>
+<input
+  type="text"
+  id="imageURL"
+  maxLength="1500"
+  className={`form-control ${imageError ? 'is-invalid' : ''}`}
+  value={image}
+  onChange={handleImageChange}
+  required
+/>
+{imageError && <div className="invalid-feedback">{imageError}</div>}
+{!isValidImageUrl && (
+  <div className="invalid-feedback">Please enter a valid image URL.</div>
+)}
+
             </div>
 
-          <div className="mb-3">
-          <Button disabled={loadingUpdate} type="submit" className="submit">
-              Update
-            </Button>
-            {loadingUpdate && <LoadingBox></LoadingBox>}
-          </div>
-        </form>
-      )}
+            <div className="mb-3">
+              <Button disabled={loadingUpdate || !!imageError} type="submit" className="submit">
+                Update
+              </Button>
+              {loadingUpdate && <LoadingBox></LoadingBox>}
             </div>
-
+          </form>
+        )}
+      </div>
     </div>
   );
 }
