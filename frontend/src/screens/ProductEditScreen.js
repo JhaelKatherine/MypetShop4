@@ -294,16 +294,38 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="imageURL">Image URL</label>
-              <input
-                type="text"
-                id="imageURL"
-                className="form-control"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-                required
-              />
-            </div>
+  <label htmlFor="imageURL">Image URL</label>
+  <input
+    type="text"
+    id="imageURL"
+    className="form-control"
+    value={image}
+    onChange={(e) => {
+      const inputValue = e.target.value;
+
+      // Validación de la URL
+      try {
+        const url = new URL(inputValue);
+
+        // Verifica si el protocolo es 'https'
+        if (url.protocol !== 'https:') {
+          console.error('La URL debe comenzar con "https://"');
+          return; // Puedes manejar esto como desees (mostrar un mensaje, evitar la actualización, etc.)
+        }
+
+        // La URL es válida, puedes realizar acciones adicionales si es necesario
+      } catch (error) {
+        // La URL no es válida, puedes manejar esto como desees
+        console.error('URL no válida:', inputValue);
+        return; // O muestra un mensaje de error, etc.
+      }
+
+      setImage(inputValue);
+    }}
+    required
+  />
+</div>
+
 
           <div className="mb-3">
           <Button disabled={loadingUpdate} type="submit" className="submit">
