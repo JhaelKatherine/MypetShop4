@@ -48,6 +48,7 @@ export default function ProductEditScreen() {
   const params = useParams(); // /product/:id
   const { id: productId } = params;
 
+
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
@@ -327,16 +328,19 @@ export default function ProductEditScreen() {
               />
             </div>
             <div>
-      <label htmlFor="imageURL">Image URL</label>
-      <input
-        type="text"
-        id="imageURL"
-        className={`form-control ${imageError ? 'is-invalid' : ''}`}
-        value={image}
-        onChange={handleImageChange}
-        required
-      />
-            {imageError && <div className="invalid-feedback">{imageError}</div>}
+            <label htmlFor="imageURL">Image URL</label>
+<input
+  type="text"
+  id="imageURL"
+  className={`form-control ${imageError ? 'is-invalid' : ''}`}
+  value={image}
+  onChange={handleImageChange}
+  required
+/>
+{imageError && <div className="invalid-feedback">{imageError}</div>}
+{!isValidImageUrl && (
+  <div className="invalid-feedback">Please enter a valid image URL.</div>
+)}
 
             </div>
 
