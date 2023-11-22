@@ -65,19 +65,19 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+
   const handleImageChange = (e) => {
     const imageUrl = e.target.value;
 
-    // Expresión regular para validar una URL simple
-    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-
-    if (urlRegex.test(imageUrl)) {
+    // Verifica si la cadena es vacía o comienza con "https://"
+    if (imageUrl === '' || imageUrl.startsWith('https://')) {
       setImage(imageUrl);
       setError('');
     } else {
-      setError('Please enter a valid URL.');
+      setError('Please enter a valid URL starting with "https://".');
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -310,18 +310,18 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="imageURL">Image URL</label>
-              <input
-                type="text"
-                id="imageURL"
-                className={`form-control ${error ? 'is-invalid' : ''}`}
-                value={image}
-                onChange={handleImageChange}
-                maxLength="1500"
-                required
-              />
-              {error && <div className="invalid-feedback">{error}</div>}
-            </div>
+      <label htmlFor="imageURL">Image URL</label>
+      <input
+        type="text"
+        id="imageURL"
+        className={`form-control ${error ? 'is-invalid' : ''}`}
+        value={image}
+        onChange={handleImageChange}
+        maxLength="1500"
+        required
+      />
+      {error && <div className="invalid-feedback">{error}</div>}
+    </div>
 
           <div className="mb-3">
           <Button disabled={loadingUpdate} type="submit" className="submit">
