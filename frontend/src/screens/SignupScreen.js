@@ -7,7 +7,7 @@ import { getError } from '../utils';
 import '../Css/AddUser.css';
 import Googlelogin from 'react-google-login';
 import {gapi} from 'gapi-script';
-import {userEffect} from 'react';
+import FacebookLogin from 'react-facebook-login';
 
 
 export default function SignupScreen() {
@@ -28,6 +28,10 @@ export default function SignupScreen() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -72,6 +76,7 @@ const onSuccess = (response) => {
 const onFailure = (response) => {
   console.log("something want wrong2")
 }
+
   return (
     <>
     <div className="blue-background"> {/* Agregar esta línea */}
@@ -156,18 +161,21 @@ const onFailure = (response) => {
           <button className="submit" type="submit">Sign Up</button>
                 <p className="signin">Register with</p>
                 <div className="social-buttons-container">
-    <div className="social-button google-button" onClick={(e) => e.preventDefault()}>
-        <Googlelogin>
-          clientId ={clientID}
-          onSuccess = {onSuccess}
-          onFailure = {onFailure}
-          cookiePolicy = {"single_host_policy"}
-        </Googlelogin>
+    <div  >
+    <Googlelogin
+  clientId={clientID}
+  onSuccess={onSuccess}
+  onFailure={onFailure}
+  cookiePolicy={"single_host_policy"}
+/>
     </div>
-    <button className="social-button facebook-button" onClick={(e) => e.preventDefault()}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
-        Facebook
-    </button>
+    <div >
+    <FacebookLogin
+    appId="6509151565860998"
+    autoLoad={false}
+    fields="name,email,picture"
+    callback={responseFacebook} />
+    </div>
                 
           </div>
           <div className="mb-3">

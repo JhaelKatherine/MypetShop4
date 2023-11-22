@@ -132,39 +132,24 @@
     }
   }
   
-  .social-buttons {
+  .social-buttons-container {
     display: flex;
-    flex-direction: column; 
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
   }
   
   .social-button {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
+    margin: 0 10px; /* Ajusta el margen entre los botones según sea necesario */
   }
   
-  .social-button img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+  /* Estilos específicos para los botones de Google y Facebook (si es necesario) */
+  .google-button {
+    /* Estilos para el botón de Google */
   }
   
-  .social-button:hover {
-    background-color: rgb(56, 90, 194);
-  }
-  .google-button,
-.facebook-button {
-  display: inline-block; 
-  width: calc(50% - 5px); 
-  margin-right: 10px; 
-}
-.social-buttons-container {
-    display: flex;
-    justify-content: space-between; 
-    gap: 10px; 
+  .facebook-button {
+    /* Estilos para el botón de Facebook */
   }
   
  
