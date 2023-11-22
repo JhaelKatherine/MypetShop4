@@ -43,7 +43,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default function ProductEditScreen() {
+export default async function ProductEditScreen() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
   const { id: productId } = params;
@@ -63,6 +63,7 @@ export default function ProductEditScreen() {
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
+  const [setLoading] = useState(false);
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
 
@@ -123,6 +124,50 @@ export default function ProductEditScreen() {
       dispatch({ type: 'UPDATE_FAIL' });
     }
   };
+  const checkImageExists = async (url) => {
+    try {
+      const response = await Axios.head(url);
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  };
+  if (!isValidImageUrl(image)) {
+    setLoading(false);
+    toast.error('Please enter a valid image URL');
+    return;
+  }
+  if (name.length > 50) {
+    setLoading(false);
+    toast.error('The name field should not exceed 50 characters.');
+    return;
+  }
+  
+  if (slug.length > 50) {
+    setLoading(false);
+    toast.error('The slug field should not exceed 50 characters.');
+    return;
+  }
+  
+  if (category.length > 50) {
+    setLoading(false);
+    toast.error('The category field should not exceed 50 characters.');
+    return;
+  }
+  
+  if (description.length > 210) {
+    setLoading(false);
+    toast.error('The description field should not exceed 210 characters.');
+    return;
+  }
+  const imageExists = await checkImageExists(image);
+
+  if (!imageExists) {
+    setLoading(false);
+    toast.error('Image not found at the provided URL');
+    return;
+  }
+
   const uploadFileHandler = async (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -204,12 +249,15 @@ export default function ProductEditScreen() {
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value;
-                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
-                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
+                  const enteredValue = e.target.value;
+              
+                  if (enteredValue.trim() === '' || /^\d*(\.\d*)?$/.test(enteredValue)) {
                       setPrice(enteredValue);
-                    }
-                  }}
+                  } else {
+                      console.log('Enter a number');
+                  }
+              }}
+              
                   onKeyDown={(e) => {
                     // Evita caracteres que no sean números o puntos decimales
                     if (
