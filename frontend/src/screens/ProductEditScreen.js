@@ -232,43 +232,39 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-  <label htmlFor="price">Price</label>
-  <input
-    type="text"
-    id="price"
-    className="form-control"
-    value={price}
-    onChange={(e) => {
-      const enteredValue = e.target.value;
-
-      // Verifica si el formato del número decimal es correcto
-      // (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
-      if (/^\d+(\.\d*)?$/.test(enteredValue)) {
-        // Verifica si el valor es menor o igual a 1000
-        if (parseFloat(enteredValue) <= 1000) {
-          setPrice(enteredValue);
-        }
-      }
-    }}
-    onKeyDown={(e) => {
-      // Evita caracteres que no sean números o puntos decimales
-      if (
-        !(
-          (e.key >= '0' && e.key <= '9') ||
-          e.key === '.' ||
-          e.key === 'Backspace' ||
-          e.key === 'Delete' ||
-          e.key === 'ArrowLeft' ||
-          e.key === 'ArrowRight'
-        )
-      ) {
-        e.preventDefault();
-      }
-    }}
-    required
-  />
-</div>
-
+              <label htmlFor="price">Price</label>
+              <input
+                type="number"
+                id="price"
+                className="form-control"
+                value={price}
+                onChange={(e) => {
+                    const enteredValue = e.target.value;
+                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
+                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
+                      setPrice(enteredValue);
+                    }
+                  }}
+                  min="1"
+                  max="1000"
+                  onKeyDown={(e) => {
+                    // Evita caracteres que no sean números o puntos decimales
+                    if (
+                      !(
+                        (e.key >= '0' && e.key <= '9') ||
+                        e.key === '.' ||
+                        e.key === 'Backspace' ||
+                        e.key === 'Delete' ||
+                        e.key === 'ArrowLeft' ||
+                        e.key === 'ArrowRight'
+                      )
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
+                required
+              />
+            </div>
             <div className="form-group">
               <label htmlFor="description">Description</label>
               <textarea
@@ -312,34 +308,29 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-  <label htmlFor="countInStock">Count In Stock</label>
-  <input
-    type="number"
-    id="countInStock"
-    className="form-control"
-    value={countInStock}
-    onChange={(e) => {
-      const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
-      const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
-
-      if (regex.test(enteredValue)) {
-        // Verifica si el valor es menor o igual a 1000
-        if (parseInt(enteredValue, 10) <= 1000) {
-          setCountInStock(enteredValue);
-        }
-      }
-    }}
-    min="1"
-    onKeyDown={(e) => {
-      // Evita caracteres que no sean números
-      if (!/^\d$/.test(e.key)) {
-        e.preventDefault();
-      }
-    }}
-    required
-  />
-</div>
-
+              <label htmlFor="countInStock">Count In Stock</label>
+              <input
+                type="number"
+                id="countInStock"
+                className="form-control"
+                value={countInStock}
+                onChange={(e) => {
+                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
+                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                    if (regex.test(enteredValue)) {
+                      setCountInStock(enteredValue);
+                    }
+                  }}
+                  min="1"
+                  max="1000"
+                  onKeyDown={(e) => {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
+                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    }
+                  }}
+                required
+              />
+            </div>
             <div>
             <label htmlFor="imageURL">Image URL</label>
 <input
