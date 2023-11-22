@@ -28,8 +28,8 @@
   color: #61dafb;
 }
 img.admin-image {
-  width: 55px; /* Ancho deseado */
-  height: 50px; /* Altura deseada */
+  width: 30px; /* Ancho deseado */
+  height: 30px; /* Altura deseada */
   object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
 }
 @keyframes App-logo-spin {
