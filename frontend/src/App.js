@@ -18,11 +18,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import AdminRoute from './components/AdminRoute';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
-
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 function App() {
@@ -49,7 +47,7 @@ function App() {
                   <img
                     alt="My Pet Shop Logo"
                     src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
-                    height="30"
+                    height="50"
                     className="d-inline-block align-top"
                   />
                 </Navbar.Brand>
@@ -58,15 +56,6 @@ function App() {
                 <SearchBox />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
-              <Link to="/addproduct" className="nav-link">
-                  <img
-                    alt="addProduct"
-                    src="https://i.ibb.co/VpttTSt/add1-removebg-preview.png"
-                    height="30"
-                    className="d-inline-block align-top"
-                  />
-                </Link>
-
                 <Link to="/cart" className="nav-link">
                   <img
                     alt="cart"
@@ -90,7 +79,7 @@ function App() {
           height="30"
           className="d-inline-block align-top"
         />
-        <span className="d-inline-block align-top ml-2">{userInfo.name}</span>
+        <span className="d-inline-block align-top ml-2">{userInfo.userName}</span>
       </>
     }
     className="d-inline-block align-top"
@@ -118,13 +107,11 @@ function App() {
   </LinkContainer>
 )}
                  
- <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png" alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
+ <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
  <LinkContainer to="/admin/products">
     <NavDropdown.Item className="nav-dropdown-item">
     <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
-
        Products 
-
     </NavDropdown.Item>
   </LinkContainer>
 </NavDropdown>
@@ -134,7 +121,6 @@ function App() {
         </header>
         <div>
           <Nav className="flex-column text-white w-100 p-2">
-            {/* Puedes agregar elementos aquí si es necesario */}
           </Nav>
         </div>
         <main>
