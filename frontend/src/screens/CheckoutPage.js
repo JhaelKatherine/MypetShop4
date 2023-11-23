@@ -202,9 +202,9 @@ const CheckoutPage = () => {
           });
     
           // Actualiza la cantidad en stock de cada producto comprado
-          for (const item of cart.cartItems) {
+          /*for (const item of cart.cartItems) {
             const productId = item.productId;
-            const quantityPurchased = item.quantity;
+            const quantityPurchased = item.countInStock;
     
             try {
               const { data: product } = await Axios.get(`/api/products/${productId}`);
@@ -213,7 +213,7 @@ const CheckoutPage = () => {
             } catch (error) {
               // Manejo de errores al obtener o actualizar el producto
             }
-          }
+          }*/
     
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
