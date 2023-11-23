@@ -18,7 +18,7 @@ import "../Css/StripeForm.css";
 
 
 const CheckoutPage = () => {
-  
+
   const CARD_OPTIONS = {
     iconStyle: "solid",
     style: {
@@ -183,6 +183,18 @@ const CheckoutPage = () => {
             },
           
           );
+
+          for (const item of cart.cartItems) {
+            const productId = item.productId; // Reemplaza con el ID real de tu producto
+            const updatedQuantity = item.countInStock;
+            const { data: product } = await axios.get(`/api/products/${productId}`);
+            
+            // Actualiza la cantidad restando la cantidad comprada
+            product.countInStock -= updatedQuantity;
+    
+            // Actualiza la cantidad del producto en tu base de datos
+            await axios.put(`/api/products/${productId}`, product);
+          }
           
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
