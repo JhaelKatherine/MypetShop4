@@ -76,9 +76,12 @@ header {
   background-color: #87CEFA; /* Color de fondo al asercarse el mouse */
 }
 
+
+
 img.product-icon {
   margin-right: 10px; 
   width: 25px; /* Ancho deseado */
   height: 25px; /* Altura deseada */
   object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
 }
+
