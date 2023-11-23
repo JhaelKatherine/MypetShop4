@@ -18,6 +18,7 @@ import "../Css/StripeForm.css";
 
 
 const CheckoutPage = () => {
+  
   const CARD_OPTIONS = {
     iconStyle: "solid",
     style: {
