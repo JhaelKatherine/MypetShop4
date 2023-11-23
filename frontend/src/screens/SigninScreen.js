@@ -29,6 +29,10 @@ export default function SigninScreen() {
         toast.error('Please enter a valid email address');
         return;
       }
+      if (email.length > 350) { // Permitir longitud mayor si el formato es válido
+        toast.error('Email length exceeds the limit');
+        return;
+      }
 
       const { data } = await Axios.post('/api/users/signin', {
         email,
