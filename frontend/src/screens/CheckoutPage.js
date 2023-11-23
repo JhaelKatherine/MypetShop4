@@ -182,14 +182,6 @@ const CheckoutPage = () => {
             },
           
           );
-
-          await Promise.all(
-            cart.cartItems.map(async (item) => {
-              await Axios.patch(`/api/products/${item.product}`, {
-                countInStock: item.countInStock - 1,
-              });
-            })
-          );
           
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
@@ -351,6 +343,30 @@ const CheckoutPage = () => {
       <div className="right-section">
         <CartScreen/>
       </div>
+      <div className="form-group">
+              <label htmlFor="countInStock">Count In Stock</label>
+              <input
+                type="number"
+                id="countInStock"
+                className="form-control"
+                value={countInStock}
+                onChange={(e) => {
+                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
+                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                    if (regex.test(enteredValue)) {
+                      setCountInStock(enteredValue);
+                    }
+                  }}
+                  min="1"
+                  max="1000"
+                  onKeyDown={(e) => {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
+                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    }
+                  }}
+                required
+              />
+            </div>
     </div>
   );
 };
