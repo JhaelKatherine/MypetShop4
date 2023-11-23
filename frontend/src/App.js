@@ -86,7 +86,7 @@ function App() {
     id="basic-nav-dropdown"
   >
     <Link
-      className="dropdown-item "
+      className="dropdown-item nav-dropdown-item:hover "
       to="#signout"
       onClick={signoutHandler}
     >
