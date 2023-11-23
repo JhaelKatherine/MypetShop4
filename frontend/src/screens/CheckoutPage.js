@@ -341,7 +341,6 @@ const CheckoutPage = () => {
         <CartScreen/>
       </div>
       <div className="form-group">
-  <label htmlFor="countInStock">Count In Stock</label>
 </div>
 
     </div>
