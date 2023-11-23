@@ -86,7 +86,7 @@ function App() {
     id="basic-nav-dropdown"
   >
     <Link
-      className="dropdown-item"
+      className="nav-dropdown-item"
       to="#signout"
       onClick={signoutHandler}
     >
