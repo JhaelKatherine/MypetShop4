@@ -38,52 +38,6 @@ orderRouter.post(
   })
 );
 
-ordersRouter.post(
-  '/',
-  expressAsyncHandler(async (req, res) => {
-    const orderItems = req.body.orderItems.map((x) => ({ ...x, product: x._id }));
-
-    // Verificar el stock antes de crear la orden
-    const stockCheckPromises = orderItems.map(async (item) => {
-      const product = await Product.findById(item.product);
-      return product && product.countInStock >= item.quantity;
-    });
-
-    const isStockAvailable = (await Promise.all(stockCheckPromises)).every(Boolean);
-
-    if (!isStockAvailable) {
-      return res.status(400).send({ message: 'Insufficient stock for one or more items in the order.' });
-    }
-
-    const newOrder = new Order({
-      orderItems,
-      shippingAddress: req.body.shippingAddress,
-      paymentMethod: req.body.paymentMethod,
-      itemsPrice: req.body.itemsPrice,
-      shippingPrice: req.body.shippingPrice,
-      taxPrice: req.body.taxPrice,
-      totalPrice: req.body.totalPrice,
-      user: req.body.user,
-    });
-
-    const order = await newOrder.save();
-
-    // Actualizar el stock de los productos en orderItems
-    await Promise.all(
-      orderItems.map(async (item) => {
-        const product = await Product.findById(item.product);
-
-        if (product) {
-          product.countInStock -= item.quantity;
-          await product.save();
-        }
-      })
-    );
-
-    res.status(201).send({ message: 'New Order Created', order });
-  })
-);
-
 orderRouter.get(
   '/summary',
   isAuth,
