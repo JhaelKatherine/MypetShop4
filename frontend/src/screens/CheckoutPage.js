@@ -18,6 +18,11 @@ import "../Css/StripeForm.css";
 
 
 const CheckoutPage = () => {
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+  const [countInStock, setCountInStock] = useState(0); // Ajusta el valor inicial según tus necesidades
+
   const CARD_OPTIONS = {
     iconStyle: "solid",
     style: {
@@ -46,6 +51,7 @@ const CheckoutPage = () => {
   const isValidPhone = (value) => /^\d*$/.test(value);
   const [isNameValid, setIsNameValid] = useState(true);
   const [isPhoneValid, setIsPhoneValid] = useState(true);
+
 
   const CardField = ({ onChange }) => (
     <div className="FormRow">
@@ -135,59 +141,51 @@ const CheckoutPage = () => {
     
     const handleSubmit = async (event) => {
       event.preventDefault();
-
-      
-  
+    
       if (!stripe || !elements) {
         return;
       }
-  
+    
       if (error) {
         elements.getElement("card").focus();
         return;
       }
-  
+    
       if (cardComplete) {
         setProcessing(true);
       }
-  
+    
       const payload = await stripe.createPaymentMethod({
         type: "card",
         card: elements.getElement(CardElement),
         billing_details: billingDetails
       });
-  
+    
       setProcessing(false);
-  
+    
       if (payload.error) {
         setError(payload.error);
       } else {
         setPaymentMethod(payload.paymentMethod);
-
+    
         try {
-        
           dispatch({ type: 'CREATE_REQUEST' });
-          
-          const { data } = await Axios.post(
-            '/api/orders',
-            {
-              orderItems: cart.cartItems,
-              shippingAddress: cart.shippingAddress,
-              paymentMethod: cart.paymentMethod,
-              itemsPrice: cart.itemsPrice,
-              shippingPrice: cart.shippingPrice,
-              taxPrice: cart.taxPrice,
-              totalPrice: cart.totalPrice,
-              user : userInfo
-            },
-          
-          );
-          
+    
+          const { data } = await Axios.post('/api/orders', {
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice,
+            user: userInfo
+          });
+
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
           localStorage.removeItem('cartItems');
         } catch (err) {
-         
           dispatch({ type: 'CREATE_FAIL' });
           toast.error(getError(err));
         }
@@ -318,8 +316,7 @@ const CheckoutPage = () => {
     loading: false,
   });
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart, userInfo } = state;
+
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
   cart.itemsPrice = round2(
@@ -343,6 +340,9 @@ const CheckoutPage = () => {
       <div className="right-section">
         <CartScreen/>
       </div>
+      <div className="form-group">
+</div>
+
     </div>
   );
 };
