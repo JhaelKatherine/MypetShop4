@@ -182,6 +182,14 @@ const CheckoutPage = () => {
             },
           
           );
+
+          await Promise.all(
+            cart.cartItems.map(async (item) => {
+              await Axios.patch(`/api/products/${item.product}`, {
+                countInStock: item.countInStock - 1,
+              });
+            })
+          );
           
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
