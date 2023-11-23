@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import "../Css/StripeForm.css";
 
+import Invoice from './screens/Invoice';
 
 
 
@@ -283,6 +284,8 @@ const CheckoutPage = () => {
         
         <SubmitButton processing={processing} error={error} disabled={!stripe}>
           Pay Now
+          <Route path="/invoice" element={<Invoice />} />
+
         </SubmitButton>
         
       </form>
