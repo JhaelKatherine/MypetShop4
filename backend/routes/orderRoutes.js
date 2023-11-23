@@ -22,7 +22,7 @@ orderRouter.post(
   
   expressAsyncHandler(async (req, res) => {
     console.log(" After User ID /////////////////////////////////////");
-    console.log(req.body.orderItems);
+    console.log(req.user);
     console.log("Before User ID///////////////////////////////////////");
     //console.log(user.req.user);
     const newOrder = new Order({
