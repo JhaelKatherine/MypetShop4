@@ -221,7 +221,7 @@ const CheckoutPage = () => {
     ) : (
       <form className="Form" onSubmit={handleSubmit}>
         <fieldset className="FormGroup">
-        {error && <ErrorMessage>Please enter valid data in all fields</ErrorMessage>}
+        
           <Field
             label="Name"
             id="name"
@@ -270,7 +270,7 @@ const CheckoutPage = () => {
               }
             }}
           />
-           {!isNameValid && <ErrorMessage>Please enter only letters</ErrorMessage>}
+           {!isNameValid && <ErrorMessage>Please enter only numbers</ErrorMessage>}
         </fieldset>
         <fieldset className="FormGroup">
           <CardField
@@ -279,6 +279,7 @@ const CheckoutPage = () => {
               setCardComplete(e.complete);
             }}
           />
+          {error && <ErrorMessage>Please enter valid data in all fields</ErrorMessage>}
         </fieldset>
         
         <SubmitButton processing={processing} error={error} disabled={!stripe}>
