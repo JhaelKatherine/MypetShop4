@@ -185,15 +185,18 @@ const CheckoutPage = () => {
           );
 
           for (const item of cart.cartItems) {
-            const productId = item.productId; // Reemplaza con el ID real de tu producto
-            const updatedQuantity = item.countInStock;
-            const { data: product } = await axios.get(`/api/products/${productId}`);
-            
-            // Actualiza la cantidad restando la cantidad comprada
-            product.countInStock -= updatedQuantity;
+            try {
+              const { data: product } = await axios.get(`/api/products/${productId}`);
+              
+              // Actualiza la cantidad restando la cantidad comprada
+              product.countInStock -= item.countInStock;
     
-            // Actualiza la cantidad del producto en tu base de datos
-            await axios.put(`/api/products/${productId}`, product);
+              // Actualiza la cantidad del producto en tu base de datos
+              await axios.put(`/api/products/${productId}`, product);
+            } catch (error) {
+              // Manejo de errores al obtener o actualizar el producto
+            }
+            
           }
           
           ctxDispatch({ type: 'CART_CLEAR' });
