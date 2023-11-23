@@ -29,12 +29,11 @@ export default function SigninScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      // Validar el formato del correo electrónico antes de enviar la solicitud
-      if (!validator.isEmail(email)) {
+      // Validar el formato del correo electrónico antes de enviar la solicitu  
+      if (!isEmailValid(email)) {
         toast.error('Please enter a valid email address');
         return;
       }
-  
       const { data } = await Axios.post('/api/users/signin', {
         email,
         password,
