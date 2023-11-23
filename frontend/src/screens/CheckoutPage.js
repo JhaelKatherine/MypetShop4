@@ -184,7 +184,7 @@ const CheckoutPage = () => {
           
           );
 
-          for (const item of cart.cartItems) {
+          /*for (const item of cart.cartItems) {
             const productId = item.productId; // Reemplaza con el ID real de tu producto
             const updatedQuantity = item.countInStock;
             const { data: product } = await axios.get(`/api/products/${productId}`);
@@ -194,7 +194,7 @@ const CheckoutPage = () => {
     
             // Actualiza la cantidad del producto en tu base de datos
             await axios.put(`/api/products/${productId}`, product);
-          }
+          }*/
           
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
