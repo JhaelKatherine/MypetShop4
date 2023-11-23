@@ -83,10 +83,10 @@ function App() {
       </>
     }
     className="d-inline-block align-top"
-    id="admin-nav-dropdown"
+    id="basic-nav-dropdown"
   >
     <Link
-      className="nav-dropdown-item"
+      className="dropdown-item "
       to="#signout"
       onClick={signoutHandler}
     >
