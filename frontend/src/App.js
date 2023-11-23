@@ -87,7 +87,7 @@ function App() {
   >
     {/* No incluyas el NavDropdown.Divider aquí */}
     <Link
-      className="nav-dropdown-item"
+      className="dropdown-item"
       to="#signout"
       onClick={signoutHandler}
       style={{ margin: 0, padding: 0 }}
