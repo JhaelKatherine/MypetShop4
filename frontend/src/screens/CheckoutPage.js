@@ -19,6 +19,10 @@ import "../Css/StripeForm.css";
 
 const CheckoutPage = () => {
 
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+  const [countInStock, setCountInStock] = useState(0); // Ajusta el valor inicial según tus necesidades
+
   const CARD_OPTIONS = {
     iconStyle: "solid",
     style: {
@@ -47,7 +51,7 @@ const CheckoutPage = () => {
   const isValidPhone = (value) => /^\d*$/.test(value);
   const [isNameValid, setIsNameValid] = useState(true);
   const [isPhoneValid, setIsPhoneValid] = useState(true);
-  const [countInStock, setCountInStock] = useState('');
+
 
   const CardField = ({ onChange }) => (
     <div className="FormRow">
@@ -178,24 +182,6 @@ const CheckoutPage = () => {
             user: userInfo
           });
 
-          // Actualización de la cantidad en stock de cada producto comprado
-          for (const item of cart.cartItems) {
-            const productId = item.productId;
-            const quantityPurchased = item.quantity;
-
-            try {
-              const { data: product } = await Axios.get(`/api/products/${productId}`);
-              if (product.countInStock >= quantityPurchased) {
-                product.countInStock -= quantityPurchased;
-                await Axios.put(`/api/products/${productId}`, product);
-              } else {
-                console.log('La cantidad comprada es mayor que el stock disponible.');
-                // Manejar caso cuando la cantidad comprada es mayor que la cantidad en stock
-              }
-            } catch (error) {
-              // Manejo de errores al obtener o actualizar el producto
-            }
-          }
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
           localStorage.removeItem('cartItems');
@@ -330,8 +316,7 @@ const CheckoutPage = () => {
     loading: false,
   });
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart, userInfo } = state;
+
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
   cart.itemsPrice = round2(
@@ -355,6 +340,23 @@ const CheckoutPage = () => {
       <div className="right-section">
         <CartScreen/>
       </div>
+      <div className="form-group">
+  <label htmlFor="countInStock">Count In Stock</label>
+  <input
+    type="number"
+    id="countInStock"
+    className="form-control"
+    value={countInStock}
+    onChange={(e) => {
+      const enteredValue = e.target.value.replace(/[^\d]/g, ''); // Solo permite dígitos
+      setCountInStock(enteredValue);
+    }}
+    min="1"
+    max="1000"
+    required
+  />
+</div>
+
     </div>
   );
 };
