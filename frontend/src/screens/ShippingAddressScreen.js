@@ -31,8 +31,8 @@ export default function ShippingAddressScreen() {
   const [addressError, setAddressError] = useState('');
   const [cityError, setCityError] = useState('');
   const [cellPhoneError, setCellPhoneError] = useState('');
-
-  useEffect(() => {
+  
+    useEffect(() => {
     if (!userInfo) {
       navigate('/shipping');
     }
@@ -83,15 +83,23 @@ export default function ShippingAddressScreen() {
   const submitShippingHandler = (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      ctxDispatch({
-        type: 'SAVE_SHIPPING_ADDRESS',
-        payload: { fullName, nit, address, city, cellPhone },
-      });
-      localStorage.setItem('shippingAddress', JSON.stringify({ fullName, nit, address, city, cellPhone }));
-    } else {
-      console.log('Please complete the required fields correctly.');
-    }
+    const requiredFields = [fullName, address, city, cellPhone];
+  const areRequiredFieldsFilled = requiredFields.every(field => field.trim() !== '');
+
+  if (!areRequiredFieldsFilled) {
+    console.log('Please complete all required fields except Nit.');
+    // Aquí puedes mostrar un mensaje al usuario indicando que todos los campos requeridos, excepto Nit, deben estar completos
+    return;
+  }
+
+  if (validateForm()) {
+    submitShippingHandler(e);
+    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
+    localStorage.setItem('paymentMethod', paymentMethodName);
+    navigate('/checkoutpage');
+  } else {
+    console.log('Please complete the required fields correctly.');
+  }
   };
 
   const submitPaymentHandler = (e) => {
@@ -104,6 +112,11 @@ export default function ShippingAddressScreen() {
     } else {
       console.log('Please complete the required fields correctly.');
     }
+  };
+  const placeOrder = () => {
+    if (validateForm()) {
+    navigate('/checkoutpage');
+    }else {console.log('Please complete the required fields correctly.');}
   };
 
 
@@ -127,8 +140,8 @@ export default function ShippingAddressScreen() {
       const value = e.target.value;
       if (regex.test(value) || value === '') {
         setFullName(value);
-        e.target.setCustomValidity(''); // Restablece el mensaje de error
-        setFullNameError(''); // Reset the error message
+        e.target.setCustomValidity('');
+        setFullNameError(''); 
       } else {
         e.target.setCustomValidity("Please enter only letters");
         setFullNameError('Please enter only letters');
@@ -156,7 +169,7 @@ export default function ShippingAddressScreen() {
       if (regex.test(value) || value === '') {
         setNit(value);
         e.target.setCustomValidity('');
-        setNitError(''); // Limpiar el mensaje de error cuando el valor es válido
+        setNitError('');
       } else {
         e.target.setCustomValidity("Please enter only numbers");
         setNitError('Please enter only numbers');
@@ -291,7 +304,7 @@ export default function ShippingAddressScreen() {
                       </div>
                       
                       <div className="d-flex justify-content-end mt-3">
-        <Button variant="primary" type="submit">Place the Order</Button>
+                      <Button variant="primary" type="submit" onClick={placeOrder}>Place the Order</Button>
       </div>
                     </Form>
                   </div>

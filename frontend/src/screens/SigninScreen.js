@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
-import validator from 'validator'; // Importar validator
+import validator from 'validator';
 import '../Css/AddUser.css';
 
 export default function SigninScreen() {
@@ -19,17 +19,21 @@ export default function SigninScreen() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const isEmailValid = (email) => {
+    // Expresión regular más detallada para validar el formato del correo electrónico
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      // Validar el formato del correo electrónico antes de enviar la solicitud
-      if (!validator.isEmail(email)) {
+      // Validar el formato del correo electrónico antes de enviar la solicitu  
+      if (!isEmailValid(email)) {
         toast.error('Please enter a valid email address');
         return;
       }
-
       const { data } = await Axios.post('/api/users/signin', {
         email,
         password,
@@ -82,10 +86,10 @@ export default function SigninScreen() {
             </button>
             <div className="mb-3 d-flex justify-content-start">
               New customer?{' '}
-              <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+              <Link to={`/signup?redirect=${redirect}`} className="add-space">Create your account</Link>
             </div>
             <div className="mb-3 d-flex justify-content-start"> 
-              Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
+              Forget Password? <Link to={`/forget-password`} className="add-space">Reset Password</Link>
             </div>
           </form>
         </div>

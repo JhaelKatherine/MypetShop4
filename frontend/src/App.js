@@ -21,6 +21,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
+import CheckoutPage from './screens/CheckoutPage';
 
 
 function App() {
@@ -69,7 +70,7 @@ function App() {
                     </Badge>
                   )}
                 </Link>
-               {userInfo ? (
+                {userInfo ? (
   <NavDropdown
     title={
       <>
@@ -85,9 +86,8 @@ function App() {
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    <NavDropdown.Divider />
     <Link
-      className="dropdown-item"
+      className="dropdown-item nav-dropdown-item:hover "
       to="#signout"
       onClick={signoutHandler}
     >
@@ -106,6 +106,7 @@ function App() {
     </Nav.Link>
   </LinkContainer>
 )}
+
                  
  <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
  <LinkContainer to="/admin/products">
@@ -131,6 +132,7 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
+              <Route path="/checkoutpage" element={<CheckoutPage />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
                 path="/shipping"
