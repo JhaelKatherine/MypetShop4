@@ -163,7 +163,7 @@ const CheckoutPage = () => {
         try {
         
           dispatch({ type: 'CREATE_REQUEST' });
-          console.log("Before data");
+          console.log(userInfo);
 
           const { data } = await Axios.post(
             '/api/orders',
