@@ -19,17 +19,21 @@ export default function SigninScreen() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const isEmailValid = (email) => {
+    // Expresión regular más detallada para validar el formato del correo electrónico
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      // Validar el formato del correo electrónico antes de enviar la solicitud
-      if (!validator.isEmail(email)) {
+      // Validar el formato del correo electrónico antes de enviar la solicitu  
+      if (!isEmailValid(email)) {
         toast.error('Please enter a valid email address');
         return;
       }
-
       const { data } = await Axios.post('/api/users/signin', {
         email,
         password,
