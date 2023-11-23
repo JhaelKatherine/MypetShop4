@@ -70,7 +70,7 @@ function App() {
                     </Badge>
                   )}
                 </Link>
-               {userInfo ? (
+                {userInfo ? (
   <NavDropdown
     title={
       <>
@@ -86,9 +86,8 @@ function App() {
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    <NavDropdown.Divider />
     <Link
-      className="dropdown-item"
+      className="dropdown-item nav-dropdown-item:hover "
       to="#signout"
       onClick={signoutHandler}
     >
@@ -107,6 +106,7 @@ function App() {
     </Nav.Link>
   </LinkContainer>
 )}
+
                  
  <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
  <LinkContainer to="/admin/products">
