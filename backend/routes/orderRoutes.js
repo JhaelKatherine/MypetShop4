@@ -19,8 +19,9 @@ orderRouter.get(
 
 orderRouter.post(
   '/',
-  
   expressAsyncHandler(async (req, res) => {
+    console.log("Order Items Received:", req.body.orderItems);
+
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x && x._id ? x._id : null })),
       shippingAddress: req.body.shippingAddress,
