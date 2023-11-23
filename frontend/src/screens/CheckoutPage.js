@@ -92,7 +92,7 @@ const CheckoutPage = () => {
     </button>
   );
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchData = async () => {
       for (const item of cart.cartItems){
         const productId = item.productId; // Reemplaza con el ID real de tu producto
@@ -113,7 +113,7 @@ const CheckoutPage = () => {
       
     };
     fetchData();
-  }, [productId]);
+  }, [productId]);*/
   
   const ErrorMessage = ({ children }) => (
     <div className="ErrorMessage" role="alert">
