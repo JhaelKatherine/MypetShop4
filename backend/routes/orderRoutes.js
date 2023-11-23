@@ -21,33 +21,36 @@ orderRouter.post(
   '/',
   expressAsyncHandler(async (req, res) => {
     try {
-      console.log("Order Items Received:", req.body.orderItems);
-
       const newOrder = new Order({
-        orderItems: req.body.orderItems.map((x, index) => {
-          if (!x || !x._id) {
-            console.log(`Invalid order item at index ${index}:`, x);
-            return { ...x, product: null };
-          }
-          return { ...x, product: x._id };
-        }),
+        orderItems: req.body.orderItems.map((x) => ({
+          slug: x.slug,
+          name: x.name,
+          quantity: x.quantity,
+          image: x.image,
+          price: x.price,
+          product: x.product?.$oid || null,
+        })),
         shippingAddress: req.body.shippingAddress,
         paymentMethod: req.body.paymentMethod,
         itemsPrice: req.body.itemsPrice,
         shippingPrice: req.body.shippingPrice,
         taxPrice: req.body.taxPrice,
         totalPrice: req.body.totalPrice,
-        user: req.user._id,
+        user: req.user?.$oid || null,
+        isPaid: true, // Siempre se establece como pagado según tu ejemplo
+        isDelivered: true, // Siempre se establece como entregado según tu ejemplo
       });
 
       const order = await newOrder.save();
       res.status(201).send({ message: 'New Order Created', order });
     } catch (error) {
       console.error("Error:", error);
+      console.error("Error Details:", error.message, error.stack);
       res.status(500).send({ message: 'Internal Server Error' });
     }
   })
 );
+
 
 
 
