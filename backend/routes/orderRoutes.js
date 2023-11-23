@@ -19,24 +19,25 @@ orderRouter.get(
 
 orderRouter.post(
   '/',
-  
   expressAsyncHandler(async (req, res) => {
     try {
       console.log('Recibida solicitud POST para crear una nueva orden');
 
-    const newOrder = new Order({
-      orderItems: req.body.orderItems.map((x) => ({ ...x,     product: x._id ? x._id : null,
-      })),
-      shippingAddress: req.body.shippingAddress,
-      paymentMethod: req.body.paymentMethod,
-      itemsPrice: req.body.itemsPrice,
-      shippingPrice: req.body.shippingPrice,
-      taxPrice: req.body.taxPrice,
-      totalPrice: req.body.totalPrice,
-      user: req.user._id,
-    });
+      const newOrder = new Order({
+        orderItems: req.body.orderItems.map((x) => ({
+          ...x,
+          product: x._id !== null && x._id !== undefined ? x._id : generarIdManual(),
+        })),
+        shippingAddress: req.body.shippingAddress,
+        paymentMethod: req.body.paymentMethod,
+        itemsPrice: req.body.itemsPrice,
+        shippingPrice: req.body.shippingPrice,
+        taxPrice: req.body.taxPrice,
+        totalPrice: req.body.totalPrice,
+        user: req.user._id,
+      });
 
-    const order = await newOrder.save();
+      const order = await newOrder.save();
       console.log('Nueva orden creada con éxito:', order);
 
       res.status(201).send({ message: 'New Order Created', order });
@@ -46,6 +47,23 @@ orderRouter.post(
     }
   })
 );
+
+function generarIdManual() {
+  const fecha = new Date();
+  const anio = fecha.getFullYear();
+  const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+  const dia = fecha.getDate().toString().padStart(2, '0');
+  const hora = fecha.getHours().toString().padStart(2, '0');
+  const minutos = fecha.getMinutes().toString().padStart(2, '0');
+  const segundos = fecha.getSeconds().toString().padStart(2, '0');
+  const milisegundos = fecha.getMilliseconds().toString().padStart(3, '0');
+
+  // Concatenar los componentes de la fecha y hora para formar el ID
+  const idManual = `${anio}${mes}${dia}${hora}${minutos}${segundos}${milisegundos}`;
+
+  return idManual;
+}
+
 orderRouter.get(
   '/summary',
   isAuth,
