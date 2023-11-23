@@ -19,6 +19,11 @@ export default function SigninScreen() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const isEmailValid = (email) => {
+    // Expresión regular más detallada para validar el formato del correo electrónico
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const submitHandler = async (e) => {
@@ -30,11 +35,6 @@ export default function SigninScreen() {
         return;
       }
   
-      // Verificar la longitud del correo electrónico
-      if (!validator.isByteLength(email, { min: 6, max: 254 })) {
-        toast.error('Email address length is invalid');
-        return;
-      }
       const { data } = await Axios.post('/api/users/signin', {
         email,
         password,
