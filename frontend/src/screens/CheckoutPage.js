@@ -184,7 +184,7 @@ const CheckoutPage = () => {
           
           );
 
-          for (const item of cart.cartItems) {
+          /*for (const item of cart.cartItems) {
             try {
               const { data: product } = await axios.get(`/api/products/${productId}`);
               
@@ -197,7 +197,7 @@ const CheckoutPage = () => {
               // Manejo de errores al obtener o actualizar el producto
             }
             
-          }
+          }*/
           
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
