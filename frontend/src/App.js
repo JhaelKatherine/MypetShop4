@@ -21,6 +21,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
+import CheckoutPage from './screens/CheckoutPage';
 
 
 function App() {
@@ -131,6 +132,7 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
+              <Route path="/checkoutpage" element={<CheckoutPage />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
                 path="/shipping"

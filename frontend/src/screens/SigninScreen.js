@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
-import validator from 'validator'; // Importar validator
+import validator from 'validator';
 import '../Css/AddUser.css';
 
 export default function SigninScreen() {

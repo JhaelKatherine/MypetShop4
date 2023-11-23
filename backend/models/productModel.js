@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema(
     description: { type: String, required: true },
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
-    status: { type: Boolean, default: true, required: true },
+    status: { type: Boolean, default: true, required: true }
 
   },
   {
