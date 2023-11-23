@@ -21,6 +21,10 @@ orderRouter.post(
   '/',
   
   expressAsyncHandler(async (req, res) => {
+    console.log(" After User ID /////////////////////////////////////");
+    console.log(req.body.orderItems);
+    console.log("Before User ID///////////////////////////////////////");
+    //console.log(user.req.user);
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
       shippingAddress: req.body.shippingAddress,
@@ -31,7 +35,8 @@ orderRouter.post(
       totalPrice: req.body.totalPrice,
       user: req.user._id,
     });
-
+    
+    console.log(newOrder);
     const order = await newOrder.save();
     res.status(201).send({ message: 'New Order Created', order });
   })

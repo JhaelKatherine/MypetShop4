@@ -130,6 +130,8 @@ const CheckoutPage = () => {
     
     const handleSubmit = async (event) => {
       event.preventDefault();
+
+      
   
       if (!stripe || !elements) {
         return;
@@ -156,10 +158,13 @@ const CheckoutPage = () => {
         setError(payload.error);
       } else {
         setPaymentMethod(payload.paymentMethod);
-        
+        console.log(cart.cartItems);
+
         try {
+        
           dispatch({ type: 'CREATE_REQUEST' });
-    
+          console.log("Before data");
+
           const { data } = await Axios.post(
             '/api/orders',
             {
@@ -169,15 +174,16 @@ const CheckoutPage = () => {
               itemsPrice: cart.itemsPrice,
               shippingPrice: cart.shippingPrice,
               taxPrice: cart.taxPrice,
-              totalPrice: cart.totalPrice,
+              totalPrice: cart.totalPrice
             },
           
           );
+          console.log("Hola mudno");
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
           localStorage.removeItem('cartItems');
-          
         } catch (err) {
+         // console.log(data);
           dispatch({ type: 'CREATE_FAIL' });
           toast.error(getError(err));
         }
@@ -273,6 +279,7 @@ const CheckoutPage = () => {
   };
   
   const stripePromise = loadStripe("pk_test_51OEcs4EBkKqgGPGIRt4fPpcnbJVMT67bhbHjuglghma7GSCohL5BmNQhLQ0CWe2YLlCnktGa6biR9gyJLRDvHx4a00VraXVTUn");
+
   const navigate = useNavigate();
 
   const reducer = (state, action) => {
