@@ -91,29 +91,6 @@ const CheckoutPage = () => {
       {processing ? "Processing..." : children}
     </button>
   );
-
-  /*useEffect(() => {
-    const fetchData = async () => {
-      for (const item of cart.cartItems){
-        const productId = item.productId; // Reemplaza con el ID real de tu producto
-        const quantityPurchased = item.countInStock;
-        try {
-          dispatch({ type: 'FETCH_REQUEST' });
-          const { data } = await axios.get(`/api/products/${productId}`);
-          productId.countInStock -= quantityPurchased;
-          setCountInStock(data.countInStock);
-          dispatch({ type: 'FETCH_SUCCESS' });
-        } catch (err) {
-          dispatch({
-            type: 'FETCH_FAIL',
-            payload: getError(err),
-          });
-        }
-      }
-      
-    };
-    fetchData();
-  }, [productId]);*/
   
   const ErrorMessage = ({ children }) => (
     <div className="ErrorMessage" role="alert">
@@ -200,25 +177,25 @@ const CheckoutPage = () => {
             totalPrice: cart.totalPrice,
             user: userInfo
           });
-    
-          // Actualiza la cantidad en stock de cada producto comprado
-          /*for (const item of cart.cartItems) {
-            if(item == null){
-              console.log('item no es nulo');
-            }
+
+          // Actualización de la cantidad en stock de cada producto comprado
+          for (const item of cart.cartItems) {
             const productId = item.productId;
-            const quantityPurchased = item.countInStock;
-    
+            const quantityPurchased = item.quantity;
+
             try {
               const { data: product } = await Axios.get(`/api/products/${productId}`);
-              product.countInStock -= quantityPurchased;
-              dispatch({ type: 'UPDATE_REQUEST' });
-              await Axios.put(`/api/products/${productId}`, product);
+              if (product.countInStock >= quantityPurchased) {
+                product.countInStock -= quantityPurchased;
+                await Axios.put(`/api/products/${productId}`, product);
+              } else {
+                console.log('La cantidad comprada es mayor que el stock disponible.');
+                // Manejar caso cuando la cantidad comprada es mayor que la cantidad en stock
+              }
             } catch (error) {
               // Manejo de errores al obtener o actualizar el producto
             }
-          }*/
-    
+          }
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
           localStorage.removeItem('cartItems');
