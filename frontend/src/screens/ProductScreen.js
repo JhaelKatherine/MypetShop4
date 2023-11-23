@@ -96,7 +96,7 @@ function ProductScreen() {
         `/api/products/${product._id}/reviews`,
         { rating, comment, name: userInfo.name },
         {
-          headers: {},
+          headers: { },
         }
       );
 
@@ -117,7 +117,11 @@ function ProductScreen() {
       dispatch({ type: 'CREATE_FAIL' });
     }
   };
-  return (
+  return loading ? (
+    <LoadingBox />
+  ) : error ? (
+    <MessageBox variant="danger">{error}</MessageBox>
+  ) : (
     <div>
       <Row>
         <Col md={6}>
@@ -143,22 +147,21 @@ function ProductScreen() {
             </ListGroup.Item>
             <ListGroup.Item>Pirce : ${product.price}</ListGroup.Item>
             <ListGroup.Item>
-              <Row xs={1} md={2} className="g-2">
-                {[product.image, ...product.images].map((x) => (
-                  <Col key={x}>
-                    <Card>
-                      <Button
-                        className="thumbnail"
-                        type="button"
-                        variant="light"
-                        onClick={() => setSelectedImage(x)}
-                      >
-                        <Card.Img variant="top" src={x} alt="product" />
-                      </Button>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
+            <Row xs={1} md={2} className="g-2">
+  <Col>
+    <Card>
+      <Button
+        className="thumbnail"
+        type="button"
+        variant="light"
+        onClick={() => setSelectedImage(product.image)}
+      >
+        <Card.Img variant="top" src={product.image} alt="product" />
+      </Button>
+    </Card>
+  </Col>
+</Row>
+
             </ListGroup.Item>
             <ListGroup.Item>
               Description:
@@ -206,12 +209,13 @@ function ProductScreen() {
       <div className="my-3">
         <h2 ref={reviewsRef}>Reviews</h2>
         <div className="mb-3">
-          {product.reviews.length === 0 && (
-            <MessageBox>There is no review</MessageBox>
-          )}
+        {product.reviews && product.reviews.length === 0 && (
+  <MessageBox>There is no review</MessageBox>
+)}
+
         </div>
         <ListGroup>
-          {product.reviews.map((review) => (
+        {product && product.reviews && product.reviews.map((review) => (
             <ListGroup.Item key={review._id}>
               <strong>{review.name}</strong>
               <Rating rating={review.rating} caption=" "></Rating>
@@ -261,7 +265,11 @@ function ProductScreen() {
             </form>
           ) : (
             <MessageBox>
-
+              Please{' '}
+              <Link to={`/signin?redirect=/product/${product.slug}`}>
+                Sign In
+              </Link>{' '}
+              to write a review
             </MessageBox>
           )}
         </div>

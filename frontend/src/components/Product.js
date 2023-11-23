@@ -27,7 +27,7 @@ function Product(props) {
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
-      window.alert('Lo siento. El producto está agotado');
+      window.alert('Sorry. Product is out of stock');
       return;
     }
     ctxDispatch({
@@ -35,7 +35,6 @@ function Product(props) {
       payload: { ...item, quantity },
     });
   };
-
 
   return (
     <Card>
