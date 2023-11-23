@@ -1,0 +1,84 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+img.admin-image {
+  width: 30px; /* Ancho deseado */
+  height: 30px; /* Altura deseada */
+  object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar {
+  background-color: #4180AB; /* Puedes cambiar esto según tu preferencia */
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: white;
+}
+
+.navbar-toggler-icon {
+  background-color: white;
+}
+.nav-dropdown {
+  width: 80%; /* Ancho deseado para el contenedor */
+}
+/* styles.css */
+
+/* Otros estilos existentes */
+
+.nav-dropdown-item {
+  width: 100%; /* El ancho es del 100% para ocupar todo el ancho del contenedor */
+
+  transition: background-color 0.2s; /* Transición de color de fondo al asercarse el mouse */
+}
+
+.nav-dropdown-item:hover {
+  background-color: #87CEFA; /* Color de fondo al asercarse el mouse */
+}
+
+img.product-icon {
+  margin-right: 10px; 
+  width: 25px; /* Ancho deseado */
+  height: 25px; /* Altura deseada */
+  object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
+}

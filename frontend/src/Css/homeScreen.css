@@ -1,0 +1,154 @@
+.image-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 185px;
+    height: 55px;
+    margin-right: 30px;
+    border-radius: 10px;
+    margin-left: 20px;
+    transition: background-color 0.3s; /* Agregamos una transición de color para que sea suave */
+}
+
+.button-content {
+    margin-top: 5px;
+
+}
+
+.button-container {
+    margin-bottom: 20px;
+    display: flex;
+    width: 85%;
+    justify-content: center;
+    margin-top: 10px;
+    margin-left: 80px;
+
+}
+
+.button-container button {
+    color: black;
+    cursor: pointer;
+    border: none;
+}
+
+.button-container button img {
+    width: 30%;
+}
+
+.button-container button:hover {
+    background-color: #87CEFA; /* Cambiamos el color al azul celeste cuando el ratón está encima */
+}
+
+.button-container {
+    align-items: center;
+}
+
+.button-container button {
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-button {
+        margin-right: 0;
+    }
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajusta el espacio según sea necesario */
+  }
+  
+  .image-container img {
+    width: 100%; /* El ancho de la imagen será el 100% del contenedor */
+    max-width: 9100px; /* Ancho máximo de la imagen, ajusta según sea necesario */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin: 0 10px; /* Ajusta el margen según sea necesario */
+  }
+  
+  @media (max-width: 768px) {
+    .image-container img {
+      max-width: 100%; /* Ajusta el ancho máximo para pantallas más pequeñas */
+    }
+  }
+
+  /* styles.css (o el nombre que prefieras) */
+
+/* Estilos para el contenedor de los botones de categoría de mascotas */
+.category-Pets-buttons-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px; /* Ajusta según sea necesario */
+    flex-wrap: wrap;
+
+  }
+  
+  /* Estilos para cada botón de categoría de mascotas */
+  .category-Pet-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 10px; /* Espacio entre botones */
+
+  }
+  
+  /* Estilos para el contenido dentro de cada botón */
+  .button-Pet-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Estilos para la imagen dentro de cada botón */
+  .button-Pet-content img {
+    width: 220px; /* Ajusta según sea necesario */
+    height: 220px; /* Ajusta según sea necesario */
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px; /* Ajusta según sea necesario */
+  }
+  
+  /* Estilos para el texto dentro de cada botón */
+  .button-Pet-content span {
+    font-size: 20px; /* Ajusta según sea necesario */
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .category-Pets-buttons-container {
+      justify-content: center;
+    }
+  
+    .category-Pet-button {
+      flex-basis: 100%; /* Ocupa todo el ancho disponible */
+    }
+  }
+
+  /* Agrega estos estilos al CSS de tu componente Product */
+
+/* Estilos para el contenedor del producto */
+.Card {
+  margin-bottom: 20px; /* Ajusta según sea necesario para evitar espacio en blanco entre productos */
+}
+
+/* Estilos para la imagen dentro del producto */
+.card-img-top {
+  width: 100%; /* Ajusta según sea necesario */
+  height: auto; /* Altura automática para mantener la proporción */
+}
+
+/* Estilos para el cuerpo del producto */
+.Card.Body {
+  text-align: center; /* Centra el texto dentro del cuerpo del producto */
+}
+
+/* Estilos para el botón del producto */
+.Button {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+}

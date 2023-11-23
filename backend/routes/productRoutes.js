@@ -1,7 +1,6 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
-import { isAuth, isAdmin } from '../utils.js';
 
 const productRouter = express.Router();
 
@@ -12,20 +11,17 @@ productRouter.get('/', async (req, res) => {
 
 productRouter.post(
   '/',
-  isAuth,
-  isAdmin,
+
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
-      name: 'sample name ' + Date.now(),
-      slug: 'sample-name-' + Date.now(),
-      image: '/images/p1.jpg',
-      price: 0,
-      category: 'sample category',
-      brand: 'sample brand',
-      countInStock: 0,
-      rating: 0,
-      numReviews: 0,
-      description: 'sample description',
+      name: req.body.name,
+      slug: req.body.slug,
+      image: req.body.image,
+      price: req.body.price,
+      category: req.body.category,
+      brand: req.body.brand,
+      description: req.body.description,
+      countInStock: req.body.countInStock,
     });
     const product = await newProduct.save();
     res.send({ message: 'Product Created', product });
@@ -34,8 +30,6 @@ productRouter.post(
 
 productRouter.put(
   '/:id',
-  isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -57,15 +51,19 @@ productRouter.put(
   })
 );
 
-productRouter.delete(
-  '/:id',
-  isAuth,
-  isAdmin,
+productRouter.put(
+  '/:id/status',
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
-      await product.remove();
-      res.send({ message: 'Product Deleted' });
+      product.status = req.body.status;
+      const updatedProduct = await product.save();
+      res.send({
+        _id: updatedProduct._id,
+        name: updatedProduct.name,
+        // Otros campos que desees devolver
+        status: updatedProduct.status,
+      });
     } else {
       res.status(404).send({ message: 'Product Not Found' });
     }
@@ -74,7 +72,6 @@ productRouter.delete(
 
 productRouter.post(
   '/:id/reviews',
-  isAuth,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -107,22 +104,31 @@ productRouter.post(
     }
   })
 );
-
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 6;
 
 productRouter.get(
   '/admin',
-  isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
     const page = query.page || 1;
     const pageSize = query.pageSize || PAGE_SIZE;
 
-    const products = await Product.find()
+    let products = await Product.find({ status: true })
       .skip(pageSize * (page - 1))
-      .limit(pageSize);
-    const countProducts = await Product.countDocuments();
+      .limit(pageSize)
+      .lean();
+
+    const countProducts = await Product.countDocuments({ status: true });
+
+    // Si la página actual tiene menos de 6 elementos, carga elementos adicionales de la página siguiente
+    if (products.length < PAGE_SIZE) {
+      const remainingProducts = await Product.find({ status: true })
+        .skip(pageSize * page)
+        .limit(PAGE_SIZE - products.length)
+        .lean();
+      products = products.concat(remainingProducts);
+    }
+
     res.send({
       products,
       countProducts,
@@ -131,6 +137,12 @@ productRouter.get(
     });
   })
 );
+
+// Resto del código...
+
+
+// Resto del código...
+
 
 productRouter.get(
   '/search',
