@@ -342,19 +342,6 @@ const CheckoutPage = () => {
       </div>
       <div className="form-group">
   <label htmlFor="countInStock">Count In Stock</label>
-  <input
-    type="number"
-    id="countInStock"
-    className="form-control"
-    value={countInStock}
-    onChange={(e) => {
-      const enteredValue = e.target.value.replace(/[^\d]/g, ''); // Solo permite dígitos
-      setCountInStock(enteredValue);
-    }}
-    min="1"
-    max="1000"
-    required
-  />
 </div>
 
     </div>
