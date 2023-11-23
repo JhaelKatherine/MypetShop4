@@ -208,7 +208,7 @@ const CheckoutPage = () => {
           
           );
 
-          for (const item of cart.cartItems) {
+          /*for (const item of cart.cartItems) {
             const productId = item.productId; // Reemplaza con el ID real de tu producto
             const quantityPurchased = item.countInStock;
             try {
@@ -224,7 +224,7 @@ const CheckoutPage = () => {
               // Manejo de errores al obtener o actualizar el producto
             }
             
-          }
+          }*/
           
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
