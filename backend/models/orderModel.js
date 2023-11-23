@@ -4,50 +4,38 @@ const orderSchema = new mongoose.Schema(
   {
     orderItems: [
       {
-        slug: { type: String, required: true },
-        name: { type: String, required: true },
-        quantity: { type: Number, required: true },
-        image: { type: String, required: true },
-        price: { type: Number, required: true },
+        slug: { type: String, required: false },
+        name: { type: String, required: false },
+        quantity: { type: Number, required: false },
+        image: { type: String, required: false },
+        price: { type: Number, required: false },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Product',
-          required: true,
+          required: false,
           
         },
-        _id: { type: mongoose.Schema.Types.ObjectId, required: true,},
+        _id: { type: mongoose.Schema.Types.ObjectId, required: false,},
       },
     ],
     shippingAddress: {
-      fullName: { type: String, required: true },
-      //nit: { type: String, required: false },
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
-
-      //cellPhone: { type: String, required: true },
+      fullName: { type: String, required: false },
+      nit: { type: String, required: false },
+      address: { type: String, required: false },
+      city: { type: String, required: false },
+      postalCode: { type: String, required: false },
+      country: { type: String, required: false },
+      cellPhone: { type: String, required: false },
     },
-    paymentMethod: { type: String, required: true },
-    //paymentResult: {
-     // id: String,
-     // status: String,
-     // update_time: String,
-     // email_address: String,
-   // },
-    //itemsPrice: { type: Number, required: true },
-    shippingPrice: { type: Number, required: true },
-    taxPrice: { type: Number, required: true },
-    totalPrice: { type: Number, required: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    paymentMethod: { type: String, required: false },
+    shippingPrice: { type: Number, required: false },
+    taxPrice: { type: Number, required: false },
+    totalPrice: { type: Number, required: false },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
     isDelivered: { type: Boolean, default: false },
-    //deliveredAt: { type: Date },
-  }//,
-  //{
-   // timestamps: true,
- // }
+  }
 );
 
 const Order = mongoose.model('Order', orderSchema);
