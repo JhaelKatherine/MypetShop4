@@ -92,7 +92,7 @@ const CheckoutPage = () => {
     </button>
   );
 
-  /*useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       for (const item of cart.cartItems){
         const productId = item.productId; // Reemplaza con el ID real de tu producto
@@ -113,7 +113,7 @@ const CheckoutPage = () => {
       
     };
     fetchData();
-  }, [productId]);*/
+  }, [productId]);
   
   const ErrorMessage = ({ children }) => (
     <div className="ErrorMessage" role="alert">
@@ -202,7 +202,7 @@ const CheckoutPage = () => {
           });
     
           // Actualiza la cantidad en stock de cada producto comprado
-          for (const item of cart.cartItems) {
+          /*for (const item of cart.cartItems) {
             if(item == null){
               console.log('item no es nulo');
             }
@@ -217,7 +217,7 @@ const CheckoutPage = () => {
             } catch (error) {
               // Manejo de errores al obtener o actualizar el producto
             }
-          }
+          }*/
     
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
