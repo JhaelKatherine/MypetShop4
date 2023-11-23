@@ -18,6 +18,10 @@ import "../Css/StripeForm.css";
 
 
 const CheckoutPage = () => {
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+  const [countInStock, setCountInStock] = useState(0); // Ajusta el valor inicial según tus necesidades
+
   const CARD_OPTIONS = {
     iconStyle: "solid",
     style: {
@@ -318,8 +322,7 @@ const CheckoutPage = () => {
     loading: false,
   });
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart, userInfo } = state;
+
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
   cart.itemsPrice = round2(
