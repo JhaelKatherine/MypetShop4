@@ -90,6 +90,8 @@ function App() {
       className="dropdown-item"
       to="#signout"
       onClick={signoutHandler}
+      style={{ margin: 0, padding: 0 }}  // Agrega esta línea
+
     >
       Sign Out
     </Link>
