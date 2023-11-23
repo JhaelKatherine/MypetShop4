@@ -25,7 +25,8 @@ orderRouter.post(
       console.log('Recibida solicitud POST para crear una nueva orden');
 
     const newOrder = new Order({
-      orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+      orderItems: req.body.orderItems.map((x) => ({ ...x,     product: x._id ? x._id : null,
+      })),
       shippingAddress: req.body.shippingAddress,
       paymentMethod: req.body.paymentMethod,
       itemsPrice: req.body.itemsPrice,
