@@ -160,7 +160,7 @@ const CheckoutPage = () => {
           dispatch({ type: 'CREATE_REQUEST' });
     
           const { data } = await Axios.post('/api/orders', {
-            orderItems: cart.cartItems.map(item => ({ product: item._id, quantity: item.quantity })),
+            orderItems: cart.cartItems, // No hay necesidad de realizar la transformación aquí
             shippingAddress: cart.shippingAddress,
             paymentMethod: cart.paymentMethod,
             itemsPrice: cart.itemsPrice,
