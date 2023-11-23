@@ -284,6 +284,7 @@ export default function ShippingAddressScreen() {
                               value="PayPal"
                               checked={paymentMethodName === 'PayPal'}
                               onChange={(e) => setPaymentMethod(e.target.value)}
+                              disabled={true} 
                             />
                           </div>
                         </ListGroup.Item>
