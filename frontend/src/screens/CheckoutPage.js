@@ -142,72 +142,101 @@ const CheckoutPage = () => {
     </button>
   );
   
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    if (!stripe || !elements) {
-      return;
-    }
-  
-    if (error) {
-      elements.getElement("card").focus();
-      return;
-    }
-  
-    if (cardComplete) {
-      setProcessing(true);
-    }
-  
-    const payload = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
-      billing_details: billingDetails
+  const CheckoutForm = () => {
+    
+    
+    const stripe = useStripe();
+    const elements = useElements();
+    const [error, setError] = useState(null);
+    const [cardComplete, setCardComplete] = useState(false);
+    const [processing, setProcessing] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState(null);
+    const [billingDetails, setBillingDetails] = useState({
+      email: "",
+      phone: "",
+      name: ""
     });
   
-    setProcessing(false);
-  
-    if (payload.error) {
-      setError(payload.error);
-    } else {
-      setPaymentMethod(payload.paymentMethod);
-  
-      try {
-        dispatch({ type: 'CREATE_REQUEST' });
-  
-        const { data } = await Axios.post('/api/orders', {
-          orderItems: cart.cartItems,
-          shippingAddress: cart.shippingAddress,
-          paymentMethod: cart.paymentMethod,
-          itemsPrice: cart.itemsPrice,
-          shippingPrice: cart.shippingPrice,
-          taxPrice: cart.taxPrice,
-          totalPrice: cart.totalPrice,
-          user: userInfo
-        });
-  
-        // Actualiza la cantidad en stock de cada producto comprado
-        for (const item of cart.cartItems) {
-          const productId = item.productId;
-          const quantityPurchased = item.quantity;
-  
-          try {
-            const { data: product } = await Axios.get(`/api/products/${productId}`);
-            product.countInStock -= quantityPurchased;
-            await Axios.put(`/api/products/${productId}`, product);
-          } catch (error) {
-            // Manejo de errores al obtener o actualizar el producto
-          }
-        }
-  
-        ctxDispatch({ type: 'CART_CLEAR' });
-        dispatch({ type: 'CREATE_SUCCESS' });
-        localStorage.removeItem('cartItems');
-      } catch (err) {
-        dispatch({ type: 'CREATE_FAIL' });
-        toast.error(getError(err));
+    
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+    
+      if (!stripe || !elements) {
+        return;
       }
-    }
-  };
+    
+      if (error) {
+        elements.getElement("card").focus();
+        return;
+      }
+    
+      if (cardComplete) {
+        setProcessing(true);
+      }
+    
+      const payload = await stripe.createPaymentMethod({
+        type: "card",
+        card: elements.getElement(CardElement),
+        billing_details: billingDetails
+      });
+    
+      setProcessing(false);
+    
+      if (payload.error) {
+        setError(payload.error);
+      } else {
+        setPaymentMethod(payload.paymentMethod);
+    
+        try {
+          dispatch({ type: 'CREATE_REQUEST' });
+    
+          const { data } = await Axios.post('/api/orders', {
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice,
+            user: userInfo
+          });
+    
+          // Actualiza la cantidad en stock de cada producto comprado
+          for (const item of cart.cartItems) {
+            const productId = item.productId;
+            const quantityPurchased = item.quantity;
+    
+            try {
+              const { data: product } = await Axios.get(`/api/products/${productId}`);
+              product.countInStock -= quantityPurchased;
+              await Axios.put(`/api/products/${productId}`, product);
+            } catch (error) {
+              // Manejo de errores al obtener o actualizar el producto
+            }
+          }
+    
+          ctxDispatch({ type: 'CART_CLEAR' });
+          dispatch({ type: 'CREATE_SUCCESS' });
+          localStorage.removeItem('cartItems');
+        } catch (err) {
+          dispatch({ type: 'CREATE_FAIL' });
+          toast.error(getError(err));
+        }
+      }
+    };
+  
+  
+  
+  const reset = () => {
+      setError(null);
+      setProcessing(false);
+      setPaymentMethod(null);
+      setBillingDetails({
+        email: "",
+        phone: "",
+        name: ""
+      });
+    };
   
     return paymentMethod ? (
       <div className="Result">
