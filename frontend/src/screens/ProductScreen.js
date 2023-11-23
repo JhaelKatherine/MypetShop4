@@ -96,7 +96,7 @@ function ProductScreen() {
         `/api/products/${product._id}/reviews`,
         { rating, comment, name: userInfo.name },
         {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
+          headers: {},
         }
       );
 
@@ -117,11 +117,7 @@ function ProductScreen() {
       dispatch({ type: 'CREATE_FAIL' });
     }
   };
-  return loading ? (
-    <LoadingBox />
-  ) : error ? (
-    <MessageBox variant="danger">{error}</MessageBox>
-  ) : (
+  return (
     <div>
       <Row>
         <Col md={6}>
@@ -265,11 +261,7 @@ function ProductScreen() {
             </form>
           ) : (
             <MessageBox>
-              Please{' '}
-              <Link to={`/signin?redirect=/product/${product.slug}`}>
-                Sign In
-              </Link>{' '}
-              to write a review
+
             </MessageBox>
           )}
         </div>

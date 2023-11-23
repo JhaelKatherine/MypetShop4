@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import { useContext } from 'react';
 import { Store } from '../Store';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Rating from './Rating';
 
 function Product(props) {
   const { product } = props;
@@ -34,15 +36,21 @@ function Product(props) {
     });
   };
 
+
   return (
     <Card>
-      <img src={product.image} className="card-img-top" alt={product.name} />
+      <Link to={`/product/${product.slug}`}>
+        <img src={product.image} className="card-img-top" alt={product.name} />
+      </Link>
       <Card.Body>
-        <Card.Title>{product.name}</Card.Title>
+        <Link to={`/product/${product.slug}`}>
+          <Card.Title>{product.name}</Card.Title>
+        </Link>
+        <Rating rating={product.rating} numReviews={product.numReviews} />
         <Card.Text>${product.price}</Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>
-            Sin stock
+            Out of stock
           </Button>
         ) : (
           <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
@@ -51,6 +59,5 @@ function Product(props) {
     </Card>
   );
 }
-
 export default Product;
 
