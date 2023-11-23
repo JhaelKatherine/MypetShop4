@@ -85,7 +85,3 @@ img.product-icon {
   object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
 }
 
-.dropdown:hover .dropdown-menu {
-  background-color: #87CEFA; /* Color de fondo al pasar el cursor */
-  /* Otros estilos que desees aplicar al pasar el cursor */
-}
