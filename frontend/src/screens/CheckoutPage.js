@@ -47,6 +47,7 @@ const CheckoutPage = () => {
   const isValidPhone = (value) => /^\d*$/.test(value);
   const [isNameValid, setIsNameValid] = useState(true);
   const [isPhoneValid, setIsPhoneValid] = useState(true);
+  const [countInStock, setCountInStock] = useState('');
 
   const CardField = ({ onChange }) => (
     <div className="FormRow">
@@ -90,6 +91,29 @@ const CheckoutPage = () => {
       {processing ? "Processing..." : children}
     </button>
   );
+
+  /*useEffect(() => {
+    const fetchData = async () => {
+      for (const item of cart.cartItems){
+        const productId = item.productId; // Reemplaza con el ID real de tu producto
+        const quantityPurchased = item.countInStock;
+        try {
+          dispatch({ type: 'FETCH_REQUEST' });
+          const { data } = await axios.get(`/api/products/${productId}`);
+          productId.countInStock -= quantityPurchased;
+          setCountInStock(data.countInStock);
+          dispatch({ type: 'FETCH_SUCCESS' });
+        } catch (err) {
+          dispatch({
+            type: 'FETCH_FAIL',
+            payload: getError(err),
+          });
+        }
+      }
+      
+    };
+    fetchData();
+  }, [productId]);*/
   
   const ErrorMessage = ({ children }) => (
     <div className="ErrorMessage" role="alert">
@@ -184,20 +208,23 @@ const CheckoutPage = () => {
           
           );
 
-          /*for (const item of cart.cartItems) {
+          for (const item of cart.cartItems) {
+            const productId = item.productId; // Reemplaza con el ID real de tu producto
+            const quantityPurchased = item.countInStock;
             try {
-              const { data: product } = await axios.get(`/api/products/${productId}`);
+              
+              const { data: product } = await Axios.get(`/api/products/${productId}`);
               
               // Actualiza la cantidad restando la cantidad comprada
               product.countInStock -= item.countInStock;
     
               // Actualiza la cantidad del producto en tu base de datos
-              await axios.put(`/api/products/${productId}`, product);
+              await Axios.put(`/api/products/${productId}`, product);
             } catch (error) {
               // Manejo de errores al obtener o actualizar el producto
             }
             
-          }*/
+          }
           
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
