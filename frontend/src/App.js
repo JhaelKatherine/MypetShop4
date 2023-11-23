@@ -85,12 +85,10 @@ function App() {
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    {/* No incluyas el NavDropdown.Divider aquí */}
     <Link
       className="dropdown-item"
       to="#signout"
       onClick={signoutHandler}
-      style={{ margin: 0, padding: 0 }}
     >
       Sign Out
     </Link>

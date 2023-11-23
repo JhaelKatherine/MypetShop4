@@ -86,10 +86,10 @@ export default function SigninScreen() {
             </button>
             <div className="mb-3 d-flex justify-content-start">
               New customer?{' '}
-              <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+              <Link to={`/signup?redirect=${redirect}`} className="add-space">Create your account</Link>
             </div>
             <div className="mb-3 d-flex justify-content-start"> 
-              Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
+              Forget Password? <Link to={`/forget-password`} className="add-space">Reset Password</Link>
             </div>
           </form>
         </div>
