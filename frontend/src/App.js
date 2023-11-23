@@ -84,7 +84,7 @@ function App() {
 className="d-inline-block align-top"
 id="basic-nav-dropdown"
 >
-<LinkContainer to="/admin/products">
+<LinkContainer >
 <NavDropdown.Item className="nav-dropdown-item"
   to="#signout"
   onClick={signoutHandler}>
