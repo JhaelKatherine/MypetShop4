@@ -70,28 +70,31 @@ function App() {
                   )}
                 </Link>
                {userInfo ? (
- <NavDropdown    title={
-  <>
-    <img
-      src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-      alt="Profile"
-      height="30"
-      className="d-inline-block align-top"
-    />
-    <span className="d-inline-block align-top ml-2">{userInfo.userName}</span>
-  </>
-}
-className="d-inline-block align-top"
-id="basic-nav-dropdown"
->
-<LinkContainer to="/">
-<NavDropdown.Item className="nav-dropdown-item"
-  to="#signout"
-  onClick={signoutHandler}>
-   Sign out 
-</NavDropdown.Item>
-</LinkContainer>
-</NavDropdown>
+  <NavDropdown
+    title={
+      <>
+        <img
+          src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+          alt="Profile"
+          height="30"
+          className="d-inline-block align-top"
+        />
+        <span className="d-inline-block align-top ml-2">{userInfo.userName}</span>
+      </>
+    }
+    className="d-inline-block align-top"
+    id="basic-nav-dropdown"
+  >
+    <NavDropdown.Divider />
+    <Link
+      className="dropdown-item"
+      to="#signout"
+      onClick={signoutHandler}
+      style={{ margin: 0, padding: 0 }}  // Agrega esta línea
+    >
+      Sign Out
+    </Link>
+  </NavDropdown>
 ) : (
   <LinkContainer to="/signin">
     <Nav.Link>
@@ -106,16 +109,13 @@ id="basic-nav-dropdown"
 )}
                  
  <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
- <LinkContainer>
+ <LinkContainer to="/admin/products">
     <NavDropdown.Item className="nav-dropdown-item">
     <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
        Products 
     </NavDropdown.Item>
   </LinkContainer>
 </NavDropdown>
-
-
-
               </Nav>
             </Container>
           </Navbar>
