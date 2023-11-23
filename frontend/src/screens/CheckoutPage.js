@@ -42,6 +42,11 @@ const CheckoutPage = () => {
     }
   };
   
+  const isValidName = (value) => /^[A-Za-z\s]+$/.test(value);
+  const isValidPhone = (value) => /^\d*$/.test(value);
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isPhoneValid, setIsPhoneValid] = useState(true);
+
   const CardField = ({ onChange }) => (
     <div className="FormRow">
       <CardElement options={CARD_OPTIONS} onChange={onChange} />
@@ -216,6 +221,7 @@ const CheckoutPage = () => {
     ) : (
       <form className="Form" onSubmit={handleSubmit}>
         <fieldset className="FormGroup">
+        {error && <ErrorMessage>Please enter valid data in all fields</ErrorMessage>}
           <Field
             label="Name"
             id="name"
@@ -225,8 +231,12 @@ const CheckoutPage = () => {
             autoComplete="name"
             value={billingDetails.name}
             onChange={(e) => {
-              setBillingDetails({ ...billingDetails, name: e.target.value });
-            }}
+              const value = e.target.value;
+              if (isValidName(value) || value === '') {
+                setBillingDetails({ ...billingDetails, name: value });
+              }
+            }
+            }
           />
           <Field
             label="Email"
@@ -236,8 +246,11 @@ const CheckoutPage = () => {
             required
             autoComplete="email"
             value={billingDetails.email}
-            onChange={(e) => {
-              setBillingDetails({ ...billingDetails, email: e.target.value });
+            onChange={(e) =>  {
+              const value = e.target.value;
+              
+                setBillingDetails({ ...billingDetails, email: value });
+              
             }}
           />
           <Field
@@ -248,10 +261,16 @@ const CheckoutPage = () => {
             required
             autoComplete="tel"
             value={billingDetails.phone}
-            onChange={(e) => {
-              setBillingDetails({ ...billingDetails, phone: e.target.value });
+            onChange={(e) =>  {
+              const value = e.target.value;
+              if (isValidPhone(value) || value === '') {
+                setBillingDetails({ ...billingDetails, phone: value });
+              } else {
+                setIsNameValid(false);
+              }
             }}
           />
+           {!isNameValid && <ErrorMessage>Please enter only letters</ErrorMessage>}
         </fieldset>
         <fieldset className="FormGroup">
           <CardField
@@ -261,10 +280,11 @@ const CheckoutPage = () => {
             }}
           />
         </fieldset>
-        {error && <ErrorMessage>{error.message}</ErrorMessage>}
+        
         <SubmitButton processing={processing} error={error} disabled={!stripe}>
           Pay Now
         </SubmitButton>
+        
       </form>
     );
   };
