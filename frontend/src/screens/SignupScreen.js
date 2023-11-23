@@ -58,6 +58,11 @@ export default function SignupScreen() {
     }
   };
 
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   return (
     <>
     <div className="blue-background"> {/* Agregar esta línea */}
@@ -108,14 +113,24 @@ export default function SignupScreen() {
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
-              type="email"
-              id="email"
-              className="form-control"
-              onChange={(e) => setEmail(e.target.value)}
-              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-              onInput={(e) => e.target.setCustomValidity('')}
-              required
-            />
+  type="email"
+  id="email"
+  className="form-control"
+  onChange={(e) => setEmail(e.target.value)}
+  onInvalid={(e) => {
+    if (!isEmailValid(e.target.value)) {
+      e.target.setCustomValidity("Please enter a valid email address");
+    } else {
+      e.target.setCustomValidity("This field is required");
+    }
+  }}
+  onInput={(e) => {
+    if (isEmailValid(e.target.value)) {
+      e.target.setCustomValidity('');
+    }
+  }}
+  required
+/>
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
