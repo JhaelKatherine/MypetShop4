@@ -40,6 +40,7 @@ export default function OrderHistoryScreen() {
           `/api/orders/mine`,
           { headers: { Authorization: `Bearer ${userInfo.token}` } }
         );
+        console.log('Data from server:', data);  // Verifica la respuesta del servidor
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
         dispatch({
@@ -50,7 +51,7 @@ export default function OrderHistoryScreen() {
     };
     fetchData();
   }, [userInfo]);
-  // Resto del código...
+  
 
 
 return (
@@ -77,26 +78,29 @@ return (
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
-            <tr key={order?._id}>
-              <td>{order?._id || 'N/A'}</td>
-              <td>{order?.createdAt?.substring(0, 10) || 'N/A'}</td>
-              <td>{order?.totalPrice?.toFixed(2) || 'N/A'}</td>
-              <td>{order?.isPaid ? (order?.paidAt?.substring(0, 10) || 'No') : 'No'}</td>
-              <td>{order?.isDelivered ? (order?.deliveredAt?.substring(0, 10) || 'No') : 'No'}</td>
-              <td>
-                <Button
-                  type="button"
-                  variant="light"
-                  onClick={() => {
-                    navigate(`/order/${order?._id || ''}`);
-                  }}
-                >
-                  Details
-                </Button>
-              </td>
-            </tr>
-          ))}
+        {orders && orders.map((order) => (
+  <tr key={order?._id ?? 'N/A'}>
+    <td>{order?.createdAt?.substring(0, 10) ?? 'N/A'}</td>
+    <td>{order?.totalPrice?.toFixed(2) ?? 'N/A'}</td>
+    <td>{order?.isPaid ? order?.paidAt?.substring(0, 10) : 'No'}</td>
+    <td>
+      {order?.isDelivered
+        ? order?.deliveredAt?.substring(0, 10)
+        : 'No'}
+    </td>
+    <td>
+      <Button
+        type="button"
+        variant="light"
+        onClick={() => {
+          navigate(`/order/${order?._id ?? 'N/A'}`);
+        }}
+      >
+        Details
+      </Button>
+    </td>
+  </tr>
+))}
         </tbody>
       </table>
     )}
