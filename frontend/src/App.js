@@ -170,6 +170,14 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
+               <Route
+                path="/orderhistory"
+                element={
+                  <ProtectedRoute>
+                    <OrderHistoryScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
             </Routes>
           </Container>
         </main>
