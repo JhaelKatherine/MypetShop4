@@ -84,6 +84,9 @@ function App() {
           className="d-inline-block align-top"
         />
         <span className="d-inline-block align-top ml-2">{userInfo.userName}</span>
+        <LinkContainer to="/orderhistory">
+                        <NavDropdown.Item>Order History</NavDropdown.Item>
+                      </LinkContainer>
       </>
     }
     className="d-inline-block align-top"
