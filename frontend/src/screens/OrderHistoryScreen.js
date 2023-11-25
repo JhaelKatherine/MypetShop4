@@ -8,10 +8,10 @@ const OrderHistoryScreen = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchOrderHistory = async () => {
+    const fetchAllOrders = async () => {
       try {
         setLoading(true);
-        const { data } = await Axios.get('/api/orders/mine');
+        const { data } = await Axios.get('/api/orders'); // Cambié la ruta para obtener todas las órdenes
         setOrders(data);
         setLoading(false);
       } catch (error) {
@@ -20,7 +20,7 @@ const OrderHistoryScreen = () => {
       }
     };
 
-    fetchOrderHistory();
+    fetchAllOrders();
   }, []);
 
   return (

@@ -30,7 +30,7 @@ orderRouter.post(
       shippingPrice: req.body.shippingPrice,
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
-      user: req.user._id, // Utiliza el ID del usuario autenticado
+      user: req.body.user
     });
     
     const order = await newOrder.save();
@@ -82,27 +82,14 @@ orderRouter.get(
   })
 );
 
-// ... Importaciones y configuraciones previas
-
 orderRouter.get(
   '/mine',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    try {
-      console.log('Fetching user orders for user ID:', req.user._id);
-      const orders = await Order.find({ user: req.user._id }).populate('user', 'name');
-      console.log('Fetched orders:', orders);
-      res.send(orders);
-    } catch (error) {
-      console.error('Error fetching user orders:', error);
-      res.status(500).send({ message: 'Error fetching user order history' });
-    }
+    const orders = await Order.find({ user: req.user._id });
+    res.send(orders);
   })
 );
-
-
-// ... Otras rutas y configuraciones del router
-
 
 orderRouter.get(
   '/:id',
