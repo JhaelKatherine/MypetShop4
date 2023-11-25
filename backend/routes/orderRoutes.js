@@ -82,14 +82,24 @@ orderRouter.get(
   })
 );
 
+// ... Importaciones y configuraciones previas
+
 orderRouter.get(
   '/mine',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const orders = await Order.find({ user: req.user._id });
-    res.send(orders);
+    try {
+      const orders = await Order.find({ user: req.user._id }).populate('user', 'name');
+      res.send(orders);
+    } catch (error) {
+      console.error('Error fetching user orders:', error);
+      res.status(500).send({ message: 'Error fetching user order history' });
+    }
   })
 );
+
+// ... Otras rutas y configuraciones del router
+
 
 orderRouter.get(
   '/:id',
