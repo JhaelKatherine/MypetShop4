@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { listOrderMine } from '../actions/orderActions';
+import Axios from 'axios';
 
 const OrderHistoryScreen = () => {
-  const dispatch = useDispatch();
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
-  const orderMineList = useSelector((state) => state.orderMineList);
-  const { loading, error, orders } = orderMineList;
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    if (userInfo) {
-      dispatch(listOrderMine());
-    } else {
-      // Si el usuario no está autenticado, redirige al inicio de sesión
-      // Puedes personalizar esto según tus necesidades
-      // Por ejemplo: history.push('/login');
-    }
-  }, [dispatch, userInfo]);
+    const fetchOrderHistory = async () => {
+      try {
+        setLoading(true);
+        const { data } = await Axios.get('/api/orders/mine');
+        setOrders(data);
+        setLoading(false);
+      } catch (error) {
+        setError('Error fetching order history');
+        setLoading(false);
+      }
+    };
+
+    fetchOrderHistory();
+  }, []);
 
   return (
     <div>
