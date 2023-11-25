@@ -11,7 +11,7 @@ const OrderHistoryScreen = () => {
     const fetchOrderHistory = async () => {
       try {
         setLoading(true);
-        const { data } = await Axios.get('/api/orders/mine');
+        const { data } = await Axios.get('/api/orders');
         setOrders(data);
         setLoading(false);
       } catch (error) {
