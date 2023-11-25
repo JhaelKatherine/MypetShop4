@@ -51,6 +51,7 @@ export default function OrderHistoryScreen() {
   }, [userInfo]);
   // Resto del código...
 // Resto del código...
+// Resto del código...
 
 return (
   <div>
@@ -76,19 +77,19 @@ return (
           </tr>
         </thead>
         <tbody>
-          {orders && orders.map((order) => (
-            <tr key={order && order._id}>
-              <td>{order && order._id}</td>
-              <td>{order && order.createdAt.substring(0, 10)}</td>
-              <td>{order && order.totalPrice.toFixed(2)}</td>
-              <td>{order && (order.isPaid ? order.paidAt.substring(0, 10) : 'No')}</td>
-              <td>{order && (order.isDelivered ? order.deliveredAt.substring(0, 10) : 'No')}</td>
+          {orders.map((order) => (
+            <tr key={order?._id}>
+              <td>{order?._id || 'N/A'}</td>
+              <td>{order?.createdAt?.substring(0, 10) || 'N/A'}</td>
+              <td>{order?.totalPrice?.toFixed(2) || 'N/A'}</td>
+              <td>{order?.isPaid ? (order?.paidAt?.substring(0, 10) || 'No') : 'No'}</td>
+              <td>{order?.isDelivered ? (order?.deliveredAt?.substring(0, 10) || 'No') : 'No'}</td>
               <td>
                 <Button
                   type="button"
                   variant="light"
                   onClick={() => {
-                    navigate(`/order/${order && order._id}`);
+                    navigate(`/order/${order?._id || ''}`);
                   }}
                 >
                   Details
@@ -101,4 +102,5 @@ return (
     )}
   </div>
 );
+
                 }
