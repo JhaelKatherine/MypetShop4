@@ -24,6 +24,7 @@ import './App.css';
 import CheckoutPage from './screens/CheckoutPage';
 import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 
