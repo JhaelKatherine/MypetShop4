@@ -15,7 +15,10 @@ const OrderHistoryScreen = () => {
         setOrders(data);
         setLoading(false);
       } catch (error) {
+        console.error('Error fetching order history:', error); // Agregar este console.log
+
         setError('Error fetching order history');
+        
         setLoading(false);
       }
     };
