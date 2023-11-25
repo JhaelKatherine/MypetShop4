@@ -86,21 +86,15 @@ function App() {
           className="d-inline-block align-top"
         />
         <span className="d-inline-block align-top ml-2">{userInfo.userName}</span>
-        <LinkContainer to="/orderhistory">
-                        <NavDropdown.Item>Order History</NavDropdown.Item>
-                      </LinkContainer>
       </>
     }
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    <Link
-      className="dropdown-item nav-dropdown-item:hover "
-      to="#signout"
-      onClick={signoutHandler}
-    >
-      Sign Out
-    </Link>
+    <LinkContainer to="/orderhistory">
+      <NavDropdown.Item>Order History</NavDropdown.Item>
+    </LinkContainer>
+    <NavDropdown.Item onClick={signoutHandler}>Sign Out</NavDropdown.Item>
   </NavDropdown>
 ) : (
   <LinkContainer to="/signin">
@@ -114,6 +108,7 @@ function App() {
     </Nav.Link>
   </LinkContainer>
 )}
+
 
                  
  <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
