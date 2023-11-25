@@ -29,14 +29,15 @@ export default function OrderHistoryScreen() {
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
+    orders: [], // Inicializar como un array vacío
   });
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
         const { data } = await axios.get(
           `/api/orders/mine`,
-
           { headers: { Authorization: `Bearer ${userInfo.token}` } }
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -50,8 +51,7 @@ export default function OrderHistoryScreen() {
     fetchData();
   }, [userInfo]);
   // Resto del código...
-// Resto del código...
-// Resto del código...
+
 
 return (
   <div>
