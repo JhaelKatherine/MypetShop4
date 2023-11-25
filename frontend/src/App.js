@@ -22,6 +22,9 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import CheckoutPage from './screens/CheckoutPage';
+import OrderScreen from './screens/OrderScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+
 
 
 function App() {
@@ -152,6 +155,15 @@ function App() {
                   <AdminRoute>
                     <ProductEditScreen />
                   </AdminRoute>
+                }
+              ></Route>
+              <Route path="/placeorder" element={<PlaceOrderScreen />} />
+              <Route
+                path="/order/:id"
+                element={
+                  <ProtectedRoute>
+                    <OrderScreen />
+                  </ProtectedRoute>
                 }
               ></Route>
             </Routes>
