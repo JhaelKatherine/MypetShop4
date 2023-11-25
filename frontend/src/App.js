@@ -25,6 +25,7 @@ import CheckoutPage from './screens/CheckoutPage';
 import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
+import OrderHistoryScreen from './screens/OrderHistoryScreen';
 
 
 
@@ -161,6 +162,14 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+              <Route
+                path="/orderhistory"
+                element={
+                  <ProtectedRoute>
+                    <OrderHistoryScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route
                 path="/order/:id"
@@ -170,15 +179,9 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
-               <Route
-                path="/orderhistory"
-                element={
-                  <ProtectedRoute>
-                    <OrderHistoryScreen />
-                  </ProtectedRoute>
-                }
-              ></Route>
+
             </Routes>
+            
           </Container>
         </main>
       </div>
