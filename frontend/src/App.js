@@ -22,6 +22,7 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import CheckoutPage from './screens/CheckoutPage';
+import AboutUs from "./components/AboutUs";
 
 
 function App() {
@@ -57,7 +58,16 @@ function App() {
                 <SearchBox />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
-                <Link to="/cart" className="nav-link">
+                  <Link to="/aboutUs" className="nav-link">
+                      <img
+                          alt="cart"
+                          src="https://cdn-icons-png.flaticon.com/512/43/43921.png"
+                          height="30"
+                          className="d-inline-block align-top"
+                      />
+                  </Link>
+
+                  <Link to="/cart" className="nav-link">
                   <img
                     alt="cart"
                     src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
@@ -133,6 +143,7 @@ function App() {
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
+                <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
                 path="/shipping"
