@@ -107,7 +107,7 @@ export default function OrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>
+                    <Col>187</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
