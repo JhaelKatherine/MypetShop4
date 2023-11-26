@@ -103,13 +103,13 @@ export default function OrderScreen() {
                     <Col md={3} className="text-left">
                      <span>{item.name}</span>
                     </Col>
-                    <Col md={3} className="text-left">
+                    <Col md={2} className="text-left">
                       <span>{item.quantity}</span>
                     </Col>
-                    <Col md={3} className="text-left">
+                    <Col md={2} className="text-left">
                       ${item.price }
                     </Col>
-                    <Col md={3} className="text-left">
+                    <Col md={2} className="text-left">
                       ${(item.price * item.quantity)}
                     </Col>
                   </Row>
