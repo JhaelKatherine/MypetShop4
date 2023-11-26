@@ -1,36 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Axios from 'axios';
+import React, { useContext, useEffect, useReducer } from 'react';
+import { Helmet } from 'react-helmet-async';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { Store } from '../Store';
+import { getError } from '../utils';
+import Button from 'react-bootstrap/esm/Button';
 
-const OrderHistoryScreen = () => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'FETCH_REQUEST':
+      return { ...state, loading: true };
+    case 'FETCH_SUCCESS':
+      return { ...state, orders: action.payload, loading: false };
+    case 'FETCH_FAIL':
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
+export default function OrderHistoryScreen() {
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+  const navigate = useNavigate();
+
+  const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: '',
+  });
   useEffect(() => {
-    const fetchAllOrders = async () => {
+    const fetchData = async () => {
+      dispatch({ type: 'FETCH_REQUEST' });
       try {
-        setLoading(true);
-        const { data } = await Axios.get('/api/orders'); // Cambié la ruta para obtener todas las órdenes
-        setOrders(data);
-        setLoading(false);
+        const { data } = await axios.get(
+          `/api/orders/mine`,
+
+          { headers: { Authorization: `Bearer ${userInfo.token}` } }
+        );
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
-        console.error('Error fetching order history:', error); // Agregar este console.log
-        setError('Error fetching order history');
-        setLoading(false);
+        dispatch({
+          type: 'FETCH_FAIL',
+          payload: getError(error),
+        });
       }
     };
-
-    fetchAllOrders();
-  }, []);
-
+    fetchData();
+  }, [userInfo]);
   return (
     <div>
+      <Helmet>
+        <title>Order History</title>
+      </Helmet>
+
       <h1>Order History</h1>
       {loading ? (
-        <div>Loading...</div>
+        <LoadingBox></LoadingBox>
       ) : error ? (
-        <div>{error}</div>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <table className="table">
           <thead>
@@ -48,7 +77,15 @@ const OrderHistoryScreen = () => {
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>
-                  <Link to={`/order/${order._id}`}>Details</Link>
+                  <Button
+                    type="button"
+                    variant="light"
+                    onClick={() => {
+                      navigate(`/order/${order._id}`);
+                    }}
+                  >
+                    Details
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -57,6 +94,4 @@ const OrderHistoryScreen = () => {
       )}
     </div>
   );
-};
-
-export default OrderHistoryScreen;
+}
