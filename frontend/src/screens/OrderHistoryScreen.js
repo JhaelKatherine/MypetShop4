@@ -55,6 +55,7 @@ export default function OrderHistoryScreen() {
       </Helmet>
 
       <h1>Order History</h1>
+      <h3>You can see your orders here</h3>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
