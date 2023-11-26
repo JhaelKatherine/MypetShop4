@@ -12,6 +12,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { format } from 'date-fns';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function reducer(state, action) {
