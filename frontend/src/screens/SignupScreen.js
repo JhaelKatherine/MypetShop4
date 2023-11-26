@@ -61,19 +61,8 @@ export default function SignupScreen() {
   };
 
 const responseGoogle = async (response) => {
-  try {
-    const { data } = await Axios.post('/api/users/signup-google', {
-      name: response.profileObj.givenName,
-      lastName: response.profileObj.familyName,
-      email: response.profileObj.email,
-    });
-
-    ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
-    navigate(redirect || '/');
-  } catch (err) {
-    toast.error(getError(err));
-  }
+  console.log(response);
+  console.log(response.profileObj);
 };
 useEffect(() => {
   const start = () =>{
