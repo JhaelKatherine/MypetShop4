@@ -71,9 +71,17 @@ export default function OrderScreen() {
       <Helmet>
         <title>Order</title>
       </Helmet>
-      <h1 className="my-3"> Information about your order </h1>
-      <h5>ID:{orderId}</h5>
-      <h5>Date: {format(new Date(order.createdAt), 'MMMM dd, yyyy HH:mm')}</h5>      <Row>
+      <h2 className="my-3"> Information about your order </h2>
+      <h7>
+  <span style={{ fontWeight: 'bold' }}>ID:</span> {orderId}
+</h7>
+<h7>
+  <span style={{ fontWeight: 'bold' }}>Date:</span>{' '}
+  <span style={{ fontWeight: 'normal' }}>
+    {format(new Date(order.createdAt), 'MMMM dd, yyyy HH:mm')}
+  </span>
+</h7>     
+       <Row>
         <Col md={8}>
           <Card className="mb-3">
             <Card.Body>
@@ -111,29 +119,30 @@ export default function OrderScreen() {
             <Card.Body>
               <Card.Title>Order Summary</Card.Title>
               <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Items</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Delivery</Col>
-                    <Col>FREE</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>
-                      <strong> Order Total</strong>
-                    </Col>
-                    <Col>
-                      <strong>${order.totalPrice.toFixed(2)}</strong>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>              
-              </ListGroup>
+  <ListGroup.Item>
+    <Row>
+      <Col className="text-right">Items</Col>
+      <Col className="text-right">${order.itemsPrice.toFixed(2)}</Col>
+    </Row>
+  </ListGroup.Item>
+  <ListGroup.Item>
+    <Row>
+      <Col className="text-right">Delivery</Col>
+      <Col className="text-right">FREE</Col>
+    </Row>
+  </ListGroup.Item>
+  <ListGroup.Item>
+    <Row>
+      <Col className="text-right">
+        <strong>Order Total</strong>
+      </Col>
+      <Col className="text-right">
+        <strong>${order.totalPrice.toFixed(2)}</strong>
+      </Col>
+    </Row>
+  </ListGroup.Item>
+</ListGroup>
+
             </Card.Body>
           </Card>
         </Col>
