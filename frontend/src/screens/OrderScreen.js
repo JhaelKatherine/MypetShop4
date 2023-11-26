@@ -71,8 +71,7 @@ export default function OrderScreen() {
       </Helmet>
       <h1 className="my-3"> Information about your order </h1>
       <h5>ID:{orderId}</h5>
-      <h5>Date:</h5>
-      <Row>
+      <h5>Date: {format(new Date(order.createdAt), 'MMMM dd, yyyy HH:mm')}</h5>      <Row>
         <Col md={8}>
           <Card className="mb-3">
             <Card.Body>
