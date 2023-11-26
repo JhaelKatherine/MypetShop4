@@ -32,6 +32,7 @@ export default function SearchBar() {
             value={query}
             onChange={handleInputChange}
             placeholder="Search products..."
+            className={'searchInput'}
         />
         {results.length > 0 && <SearchResult results={results} />}
       </div>
