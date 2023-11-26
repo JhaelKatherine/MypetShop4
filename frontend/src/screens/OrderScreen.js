@@ -51,11 +51,7 @@ export default function OrderScreen() {
       }
     };
 
-    if (!userInfo) {
-      // Redirigir al usuario a la página de inicio de sesión si no está autenticado
-      // Puedes ajustar esto según tus necesidades
-      return navigate('/login');
-    }
+
 
     fetchOrder();
   }, [userInfo, orderId]);
