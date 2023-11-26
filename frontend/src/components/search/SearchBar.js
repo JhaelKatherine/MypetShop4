@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import SearchResult from './SearchResult';
 import axios from "axios";
 import '../../Css/SearchResult.css'
@@ -6,6 +6,7 @@ import '../../Css/SearchResult.css'
 export default function SearchBar() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const resultsRef = useRef(null);
 
   const fetchResults = async (query) => {
     try {
@@ -15,6 +16,19 @@ export default function SearchBar() {
       console.error('Error searching products: ', error);
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (resultsRef.current && !resultsRef.current.contains(event.target)) {
+        setResults([]);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const query = e.target.value;
@@ -35,7 +49,7 @@ export default function SearchBar() {
             placeholder="Search products..."
             className={'searchInput'}
         />
-        {results.length > 0 && <SearchResult results={results} />}
+        {results.length > 0 && <div ref={resultsRef}><SearchResult results={results} /></div>}
       </div>
   );
 }

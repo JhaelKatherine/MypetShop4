@@ -33,6 +33,9 @@
     align-items: center;
     text-decoration: none;
     color: inherit;
+    margin-bottom: 5px;
+    background-color: #a9caf6;
+    border-radius: 7px;
 }
 
 .result-item span {
