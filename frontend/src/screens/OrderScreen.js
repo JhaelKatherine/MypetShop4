@@ -88,11 +88,12 @@ export default function OrderScreen() {
         <Col md={8}>
           <Card className="mb-3">
             <Card.Body>
-            <Card.Title style={{ textAlign: 'left' }}>Items</Card.Title>              <ListGroup variant="flush">
+            <Card.Title style={{ textAlign: 'left' }}>Items</Card.Title>  
+                        <ListGroup variant="flush">
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                   <Row className="align-items-center">
-                    <Col md={2} className="text-left">
+                    <Col md={3} className="text-left">
                       <img
                         src={item.image}
                         alt={item.name}
@@ -100,13 +101,16 @@ export default function OrderScreen() {
                       />
                     </Col>
                     <Col md={3} className="text-left">
-                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                     <span>{item.name}</span>
                     </Col>
                     <Col md={3} className="text-left">
                       <span>{item.quantity}</span>
                     </Col>
-                    <Col md={4} className="text-left">
-                      ${item.price}
+                    <Col md={3} className="text-left">
+                      ${item.price }
+                    </Col>
+                    <Col md={3} className="text-left">
+                      ${(item.price * item.quantity)}
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -139,7 +143,7 @@ export default function OrderScreen() {
               <strong>Order Total</strong>
             </Col>
             <Col className="text-right" style={{ textAlign: 'right' }}>
-              <strong>${order.totalPrice.toFixed(2)}</strong>
+              <strong>${order.itemsPrice.toFixed(2)}</strong>
             </Col>
           </Row>
         </ListGroup.Item>
