@@ -245,7 +245,9 @@ userRouter.post(
           email,
           password: bcrypt.hashSync('googleuserpassword', 8), // Cambia esto según tus necesidades
         });
+        console.log('New User:', newUser);
         const createdUser = await newUser.save();
+        console.log('Created User:', createdUser); // Agrega esto para ver los detalles del usuario creado
         res.send({
           _id: createdUser._id,
           name: createdUser.name,
