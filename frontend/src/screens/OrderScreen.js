@@ -20,27 +20,6 @@ function reducer(state, action) {
       return { ...state, loading: false, order: action.payload, error: '' };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
-    case 'PAY_REQUEST':
-      return { ...state, loadingPay: true };
-    case 'PAY_SUCCESS':
-      return { ...state, loadingPay: false, successPay: true };
-    case 'PAY_FAIL':
-      return { ...state, loadingPay: false };
-    case 'PAY_RESET':
-      return { ...state, loadingPay: false, successPay: false };
-
-    case 'DELIVER_REQUEST':
-      return { ...state, loadingDeliver: true };
-    case 'DELIVER_SUCCESS':
-      return { ...state, loadingDeliver: false, successDeliver: true };
-    case 'DELIVER_FAIL':
-      return { ...state, loadingDeliver: false };
-    case 'DELIVER_RESET':
-      return {
-        ...state,
-        loadingDeliver: false,
-        successDeliver: false,
-      };
     default:
       return state;
   }
@@ -54,53 +33,14 @@ export default function OrderScreen() {
   const { id: orderId } = params;
 
   const [
-    { loading, error, order, },
+    { loading, error, order },
     dispatch
   ] = useReducer(reducer, {
     loading: true,
     order: {},
-    error: '',
-    successPay: false,
-    loadingPay: false,
+    error: ''
   });
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
-  function createOrder(data, actions) {
-    return actions.order
-      .create({
-        purchase_units: [
-          {
-            amount: { value: order.totalPrice },
-          },
-        ],
-      })
-      .then((orderID) => {
-        return orderID;
-      });
-  }
-
-  function onApprove(data, actions) {
-    return actions.order.capture().then(async function (details) {
-      try {
-        dispatch({ type: 'PAY_REQUEST' });
-        const { data } = await axios.put(
-          `/api/orders/${order._id}/pay`,
-          details,
-          {
-            headers: { authorization: `Bearer ${userInfo.token}` },
-          }
-        );
-        dispatch({ type: 'PAY_SUCCESS', payload: data });
-        toast.success('Order is paid');
-      } catch (err) {
-        dispatch({ type: 'PAY_FAIL', payload: getError(err) });
-        toast.error(getError(err));
-      }
-    });
-  }
-  function onError(err) {
-    toast.error(getError(err));
-  }
   useEffect(() => {
     const fetchOrder = async () => {
       try {
