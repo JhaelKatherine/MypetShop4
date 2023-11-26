@@ -74,6 +74,7 @@ export default function OrderHistoryScreen() {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
+                <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
                 <td>
                   <Button
