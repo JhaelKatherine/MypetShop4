@@ -72,21 +72,20 @@ export default function OrderScreen() {
         <title>Order</title>
       </Helmet>
       <h2 className="my-3"> Information about your order </h2>
-      <h7>
+      <h6>
   <span style={{ fontWeight: 'bold' }}>ID:</span> {orderId}
-</h7>
-<h7>
+</h6>
+<h6>
   <span style={{ fontWeight: 'bold' }}>Date:</span>{' '}
   <span style={{ fontWeight: 'normal' }}>
     {format(new Date(order.createdAt), 'MMMM dd, yyyy HH:mm')}
   </span>
-</h7>     
+</h6>     
        <Row>
         <Col md={8}>
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title className="text-left">Items</Card.Title>
-              <ListGroup variant="flush">
+            <Card.Title style={{ textAlign: 'left' }}>Items</Card.Title>              <ListGroup variant="flush">
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                   <Row className="align-items-center">
@@ -121,19 +120,19 @@ export default function OrderScreen() {
               <ListGroup variant="flush">
   <ListGroup.Item>
     <Row>
-      <Col className="text-right">Items</Col>
+      <Col className="text-left">Items</Col>
       <Col className="text-right">${order.itemsPrice.toFixed(2)}</Col>
     </Row>
   </ListGroup.Item>
   <ListGroup.Item>
     <Row>
-      <Col className="text-right">Delivery</Col>
+      <Col className="text-left">Delivery</Col>
       <Col className="text-right">FREE</Col>
     </Row>
   </ListGroup.Item>
   <ListGroup.Item>
     <Row>
-      <Col className="text-right">
+      <Col className="text-left">
         <strong>Order Total</strong>
       </Col>
       <Col className="text-right">
@@ -142,6 +141,7 @@ export default function OrderScreen() {
     </Row>
   </ListGroup.Item>
 </ListGroup>
+
 
             </Card.Body>
           </Card>

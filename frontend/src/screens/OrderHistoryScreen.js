@@ -7,6 +7,7 @@ import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import Button from 'react-bootstrap/esm/Button';
+import { format } from 'date-fns';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -47,7 +48,7 @@ export default function OrderHistoryScreen() {
     };
     fetchData();
   }, [userInfo]);
-  
+
   return (
     <div>
       <Helmet>
@@ -55,7 +56,7 @@ export default function OrderHistoryScreen() {
       </Helmet>
 
       <h1>My order</h1>
-      <p>You can seee your orders here</p>
+      <p>You can see your orders here</p>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -74,7 +75,7 @@ export default function OrderHistoryScreen() {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.createdAt}</td>          
+                <td>{format(new Date(order.createdAt), 'MM/dd/yyyy')}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
                 <td>
                   <Button
