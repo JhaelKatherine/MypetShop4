@@ -1,0 +1,101 @@
+.invoice {
+    background-color: #f0f0f0;
+    width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.invoice h2, .invoice h3 {
+    color: #333;
+}
+
+.invoice h1 {
+    text-align: center;
+}
+
+.date {
+    text-align: end;
+}
+
+.invoice-bill_send {
+    display: flex;
+    gap: 30px;
+}
+
+.invoice span {
+    font-weight: bold;
+}
+
+.invoice p {
+    color: #666;
+}
+
+.invoice table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.invoice table, .invoice th, .invoice td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.invoice th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #005593;
+    color: white;
+}
+
+.commerce-name {
+    font-weight: bold;
+    text-align: center;
+}
+
+.commerce-name_aux {
+    color: #ff4500;
+}
+
+.total-price {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 15px;
+    margin-right: 10px;
+}
+
+.total-price p {
+    margin: 0;
+    font-size: 20px;
+}
+
+.total-price h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.send-button {
+    background-color: #005593;
+    color: white;
+    padding: 7px 27px;
+}
+
+.button-container_invoice{
+    width: 90%;
+    padding: 20px;
+    margin: auto auto 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.greetings {
+    font-weight: bold;
+
+}
+
+.greetings span{
+    color: #ff4500;
+}

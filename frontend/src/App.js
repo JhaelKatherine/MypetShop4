@@ -22,6 +22,7 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import CheckoutPage from './screens/CheckoutPage';
+import Invoice from "./screens/Invoice";
 
 
 function App() {
@@ -133,6 +134,7 @@ function App() {
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
+                <Route path="/invoice" element={<Invoice />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
                 path="/shipping"
