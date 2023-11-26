@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../Css/searchbar.css'
+import Modal from 'react-modal';
 
 export default function SearchBox() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     if (query) {
@@ -15,6 +16,7 @@ export default function SearchBox() {
         try {
           const response = await axios.get(`/api/products/search?query=${query}`);
           setResults(response.data.products);
+          setModalIsOpen(true);
         } catch (error) {
           console.error('Error searching products: ', error);
         }
@@ -22,6 +24,7 @@ export default function SearchBox() {
       fetchResults();
     } else {
       setResults([]);
+      setModalIsOpen(false);
     }
   }, [query]);
 
@@ -31,21 +34,21 @@ export default function SearchBox() {
   };
 
   return (
-      <form onSubmit={submitHandler}>
-        <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search products..."
-        />
-        <button type="submit">Search</button>
-        {results.length > 0 && (
-            <div className="search-results">
-              {results.map((product) => (
-                  <div key={product._id}>{product.name}</div>
-              ))}
-            </div>
-        )}
-      </form>
+      <div>
+        <form onSubmit={submitHandler}>
+          <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search products..."
+          />
+          <button type="submit">Search</button>
+        </form>
+        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+          {results.map((product) => (
+              <div key={product._id}>{product.name}</div>
+          ))}
+        </Modal>
+      </div>
   );
 }
