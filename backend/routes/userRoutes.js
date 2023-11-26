@@ -258,9 +258,10 @@ userRouter.post(
           token: generateToken(savedUser),
         });
       }
+      console.log('Signup with Google:', req.body);
     } catch (error) {
-      res.status(500).send({ message: 'Internal Server Error' });
-    }
+      console.error('Error during signup with Google:', error);
+      res.status(500).send({ message: 'Internal Server Error' });    }
   })
 );
 

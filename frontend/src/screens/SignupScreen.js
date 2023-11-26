@@ -60,22 +60,22 @@ export default function SignupScreen() {
     }
   };
 
-  const responseGoogle = async (response) => {
-    try {
-      const { data } = await Axios.post('/api/users/signup-google', {
-        name: response.profileObj.givenName,
-        lastName: response.profileObj.familyName,
-        email: response.profileObj.email,
-      });
+const responseGoogle = async (response) => {
+  try {
+    const { data } = await Axios.post('/api/users/signup-google', {
+      name: response.profileObj.givenName,
+      lastName: response.profileObj.familyName,
+      email: response.profileObj.email,
+    });
 
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
-    } catch (err) {
-      toast.error(getError(err));
-    }
-  };
-
+    ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+    localStorage.setItem('userInfo', JSON.stringify(data));
+    navigate(redirect || '/');
+  } catch (err) {
+    console.error('Error during signup with Google:', err);
+    toast.error(getError(err));
+  }
+};
 useEffect(() => {
   const start = () =>{
   gapi.auth2.init({
