@@ -37,7 +37,7 @@ export default function OrderHistoryScreen() {
         const { data } = await axios.get(
           `/api/orders/mine`,
 
-          { headers: { Authorization: `Bearer ${userInfo.token}` } }
+          { headers: {} }
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
