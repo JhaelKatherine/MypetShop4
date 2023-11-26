@@ -81,7 +81,7 @@ export default function OrderScreen() {
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                   <Row className="align-items-center">
-                    <Col md={6} className="text-left">
+                    <Col md={4} className="text-left">
                       <img
                         src={item.image}
                         alt={item.name}
