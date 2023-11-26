@@ -81,12 +81,14 @@ export default function OrderScreen() {
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
-  <Col md={6} className="text-left">
+                    <Col md={6} className="text-left">
     <img
       src={item.image}
       alt={item.name}
       className="img-fluid rounded img-thumbnail"
-    ></img>{' '}
+    />
+  </Col>
+  <Col md={6} className="text-left">
     <Link to={`/product/${item.slug}`}>{item.name}</Link>
   </Col>
   <Col md={3} className="text-left">
