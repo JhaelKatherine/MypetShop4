@@ -40,6 +40,8 @@ export default function SearchBar() {
     }
   };
 
+  const clearResults = () => setResults([]);
+
   return (
       <div>
         <input
@@ -49,7 +51,7 @@ export default function SearchBar() {
             placeholder="Search products..."
             className={'searchInput'}
         />
-        {results.length > 0 && <div ref={resultsRef}><SearchResult results={results} /></div>}
+        {results.length > 0 && <div ref={resultsRef}><SearchResult results={results} clearResults={clearResults} /></div>}
       </div>
   );
 }
