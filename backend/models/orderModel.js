@@ -27,6 +27,7 @@ const orderSchema = new mongoose.Schema(
       country: { type: String, required: false },
       cellPhone: { type: String, required: false },
     },
+    itemsPrice: { type: Number, required: true },
     paymentMethod: { type: String, required: false },
     shippingPrice: { type: Number, required: false },
     taxPrice: { type: Number, required: false },
@@ -35,6 +36,9 @@ const orderSchema = new mongoose.Schema(
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
     isDelivered: { type: Boolean, default: false },
+  },
+  {
+    timestamps: true,
   }
 );
 
