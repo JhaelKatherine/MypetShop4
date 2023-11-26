@@ -68,14 +68,6 @@ export default function OrderScreen() {
       <h1 className="my-3"> Information about your order </h1>
       <h3>ID:{orderId}</h3>
       <h3>Date:</h3>
-      <ListGroup variant="flush">
-        {order.orderItems.map((item) => (
-          <ListGroup.Item key={item._id}>
-            <Link to={`/product/${item.slug}`}>{item.name}</Link>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
-
 
       <Card className="mb-3">
             <Card.Body>
