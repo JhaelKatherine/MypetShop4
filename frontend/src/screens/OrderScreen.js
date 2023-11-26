@@ -81,6 +81,8 @@ export default function OrderScreen() {
   <span style={{ fontWeight: 'normal' }}>
     {format(new Date(order.createdAt), 'MMMM dd, yyyy HH:mm')}
   </span>
+  <br>
+  </br>
 </h6>     
        <Row>
         <Col md={8}>
@@ -127,7 +129,7 @@ export default function OrderScreen() {
         </ListGroup.Item>
         <ListGroup.Item>
           <Row>
-            <Col className="text-left" style={{ textAlign: 'left' }}>Shipping</Col>
+            <Col className="text-left" style={{ textAlign: 'left' }}>Delivery</Col>
             <Col className="text-right" style={{ textAlign: 'right' }}>FREE</Col>
           </Row>
         </ListGroup.Item>
