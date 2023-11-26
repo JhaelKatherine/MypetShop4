@@ -11,7 +11,7 @@ import SignupScreen from './screens/SignupScreen';
 import AddProductScreen from './screens/AddProductScreen'
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
-import SearchBox from './components/SearchBox';
+import SearchBar from './components/search/SearchBar';
 import CartScreen from './screens/CartScreen';
 import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -54,7 +54,7 @@ function App() {
                 </Navbar.Brand>
               </LinkContainer>
               <Nav className="mx-auto" style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
-                <SearchBox />
+                <SearchBar />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
                 <Link to="/cart" className="nav-link">
