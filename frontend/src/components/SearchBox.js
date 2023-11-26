@@ -44,7 +44,22 @@ export default function SearchBox() {
           />
           <button type="submit">Search</button>
         </form>
-        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+        <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
+            style={{
+              content: {
+                top: '50%', // Posiciona el modal en el centro verticalmente
+                left: '50%', // Posiciona el modal en el centro horizontalmente
+                right: 'auto',
+                bottom: 'auto',
+                marginRight: '-50%',
+                transform: 'translate(-50%, -50%)', // Asegura que el modal esté centrado
+                width: '80%', // Establece el ancho del modal al 80% del ancho de la ventana
+                height: '80%', // Establece la altura del modal al 80% de la altura de la ventana
+              },
+            }}
+        >
           {results.map((product) => (
               <div key={product._id}>{product.name}</div>
           ))}
