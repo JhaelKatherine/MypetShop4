@@ -1,35 +1,50 @@
 // SearchBox.js
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function SearchBox() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    if (query) {
+      const fetchResults = async () => {
+        try {
+          const response = await axios.get(`/api/products/search?query=${query}`);
+          setResults(response.data.products);
+        } catch (error) {
+          console.error('Error searching products: ', error);
+        }
+      };
+      fetchResults();
+    } else {
+      setResults([]);
+    }
+  }, [query]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     navigate(query ? `/search/?query=${query}` : '/search');
   };
 
   return (
-  <FormControl
-  type="text"
-  name="q"
-  id="q"
-  onChange={(e) => setQuery(e.target.value)}
-  placeholder="search products..."
-  aria-label="Search Products"
-  aria-describedby="button-search"
-  className="w-100" // Esta clase Bootstrap puede ajustar el ancho
-  style={{
-    borderRadius: '20px',
-    maxWidth: '950px', // Modifica el maxWidth según tu preferencia
-    width: 'calc(100% - 44px)', // Ancho restante luego de considerar el botón
-  }}
-/>
-
+      <form onSubmit={submitHandler}>
+        <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search products..."
+        />
+        <button type="submit">Search</button>
+        {results.length > 0 && (
+            <div className="search-results">
+              {results.map((product) => (
+                  <div key={product._id}>{product.name}</div>
+              ))}
+            </div>
+        )}
+      </form>
   );
 }
