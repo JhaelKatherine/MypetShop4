@@ -60,10 +60,20 @@ export default function SignupScreen() {
     }
   };
 
-const responseGoogle = async (response) => {
-  console.log(response);
-  console.log(response.profileObj);
-};
+
+  const responseGoogle = async (response) => {
+    try {
+      const { data } = await Axios.post('/api/users/signup-google', {
+        tokenId: response.tokenId,
+      });
+      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      navigate(redirect || '/');
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
+  
 useEffect(() => {
   const start = () =>{
   gapi.auth2.init({
@@ -166,12 +176,13 @@ const onFailure = (response) => {
                 <p className="signin">Register with</p>
                 <div className="social-buttons-container">
     <div  >
-    <Googlelogin
+    <GoogleLogin
   clientId={clientID}
-  buttonText="Registrarse con Google"
+  buttonText="Sign up with Google"
   onSuccess={responseGoogle}
   onFailure={responseGoogle}
-  cookiePolicy={'single_host_origin'}/>
+  cookiePolicy={'single_host_origin'}
+/>
     </div>
     <div >
     <FacebookLogin
