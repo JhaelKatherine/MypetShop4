@@ -70,7 +70,7 @@ export default function OrderScreen() {
   ) : (
     <div>
       <Helmet>
-        <title>Order</title>
+        <title>Order Details</title>
       </Helmet>
       <h2 className="my-3"> Information about your order </h2>
       <h6>
