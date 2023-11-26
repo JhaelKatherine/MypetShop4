@@ -83,12 +83,14 @@ orderRouter.get(
 );
 
 orderRouter.get(
-  '/mine',
+  '/mine/:userId',
   expressAsyncHandler(async (req, res) => {
-    const orders = await Order.find({ user: req.body.user });
+    const userId = req.params.userId;
+    const orders = await Order.find({ user: userId });
     res.send(orders);
   })
 );
+
 
 orderRouter.get(
   '/:id',

@@ -34,12 +34,10 @@ export default function OrderHistoryScreen() {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const { data } = await axios.get(
-          `/api/orders/mine`,
-
-          { headers: {} }
-        );
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        if (userInfo) {
+          const { data } = await axios.get(`/api/orders/mine/${userInfo._id}`);
+          dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        }
       } catch (error) {
         dispatch({
           type: 'FETCH_FAIL',
@@ -49,6 +47,7 @@ export default function OrderHistoryScreen() {
     };
     fetchData();
   }, [userInfo]);
+  
   return (
     <div>
       <Helmet>
