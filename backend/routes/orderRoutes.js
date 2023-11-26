@@ -85,7 +85,7 @@ orderRouter.get(
 orderRouter.get(
   '/mine',
   expressAsyncHandler(async (req, res) => {
-    const orders = await Order.find({ user: req.user._id });
+    const orders = await Order.find({ user: req.body.user });
     res.send(orders);
   })
 );
