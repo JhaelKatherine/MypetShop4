@@ -54,7 +54,8 @@ export default function OrderHistoryScreen() {
         <title>Order History</title>
       </Helmet>
 
-      <h1>My order</h1>
+      <h1>Order History</h1>
+      <h3>You can see your orders here</h3>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -73,8 +74,6 @@ export default function OrderHistoryScreen() {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
                 <td>
                   <Button
                     type="button"
