@@ -73,7 +73,7 @@ export default function SignupScreen() {
       toast.error(getError(err));
     }
   };
-  
+
 useEffect(() => {
   const start = () =>{
   gapi.auth2.init({
@@ -176,7 +176,7 @@ const onFailure = (response) => {
                 <p className="signin">Register with</p>
                 <div className="social-buttons-container">
     <div  >
-    <GoogleLogin
+    <Googlelogin
   clientId={clientID}
   buttonText="Sign up with Google"
   onSuccess={responseGoogle}
