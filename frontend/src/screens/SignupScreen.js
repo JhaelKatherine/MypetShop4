@@ -65,6 +65,7 @@ const responseGoogle = async (response) => {
     const { data } = await Axios.post('/api/users/signup-google', {
       name: response.profileObj.givenName,
       lastName: response.profileObj.familyName,
+      userName: response.profileObj.givenName,
       email: response.profileObj.email,
     });
 
