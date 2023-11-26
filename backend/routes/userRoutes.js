@@ -230,6 +230,7 @@ userRouter.post(
       const user = await User.findOne({ email });
 
       if (user) {
+        console.log('Existing User:', existingUser);
         res.send({
           _id: user._id,
           name: user.name,
@@ -240,6 +241,7 @@ userRouter.post(
           token: generateToken(user),
         });
       } else {
+        console.log('Creating New User:', name, email);
         const newUser = new User({
           name,
           email,
@@ -259,8 +261,10 @@ userRouter.post(
         });
       }
     } catch (error) {
-      console.error(error);
-      res.status(500).send({ message: 'Internal Server Error' });
+      console.error(err);
+      if (err.response && err.response.data) {
+        console.log(err.response.data); // Imprime el mensaje de error desde el servidor
+      }            res.status(500).send({ message: 'Internal Server Error' });
     }
   })
 );
