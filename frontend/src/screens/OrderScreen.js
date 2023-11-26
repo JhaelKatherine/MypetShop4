@@ -114,38 +114,37 @@ export default function OrderScreen() {
           </Card>
         </Col>
         <Col md={4}>
-          <Card className="mb-3">
-            <Card.Body>
-              <Card.Title>Order Summary</Card.Title>
-              <ListGroup variant="flush">
-  <ListGroup.Item>
-    <Row>
-      <Col className="text-left">Items</Col>
-      <Col className="text-right">${order.itemsPrice.toFixed(2)}</Col>
-    </Row>
-  </ListGroup.Item>
-  <ListGroup.Item>
-    <Row>
-      <Col className="text-left">Delivery</Col>
-      <Col className="text-right">FREE</Col>
-    </Row>
-  </ListGroup.Item>
-  <ListGroup.Item>
-    <Row>
-      <Col className="text-left">
-        <strong>Order Total</strong>
-      </Col>
-      <Col className="text-right">
-        <strong>${order.totalPrice.toFixed(2)}</strong>
-      </Col>
-    </Row>
-  </ListGroup.Item>
-</ListGroup>
+  <Card className="mb-3">
+    <Card.Body>
+      <Card.Title>Order Summary</Card.Title>
+      <ListGroup variant="flush">
+        <ListGroup.Item>
+          <Row>
+            <Col className="text-left">Items</Col>
+            <Col className="text-right">${order.itemsPrice.toFixed(2)}</Col>
+          </Row>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Row>
+            <Col className="text-left">Shipping</Col>
+            <Col className="text-right">FREE</Col>
+          </Row>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Row>
+            <Col className="text-left">
+              <strong>Order Total</strong>
+            </Col>
+            <Col className="text-right">
+              <strong>${order.totalPrice.toFixed(2)}</strong>
+            </Col>
+          </Row>
+        </ListGroup.Item>
+      </ListGroup>
+    </Card.Body>
+  </Card>
+</Col>
 
-
-            </Card.Body>
-          </Card>
-        </Col>
       </Row>
     </div>
   );
