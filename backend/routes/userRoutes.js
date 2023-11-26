@@ -219,7 +219,7 @@ userRouter.post(
 userRouter.post(
   '/signup-google',
   expressAsyncHandler(async (req, res) => {
-    const { name, lastName,userName, email } = req.body;
+    const { name, lastName, email } = req.body;
 
     try {
       // Buscar si ya existe un usuario con el correo electrónico de Google
@@ -241,7 +241,6 @@ userRouter.post(
         const newUser = new User({
           name,
           lastName,
-          userName,
           email,
           password: 'generated-password-for-google-user', // Puedes generar una contraseña única para usuarios de Google
         });
@@ -259,7 +258,7 @@ userRouter.post(
           token: generateToken(savedUser),
         });
       }
-      console.log('Signup with Google:', req.body);
+            console.log('Signup with Google:', req.body);
     } catch (error) {
       console.error('Error during signup with Google:', error);
       res.status(500).send({ message: 'Internal Server Error' });    }
