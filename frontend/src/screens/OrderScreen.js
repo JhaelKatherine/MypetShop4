@@ -8,14 +8,9 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
-import { useNavigate, useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
-import { toast } from 'react-toastify';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -117,14 +112,8 @@ export default function OrderScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Shipping</Col>
-                    <Col>${order.shippingPrice.toFixed(2)}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Tax</Col>
-                    <Col>${order.taxPrice.toFixed(2)}</Col>
+                    <Col>Delivery</Col>
+                    <Col>FREE</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
