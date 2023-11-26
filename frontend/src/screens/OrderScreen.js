@@ -80,26 +80,24 @@ export default function OrderScreen() {
               <ListGroup variant="flush">
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
-                    <Row className="align-items-center">
+                  <Row className="align-items-center">
                     <Col md={6} className="text-left">
-    <img
-      src={item.image}
-      alt={item.name}
-      className="img-fluid rounded img-thumbnail"
-    />
-  </Col>
-  <Col md={6} className="text-left">
-    <Link to={`/product/${item.slug}`}>{item.name}</Link>
-  </Col>
-  <Col md={3} className="text-left">
-    <span>{item.quantity}</span>
-  </Col>
-  <Col md={3} className="text-left">
-    ${item.price}
-  </Col>
-</Row>
-
-                  </ListGroup.Item>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="img-fluid rounded img-thumbnail"
+                      />
+                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                    </Col>
+                    <Col md={3} className="text-left">
+                      <span>{item.quantity}</span>
+                    </Col>
+                    <Col md={3} className="text-left">
+                      ${item.price}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+                
                 ))}
               </ListGroup>
             </Card.Body>
