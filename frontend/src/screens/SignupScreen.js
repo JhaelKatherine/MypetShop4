@@ -65,7 +65,6 @@ const responseGoogle = async (response) => {
     const { data } = await Axios.post('/api/users/signup-google', {
       name: response.profileObj.givenName,
       lastName: response.profileObj.familyName,
-      userName: response.profileObj.givenName,
       email: response.profileObj.email,
     });
 
@@ -73,8 +72,6 @@ const responseGoogle = async (response) => {
     localStorage.setItem('userInfo', JSON.stringify(data));
     navigate(redirect || '/');
   } catch (err) {
-    console.error('Error during signup with Google:', err);
-    console.log('Response data:', err.response && err.response.data);
     toast.error(getError(err));
   }
 };
