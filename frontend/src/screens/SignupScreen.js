@@ -73,6 +73,7 @@ const responseGoogle = async (response) => {
     navigate(redirect || '/');
   } catch (err) {
     console.error('Error during signup with Google:', err);
+    console.log('Response data:', err.response && err.response.data);
     toast.error(getError(err));
   }
 };
