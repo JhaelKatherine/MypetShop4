@@ -223,33 +223,31 @@ userRouter.post(
     try {
       const ticket = await client.verifyIdToken({
         idToken: tokenId,
-        audience: '193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com',
+        audience: 193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com,
       });
-      const { name, email, picture } = ticket.getPayload();
+      const { name, email } = ticket.getPayload();
 
-      // Buscar usuario existente por correo electrónico
-      const existingUser = await User.findOne({ email });
+      const user = await User.findOne({ email });
 
-      if (existingUser) {
-        // Si el usuario ya existe, enviar sus datos
+      if (user) {
         res.send({
-          _id: existingUser._id,
-          name: existingUser.name,
-          lastName: existingUser.lastName,
-          userName: existingUser.userName,
-          email: existingUser.email,
-          isAdmin: existingUser.isAdmin,
-          token: generateToken(existingUser),
+          _id: user._id,
+          name: user.name,
+          lastName: user.lastName,
+          userName: user.userName,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: generateToken(user),
         });
       } else {
-        // Si el usuario no existe, crear uno nuevo
         const newUser = new User({
           name,
           email,
-          password: bcrypt.hashSync('googleuserpassword', 8),
+          password: bcrypt.hashSync('googleuserpassword', 8), // Cambia esto según tus necesidades
         });
-
+        console.log('New User:', newUser);
         const createdUser = await newUser.save();
+        console.log('Created User:', createdUser); // Agrega esto para ver los detalles del usuario creado
         res.send({
           _id: createdUser._id,
           name: createdUser.name,
@@ -266,6 +264,5 @@ userRouter.post(
     }
   })
 );
-
 
 export default userRouter;
