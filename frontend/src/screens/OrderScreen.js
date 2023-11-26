@@ -121,22 +121,22 @@ export default function OrderScreen() {
       <ListGroup variant="flush">
         <ListGroup.Item>
           <Row>
-            <Col className="text-left">Items</Col>
-            <Col className="text-right">${order.itemsPrice.toFixed(2)}</Col>
+            <Col className="text-left" style={{ textAlign: 'left' }}>Items</Col>
+            <Col className="text-right" style={{ textAlign: 'right' }}>${order.itemsPrice.toFixed(2)}</Col>
           </Row>
         </ListGroup.Item>
         <ListGroup.Item>
           <Row>
-            <Col className="text-left">Shipping</Col>
-            <Col className="text-right">FREE</Col>
+            <Col className="text-left" style={{ textAlign: 'left' }}>Shipping</Col>
+            <Col className="text-right" style={{ textAlign: 'right' }}>FREE</Col>
           </Row>
         </ListGroup.Item>
         <ListGroup.Item>
           <Row>
-            <Col className="text-left">
+            <Col className="text-left" style={{ textAlign: 'left' }}>
               <strong>Order Total</strong>
             </Col>
-            <Col className="text-right">
+            <Col className="text-right" style={{ textAlign: 'right' }}>
               <strong>${order.totalPrice.toFixed(2)}</strong>
             </Col>
           </Row>
