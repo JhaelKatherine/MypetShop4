@@ -1,0 +1,74 @@
+.about-us {
+    background-color: #E4EBF0;
+    padding: 20px;
+
+}
+
+.w-100-bg {
+    width: 100vw; /* Esto hará que la imagen tenga el ancho de la ventana del navegador */
+    position: relative; /* Esto es necesario para que left y right funcionen */
+    left: 50%; /* Esto moverá la imagen a la mitad de su contenedor */
+    right: 50%; /* Esto moverá la imagen a la mitad de su contenedor */
+    margin-left: -50vw; /* Esto compensará el movimiento anterior para alinear la imagen con el borde izquierdo de la ventana del navegador */
+    margin-right: -50vw; /* Esto compensará el movimiento anterior para alinear la imagen con el borde derecho de la ventana del navegador */
+    margin-top: 0;
+}
+
+.about-us h1 {
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.about-us p {
+    text-align: center;
+}
+
+.sub-tittle {
+    color: #3a8aff;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.members {
+    margin-top: 30px;
+}
+
+.about-us p {
+    color: #000000;
+    font-size: 16px;
+}
+
+.team {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.team img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.version {
+    text-align: center;
+    margin-top: 50px;
+
+}
+
+.team p {
+    text-align: center;
+}
+
+.members h2{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.container-aboutUs {
+    margin-bottom: 50px;
+}
