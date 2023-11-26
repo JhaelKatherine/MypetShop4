@@ -215,4 +215,53 @@ userRouter.post(
 })
 );
 
+
+userRouter.post(
+  '/signup-google',
+  expressAsyncHandler(async (req, res) => {
+    const { name, lastName, email } = req.body;
+
+    try {
+      // Buscar si ya existe un usuario con el correo electrónico de Google
+      const existingUser = await User.findOne({ email });
+
+      if (existingUser) {
+        // Si el usuario ya existe, enviar los detalles del usuario existente
+        res.send({
+          _id: existingUser._id,
+          name: existingUser.name,
+          lastName: existingUser.lastName,
+          userName: existingUser.userName,
+          email: existingUser.email,
+          isAdmin: existingUser.isAdmin,
+          token: generateToken(existingUser),
+        });
+      } else {
+        // Si el usuario no existe, crear un nuevo usuario en la base de datos
+        const newUser = new User({
+          name,
+          lastName,
+          email,
+          password: 'generated-password-for-google-user', // Puedes generar una contraseña única para usuarios de Google
+        });
+
+        const savedUser = await newUser.save();
+
+        // Enviar detalles del nuevo usuario
+        res.send({
+          _id: savedUser._id,
+          name: savedUser.name,
+          lastName: savedUser.lastName,
+          userName: savedUser.userName,
+          email: savedUser.email,
+          isAdmin: savedUser.isAdmin,
+          token: generateToken(savedUser),
+        });
+      }
+    } catch (error) {
+      res.status(500).send({ message: 'Internal Server Error' });
+    }
+  })
+);
+
 export default userRouter;
