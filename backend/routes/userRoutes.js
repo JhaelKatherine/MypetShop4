@@ -4,9 +4,9 @@ import expressAsyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import { isAuth, isAdmin, generateToken, baseUrl, mailgun } from '../utils.js';
-
+import { OAuth2Client } from 'google-auth-library';
 const userRouter = express.Router();
-
+const client = new OAuth2Client("193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com");
 userRouter.get(
   '/',
   isAuth,
@@ -219,49 +219,47 @@ userRouter.post(
 userRouter.post(
   '/signup-google',
   expressAsyncHandler(async (req, res) => {
-    const { name, lastName, email } = req.body;
-
+    const { tokenId } = req.body;
     try {
-      // Buscar si ya existe un usuario con el correo electrónico de Google
-      const existingUser = await User.findOne({ email });
+      const ticket = await client.verifyIdToken({
+        idToken: tokenId,
+        audience: 193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com,
+      });
+      const { name, email } = ticket.getPayload();
 
-      if (existingUser) {
-        // Si el usuario ya existe, enviar los detalles del usuario existente
+      const user = await User.findOne({ email });
+
+      if (user) {
         res.send({
-          _id: existingUser._id,
-          name: existingUser.name,
-          lastName: existingUser.lastName,
-          userName: existingUser.userName,
-          email: existingUser.email,
-          isAdmin: existingUser.isAdmin,
-          token: generateToken(existingUser),
+          _id: user._id,
+          name: user.name,
+          lastName: user.lastName,
+          userName: user.userName,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: generateToken(user),
         });
       } else {
-        // Si el usuario no existe, crear un nuevo usuario en la base de datos
         const newUser = new User({
           name,
-          lastName,
           email,
-          password: 'generated-password-for-google-user', // Puedes generar una contraseña única para usuarios de Google
+          password: bcrypt.hashSync('googleuserpassword', 8), // Cambia esto según tus necesidades
         });
-
-        const savedUser = await newUser.save();
-
-        // Enviar detalles del nuevo usuario
+        const createdUser = await newUser.save();
         res.send({
-          _id: savedUser._id,
-          name: savedUser.name,
-          lastName: savedUser.lastName,
-          userName: savedUser.userName,
-          email: savedUser.email,
-          isAdmin: savedUser.isAdmin,
-          token: generateToken(savedUser),
+          _id: createdUser._id,
+          name: createdUser.name,
+          lastName: createdUser.lastName,
+          userName: createdUser.userName,
+          email: createdUser.email,
+          isAdmin: createdUser.isAdmin,
+          token: generateToken(createdUser),
         });
       }
-            console.log('Signup with Google:', req.body);
     } catch (error) {
-      console.error('Error during signup with Google:', error);
-      res.status(500).send({ message: 'Internal Server Error' });    }
+      console.error(error);
+      res.status(500).send({ message: 'Internal Server Error' });
+    }
   })
 );
 
