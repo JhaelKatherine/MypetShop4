@@ -28,6 +28,14 @@ productRouter.post(
   })
 );
 
+productRouter.get('/category/:category', expressAsyncHandler(async (req, res) => {
+  const { category } = req.params;
+
+  const products = await Product.find({ category, status: true });
+
+  res.send(products);
+}));
+
 productRouter.put(
   '/:id',
   expressAsyncHandler(async (req, res) => {
