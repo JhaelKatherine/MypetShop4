@@ -310,7 +310,6 @@ export default function AddProductScreen() {
                 type="text"
                 id="imageURL"
                 maxLength="1500"
-
                 className="form-control"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
