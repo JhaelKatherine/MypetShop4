@@ -115,8 +115,11 @@ export default function ShippingAddressScreen() {
   };
   const placeOrder = () => {
     if (validateForm()) {
-    navigate('/checkoutpage');
-    }else {console.log('Please complete the required fields correctly.');}
+      ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
+      navigate('/checkoutpage');
+    } else {
+      console.log('Please complete the required fields correctly.');
+    }
   };
 
 

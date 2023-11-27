@@ -35,7 +35,7 @@ export default function CartScreen() {
   };
 
   const checkoutHandler = () => {
-    navigate('/shipping');
+    navigate('/invoice');
   };
 
   return (

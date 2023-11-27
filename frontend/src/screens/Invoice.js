@@ -1,38 +1,34 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import '../Css/Invoice.css'
+import axios from "axios";
+import {Store} from "../Store";
 
 const Invoice = () => {
-    // Datos de la factura
-    const invoiceData = {
-        id: '31442F52V52',
-        date: '10/27/2023 8:00 AM',
-        billTo: 'Dennis Jorge Dennis Jorge',
-        sendTo: 'Ladisla Ceballos, Cochabamba',
-        nit: '123123123123',
-        items: [
-            {
-                description: 'Bath towel for small dog',
-                quantity: 1,
-                unitPrice: 163,
-            },
-            {
-                description: 'Bath towel for small dog',
-                quantity: 1,
-                unitPrice: 163,
-            },
-            {
-                description: 'Bath towel for small dog',
-                quantity: 1,
-                unitPrice: 163,
-            },
-            {
-                description: 'Bath towel for small dog',
-                quantity: 1,
-                unitPrice: 163,
-            },
-        ],
-        total: 316,
-    };
+    const [invoiceData, setInvoiceData] = useState(null);
+    const { state } = useContext(Store);
+    const { userInfo, shippingAddress } = state;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if (userInfo) {
+                    const {data} = await axios.get(`/api/orders/mine/${userInfo._id}`);
+                    if (data && data.length > 0) {
+                        const lastInvoice = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+                        setInvoiceData(lastInvoice);
+                    }
+                }
+            } catch (error) {
+                console.error('Error al obtener los datos de la factura:', error);
+            }
+        };
+
+        fetchData();
+    }, [userInfo]);
+
+    if (!invoiceData) {
+        return <div>Cargando factura...</div>;
+    }
 
     return (
         <>
@@ -44,24 +40,24 @@ const Invoice = () => {
                 </div>
 
                 <div>
-                    <p className={'date'}><span>Invoice ID: </span>{invoiceData.id}</p>
-                    <p className={'date'}><span>Date: </span>{invoiceData.date}</p>
+                    <p className={'date'}><span>Invoice ID: </span>{invoiceData._id}</p>
+                    <p className={'date'}><span>Date: </span>{invoiceData.createdAt}</p>
                 </div>
 
                 <div className={'invoice-bill_send'}>
                     <div>
                         <h3>Bill to</h3>
-                        <p>{invoiceData.billTo}</p>
+                        <p>{invoiceData.user.name}</p>
                     </div>
                     <div>
                         <h3>Send to</h3>
-                        <p>{invoiceData.sendTo}</p>
+                        <p>{shippingAddress.address}</p>
                     </div>
                 </div>
 
                 <div>
                     <h3>NIT</h3>
-                    <p>{invoiceData.nit}</p>
+                    <p>{shippingAddress.nit}</p>
                 </div>
 
                 <div>
@@ -76,12 +72,12 @@ const Invoice = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {invoiceData.items.map((item, index) => (
+                        {invoiceData.orderItems.map((item, index) => (
                             <tr key={index}>
-                                <td>{item.description}</td>
+                                <td>{item.name}</td>
                                 <td>{item.quantity}</td>
-                                <td>Bs. {item.unitPrice}</td>
-                                <td>Bs. {item.quantity * item.unitPrice}</td>
+                                <td>Bs. {item.price}</td>
+                                <td>Bs. {item.quantity * item.price}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -90,7 +86,7 @@ const Invoice = () => {
 
                 <div className={'total-price'}>
                     <h3>Total:</h3>
-                    <p>Bs. {invoiceData.total}</p>
+                    <p>Bs. {invoiceData.totalPrice}</p>
                 </div>
             </div>
 
@@ -100,8 +96,7 @@ const Invoice = () => {
             </div>
 
         </>
-
     );
-};
+}
 
 export default Invoice;
