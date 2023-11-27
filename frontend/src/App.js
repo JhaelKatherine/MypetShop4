@@ -23,6 +23,11 @@ import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import CheckoutPage from './screens/CheckoutPage';
 import AboutUs from "./components/AboutUs";
+import OrderScreen from './screens/OrderScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import ProtectedRoute from './components/ProtectedRoute';
+import OrderHistoryScreen from './screens/OrderHistoryScreen';
+
 
 
 function App() {
@@ -96,13 +101,10 @@ function App() {
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    <Link
-      className="dropdown-item nav-dropdown-item:hover "
-      to="#signout"
-      onClick={signoutHandler}
-    >
-      Sign Out
-    </Link>
+    <LinkContainer to="/orderhistory">
+      <NavDropdown.Item>Order History</NavDropdown.Item>
+    </LinkContainer>
+    <NavDropdown.Item onClick={signoutHandler}>Sign Out</NavDropdown.Item>
   </NavDropdown>
 ) : (
   <LinkContainer to="/signin">
@@ -116,6 +118,7 @@ function App() {
     </Nav.Link>
   </LinkContainer>
 )}
+
 
                  
  <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
@@ -165,7 +168,27 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+                            <Route
+                path="/orderhistory"
+                element={
+                  <ProtectedRoute>
+                    <OrderHistoryScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              
+              <Route path="/placeorder" element={<PlaceOrderScreen />} />
+              <Route
+                path="/order/:id"
+                element={
+                  <ProtectedRoute>
+                    <OrderScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
+
             </Routes>
+            
           </Container>
         </main>
       </div>
