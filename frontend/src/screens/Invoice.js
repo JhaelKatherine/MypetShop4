@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import '../Css/Invoice.css'
 import axios from "axios";
 import {Store} from "../Store";
+import { renderToString } from 'react-dom/server';
 
 const Invoice = () => {
     const [invoiceData, setInvoiceData] = useState(null);
@@ -34,7 +35,7 @@ const Invoice = () => {
     const sendEmail = async () => {
         let to = email.email;
         let subject = 'Invoice';
-        const htmlContent = ReactDOMServer.renderToString(
+        const htmlContent = renderToString(
             <div className="invoice">
 
                 <div>
