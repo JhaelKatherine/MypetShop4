@@ -16,11 +16,10 @@ const Invoice = () => {
                 if (userInfo) {
                     const {data} = await axios.get(`/api/orders/mine/${userInfo._id}`);
                     if (data && data.length > 0) {
-                        // Filtra los objetos que no tienen las propiedades 'createdAt' y 'updatedAt'
                         const filteredData = data.filter(order => order.createdAt && order.updatedAt);
-                        // Obtiene el último objeto de la lista filtrada
                         const lastInvoice = filteredData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
                         setInvoiceData(lastInvoice);
+                        console.log(lastInvoice.user.name)
                     }
                 }
             } catch (error) {
@@ -46,7 +45,7 @@ const Invoice = () => {
 
                 <div>
                     <p className={'date'}><span>Invoice ID: </span>{invoiceData._id}</p>
-                    <p className={'date'}><span>Date: </span>{invoiceData.createdAt}</p>
+                    <p className={'date'}><span>Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}</p>
                 </div>
 
                 <div className={'invoice-bill_send'}>
@@ -56,7 +55,7 @@ const Invoice = () => {
                     </div>
                     <div>
                         <h3>Send to</h3>
-                        <p>{shippingAddress.address}</p>
+                        <p>{`${shippingAddress.city}, ${shippingAddress.address}`}</p>
                     </div>
                 </div>
 
@@ -90,6 +89,8 @@ const Invoice = () => {
                 </div>
 
                 <div className={'total-price'}>
+                    <h3>Tax price:</h3>
+                    <p>Bs. {invoiceData.taxPrice}</p>
                     <h3>Total:</h3>
                     <p>Bs. {invoiceData.totalPrice}</p>
                 </div>
