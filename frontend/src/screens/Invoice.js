@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import '../Css/Invoice.css'
 import axios from "axios";
 import {Store} from "../Store";
-import { renderToString } from 'react-dom/server';
+import {renderToString} from 'react-dom/server';
 
 const Invoice = () => {
     const [invoiceData, setInvoiceData] = useState(null);
@@ -35,188 +35,82 @@ const Invoice = () => {
     const sendEmail = async () => {
         let to = email.email;
         let subject = 'Invoice';
-        const htmlContent = renderToString(
-            <div className="invoice">
+        let html = renderToString(
+            <div className="invoice"
+                 style="background-color: #f0f0f0; width: 90%; padding: 20px; border-radius: 10px; margin: auto;">
 
                 <div>
-                    <h2 className={'commerce-name'}><span className={'commerce-name_aux'}>MY</span>PETSHOP</h2>
-                    <h1>Invoice</h1>
+                    <h2 className={'commerce-name'} style="color: #333; font-weight: bold; text-align: center;"><span
+                        className={'commerce-name_aux'} style="color: #ff4500;">MY</span>PETSHOP</h2>
+                    <h1 style="text-align: center;">Invoice</h1>
                 </div>
 
                 <div>
-                    <p className={'date'}><span>Invoice ID: </span>{invoiceData._id}</p>
-                    <p className={'date'}><span>Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}</p>
+                    <p className={'date'} style="text-align: end;"><span
+                        style="font-weight: bold;">Invoice ID: </span>{invoiceData._id}</p>
+                    <p className={'date'} style="text-align: end;"><span
+                        style="font-weight: bold;">Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}
+                    </p>
                 </div>
 
-                <div className={'invoice-bill_send'}>
+                <div className={'invoice-bill_send'} style="display: flex; gap: 30px;">
                     <div>
-                        <h3>Bill to</h3>
-                        <p>{shippingAddress.fullName}</p>
+                        <h3 style="color: #333;">Bill to</h3>
+                        <p style="color: #666;">{shippingAddress.fullName}</p>
                     </div>
                     <div>
-                        <h3>Send to</h3>
-                        <p>{`${shippingAddress.city}, ${shippingAddress.address}`}</p>
+                        <h3 style="color: #333;">Send to</h3>
+                        <p style="color: #666;">{`${shippingAddress.city}, ${shippingAddress.address}`}</p>
                     </div>
                 </div>
 
                 <div>
-                    <h3>NIT</h3>
-                    <p>{shippingAddress.nit}</p>
+                    <h3 style="color: #333;">NIT</h3>
+                    <p style="color: #666;">{shippingAddress.nit}</p>
                 </div>
 
                 <div>
-                    <h3>Items</h3>
-                    <table>
+                    <h3 style="color: #333;">Items</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
                         <thead>
                         <tr>
-                            <th>Item</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Subtotal</th>
+                            <th style="padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #005593; color: white; border: 1px solid #ddd; padding: 8px;">Item</th>
+                            <th style="padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #005593; color: white; border: 1px solid #ddd; padding: 8px;">Quantity</th>
+                            <th style="padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #005593; color: white; border: 1px solid #ddd; padding: 8px;">Unit
+                                Price
+                            </th>
+                            <th style="padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #005593; color: white; border: 1px solid #ddd; padding: 8px;">Subtotal</th>
                         </tr>
                         </thead>
                         <tbody>
                         {invoiceData.orderItems.map((item, index) => (
                             <tr key={index}>
-                                <td>{item.name}</td>
-                                <td>{item.quantity}</td>
-                                <td>Bs. {item.price}</td>
-                                <td>Bs. {item.quantity * item.price}</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">{item.name}</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">{item.quantity}</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Bs. {item.price}</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Bs. {item.quantity * item.price}</td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 </div>
 
-                <div className={'prices-invoice'}>
+                <div className={'prices-invoice'} style="display: flex; flex-direction: column; gap: 4px;">
 
-                    <div className={'total-price'}>
-                        <h3>Tax price:</h3>
-                        <p>Bs. {invoiceData.taxPrice}</p>
+                    <div className={'total-price'}
+                         style="display: flex; justify-content: end; align-items: center; gap: 15px; margin-right: 10px;">
+                        <h3 style="font-size: 20px; margin: 0; color: #333;">Tax price:</h3>
+                        <p style="margin: 0; font-size: 20px; color: #666;">Bs. {invoiceData.taxPrice}</p>
                     </div>
-                    <div className={'total-price'}>
-                        <h3>Total:</h3>
-                        <p>Bs. {invoiceData.totalPrice}</p>
+                    <div className={'total-price'}
+                         style="display: flex; justify-content: end; align-items: center; gap: 15px; margin-right: 10px;">
+                        <h3 style="font-size: 20px; margin: 0; color: #333;">Total:</h3>
+                        <p style="margin: 0; font-size: 20px; color: #666;">Bs. {invoiceData.totalPrice}</p>
                     </div>
 
                 </div>
             </div>
         );
-        // Agregar estilos en línea al HTML
-        const styledHtml = `
-            <style>
-              .invoice {
-                    background-color: #f0f0f0;
-                    width: 90%;
-                    padding: 20px;
-                    border-radius: 10px;
-                    margin: auto;
-                }
-                
-                .invoice h2, .invoice h3 {
-                    color: #333;
-                }
-                
-                .invoice h1 {
-                    text-align: center;
-                }
-                
-                .date {
-                    text-align: end;
-                }
-                
-                .invoice-bill_send {
-                    display: flex;
-                    gap: 30px;
-                }
-                
-                .invoice span {
-                    font-weight: bold;
-                }
-                
-                .invoice p {
-                    color: #666;
-                }
-                
-                .invoice table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
-                
-                .invoice table, .invoice th, .invoice td {
-                    border: 1px solid #ddd;
-                    padding: 8px;
-                }
-                
-                .invoice th {
-                    padding-top: 12px;
-                    padding-bottom: 12px;
-                    text-align: left;
-                    background-color: #005593;
-                    color: white;
-                }
-                
-                .commerce-name {
-                    font-weight: bold;
-                    text-align: center;
-                }
-                
-                .commerce-name_aux {
-                    color: #ff4500;
-                }
-                
-                .total-price {
-                    display: flex;
-                    justify-content: end;
-                    align-items: center;
-                    gap: 15px;
-                    margin-right: 10px;
-                }
-                
-                .total-price p {
-                    margin: 0;
-                    font-size: 20px;
-                }
-                
-                .total-price h3 {
-                    font-size: 20px;
-                    margin: 0;
-                }
-                
-                .send-button {
-                    background-color: #005593;
-                    color: white;
-                    padding: 7px 27px;
-                }
-                
-                .button-container_invoice{
-                    width: 90%;
-                    padding: 20px;
-                    margin: auto auto 30px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                
-                .greetings {
-                    font-weight: bold;
-                
-                }
-                
-                .greetings span{
-                    color: #ff4500;
-                }
-                
-                .prices-invoice {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 4px;
-            </style>
-            ${htmlContent}
-          `;
-
-        // Configurar el contenido HTML en el correo electrónico
-        let html = styledHtml;
 
         let res = await axios.post('/api/send-email', { to, subject, html });
 
