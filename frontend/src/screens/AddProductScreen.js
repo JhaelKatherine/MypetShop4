@@ -149,7 +149,12 @@ export default function AddProductScreen() {
                 id="name"
                 className="form-control"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') {
+                    setName(e.target.value);
+                  }
+                }}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="50" // Limitar a 50 caracteres
@@ -163,7 +168,12 @@ export default function AddProductScreen() {
                 id="slug"
                 className="form-control"
                 value={slug}
-                onChange={(e) => setSlug(e.target.value)}
+                onChange={(e) => {
+                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                    setSlug(e.target.value);
+                  }
+                }}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="50" // Limitar a 50 caracteres
@@ -214,7 +224,12 @@ export default function AddProductScreen() {
                 id="description"
                 className="form-control"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => {
+                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                    setDescription(e.target.value);
+                  }
+                }}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="210" 
@@ -230,7 +245,12 @@ export default function AddProductScreen() {
                 id="category"
                 className="form-control"
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => {
+                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                    setCategory(e.target.value);
+                  }
+                }}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="50"
@@ -246,7 +266,12 @@ export default function AddProductScreen() {
                 maxLength="50"
                 className="form-control"
                 value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                onChange={(e) => {
+                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                    setBrand(e.target.value);
+                  }
+                }}
                 pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 required
@@ -285,7 +310,6 @@ export default function AddProductScreen() {
                 type="text"
                 id="imageURL"
                 maxLength="1500"
-
                 className="form-control"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
