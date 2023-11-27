@@ -15,7 +15,6 @@ export default function SignupScreen() {
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/';
-  const clientID = "193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com";
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
