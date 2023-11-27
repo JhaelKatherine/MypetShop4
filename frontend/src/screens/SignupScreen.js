@@ -74,7 +74,6 @@ const responseGoogle = async (response) => {
     toast.error(getError(err));
   }
 };
-};
 useEffect(() => {
   const start = () =>{
   gapi.auth2.init({
