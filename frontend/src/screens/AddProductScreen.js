@@ -169,8 +169,8 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={slug}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                  const trimmedValue = e.target.value.trim(); 
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
                     setSlug(e.target.value);
                   }
                 }}
@@ -225,8 +225,8 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={description}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                  const trimmedValue = e.target.value.trim(); 
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
                     setDescription(e.target.value);
                   }
                 }}
