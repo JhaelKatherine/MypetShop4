@@ -155,7 +155,6 @@ export default function AddProductScreen() {
                     setName(e.target.value);
                   }
                 }}
-                //pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="50"
                 required
@@ -224,10 +223,9 @@ export default function AddProductScreen() {
                 id="description"
                 className="form-control"
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim();
-                  const hasNonWhitespaceChar = /\S/.test(e.target.value); 
-                  if (trimmedValue !== '' && hasNonWhitespaceChar) {
-                    setDescription(e.target.value);
+                  const trimmedValue = e.target.value.trim(); 
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
+                    setName(e.target.value);
                   }
                 }}
                 title="Please enter only letters" 
