@@ -109,6 +109,7 @@ export default function ShippingAddressScreen() {
     if (validateForm()) {
       submitShippingHandler(e);
       ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
+      ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
       localStorage.setItem('paymentMethod', paymentMethodName);
     } else {
       console.log('Please complete the required fields correctly.');
