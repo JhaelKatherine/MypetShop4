@@ -225,7 +225,7 @@ export default function AddProductScreen() {
                 value = {description}
                 onChange={(e) => {
                   const trimmedValue = e.target.value.trim();
-                  if (trimmedValue !== '' || e.target.value === ' ') {
+                  if (e.target.value !== '' && trimmedValue !== '') {
                     setDescription(e.target.value);
                   }
                 }}
