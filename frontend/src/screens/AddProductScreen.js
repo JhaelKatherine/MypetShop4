@@ -150,12 +150,12 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={name}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') {
-                    setName(e.target.value);
+                  const trimmedValue = e.target.value.trim();
+                  if (/^[A-Za-z ]+$/.test(trimmedValue) && trimmedValue.length <= 50) {
+                    setName(trimmedValue);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
+                //pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="50" // Limitar a 50 caracteres
                 required
