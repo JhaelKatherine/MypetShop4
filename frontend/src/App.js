@@ -20,6 +20,10 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
+import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import ProfileScreen from './screens/ProfileScreen';
+
 import './App.css';
 
 
@@ -90,6 +94,7 @@ function App() {
       className="dropdown-item"
       to="#signout"
       onClick={signoutHandler}
+
     >
       Sign Out
     </Link>
@@ -132,6 +137,24 @@ function App() {
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
+              <Route
+                path="/forget-password"
+                element={<ForgetPasswordScreen />}
+              />
+              <Route
+                path="/reset-password/:token"
+                element={<ResetPasswordScreen />}
+              />
+    <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfileScreen />
+                  </ProtectedRoute>
+                }
+              />
+              
+
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
