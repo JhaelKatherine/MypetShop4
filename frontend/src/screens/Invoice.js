@@ -40,33 +40,33 @@ const Invoice = () => {
                  style={{backgroundColor: "#f0f0f0", width: "90%", padding: "20px", borderRadius: "10px", margin: "auto"}}>
 
                 <div>
-                    <h2 className={'commerce-name'} style={{color: "#333", fontWeight: "bold", textAlign: "center"}}><span
-                        className={'commerce-name_aux'} style={{color: "#ff4500"}}>MY</span>PETSHOP</h2>
-                    <h1 style={{textAlign: "center"}}>Invoice</h1>
+                    <h2 className={'commerce-name'} style={{color: "#333", fontWeight: "bold", textAlign: "center", fontSize: "30px"}}><span
+                        className={'commerce-name_aux'} style={{color: "#ff4500", fontSize: "30px"}}>MY</span>PETSHOP</h2>
+                    <h1 style={{textAlign: "center", fontSize: "25px"}}>Invoice</h1>
                 </div>
 
                 <div>
                     <p className={'date'} style={{textAlign: "end"}}><span
-                        style={{fontWeight: "bold"}}>Invoice ID: </span>{invoiceData._id}</p>
+                        style={{fontWeight: "bold", fontSize: "15px"}}>Invoice ID: </span>{invoiceData._id}</p>
                     <p className={'date'} style={{textAlign: "end"}}><span
-                        style={{fontWeight: "bold"}}>Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}
+                        style={{fontWeight: "bold", fontSize: "15px"}}>Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}
                     </p>
                 </div>
 
-                <div className={'invoice-bill_send'} style={{display: "flex", gap: "30px"}}>
-                    <div>
-                        <h3 style={{color: "#333"}}>Bill to</h3>
-                        <p style={{color: "#666"}}>{shippingAddress.fullName}</p>
+                <div className={'invoice-bill_send'} style={{display: "flex"}}>
+                    <div style={{marginRight: "30px"}}>
+                        <h3 style={{color: "#333", fontSize: "20px"}}>Bill to</h3>
+                        <p style={{color: "#666", fontSize: "20px"}}>{shippingAddress.fullName}</p>
                     </div>
                     <div>
-                        <h3 style={{color: "#333"}}>Send to</h3>
-                        <p style={{color: "#666"}}>{`${shippingAddress.city}, ${shippingAddress.address}`}</p>
+                        <h3 style={{color: "#333", fontSize: "20px"}}>Send to</h3>
+                        <p style={{color: "#666", fontSize: "20px"}}>{`${shippingAddress.city}, ${shippingAddress.address}`}</p>
                     </div>
                 </div>
 
                 <div>
-                    <h3 style={{color: "#333"}}>NIT</h3>
-                    <p style={{color: "#666"}}>{shippingAddress.nit}</p>
+                    <h3 style={{color: "#333", fontSize: "20px"}}>NIT</h3>
+                    <p style={{color: "#666", fontSize: "20px"}}>{shippingAddress.nit}</p>
                 </div>
 
                 <div>
@@ -74,12 +74,12 @@ const Invoice = () => {
                     <table style={{width: "100%", borderCollapse: "collapse"}}>
                         <thead>
                         <tr>
-                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px"}}>Item</th>
-                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px"}}>Quantity</th>
-                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px"}}>Unit
+                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px", fontSize: "20px"}}>Item</th>
+                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px", fontSize: "20px"}}>Quantity</th>
+                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px", fontSize: "20px"}}>Unit
                                 Price
                             </th>
-                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px"}}>Subtotal</th>
+                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px", fontSize: "15px"}}>Subtotal</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -95,7 +95,7 @@ const Invoice = () => {
                     </table>
                 </div>
 
-                <div className={'prices-invoice'} style={{display: "flex", flexDirection: "column", gap: "4px"}}>
+                <div className={'prices-invoice'}>
 
                     <div className={'total-price'} style={{display: "flex", justifyContent: "end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
                         <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Tax price:</h3>
