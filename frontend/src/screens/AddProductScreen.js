@@ -225,7 +225,7 @@ export default function AddProductScreen() {
                 onChange={(e) => {
                   const trimmedValue = e.target.value.trim(); 
                   if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
-                    setName(e.target.value);
+                    setDescription(e.target.value);
                   }
                 }}
                 title="Please enter only letters" 
