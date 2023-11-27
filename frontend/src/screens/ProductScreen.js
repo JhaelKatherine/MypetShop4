@@ -151,6 +151,7 @@ function ProductScreen() {
                 className="img-large"
                 src={selectedImage || product.image}
                 alt={product.name}
+                style={{ width: '500px', height: '500px' }}
               ></img>
             </Col>
             <Col md={3}>
