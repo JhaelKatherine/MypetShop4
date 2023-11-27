@@ -157,7 +157,7 @@ export default function AddProductScreen() {
                 }}
                 //pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
-                maxLength="50" // Limitar a 50 caracteres
+                maxLength="50"
                 required
               />
             </div>
@@ -230,10 +230,9 @@ export default function AddProductScreen() {
                     setDescription(e.target.value);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
+                //pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="210" 
-
                 required
               />
             </div>
@@ -251,7 +250,7 @@ export default function AddProductScreen() {
                     setCategory(e.target.value);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
+  
                 title="Please enter only letters" 
                 maxLength="50"
                 required
