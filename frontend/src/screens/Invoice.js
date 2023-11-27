@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import '../Css/Invoice.css'
 import axios from "axios";
 import {Store} from "../Store";
-import nodemailer from "nodemailer";
 
 const Invoice = () => {
     const [invoiceData, setInvoiceData] = useState(null);
@@ -32,29 +31,16 @@ const Invoice = () => {
     }, [userInfo]);
 
     const sendEmail = async () => {
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'novateammypetshop@gmail.com',
-                pass: 'Novateam1!PetShop'
-            }
-        });
+        let to = 'diegofiguesevi@gmail.com';
+        let subject = 'Test email';
+        let html = '<p>Hola mundo</p>';
 
-        let mailOptions = {
-            from: 'novateammypetshop@gmail.com',
-            to: 'diegofiguesevi@gmail.com',
-            subject: 'Invoice',
-            html: '<h1>Invoice</h1><p>Here is your invoice...</p>' // Aquí va el contenido de tu factura
-        };
+        let res = await axios.post('/api/send-email', { to, subject, html });
 
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-            }
-        });
+        console.log(res.data);
     };
+
+
 
     if (!invoiceData) {
         return <div>Cargando factura...</div>;
