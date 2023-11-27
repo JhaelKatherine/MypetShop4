@@ -16,7 +16,10 @@ const Invoice = () => {
                 if (userInfo) {
                     const {data} = await axios.get(`/api/orders/mine/${userInfo._id}`);
                     if (data && data.length > 0) {
-                        const lastInvoice = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+                        // Filtra los objetos que no tienen las propiedades 'createdAt' y 'updatedAt'
+                        const filteredData = data.filter(order => order.createdAt && order.updatedAt);
+                        // Obtiene el último objeto de la lista filtrada
+                        const lastInvoice = filteredData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
                         setInvoiceData(lastInvoice);
                     }
                 }
