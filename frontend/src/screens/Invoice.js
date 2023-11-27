@@ -3,6 +3,7 @@ import '../Css/Invoice.css'
 import axios from "axios";
 import {Store} from "../Store";
 import {renderToString} from 'react-dom/server';
+import { useHistory } from "react-router-dom";
 
 const Invoice = () => {
     const [invoiceData, setInvoiceData] = useState(null);
@@ -70,7 +71,7 @@ const Invoice = () => {
                 </div>
 
                 <div>
-                    <h3 style={{color: "#333"}}>Items</h3>
+                    <h3 style={{color: "#333", fontSize: "20px"}}>Items</h3>
                     <table style={{width: "100%", borderCollapse: "collapse"}}>
                         <thead>
                         <tr>
@@ -115,6 +116,11 @@ const Invoice = () => {
         console.log(res.data);
     };
 
+    const sendEmailAndRedirect = () => {
+        const history = useHistory();
+        sendEmail();
+        history.push("/");
+    };
 
 
     if (!invoiceData) {
@@ -179,7 +185,7 @@ const Invoice = () => {
 
                     <div className={'total-price'}>
                         <h3>Tax price:</h3>
-                        <p>Bs. {invoiceData.taxPrice}</p>
+                        <p>Bs. {invoiceData.taxPrice.toFixed(2)}</p>
                     </div>
                     <div className={'total-price'}>
                         <h3>Total:</h3>
@@ -191,7 +197,7 @@ const Invoice = () => {
 
             <div className={'button-container_invoice'}>
                 <p className={'greetings'}><span>Thanks </span>for you preference!</p>
-                <button className={'send-button'} onClick={sendEmail}>Send copy to mail</button>
+                <button className={'send-button'} onClick={sendEmailAndRedirect}>Send copy to mail</button>
             </div>
 
         </>
