@@ -174,7 +174,7 @@ export default function AddProductScreen() {
                     setSlug(e.target.value);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
+                //pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="50" // Limitar a 50 caracteres
 
