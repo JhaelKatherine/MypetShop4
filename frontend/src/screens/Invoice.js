@@ -95,13 +95,13 @@ const Invoice = () => {
                     </table>
                 </div>
 
-                <div className={'prices-invoice'}>
+                <div className={'prices-invoice'} style={{marginTop: "6px"}}>
 
-                    <div className={'total-price'} style={{display: "flex", justifyContent: "end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
+                    <div className={'total-price'} style={{display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
                         <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Tax price:</h3>
                         <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.taxPrice}</p>
                     </div>
-                    <div className={'total-price'} style={{display: "flex", justifyContent: "end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
+                    <div className={'total-price'} style={{display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
                         <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Total:</h3>
                         <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.totalPrice}</p>
                     </div>
