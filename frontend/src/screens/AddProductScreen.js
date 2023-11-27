@@ -222,6 +222,7 @@ export default function AddProductScreen() {
                 type="text"
                 id="description"
                 className="form-control"
+                value = {description}
                 onChange={(e) => {
                   const trimmedValue = e.target.value.trim(); 
                   if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
