@@ -99,3 +99,9 @@
 .greetings span{
     color: #ff4500;
 }
+
+.prices-invoice {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

@@ -51,7 +51,7 @@ const Invoice = () => {
                 <div className={'invoice-bill_send'}>
                     <div>
                         <h3>Bill to</h3>
-                        <p>{invoiceData.user.name}</p>
+                        <p>{shippingAddress.fullName}</p>
                     </div>
                     <div>
                         <h3>Send to</h3>
@@ -88,11 +88,17 @@ const Invoice = () => {
                     </table>
                 </div>
 
-                <div className={'total-price'}>
-                    <h3>Tax price:</h3>
-                    <p>Bs. {invoiceData.taxPrice}</p>
-                    <h3>Total:</h3>
-                    <p>Bs. {invoiceData.totalPrice}</p>
+                <div className={'prices-invoice'}>
+
+                    <div className={'total-price'}>
+                        <h3>Tax price:</h3>
+                        <p>Bs. {invoiceData.taxPrice}</p>
+                    </div>
+                    <div className={'total-price'}>
+                        <h3>Total:</h3>
+                        <p>Bs. {invoiceData.totalPrice}</p>
+                    </div>
+
                 </div>
             </div>
 
