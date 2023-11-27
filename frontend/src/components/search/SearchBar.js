@@ -32,9 +32,10 @@ export default function SearchBar() {
 
   const handleInputChange = (e) => {
     const query = e.target.value;
-    setQuery(query);
-    if (query) {
-      fetchResults(query);
+    const sanitizedQuery = query.replace(/[^\w\s]/gi, '');
+    setQuery(sanitizedQuery);
+    if (sanitizedQuery && sanitizedQuery !== "") {
+      fetchResults(sanitizedQuery);
     } else {
       setResults([]);
     }
