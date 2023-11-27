@@ -3,7 +3,7 @@ import '../Css/Invoice.css'
 import axios from "axios";
 import {Store} from "../Store";
 import {renderToString} from 'react-dom/server';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Invoice = () => {
     const [invoiceData, setInvoiceData] = useState(null);
@@ -117,9 +117,9 @@ const Invoice = () => {
     };
 
     const sendEmailAndRedirect = () => {
-        const history = useHistory();
+        const navigate = useNavigate()
         sendEmail();
-        history.push("/");
+        navigate("/");
     };
 
 
@@ -197,7 +197,7 @@ const Invoice = () => {
 
             <div className={'button-container_invoice'}>
                 <p className={'greetings'}><span>Thanks </span>for you preference!</p>
-                <button className={'send-button'} onClick={sendEmailAndRedirect}>Send copy to mail</button>
+                <button className={'send-button'} onClick={sendEmailAndRedirect}>Send copy to mail and go home</button>
             </div>
 
         </>
