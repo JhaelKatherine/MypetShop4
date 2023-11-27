@@ -223,14 +223,12 @@ export default function AddProductScreen() {
                 type="text"
                 id="description"
                 className="form-control"
-                value={description}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); 
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
+                  const trimmedValue = e.target.value.trim();
+                  if (trimmedValue !== '' && trimmedValue.length > 0) {
                     setDescription(e.target.value);
                   }
                 }}
-                //pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="210" 
                 required
