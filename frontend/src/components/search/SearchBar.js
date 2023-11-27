@@ -33,15 +33,14 @@ export default function SearchBar() {
 
   const handleInputChange = (e) => {
     const query = e.target.value;
-    // Evitar caracteres especiales
     if(/[^\w\s]/gi.test(query)){
-      setError('No se permiten caracteres especiales');
+      setError('No special characters allowed');
       return;
     }
     setError(null);
     const sanitizedQuery = query.replace(/[^\w\s]/gi, '');
     setQuery(sanitizedQuery);
-    if (sanitizedQuery) {
+    if (sanitizedQuery && sanitizedQuery!=="") {
       fetchResults(sanitizedQuery);
     } else {
       // Limpiar resultados si la consulta está vacía
