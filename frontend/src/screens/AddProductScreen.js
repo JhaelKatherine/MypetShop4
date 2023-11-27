@@ -150,9 +150,9 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={name}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim();
-                  if (/^\s*\S+(?:\s+\S+)*\s*$/.test(trimmedValue) && trimmedValue.length <= 50) {
-                    setName(trimmedValue);
+                  const trimmedValue = e.target.value.trim(); 
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
+                    setName(e.target.value);
                   }
                 }}
                 //pattern="[A-Za-z ]+" 
