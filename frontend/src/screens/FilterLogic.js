@@ -1,52 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Product from "../components/Product";
 import "../Css/homeScreen.css";
-import axios from 'axios'; // Importa axios u otra biblioteca para hacer la solicitud HTTP
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const FilterLogic = ({ products }) => {
+const FilterLogic = ({ forceUpdate }) => {
   const [buttonContainerColor, setButtonContainerColor] = useState("#4180AB");
   const [activeButton, setActiveButton] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const navigate = useNavigate();
+  const [selected, setSelected] = useState({ category: null, subCategory: null });
+  const location = useLocation();
 
   const handleButtonClick = (label) => {
     setActiveButton((prevLabel) => (prevLabel === label ? null : label));
   };
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+    setSelectedCategory(category.trim());
     setSelectedSubCategory(null);
+    fetchProductsByCategory(category.trim());
   };
-  const navigate = useNavigate();
+  
+  const handleResetFilter = () => {
+    // Realiza las acciones necesarias para reiniciar el filtro
+    setSelectedCategory(null);
+    setSelectedSubCategory(null);
+    setFilteredProducts([]);
+  };
+  useEffect(() => {
+    // Verificar si la ubicación actual NO contiene información de búsqueda
+    const noSearchInfo = !location.search.includes("category=") && !location.search.includes("subCategory=");
 
-  const handleSubCategoryClick = (subCategory) => {
+    // Si NO hay información de búsqueda, realizar el reinicio del filtro
+    if (noSearchInfo) {
+      handleResetFilter();
+    }
+  }, [location.search]);
+  
+  const handleSubCategoryClick = async (subCategory) => {
     setSelectedSubCategory(subCategory);
-    navigate(`/products?category=${selectedCategory}&subCategory=${subCategory}`);
-    fetchProductsByCategory(selectedCategory, subCategory);
+  
+    try {
+      const response = await axios.get(`/api/products/category/${subCategory}`);
+      setFilteredProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  
+    navigate(`/products?category=&subCategory=${subCategory}`);
   };
   
-  
-const fetchProductsByCategory = async (category, subCategory) => {
-  try {
-    const response = await axios.get(`/api/products/category/${subCategory}`);
-    setFilteredProducts(response.data);
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
-};
 
-  const applyFilters = () => {
-    // Lógica para filtrar productos
-    return products.filter(
-      (product) =>
-        (!selectedCategory || product.category === selectedCategory) &&
-        (!selectedSubCategory || product.slug === selectedSubCategory)
-    );
+  const fetchProductsByCategory = async (category, subCategory) => {
+    try {
+      const response = await axios.get(`/api/products/category/${category}/${subCategory}`);
+      setFilteredProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
   };
+  
 
 
 const categoryButtons = [
@@ -65,57 +84,55 @@ const categoryButtons = [
     REPTILES: ["REPTILE FOOD", "SNACKS FOR REPTILES", "REPTILE TOYS", "HYGIENE FOR REPTILES"],
   };
 
-
-
   return (
-    <div>
+    <div key={forceUpdate}>
       <label
         htmlFor="toggleButtons"
         className="button-container"
         style={{ backgroundColor: buttonContainerColor }}
         onMouseLeave={() => setActiveButton(null)}
       >
-      {categoryButtons.map((button, index) => (
-        <div
-          key={index}
-          onMouseEnter={() => setActiveButton(button.label)}
-          className={`image-button ${activeButton === button.label ? "focused" : ""}`}
-        >
-          <button
-            onClick={() => {
-              handleButtonClick(button.label);
-              handleCategoryClick(button.label.trim());
-            }}
-            className="original-button"
+        {categoryButtons.map((button, index) => (
+          <div
+            key={index}
+            onMouseEnter={() => setActiveButton(button.label)}
+            className={`image-button ${activeButton === button.label ? "focused" : ""}`}
           >
-            <div className="button-content">
-              <img
-                src={button.imageUrl}
-                alt={button.label}
-                style={{ width: '50px', height: '50px' }}
-              />
-              <span style={{ marginBottom: '5px' }}>{button.label}</span>
-            </div>
-          </button>
-          {activeButton === button.label && (
-            <div className="subcategories">
-              {subCategories[button.label.trim()].map((subCategory, subIndex) => (
-                <button
-                  key={subIndex}
-                  className="subcategory-button"
-                  onClick={() => {
-                    handleSubCategoryClick(subCategory);
-                  }}
-                >
-                  {subCategory}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-    </label>
-    <div className="products">
+            <button
+              onClick={() => {
+                handleButtonClick(button.label);
+                handleCategoryClick(button.label.trim());
+              }}
+              className="original-button"
+            >
+              <div className="button-content">
+                <img
+                  src={button.imageUrl}
+                  alt={button.label}
+                  style={{ width: '50px', height: '50px' }}
+                />
+                <span style={{ marginBottom: '5px' }}>{button.label}</span>
+              </div>
+            </button>
+            {activeButton === button.label && (
+              <div className="subcategories">
+                {subCategories[button.label.trim()].map((subCategory, subIndex) => (
+                  <button
+                    key={subIndex}
+                    className="subcategory-button"
+                    onClick={() => {
+                      handleSubCategoryClick(subCategory);
+                    }}
+                  >
+                    {subCategory}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </label>
+      <div className="products">
         <Row>
           {filteredProducts.map((product) => (
             <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">

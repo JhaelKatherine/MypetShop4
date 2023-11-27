@@ -137,7 +137,6 @@ function ProductScreen() {
       <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
 
       </label>
-            <FilterLogic products={product} />
             
 
       {loading ? (

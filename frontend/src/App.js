@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,12 +27,14 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProductsScreen from './screens/ProductScreen';
+import FilterLogic from "./screens/FilterLogic"; // Importa tu nuevo componente
 
 
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+  const [forceFilterUpdate, setForceFilterUpdate] = useState(false); // Nuevo estado
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -111,7 +113,6 @@ function App() {
 )}
 
 
-                 
  <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
  <LinkContainer to="/admin/products">
     <NavDropdown.Item className="nav-dropdown-item">
@@ -122,8 +123,12 @@ function App() {
 </NavDropdown>
               </Nav>
             </Container>
+            
           </Navbar>
         </header>
+        <FilterLogic forceUpdate={forceFilterUpdate} />
+
+        
         <div>
           <Nav className="flex-column text-white w-100 p-2">
           </Nav>
@@ -138,7 +143,9 @@ function App() {
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
+              
               <Route path="/" element={<HomeScreen />} />
+
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
@@ -159,6 +166,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+
                             <Route
                 path="/orderhistory"
                 element={
@@ -180,11 +188,13 @@ function App() {
               ></Route>
 
             </Routes>
-            
           </Container>
         </main>
+        
+
       </div>
     </BrowserRouter>
+    
   );
 }
 
