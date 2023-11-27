@@ -6,7 +6,9 @@ import {Store} from "../Store";
 const Invoice = () => {
     const [invoiceData, setInvoiceData] = useState(null);
     const { state } = useContext(Store);
-    const { userInfo, shippingAddress } = state;
+    const { userInfo } = state;
+
+    const shippingAddress = JSON.parse(localStorage.getItem('shippingAddress'));
 
     useEffect(() => {
         const fetchData = async () => {

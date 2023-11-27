@@ -118,6 +118,7 @@ export default function ShippingAddressScreen() {
   const placeOrder = () => {
     if (validateForm()) {
       ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
+      localStorage.setItem('shippingAddress', JSON.stringify({ nit, address }));
       navigate('/checkoutpage');
     } else {
       console.log('Please complete the required fields correctly.');
