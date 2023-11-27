@@ -1,0 +1,55 @@
+.search-results {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    position: absolute;
+    width: 500px;
+    z-index: 2;
+}
+
+.search-results div {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.search-results div:last-child {
+    border-bottom: none;
+}
+
+.searchInput {
+    width: 500px;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    padding: 7px;
+}
+
+.result-item span {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.result-item img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+}
+
+.error {
+    color: red;
+}
+
