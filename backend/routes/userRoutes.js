@@ -223,7 +223,7 @@ userRouter.post(
     try {
       const ticket = await client.verifyIdToken({
         idToken: tokenId,
-        audience: 193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com,
+        audience: "193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com",
       });
       const { name, email } = ticket.getPayload();
 
@@ -261,10 +261,8 @@ userRouter.post(
         });
       }
     } catch (error) {
-      console.error(err);
-      if (err.response && err.response.data) {
-        console.log(err.response.data); // Imprime el mensaje de error desde el servidor
-      }            res.status(500).send({ message: 'Internal Server Error' });
+      console.error('Error in signup-google:', error);
+      res.status(500).send({ message: 'Internal Server Error' });
     }
   })
 );
