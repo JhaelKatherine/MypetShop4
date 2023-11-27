@@ -37,75 +37,73 @@ const Invoice = () => {
         let subject = 'Invoice';
         let html = renderToString(
             <div className="invoice"
-                 style="background-color: #f0f0f0; width: 90%; padding: 20px; border-radius: 10px; margin: auto;">
+                 style={{backgroundColor: "#f0f0f0", width: "90%", padding: "20px", borderRadius: "10px", margin: "auto"}}>
 
                 <div>
-                    <h2 className={'commerce-name'} style="color: #333; font-weight: bold; text-align: center;"><span
-                        className={'commerce-name_aux'} style="color: #ff4500;">MY</span>PETSHOP</h2>
-                    <h1 style="text-align: center;">Invoice</h1>
+                    <h2 className={'commerce-name'} style={{color: "#333", fontWeight: "bold", textAlign: "center"}}><span
+                        className={'commerce-name_aux'} style={{color: "#ff4500"}}>MY</span>PETSHOP</h2>
+                    <h1 style={{textAlign: "center"}}>Invoice</h1>
                 </div>
 
                 <div>
-                    <p className={'date'} style="text-align: end;"><span
-                        style="font-weight: bold;">Invoice ID: </span>{invoiceData._id}</p>
-                    <p className={'date'} style="text-align: end;"><span
-                        style="font-weight: bold;">Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}
+                    <p className={'date'} style={{textAlign: "end"}}><span
+                        style={{fontWeight: "bold"}}>Invoice ID: </span>{invoiceData._id}</p>
+                    <p className={'date'} style={{textAlign: "end"}}><span
+                        style={{fontWeight: "bold"}}>Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}
                     </p>
                 </div>
 
-                <div className={'invoice-bill_send'} style="display: flex; gap: 30px;">
+                <div className={'invoice-bill_send'} style={{display: "flex", gap: "30px"}}>
                     <div>
-                        <h3 style="color: #333;">Bill to</h3>
-                        <p style="color: #666;">{shippingAddress.fullName}</p>
+                        <h3 style={{color: "#333"}}>Bill to</h3>
+                        <p style={{color: "#666"}}>{shippingAddress.fullName}</p>
                     </div>
                     <div>
-                        <h3 style="color: #333;">Send to</h3>
-                        <p style="color: #666;">{`${shippingAddress.city}, ${shippingAddress.address}`}</p>
+                        <h3 style={{color: "#333"}}>Send to</h3>
+                        <p style={{color: "#666"}}>{`${shippingAddress.city}, ${shippingAddress.address}`}</p>
                     </div>
                 </div>
 
                 <div>
-                    <h3 style="color: #333;">NIT</h3>
-                    <p style="color: #666;">{shippingAddress.nit}</p>
+                    <h3 style={{color: "#333"}}>NIT</h3>
+                    <p style={{color: "#666"}}>{shippingAddress.nit}</p>
                 </div>
 
                 <div>
-                    <h3 style="color: #333;">Items</h3>
-                    <table style="width: 100%; border-collapse: collapse;">
+                    <h3 style={{color: "#333"}}>Items</h3>
+                    <table style={{width: "100%", borderCollapse: "collapse"}}>
                         <thead>
                         <tr>
-                            <th style="padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #005593; color: white; border: 1px solid #ddd; padding: 8px;">Item</th>
-                            <th style="padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #005593; color: white; border: 1px solid #ddd; padding: 8px;">Quantity</th>
-                            <th style="padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #005593; color: white; border: 1px solid #ddd; padding: 8px;">Unit
+                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px"}}>Item</th>
+                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px"}}>Quantity</th>
+                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px"}}>Unit
                                 Price
                             </th>
-                            <th style="padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #005593; color: white; border: 1px solid #ddd; padding: 8px;">Subtotal</th>
+                            <th style={{paddingTop: "12px", paddingBottom: "12px", textAlign: "left", backgroundColor: "#005593", color: "white", border: "1px solid #ddd", padding: "8px"}}>Subtotal</th>
                         </tr>
                         </thead>
                         <tbody>
                         {invoiceData.orderItems.map((item, index) => (
                             <tr key={index}>
-                                <td style="border: 1px solid #ddd; padding: 8px;">{item.name}</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">{item.quantity}</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">Bs. {item.price}</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">Bs. {item.quantity * item.price}</td>
+                                <td style={{border: "1px solid #ddd", padding: "8px"}}>{item.name}</td>
+                                <td style={{border: "1px solid #ddd", padding: "8px"}}>{item.quantity}</td>
+                                <td style={{border: "1px solid #ddd", padding: "8px"}}>Bs. {item.price}</td>
+                                <td style={{border: "1px solid #ddd", padding: "8px"}}>Bs. {item.quantity * item.price}</td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 </div>
 
-                <div className={'prices-invoice'} style="display: flex; flex-direction: column; gap: 4px;">
+                <div className={'prices-invoice'} style={{display: "flex", flexDirection: "column", gap: "4px"}}>
 
-                    <div className={'total-price'}
-                         style="display: flex; justify-content: end; align-items: center; gap: 15px; margin-right: 10px;">
-                        <h3 style="font-size: 20px; margin: 0; color: #333;">Tax price:</h3>
-                        <p style="margin: 0; font-size: 20px; color: #666;">Bs. {invoiceData.taxPrice}</p>
+                    <div className={'total-price'} style={{display: "flex", justifyContent: "end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
+                        <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Tax price:</h3>
+                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.taxPrice}</p>
                     </div>
-                    <div className={'total-price'}
-                         style="display: flex; justify-content: end; align-items: center; gap: 15px; margin-right: 10px;">
-                        <h3 style="font-size: 20px; margin: 0; color: #333;">Total:</h3>
-                        <p style="margin: 0; font-size: 20px; color: #666;">Bs. {invoiceData.totalPrice}</p>
+                    <div className={'total-price'} style={{display: "flex", justifyContent: "end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
+                        <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Total:</h3>
+                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.totalPrice}</p>
                     </div>
 
                 </div>
