@@ -224,9 +224,10 @@ export default function AddProductScreen() {
                 className="form-control"
                 value = {description}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); 
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
-                    setDescription(e.target.value);
+                  const trimmedValue = e.target.value.trim();
+                  const hasNonWhitespaceChar = /\S/.test(trimmedValue); // Verifica si hay caracteres distintos de espacios en blanco
+                  if (hasNonWhitespaceChar && trimmedValue.length <= 210) {
+                    setDescription(trimmedValue);
                   }
                 }}
                 title="Please enter only letters" 
