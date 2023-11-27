@@ -15,6 +15,7 @@ export default function SignupScreen() {
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/';
+  const clientID = "193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com";
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
@@ -59,20 +60,22 @@ export default function SignupScreen() {
     }
   };
 
-const responseGoogle = async (response) => {
-  console.log(response);
-  console.log(response.profileObj);
-  try {
-    const { data } = await Axios.post('/api/users/signup-google', {
-      tokenId: response.tokenId,
-    });
-    ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
-    navigate(redirect || '/');
-  } catch (err) {
-    toast.error(getError(err));
-  }
-};
+  const responseGoogle = async (response) => {
+    try {
+      const { data } = await Axios.post('/api/users/signup-google', {
+        name: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+        email: response.profileObj.email,
+      });
+
+      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      navigate(redirect || '/');
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
+
 useEffect(() => {
   const start = () =>{
   gapi.auth2.init({
