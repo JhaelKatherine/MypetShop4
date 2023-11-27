@@ -244,12 +244,11 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={category}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                  const trimmedValue = e.target.value.trim(); 
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
                     setCategory(e.target.value);
                   }
                 }}
-  
                 title="Please enter only letters" 
                 maxLength="50"
                 required
@@ -265,12 +264,11 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={brand}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                  const trimmedValue = e.target.value.trim(); 
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { 
                     setBrand(e.target.value);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 required
               />
