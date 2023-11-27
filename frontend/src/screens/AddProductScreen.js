@@ -225,7 +225,8 @@ export default function AddProductScreen() {
                 className="form-control"
                 onChange={(e) => {
                   const trimmedValue = e.target.value.trim();
-                  if (trimmedValue !== '' && trimmedValue.length > 0) {
+                  const hasNonWhitespaceChar = /\S/.test(e.target.value); 
+                  if (trimmedValue !== '' && hasNonWhitespaceChar) {
                     setDescription(e.target.value);
                   }
                 }}
