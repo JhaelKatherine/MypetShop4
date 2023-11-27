@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import '../Css/Invoice.css'
 import axios from "axios";
 import {Store} from "../Store";
+import nodemailer from "nodemailer";
 
 const Invoice = () => {
     const [invoiceData, setInvoiceData] = useState(null);
@@ -31,8 +32,6 @@ const Invoice = () => {
     }, [userInfo]);
 
     const sendEmail = async () => {
-        const nodemailer = require('nodemailer');
-
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -45,71 +44,7 @@ const Invoice = () => {
             from: 'novateammypetshop@gmail.com',
             to: 'diegofiguesevi@gmail.com',
             subject: 'Invoice',
-            html: '<div className="invoice">\n' +
-                '\n' +
-                '                <div>\n' +
-                '                    <h2 className={\'commerce-name\'}><span className={\'commerce-name_aux\'}>MY</span>PETSHOP</h2>\n' +
-                '                    <h1>Invoice</h1>\n' +
-                '                </div>\n' +
-                '\n' +
-                '                <div>\n' +
-                '                    <p className={\'date\'}><span>Invoice ID: </span>{invoiceData._id}</p>\n' +
-                '                    <p className={\'date\'}><span>Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}</p>\n' +
-                '                </div>\n' +
-                '\n' +
-                '                <div className={\'invoice-bill_send\'}>\n' +
-                '                    <div>\n' +
-                '                        <h3>Bill to</h3>\n' +
-                '                        <p>{shippingAddress.fullName}</p>\n' +
-                '                    </div>\n' +
-                '                    <div>\n' +
-                '                        <h3>Send to</h3>\n' +
-                '                        <p>{`${shippingAddress.city}, ${shippingAddress.address}`}</p>\n' +
-                '                    </div>\n' +
-                '                </div>\n' +
-                '\n' +
-                '                <div>\n' +
-                '                    <h3>NIT</h3>\n' +
-                '                    <p>{shippingAddress.nit}</p>\n' +
-                '                </div>\n' +
-                '\n' +
-                '                <div>\n' +
-                '                    <h3>Items</h3>\n' +
-                '                    <table>\n' +
-                '                        <thead>\n' +
-                '                        <tr>\n' +
-                '                            <th>Item</th>\n' +
-                '                            <th>Quantity</th>\n' +
-                '                            <th>Unit Price</th>\n' +
-                '                            <th>Subtotal</th>\n' +
-                '                        </tr>\n' +
-                '                        </thead>\n' +
-                '                        <tbody>\n' +
-                '                        {invoiceData.orderItems.map((item, index) => (\n' +
-                '                            <tr key={index}>\n' +
-                '                                <td>{item.name}</td>\n' +
-                '                                <td>{item.quantity}</td>\n' +
-                '                                <td>Bs. {item.price}</td>\n' +
-                '                                <td>Bs. {item.quantity * item.price}</td>\n' +
-                '                            </tr>\n' +
-                '                        ))}\n' +
-                '                        </tbody>\n' +
-                '                    </table>\n' +
-                '                </div>\n' +
-                '\n' +
-                '                <div className={\'prices-invoice\'}>\n' +
-                '\n' +
-                '                    <div className={\'total-price\'}>\n' +
-                '                        <h3>Tax price:</h3>\n' +
-                '                        <p>Bs. {invoiceData.taxPrice}</p>\n' +
-                '                    </div>\n' +
-                '                    <div className={\'total-price\'}>\n' +
-                '                        <h3>Total:</h3>\n' +
-                '                        <p>Bs. {invoiceData.totalPrice}</p>\n' +
-                '                    </div>\n' +
-                '\n' +
-                '                </div>\n' +
-                '            </div>'
+            html: '<p>HOLA MUNDO</p>'
         };
 
         transporter.sendMail(mailOptions, function(error, info){
