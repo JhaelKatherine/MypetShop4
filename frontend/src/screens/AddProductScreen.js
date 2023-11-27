@@ -225,8 +225,7 @@ export default function AddProductScreen() {
                 value = {description}
                 onChange={(e) => {
                   const trimmedValue = e.target.value.trim();
-                  const hasNonSpaceChar = /\S/.test(trimmedValue); 
-                  if (hasNonSpaceChar || e.target.value === '') {
+                  if (trimmedValue !== '' || e.target.value === ' ') {
                     setDescription(e.target.value);
                   }
                 }}
