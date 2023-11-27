@@ -6,6 +6,7 @@ import '../../Css/SearchResult.css'
 export default function SearchBar() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const [error, setError] = useState(null);
   const resultsRef = useRef(null);
 
   const fetchResults = async (query) => {
@@ -32,11 +33,18 @@ export default function SearchBar() {
 
   const handleInputChange = (e) => {
     const query = e.target.value;
+    // Evitar caracteres especiales
+    if(/[^\w\s]/gi.test(query)){
+      setError('No se permiten caracteres especiales');
+      return;
+    }
+    setError(null);
     const sanitizedQuery = query.replace(/[^\w\s]/gi, '');
     setQuery(sanitizedQuery);
-    if (sanitizedQuery && sanitizedQuery !== "") {
+    if (sanitizedQuery) {
       fetchResults(sanitizedQuery);
     } else {
+      // Limpiar resultados si la consulta está vacía
       setResults([]);
     }
   };
@@ -52,6 +60,7 @@ export default function SearchBar() {
             placeholder="Search products..."
             className={'searchInput'}
         />
+        {error && <div className="error">{error}</div>}
         {results.length > 0 && <div ref={resultsRef}><SearchResult results={results} clearResults={clearResults} /></div>}
       </div>
   );

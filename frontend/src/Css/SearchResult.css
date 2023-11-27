@@ -49,3 +49,7 @@
     object-fit: cover;
 }
 
+.error {
+    color: red;
+}
+
