@@ -10,10 +10,12 @@ import camila from '../img/members/camila.png'
 const AboutUs = () => {
     return (
         <div className={'container-aboutUs'}>
+
             <img className={'w-100-bg'} src={imageBg}/>
+            <h1>ABOUT US</h1>
             <div className="about-us">
-                <h1>ABOUT US</h1>
-                <p className={'sub-tittle'}>Our Mission</p>
+
+                <h2 className={'sub-tittle'}>OUR MISSION</h2>
                 <p>We assume our commitment to our pet owners, providing them with solutions to their needs and well-being through innovative, reliable and guaranteed products.</p>
 
             </div>
@@ -43,7 +45,7 @@ const AboutUs = () => {
                 </div>
             </div>
 
-            <p className={'version'}>Petshop Version 3.0</p>
+            <p className={'version'}>My Petshop Version 3.0</p>
 
         </div>
     );
