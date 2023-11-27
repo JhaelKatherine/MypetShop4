@@ -151,7 +151,7 @@ export default function AddProductScreen() {
                 value={name}
                 onChange={(e) => {
                   const trimmedValue = e.target.value.trim();
-                  if (/^[\w\s]+$/i.test(trimmedValue) && trimmedValue.length <= 50) {
+                  if (/^[A-Za-z\s]+$/.test(trimmedValue) && trimmedValue.length > 0 && trimmedValue.length <= 50) {
                     setName(trimmedValue);
                   }
                 }}
