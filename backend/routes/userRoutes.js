@@ -221,6 +221,7 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const { tokenId } = req.body;
     try {
+      console.log('Entré a /signup-google'); // Agrega esto para verificar si la ruta es alcanzada
       const ticket = await client.verifyIdToken({
         idToken: tokenId,
         audience: "193456824707-ocuqc0ttv4142b56i6eb8cc0opfuaka8.apps.googleusercontent.com",
