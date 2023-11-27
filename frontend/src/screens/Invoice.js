@@ -34,7 +34,7 @@ const Invoice = () => {
     const sendEmail = async () => {
         let to = email.email;
         let subject = 'Invoice';
-        let html = `
+        let html = ReactDOMServer.renderToString(
             <div className="invoice">
 
                 <div>
@@ -54,7 +54,7 @@ const Invoice = () => {
                     </div>
                     <div>
                         <h3>Send to</h3>
-                        <p>{\`${shippingAddress.city}, ${shippingAddress.address}\`}</p>
+                        <p>{`${shippingAddress.city}, ${shippingAddress.address}`}</p>
                     </div>
                 </div>
 
@@ -100,14 +100,7 @@ const Invoice = () => {
 
                 </div>
             </div>
-
-            <div className={'button-container_invoice'}>
-                <p className={'greetings'}><span>Thanks </span>for you preference!</p>
-                <button className={'send-button'} onClick={sendEmail}>Send copy to mail</button>
-            </div>
-
-        </>
-            `;
+        );
 
         let res = await axios.post('/api/send-email', { to, subject, html });
 
