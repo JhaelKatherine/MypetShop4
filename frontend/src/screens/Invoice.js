@@ -3,8 +3,10 @@ import '../Css/Invoice.css'
 import axios from "axios";
 import {Store} from "../Store";
 import {renderToString} from 'react-dom/server';
+import { useNavigate } from 'react-router-dom';
 
 const Invoice = () => {
+    const navigate = useNavigate();
     const [invoiceData, setInvoiceData] = useState(null);
     const { state } = useContext(Store);
     const { userInfo } = state;
@@ -70,7 +72,7 @@ const Invoice = () => {
                 </div>
 
                 <div>
-                    <h3 style={{color: "#333"}}>Items</h3>
+                    <h3 style={{color: "#333", fontSize: "20px"}}>Items</h3>
                     <table style={{width: "100%", borderCollapse: "collapse"}}>
                         <thead>
                         <tr>
@@ -111,15 +113,9 @@ const Invoice = () => {
         );
 
         let res = await axios.post('/api/send-email', { to, subject, html });
-
+        navigate('/')
         console.log(res.data);
     };
-
-
-
-    if (!invoiceData) {
-        return <div>Cargando factura...</div>;
-    }
 
     return (
         <>
@@ -191,7 +187,7 @@ const Invoice = () => {
 
             <div className={'button-container_invoice'}>
                 <p className={'greetings'}><span>Thanks </span>for you preference!</p>
-                <button className={'send-button'} onClick={sendEmail}>Send copy to mail</button>
+                <button className={'send-button'} onClick={sendEmail}>Send copy to mail and go home</button>
             </div>
 
         </>
