@@ -150,14 +150,20 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={name}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') {
-                    setName(e.target.value);
+                  const inputValue = e.target.value;
+                  const trimmedValue = inputValue.trim();
+                
+                  const hasSpecialCharacters = /[+=-]/.test(inputValue);
+                
+                  if (
+                    !hasSpecialCharacters && 
+                    (trimmedValue !== '' || inputValue === '') 
+                  ) {
+                    setName(inputValue);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
-                maxLength="50" // Limitar a 50 caracteres
+                maxLength="50"
                 required
               />
             </div>
@@ -169,14 +175,21 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={slug}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
-                    setSlug(e.target.value);
+                  const inputValue = e.target.value;
+                  const trimmedValue = inputValue.trim();
+                
+                  const hasSpecialCharacters = /[+=-]/.test(inputValue);
+                
+                  if (
+                    !hasSpecialCharacters && 
+                    (trimmedValue !== '' || inputValue === '') 
+                  ) {
+                    setSlug(inputValue);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
+                
                 title="Please enter only letters" 
-                maxLength="50" // Limitar a 50 caracteres
+                maxLength="50" 
 
                 required
               />
@@ -191,7 +204,7 @@ export default function AddProductScreen() {
                 value={price}
                 onChange={(e) => {
                     const enteredValue = e.target.value;
-                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
+                    
                     if (/^\d+(\.\d*)?$/.test(enteredValue)) {
                       setPrice(enteredValue);
                     }
@@ -199,7 +212,7 @@ export default function AddProductScreen() {
                   min="1"
                   max="1000"
                   onKeyDown={(e) => {
-                    // Evita caracteres que no sean números o puntos decimales
+                   
                     if (
                       !(
                         (e.key >= '0' && e.key <= '9') ||
@@ -223,17 +236,15 @@ export default function AddProductScreen() {
                 type="text"
                 id="description"
                 className="form-control"
-                value={description}
+                value = {description}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                  const trimmedValue = e.target.value.trim();
+                  if (e.target.value !== '' && trimmedValue !== '') {
                     setDescription(e.target.value);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="210" 
-
                 required
               />
             </div>
@@ -246,12 +257,18 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={category}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
-                    setCategory(e.target.value);
+                  const inputValue = e.target.value;
+                  const trimmedValue = inputValue.trim();
+                
+                  const hasSpecialCharacters = /[+=-]/.test(inputValue);
+                
+                  if (
+                    !hasSpecialCharacters && 
+                    (trimmedValue !== '' || inputValue === '') 
+                  ) {
+                    setCategory(inputValue);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 maxLength="50"
                 required
@@ -267,12 +284,18 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={brand}
                 onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
-                    setBrand(e.target.value);
+                  const inputValue = e.target.value;
+                  const trimmedValue = inputValue.trim();
+                
+                  const hasSpecialCharacters = /[+=-]/.test(inputValue);
+                
+                  if (
+                    !hasSpecialCharacters && 
+                    (trimmedValue !== '' || inputValue === '') 
+                  ) {
+                    setBrand(inputValue);
                   }
                 }}
-                pattern="[A-Za-z ]+" 
                 title="Please enter only letters" 
                 required
               />
@@ -286,8 +309,8 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
-                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
+                    const enteredValue = e.target.value.replace(/[e]/gi, ''); 
+                    const regex = /^[0-9]*$/; 
                     if (regex.test(enteredValue)) {
                       setCountInStock(enteredValue);
                     }
