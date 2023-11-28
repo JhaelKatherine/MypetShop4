@@ -264,8 +264,8 @@ export default function AddProductScreen() {
                 value={brand}
                 onChange={(e) => {
                   const trimmedValue = e.target.value.trim();
-                  if (trimmedValue !== '' || /\s+$/.test(e.target.value)) {
-                    setBrand(e.target.value);
+                  if (trimmedValue !== e.target.value || trimmedValue !== '') {
+                    setBrand(trimmedValue);
                   }
                 }}
                 title="Please enter only letters" 
