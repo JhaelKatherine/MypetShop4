@@ -101,9 +101,23 @@ function App() {
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    <LinkContainer to="/orderhistory">
-      <NavDropdown.Item>Order History</NavDropdown.Item>
-    </LinkContainer>
+    {!userInfo.isAdmin && (
+      <LinkContainer to="/orderhistory">
+        <NavDropdown.Item>Order History</NavDropdown.Item>
+      </LinkContainer>
+    )}
+    {userInfo.isAdmin && (
+      <LinkContainer to="/admin/products">
+        <NavDropdown.Item className="nav-dropdown-item">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png"
+            alt="Icono de Producto"
+            className="product-icon"
+          />
+          Products
+        </NavDropdown.Item>
+      </LinkContainer>
+    )}
     <NavDropdown.Item onClick={signoutHandler}>Sign Out</NavDropdown.Item>
   </NavDropdown>
 ) : (
@@ -119,16 +133,6 @@ function App() {
   </LinkContainer>
 )}
 
-
-
- <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
- <LinkContainer to="/admin/products">
-    <NavDropdown.Item className="nav-dropdown-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
-       Products 
-    </NavDropdown.Item>
-  </LinkContainer>
-</NavDropdown>
               </Nav>
             </Container>
           </Navbar>
@@ -144,7 +148,6 @@ function App() {
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-              <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
                 <Route path="/aboutUs" element={<AboutUs />} />
                 <Route path="/invoice" element={<Invoice />} />
@@ -161,7 +164,14 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-                            <Route
+             <Route path="/addproduct" element=
+             {
+              <AdminRoute>
+                  <AddProductScreen />
+               </AdminRoute>
+             } 
+             />
+              <Route
                 path="/admin/product/:id"
                 element={
                   <AdminRoute>
