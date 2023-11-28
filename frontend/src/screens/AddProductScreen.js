@@ -23,6 +23,8 @@ export default function AddProductScreen() {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
+  const [species, setSpecies] = useState('');
+
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
@@ -91,6 +93,7 @@ export default function AddProductScreen() {
         image,
         brand,
         category,
+        species,
         description,
         price,
         countInStock,
@@ -249,6 +252,25 @@ export default function AddProductScreen() {
                   const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
                   if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
                     setCategory(e.target.value);
+                  }
+                }}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                maxLength="50"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="species">species</label>
+              <input
+                type="text"
+                id="species"
+                className="form-control"
+                value={species}
+                onChange={(e) => {
+                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
+                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
+                    setSpecies(e.target.value);
                   }
                 }}
                 pattern="[A-Za-z ]+" 

@@ -19,9 +19,11 @@ productRouter.post(
       image: req.body.image,
       price: req.body.price,
       category: req.body.category,
+      species: req.body.species,
       brand: req.body.brand,
       description: req.body.description,
       countInStock: req.body.countInStock,
+
     });
     const product = await newProduct.save();
     res.send({ message: 'Product Created', product });
@@ -48,6 +50,7 @@ productRouter.put(
       product.image = req.body.image;
       product.images = req.body.images;
       product.category = req.body.category;
+      product.species = req.body.species;
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
