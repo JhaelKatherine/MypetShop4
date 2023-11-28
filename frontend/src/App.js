@@ -56,6 +56,23 @@ function App() {
     setButtonContainerColor(color);
   };
 
+  const Footer = () => {
+    return (
+      <footer className="footer">
+        <div className="footer-left">
+          <img
+            alt="My Pet Shop Logo"
+            src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
+            height="50"
+            className="d-inline-block align-top"
+          />
+          {/* Puedes añadir texto u otros elementos a la izquierda del logo si es necesario */}
+        </div>
+        {/* Otro contenido del footer puede ir aquí */}
+      </footer>
+    );
+  };
+
   return (
     <BrowserRouter>
       <div>
@@ -225,6 +242,7 @@ function App() {
             </Routes>
           </Container>
         </main>
+        <Footer />
       </div>
     </BrowserRouter>
   );
