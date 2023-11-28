@@ -9,10 +9,10 @@ import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
 
 dotenv.config();
-
+// "mongodb+srv://novateammypetshop:PNe5EGUIt2OHALOH@cluster0.n4sbjz1.mongodb.net/mern-amazona-app-db"
 mongoose
-  .connect(
-    "mongodb+srv://novateammypetshop:PNe5EGUIt2OHALOH@cluster0.n4sbjz1.mongodb.net/mern-amazona-app-db")
+.connect(process.env.MONGODB_URI)
+
   .then(() => {
     console.log("connected to db");
   })
