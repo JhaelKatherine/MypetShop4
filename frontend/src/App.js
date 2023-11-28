@@ -27,7 +27,7 @@ import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
-
+import Invoice from "./screens/Invoice";
 
 
 function App() {
@@ -133,7 +133,6 @@ function App() {
   </LinkContainer>
 )}
 
-
               </Nav>
             </Container>
           </Navbar>
@@ -151,6 +150,7 @@ function App() {
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
                 <Route path="/aboutUs" element={<AboutUs />} />
+                <Route path="/invoice" element={<Invoice />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
                 path="/shipping"
@@ -187,7 +187,7 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
-              
+
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route
                 path="/order/:id"
@@ -199,7 +199,7 @@ function App() {
               ></Route>
 
             </Routes>
-            
+
           </Container>
         </main>
       </div>
