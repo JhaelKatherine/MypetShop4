@@ -208,6 +208,7 @@ export default function AddProductScreen() {
                     setPrice(enteredValue === '' ? '' : enteredValue);
                   }
                 }}
+                
                 min="1"
                 max="1000"
                 onKeyDown={(e) => {
