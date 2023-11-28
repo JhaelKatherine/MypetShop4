@@ -10,7 +10,6 @@ const uploadRouter = express.Router();
 
 uploadRouter.post(
   '/',
-  isAuth,
   isAdmin,
   upload.single('file'),
   async (req, res) => {
