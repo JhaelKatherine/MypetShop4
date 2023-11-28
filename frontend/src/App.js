@@ -136,7 +136,7 @@ function App() {
             
           </Navbar>
         </header>
-        <FilterLogic forceUpdate={forceFilterUpdate} />
+        <FilterLogic />
 
         
         <div>

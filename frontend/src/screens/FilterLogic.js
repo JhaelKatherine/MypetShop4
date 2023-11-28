@@ -46,11 +46,19 @@ const FilterLogic = ({ forceUpdate }) => {
   };
 
   useEffect(() => {
-    const noSearchInfo = !location.search.includes("category=") && !location.search.includes("species=");
-    if (noSearchInfo) {
+    const params = new URLSearchParams(location.search);
+    const category = params.get("category");
+    const species = params.get("species");
+  
+    if (category && species) {
+      handleSubCategoryClick(`${species} ${category}`);
+    } else if (category) {
+      handleCategoryClick(category);
+    } else {
       handleResetFilter();
     }
   }, [location.search]);
+  
 
   const fetchProductsByCategoryAndSpecies = async (category, species) => {
     try {
