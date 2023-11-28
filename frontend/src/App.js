@@ -11,7 +11,7 @@ import SignupScreen from './screens/SignupScreen';
 import AddProductScreen from './screens/AddProductScreen'
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
-import SearchBox from './components/SearchBox';
+import SearchBar from './components/search/SearchBar';
 import CartScreen from './screens/CartScreen';
 import Badge from 'react-bootstrap/Badge';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -22,6 +22,7 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import CheckoutPage from './screens/CheckoutPage';
+import AboutUs from "./components/AboutUs";
 import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -59,9 +60,18 @@ function App() {
                 </Navbar.Brand>
               </LinkContainer>
               <Nav className="mx-auto" style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
-                <SearchBox />
+                <SearchBar />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
+                  <Link to="/aboutUs" className="nav-link">
+                      <img
+                          alt="cart"
+                          src="https://cdn-icons-png.flaticon.com/512/43/43921.png"
+                          height="30"
+                          className="d-inline-block align-top"
+                      />
+                  </Link>
+
                 <Link to="/cart" className="nav-link">
                   <img
                     alt="cart"
@@ -137,6 +147,7 @@ function App() {
               <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
                 <Route path="/invoice" element={<Invoice />} />
+                <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/" element={<HomeScreen />} />
               <Route
                 path="/shipping"
