@@ -204,7 +204,7 @@ export default function AddProductScreen() {
                 value={price}
                 onChange={(e) => {
                   const enteredValue = e.target.value;
-                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) >= 1) {
                     setPrice(enteredValue === '' ? '' : enteredValue);
                   }
                 }}
