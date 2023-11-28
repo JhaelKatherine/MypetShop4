@@ -206,6 +206,9 @@ export default function AddProductScreen() {
                   const enteredValue = e.target.value;
                   if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
                     setPrice(enteredValue === '' ? '' : enteredValue);
+                    setErrorMessage(''); 
+                  } else {
+                    setErrorMessage('Please enter a value greater than zero.'); 
                   }
                 }}
                 min="1"
