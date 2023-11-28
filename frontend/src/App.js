@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +21,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
-import "../Css/homeScreen.css";
+import "./Css/homeScreen.css";
 import CheckoutPage from './screens/CheckoutPage';
 import AboutUs from "./components/AboutUs";
 import OrderScreen from './screens/OrderScreen';
@@ -43,6 +43,8 @@ function App() {
     window.location.href = '/';
   };
 
+  const [buttonContainerColor, setButtonContainerColor] = useState("#4180AB");
+
   const categoryButtons = [
     { label: " DOG", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png", onClick: () => console.log("Filtrar por gato") },
     { label: " CAT", imageUrl: "https://cdn.icon-icons.com/icons2/2242/PNG/512/gato_icon_134883.png", onClick: () => console.log("Filtrar por perro") },
@@ -50,6 +52,9 @@ function App() {
     { label: " BIRDS", imageUrl: "https://cdn-icons-png.flaticon.com/512/6622/6622649.png", onClick: () => console.log("Filtrar por reptil") },
     { label: " REPTILES", imageUrl: "https://cdn-icons-png.flaticon.com/512/2809/2809783.png", onClick: () => console.log("Filtrar por roedores") },
   ];
+  const handleButtonClick = (color) => {
+    setButtonContainerColor(color);
+  };
 
   return (
     <BrowserRouter>
@@ -131,16 +136,26 @@ function App() {
 
 
  <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
- <LinkContainer to="/admin/products">
-    <NavDropdown.Item className="nav-dropdown-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
-       Products 
-    </NavDropdown.Item>
+  <LinkContainer to="/admin/products">
+      <NavDropdown.Item className="nav-dropdown-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
+        Products 
+      </NavDropdown.Item>
   </LinkContainer>
-</NavDropdown>
+  </NavDropdown>
               </Nav>
             </Container>
           </Navbar>
+          <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
+              {categoryButtons.map((button, index) => (
+                <button key={index} onClick={() => handleButtonClick("#4180AB")} className="image-button">
+                  <div className="button-content">
+                    <img src={button.imageUrl} alt={button.label} />
+                    <span style={{ marginBottom: '5px' }}>{button.label}</span>
+                  </div>
+                </button>
+              ))}
+            </label>
         </header>
         <div>
           <Nav className="flex-column text-white w-100 p-2">
@@ -198,16 +213,6 @@ function App() {
               ></Route>
 
             </Routes>
-            <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
-              {categoryButtons.map((button, index) => (
-                <button key={index} onClick={button.onClick} className="image-button">
-                  <div className="button-content">
-                    <img src={button.imageUrl} alt={button.label} />
-                    <span style={{ marginBottom: '5px' }}>{button.label}</span>
-                  </div>
-              </button>
-              ))}
-            </label>
           </Container>
         </main>
       </div>

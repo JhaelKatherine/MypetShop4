@@ -1,8 +1,8 @@
 .image-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 185px;
-    height: 55px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    width: 120px;
+    height: 35px;
     margin-right: 30px;
     border-radius: 10px;
     margin-left: 20px;
@@ -10,18 +10,18 @@
 }
 
 .button-content {
-    margin-top: 5px;
+    margin-top: 1px;
 
 }
 
 .button-container {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     display: flex;
-    width: 85%;
+    width: 100%;
     justify-content: center;
-    margin-top: 10px;
-    margin-left: 80px;
-
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
 }
 
 .button-container button {
@@ -110,7 +110,7 @@
     height: 220px; /* Ajusta según sea necesario */
     object-fit: cover;
     border-radius: 50%;
-    margin-bottom: 10px; /* Ajusta según sea necesario */
+    margin-bottom: 50px; /* Ajusta según sea necesario */
   }
   
   /* Estilos para el texto dentro de cada botón */
@@ -139,7 +139,7 @@
 
 /* Estilos para la imagen dentro del producto */
 .card-img-top {
-  width: 100%; /* Ajusta según sea necesario */
+  width: 90%; /* Ajusta según sea necesario */
   height: auto; /* Altura automática para mantener la proporción */
 }
 

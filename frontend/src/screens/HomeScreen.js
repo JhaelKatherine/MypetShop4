@@ -74,16 +74,7 @@ function HomeScreen() {
 
       {/* Checkbox for toggling buttons */}
 
-      <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
-        {categoryButtons.map((button, index) => (
-          <button key={index} onClick={() => handleButtonClick("#4180AB")} className="image-button">
-            <div className="button-content">
-              <img src={button.imageUrl} alt={button.label} />
-              <span style={{ marginBottom: '5px' }}>{button.label}</span>
-            </div>
-          </button>
-        ))}
-      </label>
+      
 
       <div className="image-container">
         <img src="https://i0.wp.com/www.russellfeedandsupply.com/wp-content/uploads/2022/01/canidae-25-off-may-23-banner-1.jpg?ssl=1" alt="promotion" />
