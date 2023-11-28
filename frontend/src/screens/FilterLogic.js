@@ -17,23 +17,48 @@ const FilterLogic = ({ forceUpdate }) => {
   const [filterApplied, setFilterApplied] = useState(false); // Nuevo estado
   const navigate = useNavigate();
   const location = useLocation();
+  const [loadingProducts, setLoadingProducts] = useState(true);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.trim());
     setSelectedSpecies(null);
+    // Actualiza para llamar a la nueva función
     fetchProductsByCategoryAndSpecies(category.trim(), null);
     setActiveCategoryButton(category);
     setActiveSpeciesButton(null);
   };
+  
 
-  const handleSubCategoryClick = (subCategory) => {
+  const handleSubCategoryClick = async (subCategory) => {
     const [category, species] = subCategory.split(' ');
     setSelectedCategory(category);
     setSelectedSpecies(species);
-    fetchProductsByCategoryAndSpecies(species, category);
-    setActiveSpeciesButton(subCategory);
+  
+    try {
+      const response = await axios.get(`/api/products/category/${species}/species/${category}`);
+      const products = response.data;
+      setFilteredProducts(products);
+      setFilterApplied(products.length === 0);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      if (error.response) {
+        // La solicitud se realizó y el servidor respondió con un estado de error
+        console.error('Error response:', error.response.data);
+        console.error('Error status:', error.response.status);
+        console.error('Error headers:', error.response.headers);
+      } else if (error.request) {
+        // La solicitud se realizó pero no se recibió respuesta
+        console.error('No response received:', error.request);
+      } else {
+        // Algo sucedió en la configuración de la solicitud que generó un error
+        console.error('Error setting up the request:', error.message);
+      }
+      setFilteredProducts([]);
+      setFilterApplied(true);
+    }
+    
   };
-
+  
 
 
   const handleResetFilter = () => {
@@ -42,38 +67,44 @@ const FilterLogic = ({ forceUpdate }) => {
     setFilteredProducts([]);
     setActiveCategoryButton(null);
     setActiveSpeciesButton(null);
-    setFilterApplied(false); // Reiniciar el estado al quitar el filtro
+    setFilterApplied(false);
   };
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const category = params.get("category");
-    const species = params.get("species");
-  
-    if (category && species) {
-      handleSubCategoryClick(`${species} ${category}`);
-    } else if (category) {
-      handleCategoryClick(category);
-    } else {
-      handleResetFilter();
-    }
-  }, [location.search]);
   
 
+  
   const fetchProductsByCategoryAndSpecies = async (category, species) => {
+    setLoadingProducts(true);
+  
     try {
       const response = await axios.get(`/api/products/category/${category}/species/${species}`);
       const products = response.data;
+  
       setFilteredProducts(products);
-      setFilterApplied(products.length === 0); // Establecer el estado según si hay coincidencias
+      setFilterApplied(products.length === 0);
+  
+      // Construir la URL basada en los parámetros de filtro
+      const filterURL = `/products?category=${category}&species=${species}`;
+      console.log('filterURL:', filterURL);
+  
+      // Intentar navegar a la nueva URL
+      navigate(filterURL);
+  
+      console.log('Después de navigate');
     } catch (error) {
       console.error('Error fetching products:', error);
       setFilteredProducts([]);
-      setFilterApplied(true); // Establecer el estado en true en caso de error
+      setFilterApplied(true);
     }
-
-    navigate(`/products?category=${category}&species=${species}`);
+  
+    setLoadingProducts(false);
   };
+  
+  
+  
+  
+  
+  
+  
 
   const categoryButtons = [
     { label: "\u00A0\u00A0\u00A0\u00A0DOG\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png", onClick: () => handleCategoryClick("DOG") },
@@ -87,6 +118,43 @@ const FilterLogic = ({ forceUpdate }) => {
     const [category, species] = label.split(' ');
     return { category, species };
   };
+  
+  const handleProductClick = (productSlug) => {
+    console.log("Clicked product slug:", productSlug);
+  
+    if (productSlug) {
+      // Actualizar la ruta solo cuando se hace clic en el producto
+      navigate(`/product/${productSlug}`);
+    } else {
+      console.error("Product slug is undefined");
+      // Puedes elegir realizar alguna acción o simplemente no hacer nada
+    }
+  };
+  
+  
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const category = params.get("category");
+    const species = params.get("species");
+  
+    console.log('useEffect - category:', category, 'species:', species);
+  
+    if (category || species) {
+      // Filtrar productos cuando la URL tenga parámetros de filtro
+      handleSubCategoryClick(`${species} ${category}`);
+    } else {
+      // En caso contrario, resetear los filtros
+      handleResetFilter();
+    }
+  }, [location.search]);
+  
+  
+  
+
+  useEffect(() => {
+    // Limpiar filtros y productos cuando cambie la ruta
+    handleResetFilter();
+  }, [location.pathname]);
 
   const subCategories = {
     DOG: ["DOG FOOD", "DOG SNACKS", "DOG TOYS", "DOG HYGIENE"],
@@ -156,7 +224,9 @@ const FilterLogic = ({ forceUpdate }) => {
           <Row>
             {filteredProducts.map((product) => (
               <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                <Product product={product}></Product>
+                <div onClick={() => handleProductClick(product.slug)}>
+                  {product.slug ? <Product product={product} /> : <p>Producto no disponible</p>}
+                </div>
               </Col>
             ))}
           </Row>
