@@ -6,6 +6,7 @@ import {renderToString} from 'react-dom/server';
 import { useNavigate } from "react-router-dom";
 
 const Invoice = () => {
+    const navigate = useNavigate()
     const [invoiceData, setInvoiceData] = useState(null);
     const { state } = useContext(Store);
     const { userInfo } = state;
@@ -117,7 +118,7 @@ const Invoice = () => {
     };
 
     const sendEmailAndRedirect = () => {
-        const navigate = useNavigate()
+
         sendEmail();
         navigate("/");
     };
