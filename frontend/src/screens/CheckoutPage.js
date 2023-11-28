@@ -185,6 +185,9 @@ const CheckoutPage = () => {
           ctxDispatch({ type: 'CART_CLEAR' });
           dispatch({ type: 'CREATE_SUCCESS' });
           localStorage.removeItem('cartItems');
+          const email = billingDetails.email;
+          localStorage.setItem('buy-email', JSON.stringify({email}));
+          navigate('/invoice')
         } catch (err) {
           dispatch({ type: 'CREATE_FAIL' });
           toast.error(getError(err));

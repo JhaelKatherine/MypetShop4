@@ -27,8 +27,12 @@ import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
+
 import ProductsScreen from './screens/ProductScreen';
 import FilterLogic from "./screens/FilterLogic"; // Importa tu nuevo componente
+
+
+import Invoice from "./screens/Invoice";
 
 
 
@@ -123,6 +127,7 @@ function App() {
 )}
 
 
+
  <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
  <LinkContainer to="/admin/products">
     <NavDropdown.Item className="nav-dropdown-item">
@@ -158,6 +163,8 @@ function App() {
 
                 <Route path="/aboutUs" element={<AboutUs />} />
 
+                <Route path="/invoice" element={<Invoice />} />
+
               <Route path="/" element={<HomeScreen />} />
 
               <Route
@@ -189,8 +196,7 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
-              
-              
+
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route
                 path="/order/:id"
@@ -202,6 +208,7 @@ function App() {
               ></Route>
 
             </Routes>
+
           </Container>
         </main>
         

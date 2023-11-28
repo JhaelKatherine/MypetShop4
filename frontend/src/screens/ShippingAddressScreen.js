@@ -96,6 +96,7 @@ export default function ShippingAddressScreen() {
     submitShippingHandler(e);
     ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
     localStorage.setItem('paymentMethod', paymentMethodName);
+    ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
     navigate('/checkoutpage');
   } else {
     console.log('Please complete the required fields correctly.');
@@ -108,6 +109,7 @@ export default function ShippingAddressScreen() {
     if (validateForm()) {
       submitShippingHandler(e);
       ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
+      ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
       localStorage.setItem('paymentMethod', paymentMethodName);
     } else {
       console.log('Please complete the required fields correctly.');
@@ -115,8 +117,12 @@ export default function ShippingAddressScreen() {
   };
   const placeOrder = () => {
     if (validateForm()) {
-    navigate('/checkoutpage');
-    }else {console.log('Please complete the required fields correctly.');}
+      ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
+      localStorage.setItem('shippingAddress', JSON.stringify({ nit, address, city , fullName}));
+      navigate('/checkoutpage');
+    } else {
+      console.log('Please complete the required fields correctly.');
+    }
   };
 
 
