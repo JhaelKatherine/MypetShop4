@@ -21,6 +21,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
+import "../Css/homeScreen.css";
 import CheckoutPage from './screens/CheckoutPage';
 import AboutUs from "./components/AboutUs";
 import OrderScreen from './screens/OrderScreen';
@@ -41,6 +42,14 @@ function App() {
     localStorage.removeItem('paymentMethod');
     window.location.href = '/';
   };
+
+  const categoryButtons = [
+    { label: " DOG", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png", onClick: () => console.log("Filtrar por gato") },
+    { label: " CAT", imageUrl: "https://cdn.icon-icons.com/icons2/2242/PNG/512/gato_icon_134883.png", onClick: () => console.log("Filtrar por perro") },
+    { label: " RODENTS", imageUrl: "https://cdn-icons-png.flaticon.com/512/1905/1905235.png", onClick: () => console.log("Filtrar por ave") },
+    { label: " BIRDS", imageUrl: "https://cdn-icons-png.flaticon.com/512/6622/6622649.png", onClick: () => console.log("Filtrar por reptil") },
+    { label: " REPTILES", imageUrl: "https://cdn-icons-png.flaticon.com/512/2809/2809783.png", onClick: () => console.log("Filtrar por roedores") },
+  ];
 
   return (
     <BrowserRouter>
@@ -189,7 +198,16 @@ function App() {
               ></Route>
 
             </Routes>
-
+            <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
+              {categoryButtons.map((button, index) => (
+                <button key={index} onClick={button.onClick} className="image-button">
+                  <div className="button-content">
+                    <img src={button.imageUrl} alt={button.label} />
+                    <span style={{ marginBottom: '5px' }}>{button.label}</span>
+                  </div>
+              </button>
+              ))}
+            </label>
           </Container>
         </main>
       </div>
