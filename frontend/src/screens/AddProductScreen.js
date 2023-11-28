@@ -203,29 +203,27 @@ export default function AddProductScreen() {
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value;
-                    
-                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
-                      setPrice(enteredValue);
-                    }
-                  }}
-                  min="1"
-                  max="1000"
-                  onKeyDown={(e) => {
-                   
-                    if (
-                      !(
-                        (e.key >= '0' && e.key <= '9') ||
-                        e.key === '.' ||
-                        e.key === 'Backspace' ||
-                        e.key === 'Delete' ||
-                        e.key === 'ArrowLeft' ||
-                        e.key === 'ArrowRight'
-                      )
-                    ) {
-                      e.preventDefault();
-                    }
-                  }}
+                  const enteredValue = e.target.value;
+                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                    setPrice(enteredValue === '' ? '' : enteredValue);
+                  }
+                }}
+                min="1"
+                max="1000"
+                onKeyDown={(e) => {
+                  if (
+                    !(
+                      (e.key >= '0' && e.key <= '9') ||
+                      e.key === '.' ||
+                      e.key === 'Backspace' ||
+                      e.key === 'Delete' ||
+                      e.key === 'ArrowLeft' ||
+                      e.key === 'ArrowRight'
+                    )
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
                 required
               />
             </div>
