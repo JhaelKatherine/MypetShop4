@@ -33,7 +33,21 @@ productRouter.post(
 productRouter.get('/category/:category/species/:species', expressAsyncHandler(async (req, res) => {
   const { category, species } = req.params;
 
-  const products = await Product.find({ category, species, status: true });
+  console.log('Categoría:', category);
+  console.log('Especie:', species);
+
+  // Usamos una expresión regular insensible a mayúsculas/minúsculas para la especie
+  const speciesRegex = new RegExp(`^${species}$`, 'i');
+
+  const products = await Product.find({ category, species: speciesRegex, status: true });
+
+  console.log('Productos encontrados:', products);
+
+  if (products.length === 0) {
+    // Si no hay coincidencias, envía un mensaje específico
+    console.log('No se encontraron productos');
+    return res.status(404).send({ message: 'No se encontraron productos que coincidan con los criterios de búsqueda.' });
+  }
 
   res.send(products);
 }));
