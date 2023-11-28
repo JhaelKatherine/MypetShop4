@@ -118,17 +118,17 @@ function App() {
     </Nav.Link>
   </LinkContainer>
 )}
+{userInfo && userInfo.isAdmin && (
+                 <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
+                 <LinkContainer to="/admin/products">
+                    <NavDropdown.Item className="nav-dropdown-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
+                       Products 
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+                  )}
 
-
-                 
- <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
- <LinkContainer to="/admin/products">
-    <NavDropdown.Item className="nav-dropdown-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
-       Products 
-    </NavDropdown.Item>
-  </LinkContainer>
-</NavDropdown>
               </Nav>
             </Container>
           </Navbar>
