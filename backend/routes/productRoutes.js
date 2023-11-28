@@ -1,6 +1,8 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
+import {  isAdmin } from '../utils.js';
+
 
 const productRouter = express.Router();
 
@@ -11,7 +13,7 @@ productRouter.get('/', async (req, res) => {
 
 productRouter.post(
   '/',
-
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
       name: req.body.name,
@@ -30,6 +32,7 @@ productRouter.post(
 
 productRouter.put(
   '/:id',
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -53,6 +56,7 @@ productRouter.put(
 
 productRouter.put(
   '/:id/status',
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -108,6 +112,7 @@ const PAGE_SIZE = 6;
 
 productRouter.get(
   '/admin',
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
     const page = query.page || 1;

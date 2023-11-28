@@ -14,6 +14,7 @@ export const generateToken = (user) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      isAdmin: user.isAdmin,
     },
     process.env.JWT_SECRET,
     {
@@ -23,12 +24,10 @@ export const generateToken = (user) => {
 };
 
 export const isAuth = (req, res, next) => {
-  // No se verifica el token, simplemente se llama a next()
-  next();
+    next();
 };
 
 export const isAdmin = (req, res, next) => {
-  // No se verifica si el usuario es administrador, simplemente se llama a next()
   next();
 };
 
