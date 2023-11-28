@@ -120,6 +120,7 @@ function App() {
                     <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
                        Products 
                     </NavDropdown.Item>
+                    <NavDropdown.Item onClick={signoutHandler}>Sign Out</NavDropdown.Item>
                   </LinkContainer>
                   )}
 
