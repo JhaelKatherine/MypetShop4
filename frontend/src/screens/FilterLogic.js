@@ -24,7 +24,7 @@ const FilterLogic = ({ forceUpdate }) => {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.trim());
     setSelectedSubCategory(null);
-    fetchProductsByCategory(category.trim());
+    fetchProductsByCategoryAndSpecies(category.trim(), selectedSubCategory);
   };
   
   const handleResetFilter = () => {
@@ -45,18 +45,18 @@ const FilterLogic = ({ forceUpdate }) => {
   
   const handleSubCategoryClick = async (subCategory) => {
     setSelectedSubCategory(subCategory);
-  
+    fetchProductsByCategoryAndSpecies(selectedCategory, subCategory);
+  };
+  const fetchProductsByCategoryAndSpecies = async (category, species) => {
     try {
-      const response = await axios.get(`/api/products/category/${subCategory}`);
+      const response = await axios.get(`/api/products/category/${category}/species/${species}`);
       setFilteredProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
-  
-    navigate(`/products?category=&subCategory=${subCategory}`);
-  };
-  
 
+    navigate(`/products?category=${category}&species=${species}`);
+  };
   const fetchProductsByCategory = async (category, subCategory) => {
     try {
       const response = await axios.get(`/api/products/category/${category}/${subCategory}`);
@@ -77,11 +77,11 @@ const categoryButtons = [
   ];
 
   const subCategories = {
-    DOG: ["DOG FOOD", "SNACKS FOR DOGS", "DOG'S TOYS", "HYGIENE FOR DOGS"],
-    CAT: ["CAT FOOD", "SNACKS FOR CATS", "CAT TOYS", "HYGIENE FOR CATS"],
-    RODENTS: ["RODENT FOOD", "SNACKS FOR RODENTS", "RODENT TOYS", "HYGIENE FOR RODENTS"],
-    BIRDS: ["BIRD FOOD", "SNACKS FOR BIRDS", "BIRD TOYS", "HYGIENE FOR BIRDS"],
-    REPTILES: ["REPTILE FOOD", "SNACKS FOR REPTILES", "REPTILE TOYS", "HYGIENE FOR REPTILES"],
+    DOG: ["DOG FOOD", "DOG SNACKS", "DOG TOYS", "DOG HYGIENE"],
+    CAT: ["CAT FOOD", "CAT SNACKS", "CAT TOYS", "CAT HYGIENE"],
+    RODENTS: ["RODENT FOOD", "RODENT SNACKS", "RODENT TOYS", "RODENT HYGIENE"],
+    BIRDS: ["BIRD FOOD", "BIRD SNACKS", "BIRD TOYS", "BIRD HYGIENE"],
+    REPTILES: ["REPTILE FOOD", "REPTILE SNACKS", "REPTILE TOYS", "REPTILE HYGIENE"],
   };
 
   return (

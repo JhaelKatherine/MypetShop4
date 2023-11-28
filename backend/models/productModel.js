@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
     status: { type: Boolean, default: true, required: true },
-    species: { type: Boolean, default: true, required: true }
+    species: { type: String, required: true }
 
   },
   {

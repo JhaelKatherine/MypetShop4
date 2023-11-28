@@ -30,13 +30,14 @@ productRouter.post(
   })
 );
 
-productRouter.get('/category/:category', expressAsyncHandler(async (req, res) => {
-  const { category } = req.params;
+productRouter.get('/category/:category/species/:species', expressAsyncHandler(async (req, res) => {
+  const { category, species } = req.params;
 
-  const products = await Product.find({ category, status: true });
+  const products = await Product.find({ category, species, status: true });
 
   res.send(products);
 }));
+
 
 productRouter.put(
   '/:id',

@@ -72,6 +72,11 @@ export default function AddProductScreen() {
       toast.error('The category field should not exceed 50 characters.');
       return;
     }
+    if (species.length > 50) {
+      setLoading(false);
+      toast.error('The species field should not exceed 50 characters.');
+      return;
+    }
     
     if (description.length > 210) {
       setLoading(false);
@@ -242,43 +247,39 @@ export default function AddProductScreen() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="category">Category</label>
-              <input
-                type="text"
-                id="category"
-                className="form-control"
-                value={category}
-                onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
-                    setCategory(e.target.value);
-                  }
-                }}
-                pattern="[A-Za-z ]+" 
-                title="Please enter only letters" 
-                maxLength="50"
-                required
-              />
-            </div>
+  <label htmlFor="category">Category</label>
+  <select
+    id="category"
+    className="form-control"
+    value={category}
+    onChange={(e) => setCategory(e.target.value)}
+    required
+  >
+    <option value="FOOD">FOOD</option>
+    <option value="SNACKS">SNACKS</option>
+    <option value="TOYS">TOYS</option>
+    <option value="HYGIENE">HYGIENE</option>
+
+  </select>
+</div>
+
             <div className="form-group">
-              <label htmlFor="species">species</label>
-              <input
-                type="text"
-                id="species"
-                className="form-control"
-                value={species}
-                onChange={(e) => {
-                  const trimmedValue = e.target.value.trim(); // Eliminar espacios en blanco al inicio y final
-                  if (trimmedValue !== '' || /^\s+$/.test(e.target.value) || e.target.value === '') { // Verificar si no es una cadena vacía o solo espacios en blanco
-                    setSpecies(e.target.value);
-                  }
-                }}
-                pattern="[A-Za-z ]+" 
-                title="Please enter only letters" 
-                maxLength="50"
-                required
-              />
-            </div>
+  <label htmlFor="species">Species</label>
+  <select
+    id="species"
+    className="form-control"
+    value={species}
+    onChange={(e) => setSpecies(e.target.value)}
+    required
+  >
+    <option value="DOG">DOG</option>
+    <option value="CAT">CAT</option>
+    <option value="RODENTS">RODENTS</option>
+    <option value="BIRDS">BIRDS</option>
+    <option value="REPTILES">REPTILES</option>
+  </select>
+</div>
+
 
             <div className="form-group">
               <label htmlFor="brand">Brand</label>
