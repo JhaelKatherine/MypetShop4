@@ -4,6 +4,7 @@ import axios from "axios";
 import {Store} from "../Store";
 import {renderToString} from 'react-dom/server';
 import { useNavigate } from "react-router-dom";
+import {format} from "date-fns";
 
 const Invoice = () => {
     const navigate = useNavigate()
@@ -51,7 +52,8 @@ const Invoice = () => {
                     <p className={'date'} style={{textAlign: "end"}}><span
                         style={{fontWeight: "bold", fontSize: "15px"}}>Invoice ID: </span>{invoiceData._id}</p>
                     <p className={'date'} style={{textAlign: "end"}}><span
-                        style={{fontWeight: "bold", fontSize: "15px"}}>Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}
+                        style={{fontWeight: "bold", fontSize: "15px"}}>Date: </span>{format(new Date(invoiceData.createdAt), 'yyyy-MM-dd')}
+
                     </p>
                 </div>
 
@@ -89,8 +91,8 @@ const Invoice = () => {
                             <tr key={index}>
                                 <td style={{border: "1px solid #ddd", padding: "8px"}}>{item.name}</td>
                                 <td style={{border: "1px solid #ddd", padding: "8px"}}>{item.quantity}</td>
-                                <td style={{border: "1px solid #ddd", padding: "8px"}}>Bs. {item.price}</td>
-                                <td style={{border: "1px solid #ddd", padding: "8px"}}>Bs. {item.quantity * item.price}</td>
+                                <td style={{border: "1px solid #ddd", padding: "8px"}}>$ {item.price}</td>
+                                <td style={{border: "1px solid #ddd", padding: "8px"}}>$ {item.quantity * item.price}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -98,14 +100,9 @@ const Invoice = () => {
                 </div>
 
                 <div className={'prices-invoice'} style={{marginTop: "6px"}}>
-
-                    <div className={'total-price'} style={{display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
-                        <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Tax price:</h3>
-                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.taxPrice.toFixed(2)}</p>
-                    </div>
                     <div className={'total-price'} style={{display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
                         <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Total:</h3>
-                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.totalPrice.toFixed(2)}</p>
+                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>$ {invoiceData.itemsPrice.toFixed(2)}</p>
                     </div>
 
                 </div>
@@ -139,7 +136,7 @@ const Invoice = () => {
 
                 <div>
                     <p className={'date'}><span>Invoice ID: </span>{invoiceData._id}</p>
-                    <p className={'date'}><span>Date: </span>{new Date(invoiceData.createdAt).toLocaleDateString()}</p>
+                    <p className={'date'}><span>Date: </span>{format(new Date(invoiceData.createdAt), 'yyyy-MM-dd')}</p>
                 </div>
 
                 <div className={'invoice-bill_send'}>
@@ -174,8 +171,8 @@ const Invoice = () => {
                             <tr key={index}>
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
-                                <td>Bs. {item.price}</td>
-                                <td>Bs. {item.quantity * item.price}</td>
+                                <td>$ {item.price}</td>
+                                <td>$ {item.quantity * item.price}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -183,14 +180,9 @@ const Invoice = () => {
                 </div>
 
                 <div className={'prices-invoice'}>
-
-                    <div className={'total-price'}>
-                        <h3>Tax price:</h3>
-                        <p>Bs. {invoiceData.taxPrice.toFixed(2)}</p>
-                    </div>
                     <div className={'total-price'}>
                         <h3>Total:</h3>
-                        <p>Bs. {invoiceData.totalPrice.toFixed(2)}</p>
+                        <p>$ {invoiceData.itemsPrice.toFixed(2)}</p>
                     </div>
 
                 </div>
