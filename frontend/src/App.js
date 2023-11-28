@@ -114,36 +114,14 @@ function App() {
               </LinkContainer>
 )}
 {userInfo && userInfo.isAdmin && (
-  <LinkContainer to="/admin/products">
-    <NavDropdown
-      title={
-        <>
-          <img
-            src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-            alt="Profile"
-            height="30"
-            className="d-inline-block align-top"
-          />
-          <span className="d-inline-block align-top ml-2">
-            {userInfo.userName}
-          </span>
-        </>
-      }
-      className="d-inline-block align-top"
-      id="basic-nav-dropdown"
-    >
-      <NavDropdown.Item onClick={signoutHandler}>Sign Out</NavDropdown.Item>
-    </NavDropdown>
-    <NavDropdown.Item className="nav-dropdown-item">
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png"
-        alt="Icono de Producto"
-        className="product-icon"
-      />
-      Products
-    </NavDropdown.Item>
-  </LinkContainer>
-)}
+  
+                 <LinkContainer to="/admin/products">
+                    <NavDropdown.Item className="nav-dropdown-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
+                       Products 
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                  )}
 
               </Nav>
             </Container>
