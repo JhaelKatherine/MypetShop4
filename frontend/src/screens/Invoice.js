@@ -101,11 +101,11 @@ const Invoice = () => {
 
                     <div className={'total-price'} style={{display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
                         <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Tax price:</h3>
-                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.taxPrice}</p>
+                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.taxPrice.toFixed(2)}</p>
                     </div>
                     <div className={'total-price'} style={{display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "15px", marginRight: "10px"}}>
                         <h3 style={{fontSize: "20px", margin: "0", color: "#333"}}>Total:</h3>
-                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.totalPrice}</p>
+                        <p style={{margin: "0", fontSize: "20px", color: "#666"}}>Bs. {invoiceData.totalPrice.toFixed(2)}</p>
                     </div>
 
                 </div>
@@ -190,7 +190,7 @@ const Invoice = () => {
                     </div>
                     <div className={'total-price'}>
                         <h3>Total:</h3>
-                        <p>Bs. {invoiceData.totalPrice}</p>
+                        <p>Bs. {invoiceData.totalPrice.toFixed(2)}</p>
                     </div>
 
                 </div>
