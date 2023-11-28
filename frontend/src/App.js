@@ -86,34 +86,6 @@ function App() {
                   )}
                 </Link>
                 {userInfo ? (
-                <NavDropdown title={ <>
-                     <img
-                       src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-                       alt="Profile"
-                       height="30"
-                       className="d-inline-block align-top"/>
-                   <span className="d-inline-block align-top ml-2">{userInfo.userName}</span>
-                    </>  }
-                       className="d-inline-block align-top"
-                       id="basic-nav-dropdown">
-                 <LinkContainer to="/orderhistory">
-                    <NavDropdown.Item>Order History</NavDropdown.Item>
-                 </LinkContainer>
-                 <NavDropdown.Item onClick={signoutHandler}>Sign Out</NavDropdown.Item>
-               </NavDropdown>
-            ) : (
-              <LinkContainer to="/signin">
-                <Nav.Link>
-                  <img
-                    alt="signin"
-                    src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
-                    height="30"
-                    className="d-inline-block align-top"
-                  />
-                </Nav.Link>
-              </LinkContainer>
-)}
-{userInfo && userInfo.isAdmin && (
   <NavDropdown
     title={
       <>
@@ -129,18 +101,36 @@ function App() {
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    <LinkContainer to="/admin/products">
-      <NavDropdown.Item className="nav-dropdown-item">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png"
-          alt="Icono de Producto"
-          className="product-icon"
-        />
-        Products
-      </NavDropdown.Item>
-    </LinkContainer>
+    {!userInfo.isAdmin && (
+      <LinkContainer to="/orderhistory">
+        <NavDropdown.Item>Order History</NavDropdown.Item>
+      </LinkContainer>
+    )}
+    {userInfo.isAdmin && (
+      <LinkContainer to="/admin/products">
+        <NavDropdown.Item className="nav-dropdown-item">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png"
+            alt="Icono de Producto"
+            className="product-icon"
+          />
+          Products
+        </NavDropdown.Item>
+      </LinkContainer>
+    )}
     <NavDropdown.Item onClick={signoutHandler}>Sign Out</NavDropdown.Item>
   </NavDropdown>
+) : (
+  <LinkContainer to="/signin">
+    <Nav.Link>
+      <img
+        alt="signin"
+        src="https://i.ibb.co/PMQ1s9X/imagen-de-perfil.png"
+        height="30"
+        className="d-inline-block align-top"
+      />
+    </Nav.Link>
+  </LinkContainer>
 )}
 
 
