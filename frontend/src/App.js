@@ -322,8 +322,7 @@ function App() {
 
           </Container>
         </main>
-        
-
+        <Footer/>
       </div>
     </BrowserRouter>
     
