@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-const FilterLogic = ({ forceUpdate }) => {
+const FilterLogic = () => {
   const [buttonContainerColor, setButtonContainerColor] = useState("#4180AB");
   const [activeCategoryButton, setActiveCategoryButton] = useState(null);
   const [activeSpeciesButton, setActiveSpeciesButton] = useState(null);
@@ -18,6 +18,7 @@ const FilterLogic = ({ forceUpdate }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loadingProducts, setLoadingProducts] = useState(true);
+  const [updateCounter, setUpdateCounter] = useState(0);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.trim());
@@ -27,10 +28,16 @@ const FilterLogic = ({ forceUpdate }) => {
     setActiveCategoryButton(category);
     setActiveSpeciesButton(null);
   };
-  
+  const forceUpdate = () => {
+    setUpdateCounter((prevCounter) => prevCounter + 1);
+  };
+
 
   const handleSubCategoryClick = async (subCategory) => {
     const [category, species] = subCategory.split(' ');
+  
+    // Antes de llamar a axios.get, inicia la actualización de la URL
+  
     setSelectedCategory(category);
     setSelectedSpecies(species);
   
@@ -39,6 +46,8 @@ const FilterLogic = ({ forceUpdate }) => {
       const products = response.data;
       setFilteredProducts(products);
       setFilterApplied(products.length === 0);
+      fetchProductsByCategoryAndSpecies(species, category);
+
     } catch (error) {
       console.error('Error fetching products:', error);
       if (error.response) {
@@ -56,8 +65,8 @@ const FilterLogic = ({ forceUpdate }) => {
       setFilteredProducts([]);
       setFilterApplied(true);
     }
-    
   };
+  
   
 
 
@@ -74,28 +83,26 @@ const FilterLogic = ({ forceUpdate }) => {
   
   const fetchProductsByCategoryAndSpecies = async (category, species) => {
     setLoadingProducts(true);
-  
+
     try {
-      const response = await axios.get(`/api/products/category/${category}/species/${species}`);
-      const products = response.data;
-  
-      setFilteredProducts(products);
-      setFilterApplied(products.length === 0);
-  
+
+
       // Construir la URL basada en los parámetros de filtro
       const filterURL = `/products?category=${category}&species=${species}`;
       console.log('filterURL:', filterURL);
-  
-      // Intentar navegar a la nueva URL
+
+      // Navegar a la nueva URL sin recargar la página
       navigate(filterURL);
-  
+
       console.log('Después de navigate');
     } catch (error) {
       console.error('Error fetching products:', error);
       setFilteredProducts([]);
       setFilterApplied(true);
+      const filterURL = `/products?category=${category}&species=${species}`;
+      navigate(filterURL);
     }
-  
+
     setLoadingProducts(false);
   };
   
@@ -107,11 +114,11 @@ const FilterLogic = ({ forceUpdate }) => {
   
 
   const categoryButtons = [
-    { label: "\u00A0\u00A0\u00A0\u00A0DOG\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png", onClick: () => handleCategoryClick("DOG") },
-    { label: "\u00A0\u00A0\u00A0\u00A0CAT\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn.icon-icons.com/icons2/2242/PNG/512/gato_icon_134883.png", onClick: () => handleCategoryClick("CAT") },
+    { label: "\u00A0\u00A0\u00A0\u00A0DOG\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png" },
+    { label: "\u00A0\u00A0\u00A0\u00A0CAT\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn.icon-icons.com/icons2/2242/PNG/512/gato_icon_134883.png" },
     { label: " RODENTS", imageUrl: "https://cdn-icons-png.flaticon.com/512/1905/1905235.png", onClick: () => handleCategoryClick("RODENTS") },
-    { label: "\u00A0\u00A0\u00A0\u00A0\u00A0BIRDS\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/6622/6622649.png", onClick: () => handleCategoryClick("BIRDS") },
-    { label: " REPTILES\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/2809/2809783.png", onClick: () => handleCategoryClick("REPTILES") },
+    { label: "\u00A0\u00A0\u00A0\u00A0\u00A0BIRDS\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/6622/6622649.png" },
+    { label: " REPTILES\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/2809/2809783.png"},
   ];
 
   const extractCategoryAndSpecies = (label) => {
@@ -159,8 +166,8 @@ const FilterLogic = ({ forceUpdate }) => {
   const subCategories = {
     DOG: ["DOG FOOD", "DOG SNACKS", "DOG TOYS", "DOG HYGIENE"],
     CAT: ["CAT FOOD", "CAT SNACKS", "CAT TOYS", "CAT HYGIENE"],
-    RODENTS: ["RODENT FOOD", "RODENT SNACKS", "RODENT TOYS", "RODENT HYGIENE"],
-    BIRDS: ["BIRD FOOD", "BIRD SNACKS", "BIRD TOYS", "BIRD HYGIENE"],
+    RODENTS: ["RODENTS FOOD", "RODENTS SNACKS", "RODENTS TOYS", "RODENTS HYGIENE"],
+    BIRDS: ["BIRDS FOOD", "BIRDS SNACKS", "BIRDS TOYS", "BIRDS HYGIENE"],
     REPTILES: ["REPTILES FOOD", "REPTILES SNACKS", "REPTILES TOYS", "REPTILES HYGIENE"],
   };
 
@@ -218,14 +225,14 @@ const FilterLogic = ({ forceUpdate }) => {
         ))}
       </label>
       <div className="products">
-        {filterApplied && filteredProducts.length === 0 ? (
-          <p>No hay productos disponibles</p>
-        ) : (
+        {filterApplied ? (
+    <p>We are sorry but there are no products in the selected category, please continue browsing for more products.</p>
+    ) : (
           <Row>
             {filteredProducts.map((product) => (
               <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
                 <div onClick={() => handleProductClick(product.slug)}>
-                  {product.slug ? <Product product={product} /> : <p>Producto no disponible</p>}
+                  {product.slug ? <Product product={product} /> : <p></p>}
                 </div>
               </Col>
             ))}

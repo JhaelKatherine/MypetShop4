@@ -151,7 +151,6 @@ function App() {
         <main>
         <Container className="mt-3">
             <Routes>
-            <Route path="/products" element={<ProductsScreen />} /> {/* Nueva ruta */}
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
