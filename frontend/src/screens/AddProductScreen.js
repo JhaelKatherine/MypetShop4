@@ -256,8 +256,9 @@ export default function AddProductScreen() {
               />
             </div>
 
-            <div className="form-group">
+        
 
+            <div className="form-group">
   <label htmlFor="category">Category</label>
   <select
     id="category"
@@ -266,15 +267,15 @@ export default function AddProductScreen() {
     onChange={(e) => setCategory(e.target.value)}
     required
   >
+    <option value="" className="custom-option">Select Category</option>
     <option value="FOOD">FOOD</option>
     <option value="SNACKS">SNACKS</option>
     <option value="TOYS">TOYS</option>
     <option value="HYGIENE">HYGIENE</option>
-
   </select>
 </div>
 
-            <div className="form-group">
+<div className="form-group">
   <label htmlFor="species">Species</label>
   <select
     id="species"
@@ -283,6 +284,7 @@ export default function AddProductScreen() {
     onChange={(e) => setSpecies(e.target.value)}
     required
   >
+    <option value="" className="custom-option">Select Species</option>
     <option value="DOG">DOG</option>
     <option value="CAT">CAT</option>
     <option value="RODENTS">RODENTS</option>
@@ -290,6 +292,7 @@ export default function AddProductScreen() {
     <option value="REPTILES">REPTILES</option>
   </select>
 </div>
+
 
 
 
