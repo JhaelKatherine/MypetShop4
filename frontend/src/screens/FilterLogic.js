@@ -242,7 +242,8 @@ const FilterLogic = () => {
                     width: '250px', // Puedes ajustar según tus necesidades
                     height: '350px', // Puedes ajustar según tus necesidades
                     margin: '0 auto 60px', // Puedes ajustar según tus necesidades
-                  
+                    marginBottom: '300px',
+                    marginTop: '50px',
                   }}
                 >
                   {product.slug ? <Product product={product} /> : <p></p>}
