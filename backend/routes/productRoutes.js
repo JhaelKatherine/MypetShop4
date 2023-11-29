@@ -21,14 +21,39 @@ productRouter.post(
       image: req.body.image,
       price: req.body.price,
       category: req.body.category,
+      species: req.body.species,
       brand: req.body.brand,
       description: req.body.description,
       countInStock: req.body.countInStock,
+
     });
     const product = await newProduct.save();
     res.send({ message: 'Product Created', product });
   })
 );
+
+productRouter.get('/category/:category/species/:species', expressAsyncHandler(async (req, res) => {
+  const { category, species } = req.params;
+
+  console.log('Categoría:', category);
+  console.log('Especie:', species);
+
+  // Usamos una expresión regular insensible a mayúsculas/minúsculas para la especie
+  const speciesRegex = new RegExp(`^${species}$`, 'i');
+
+  const products = await Product.find({ category, species: speciesRegex, status: true });
+
+  console.log('Productos encontrados:', products);
+
+  if (products.length === 0) {
+    // Si no hay coincidencias, envía un mensaje específico
+    console.log('No se encontraron productos');
+    return res.status(404).send({ message: 'No se encontraron productos que coincidan con los criterios de búsqueda.' });
+  }
+
+  res.send(products);
+}));
+
 
 productRouter.put(
   '/:id',
@@ -43,6 +68,7 @@ productRouter.put(
       product.image = req.body.image;
       product.images = req.body.images;
       product.category = req.body.category;
+      product.species = req.body.species;
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;

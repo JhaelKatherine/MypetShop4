@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,12 +27,19 @@ import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
+
+import ProductsScreen from './screens/ProductScreen';
+import FilterLogic from "./screens/FilterLogic"; // Importa tu nuevo componente
+
+
 import Invoice from "./screens/Invoice";
+
 
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+  const [forceFilterUpdate, setForceFilterUpdate] = useState(false); // Nuevo estado
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -135,8 +142,12 @@ function App() {
 
               </Nav>
             </Container>
+            
           </Navbar>
         </header>
+        <FilterLogic/>
+
+        
         <div>
           <Nav className="flex-column text-white w-100 p-2">
           </Nav>
@@ -149,9 +160,15 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
+
+              
+
                 <Route path="/aboutUs" element={<AboutUs />} />
+
                 <Route path="/invoice" element={<Invoice />} />
+
               <Route path="/" element={<HomeScreen />} />
+
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
@@ -179,6 +196,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+
                             <Route
                 path="/orderhistory"
                 element={
@@ -202,8 +220,11 @@ function App() {
 
           </Container>
         </main>
+        
+
       </div>
     </BrowserRouter>
+    
   );
 }
 
