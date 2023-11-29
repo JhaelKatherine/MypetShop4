@@ -1,12 +1,14 @@
 .footer {
   background-color: #4180AB;
-  padding: 20px;
+  padding: 10px;
+  min-height: 1vh;
 }
 
 .footer-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex: 1;
 }
 
 .left-section,

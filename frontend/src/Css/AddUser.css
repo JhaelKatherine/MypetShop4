@@ -11,13 +11,17 @@
     text-align: center;
     margin-top: 40px;
     margin-bottom: 30px;
+    
 
   }
   .centered-title {
     text-align: center; /* Centrar el texto */
     margin-top: 20px; /* Ajustar margen superior según sea necesario */
   }
-  
+  .custom-option {
+    background-color: #333; /* Puedes ajustar el color de fondo aquí */
+    color: #fff; /* Puedes ajustar el color del texto aquí */
+  }
   
   .title {
     font-size: 28px;
@@ -78,6 +82,7 @@
     border: 1px solid rgba(105, 105, 105, 0.397);
     border-radius: 10px;
     font-size: 16px;
+    
   }
   .form-group{
     margin-bottom: 15px; /* Agregar margen inferior entre los campos de texto */
@@ -174,6 +179,8 @@
     border-radius: 15px; /* Añadir bordes redondos */
     max-width: 700px; /* Establecer un ancho máximo para hacerlo más pequeño */
     margin: 0 auto; /* Centrar horizontalmente */
+    margin-bottom : 200px;
+    margin-top : 100px;
   }
   .mb-3 {
     text-align: center; /* Centrar el texto */

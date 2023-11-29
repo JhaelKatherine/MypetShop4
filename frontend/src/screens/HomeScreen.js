@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, Link } from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,20 +6,25 @@ import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import "../Css/homeScreen.css";
+import FilterLogic from "./FilterLogic"; // Importa tu nuevo componente
+import { useNavigate } from 'react-router-dom';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_REQUEST":
+    case 'REFRESH_PRODUCT':
+      return { ...state, product: action.payload };
+    case 'FETCH_REQUEST':
       return { ...state, loading: true };
-    case "FETCH_SUCCESS":
+    case 'FETCH_SUCCESS':
       return { ...state, products: action.payload, loading: false };
-    case "FETCH_FAIL":
+    case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
 };
+
 
 function HomeScreen() {
   const [{ loading, error, products }, dispatch] = useReducer(reducer, {
@@ -28,31 +32,13 @@ function HomeScreen() {
     loading: true,
     error: "",
   });
-  const [successDelete, setSuccessDelete] = useState(false);
-
-  const [buttonContainerColor, setButtonContainerColor] = useState("#4180AB");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
-      try {
-        const result = await axios.get("/api/products");
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
-      } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
-      }
-    };
-    fetchData();
-  }, [successDelete]); // Asegúrate de incluir successDelete como dependencia
   
-
-  const categoryButtons = [
-    { label: " DOG", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png", onClick: () => console.log("Filtrar por gato") },
-    { label: " CAT", imageUrl: "https://cdn.icon-icons.com/icons2/2242/PNG/512/gato_icon_134883.png", onClick: () => console.log("Filtrar por perro") },
-    { label: " RODENTS", imageUrl: "https://cdn-icons-png.flaticon.com/512/1905/1905235.png", onClick: () => console.log("Filtrar por ave") },
-    { label: " BIRDS", imageUrl: "https://cdn-icons-png.flaticon.com/512/6622/6622649.png", onClick: () => console.log("Filtrar por reptil") },
-    { label: " REPTILES", imageUrl: "https://cdn-icons-png.flaticon.com/512/2809/2809783.png", onClick: () => console.log("Filtrar por roedores") },
-  ];
+  const [successDelete, setSuccessDelete] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  
+  const [buttonContainerColor, setButtonContainerColor] = useState("#4180AB");
 
   const categoryButtonsPets = [
     { label: "Dog Food", imageUrl: "https://images.ecestaticos.com/RYyHCyWe7IE6v1LNdx-ud8zj-KM=/0x0:2121x1414/1200x1200/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd67%2Fa8d%2F860%2Fd67a8d8604edeac49386e96e2890fe7a.jpg", onClick: () => console.log("Acción para Dog Food") },
@@ -62,23 +48,124 @@ function HomeScreen() {
     { label: "Cat Accessories", imageUrl: "https://us.123rf.com/450wm/colnihko/colnihko2306/colnihko230600052/205883575-cute-fluffy-cat-celebrates-birthday-in-cap-on-festive-balloons-background-generative-ai-illustration.jpg?ver=6", onClick: () => console.log("Acción para Cat Accessories") },
   ];
 
-  const handleButtonClick = (color) => {
-    setButtonContainerColor(color);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchData = async () => {
+      dispatch({ type: "FETCH_REQUEST" });
+      try {
+        const result = await axios.get("/api/products");
+        console.log("Data on HomeScreen:", result.data); // Agrega este log para verificar los datos
+        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+      } catch (err) {
+        dispatch({ type: "FETCH_FAIL", payload: err.message });
+      }
+    };
+    fetchData();
+  }, [successDelete]);
+
+  const Footer = () => {
+    const openSocialMedia = (socialMedia) => {
+      
+      let url = '';
+      switch (socialMedia) {
+        case 'instagram':
+          url = 'https://www.instagram.com/petshop_patitas_cbba/';
+          break;
+        case 'tiktok':
+          url = 'https://www.tiktok.com/@gaston_hdyxfhchvq?_t=8hksnUI89AM&_r=1';
+          break;
+        case 'facebook':
+          url = 'https://www.facebook.com/profile.php?id=61550120834894';
+          break;
+        
+        default:
+          url = '';
+      }
+      window.open(url, '_blank'); 
+    };
+    return (
+      <footer className="footer">
+        <div className="footer-container">
+          <div className="left-section">
+            <div className="logo">
+              <img
+                alt="My Pet Shop Logo"
+                src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
+                height="50"
+                className="d-inline-block align-top"
+              />
+            </div>
+            <div className="follow-us">
+              <p>FOLLOW US ON:</p>
+              <div className="social-icons">
+              <a href="#" onClick={() => openSocialMedia('instagram')}>
+                <img
+                  alt="Instagram"
+                  src="https://i.ibb.co/bJdCgX7/instagram-Icon.png"
+                  className="social-icon"
+                />
+              </a>
+              <a href="#" onClick={() => openSocialMedia('tiktok')}>
+                <img
+                  alt="Tiktok"
+                  src="https://i.ibb.co/x89mcW1/tiktokk-Icon.png"
+                  className="social-icon"
+                />
+              </a>
+              <a href="#" onClick={() => openSocialMedia('facebook')}>
+                <img
+                  alt="Facebook"
+                  src="https://i.ibb.co/zsVxMJJ/facebook-Icon.png"
+                  className="social-icon"
+                />
+              </a>
+                {/* Otros íconos... */}
+              </div>
+            </div>
+          </div>
+          <div className="center-section">
+            <div className="buy-with-us">
+              <p style={{ color: 'black' }}>BUY WITH US:</p>
+              <ul className="product-list">
+                <li>Dog Food</li>
+                <li>Cat Food</li>
+                <li>Rodents Food</li>
+              </ul>
+            </div>
+          </div>
+          <div className="right-section">
+            <div className="any-questions">
+              <p style={{ color: 'black' }}>ANY QUESTIONS?</p>
+              <ul className="additional-links">
+                <li>
+                <Link to="/aboutUs" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  About us
+                </Link>
+                </li>
+                <li>Terms and Conditions</li>
+                <li>Privacy Policy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
   };
+  
 
   return (
     <div>
       <Helmet>
+        
         <title>MY PET SHOP</title>
       </Helmet>
 
       {/* Checkbox for toggling buttons */}
 
-      
+     
 
       <div className="image-container">
         <img src="https://i0.wp.com/www.russellfeedandsupply.com/wp-content/uploads/2022/01/canidae-25-off-may-23-banner-1.jpg?ssl=1" alt="promotion" />
-        {/* Agrega más imágenes según sea necesario */}
       </div>
       <h1>Featured Categories</h1>
 
@@ -102,7 +189,7 @@ function HomeScreen() {
         ) : (
           <Row>
             {products
-              .filter((product) => product.status !== false) // Filtra productos con status diferente de false
+              .filter((product) => product.status !== false)
               .map((product) => (
                 <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
                   <Product product={product}></Product>
@@ -112,6 +199,7 @@ function HomeScreen() {
         )}
       </div>
     </div>
+    
   );
 }
 

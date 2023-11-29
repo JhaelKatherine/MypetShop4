@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext,useState,useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,12 +29,17 @@ import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
+import ProductsScreen from './screens/ProductScreen';
+import FilterLogic from "./screens/FilterLogic"; 
+
 import Invoice from "./screens/Invoice";
+
 
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+  const [forceFilterUpdate, setForceFilterUpdate] = useState(false); // Nuevo estado
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -239,18 +244,13 @@ function App() {
 
               </Nav>
             </Container>
+            
           </Navbar>
-          <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
-              {categoryButtons.map((button, index) => (
-                <button key={index} onClick={() => handleButtonClick("#4180AB")} className="image-button">
-                  <div className="button-content">
-                    <img src={button.imageUrl} alt={button.label} />
-                    <span style={{ marginBottom: '5px' }}>{button.label}</span>
-                  </div>
-                </button>
-              ))}
-            </label>
+            <FilterLogic/>
         </header>
+        
+
+        
         <div>
           <Nav className="flex-column text-white w-100 p-2">
           </Nav>
@@ -263,9 +263,15 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
+
+              
+
                 <Route path="/aboutUs" element={<AboutUs />} />
+
                 <Route path="/invoice" element={<Invoice />} />
+
               <Route path="/" element={<HomeScreen />} />
+
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
@@ -293,6 +299,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+
                             <Route
                 path="/orderhistory"
                 element={
@@ -314,10 +321,12 @@ function App() {
 
             </Routes>
           </Container>
+          
         </main>
-        <Footer />
+        <Footer/>
       </div>
     </BrowserRouter>
+    
   );
 }
 

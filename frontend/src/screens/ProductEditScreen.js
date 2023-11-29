@@ -68,6 +68,7 @@ export default function ProductEditScreen() {
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
   const [loading2, setLoading] = useState(false);
+  const [species, setSpecies] = useState(''); // Nueva variable para la especie
 
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -94,6 +95,7 @@ export default function ProductEditScreen() {
         setImage(data.image);
         setImages(data.images);
         setCategory(data.category);
+        setSpecies(data.species);
         setCountInStock(data.countInStock);
         setBrand(data.brand);
         setDescription(data.description);
@@ -139,6 +141,7 @@ export default function ProductEditScreen() {
           price,
           image,
           images,
+          species,
           category,
           brand,
           countInStock,
@@ -280,19 +283,39 @@ export default function ProductEditScreen() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="category">Category</label>
-              <input
-                type="text"
-                id="category"
-                maxLength="50"
-                className="form-control"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                pattern="[A-Za-z ]+" 
-                title="Please enter only letters" 
-                required
-              />
-            </div>
+            <label htmlFor="category">Category</label>
+  <select
+    id="category"
+    className="form-control"
+    value={category}
+    onChange={(e) => setCategory(e.target.value)}
+    required
+  >
+    <option value="FOOD">FOOD</option>
+    <option value="SNACKS">SNACKS</option>
+    <option value="TOYS">TOYS</option>
+    <option value="HYGIENE">HYGIENE</option>
+
+  </select>
+</div>
+
+            <div className="form-group">
+  <label htmlFor="species">Species</label>
+  <select
+    id="species"
+    className="form-control"
+    value={species}
+    onChange={(e) => setSpecies(e.target.value)}
+    required
+  >
+    <option value="DOG">DOG</option>
+    <option value="CAT">CAT</option>
+    <option value="RODENTS">RODENTS</option>
+    <option value="BIRDS">BIRDS</option>
+    <option value="REPTILES">REPTILES</option>
+  </select>
+</div>
+
             <div className="form-group">
               <label htmlFor="brand">Brand</label>
               <input

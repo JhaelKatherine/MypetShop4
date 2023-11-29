@@ -1,9 +1,9 @@
 .image-button {
-    margin-top: 3px;
-    margin-bottom: 3px;
-    width: 120px;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    width: 20px;
     height: 35px;
-    margin-right: 30px;
+    margin-right: 35px;
     border-radius: 10px;
     margin-left: 20px;
     transition: background-color 0.3s; /* Agregamos una transición de color para que sea suave */
@@ -11,7 +11,8 @@
 
 .button-content {
     margin-top: 1px;
-
+    margin-bottom: 0px;
+    font-size: 14px;
 }
 
 .button-container {
@@ -23,6 +24,28 @@
     margin-top: 0px;
     margin-left: 0px;
 }
+/* En tu archivo CSS (por ejemplo, homeScreen.css) */
+
+.product-image {
+  max-width: 70%; /* La imagen no superará el ancho del contenedor */
+}
+
+.product-container img {
+  border: none; /* Elimina cualquier borde que se haya establecido anteriormente */
+
+  max-width: 70%; /* Asegura que la imagen del producto no exceda el ancho del contenedor */
+}
+.filter-container {
+  margin-left: 0px; /* Ajusta el margen izquierdo según tus preferencias */
+  margin-right: 0px; /* Ajusta el margen derecho según tus preferencias */
+}
+
+/* Ajusta el tamaño del texto y otros estilos según sea necesario */
+.product-details {
+  font-size: 14px;
+  color: #333;
+}
+
 
 .button-container button {
     color: black;
@@ -60,14 +83,16 @@
 .image-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Ajusta el espacio según sea necesario */
+    
+    margin-top: 15px; /* Ajusta el espacio según sea necesario */
   }
   
   .image-container img {
-    width: 100%; /* El ancho de la imagen será el 100% del contenedor */
+    width: 100%;
+    margin-left: 20px; /* El ancho de la imagen será el 100% del contenedor */
     max-width: 9100px; /* Ancho máximo de la imagen, ajusta según sea necesario */
     height: auto; /* Altura automática para mantener la proporción */
-    margin: 0 10px; /* Ajusta el margen según sea necesario */
+    margin: 10px; /* Ajusta el margen según sea necesario */
   }
   
   @media (max-width: 768px) {
@@ -151,4 +176,42 @@
 /* Estilos para el botón del producto */
 .Button {
   width: 100%; /* Ocupa todo el ancho del contenedor */
+}
+
+.button-container {
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea en pantallas pequeñas */
+}
+
+.image-button {
+  position: relative;
+  min-width: 150px; /* Establece el ancho mínimo para el botón */
+  flex: 1; /* Permite que los botones se distribuyan de manera equitativa y se estiren si es necesario */
+  max-width: 150px; /* Ancho máximo para evitar que los botones se estiren demasiado */
+}
+
+
+.subcategories {
+  position: absolute;
+  top: 100%; /* Coloca las subcategorías justo debajo del botón principal */
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: white; /* Fondo blanco para las subcategorías */
+  border: 1px solid #ccc; /* Borde para las subcategorías */
+  padding: 10px;
+  z-index: 1; /* Asegura que las subcategorías estén sobre los demás elementos */
+  width: max-content; /* Ancho máximo basado en el contenido */
+}
+
+.subcategory-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  text-align: left;
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+.subcategory-button:hover {
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el ratón sobre las subcategorías */
 }

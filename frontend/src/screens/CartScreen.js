@@ -39,7 +39,7 @@ export default function CartScreen() {
   };
 
   return (
-    <div>
+    <div style={{ marginBottom: '400px' }}>
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>
@@ -107,10 +107,15 @@ export default function CartScreen() {
                     Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
                     Product) : $
                     {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+
                   </h3>
+                  
                 </ListGroup.Item>
+                
                 <ListGroup.Item>
+                  
                <div className="d-grid">
+                
     {/* Comenta o elimina la línea siguiente para desactivar la funcionalidad */}
     {<Button
       type="button"
