@@ -40,16 +40,38 @@ export default function AddProductScreen() {
       const response = await Axios.get(`/api/brands/${species}/${category}`);
       setAvailableBrands(response.data);
       setBrandDisabled(false); // Habilitar el campo Brand después de obtener las marcas
+      brandOptions();
     } catch (error) {
       // Manejo de errores
       console.error('Error fetching brands:', error);
     }
   };
 
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+    if (category!==null && species!==null){
+        loadBrands();
+
+    }
+    setAvailableBrands([]); // Limpiar las marcas al cambiar la categoría
+     // Deshabilitar el campo Brand al cambiar la categoría
+  };
+
+  const handleSpeciesChange = (e) => {
+    setSpecies(e.target.value);
+ if (category!==null && species!==null){
+        loadBrands();
+        
+    }
+    setAvailableBrands([]); // Limpiar las marcas al cambiar la especie
+     // Deshabilitar el campo Brand al cambiar la especie
+  };
+  
   useEffect(() => {
-    setBrandDisabled(true); // Deshabilitar el campo Brand cuando cambie la categoría o especie
+     // Deshabilitar el campo Brand cuando cambie la categoría o especie
     if (species && category) {
-      loadBrands(); // Cargar las marcas si se han seleccionado animal y categoría
+      loadBrands();
+      brandOptions(); // Cargar las marcas si se han seleccionado animal y categoría
     }
   }, [species, category]);
 
@@ -291,7 +313,7 @@ export default function AddProductScreen() {
     id="category"
     className="form-control"
     value={category}
-    onChange={(e) => setCategory(e.target.value)}
+    onChange={handleCategoryChange}
     required
   >
     <option value="" className="custom-option">Select Category</option>
@@ -308,7 +330,7 @@ export default function AddProductScreen() {
     id="species"
     className="form-control"
     value={species}
-    onChange={(e) => setSpecies(e.target.value)}
+    onChange={handleSpeciesChange}
     required
   >
     <option value="" className="custom-option">Select Species</option>
