@@ -248,8 +248,7 @@ function App() {
           </Navbar>
           <FilterLogic/>
         </header>
-        <FilterLogic/>
-
+        
         
         <div>
           <Nav className="flex-column text-white w-100 p-2">
