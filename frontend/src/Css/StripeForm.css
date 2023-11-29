@@ -8,7 +8,7 @@ button {
 }
 .checkout-page {
   display: flex;
-  max-width: 0px;
+  max-width: -100px;
 }
 
 .left-section {
