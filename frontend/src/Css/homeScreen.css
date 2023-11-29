@@ -17,13 +17,34 @@
 .button-container {
     
     display: flex;
-    
+    margin-bottom: 45px;
     justify-content: center;
-    
-    
-    
+
 
 }
+/* En tu archivo CSS (por ejemplo, homeScreen.css) */
+
+.product-container {
+  border: 1px solid #ddd; /* Borde opcional para resaltar los límites de los productos */
+  padding: 10px; /* Espaciado interno para separar los productos */
+  cursor: pointer; 
+  /* Cambia el cursor al pasar sobre los productos */
+}
+
+.product-container img {
+  max-width: 50%; /* Asegura que la imagen del producto no exceda el ancho del contenedor */
+}
+.filter-container {
+  margin-left: 90px; /* Ajusta el margen izquierdo según tus preferencias */
+  margin-right: 90px; /* Ajusta el margen derecho según tus preferencias */
+}
+
+/* Ajusta el tamaño del texto y otros estilos según sea necesario */
+.product-details {
+  font-size: 14px;
+  color: #333;
+}
+
 
 .button-container button {
     color: black;

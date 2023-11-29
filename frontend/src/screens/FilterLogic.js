@@ -172,7 +172,7 @@ const FilterLogic = () => {
   };
 
   return (
-    <div key={forceUpdate}>
+    <div key={forceUpdate} className="filter-container">
       <label
         htmlFor="toggleButtons"
         className="button-container"
@@ -229,13 +229,13 @@ const FilterLogic = () => {
     <p>We are sorry but there are no products in the selected category, please continue browsing for more products.</p>
     ) : (
           <Row>
-            {filteredProducts.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                <div onClick={() => handleProductClick(product.slug)}>
-                  {product.slug ? <Product product={product} /> : <p></p>}
-                </div>
-              </Col>
-            ))}
+{filteredProducts.map((product) => (
+  <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+    <div className="product-container" onClick={() => handleProductClick(product.slug)}>
+      {product.slug ? <Product product={product} /> : <p></p>}
+    </div>
+  </Col>
+))}
           </Row>
         )}
       </div>
