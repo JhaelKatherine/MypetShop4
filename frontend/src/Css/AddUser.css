@@ -17,7 +17,10 @@
     text-align: center; /* Centrar el texto */
     margin-top: 20px; /* Ajustar margen superior según sea necesario */
   }
-  
+  .custom-option {
+    background-color: #333; /* Puedes ajustar el color de fondo aquí */
+    color: #fff; /* Puedes ajustar el color del texto aquí */
+  }
   
   .title {
     font-size: 28px;

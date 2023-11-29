@@ -16,6 +16,7 @@ import { getError } from '../utils';
 import { Store } from '../Store';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast } from 'react-toastify';
+import FilterLogic from "./FilterLogic"; // Importa tu nuevo componente
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -134,16 +135,10 @@ function ProductScreen() {
   return (
     <div>
       <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
-        {categoryButtons.map((button, index) => (
-          <button key={index} onClick={() => handleButtonClick("#4180AB")} className="image-button">
-            <div className="button-content">
-              <img src={button.imageUrl} alt={button.label} />
-              <span style={{ marginBottom: '5px' }}>{button.label}</span>
-            </div>
-          </button>
-        ))}
+
       </label>
-  
+            
+
       {loading ? (
         <LoadingBox />
       ) : error ? (

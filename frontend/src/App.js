@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -28,11 +28,18 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 
+import ProductsScreen from './screens/ProductScreen';
+import FilterLogic from "./screens/FilterLogic"; // Importa tu nuevo componente
+
+
+import Invoice from "./screens/Invoice";
+
 
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+  const [forceFilterUpdate, setForceFilterUpdate] = useState(false); // Nuevo estado
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -101,9 +108,23 @@ function App() {
     className="d-inline-block align-top"
     id="basic-nav-dropdown"
   >
-    <LinkContainer to="/orderhistory">
-      <NavDropdown.Item>Order History</NavDropdown.Item>
-    </LinkContainer>
+    {!userInfo.isAdmin && (
+      <LinkContainer to="/orderhistory">
+        <NavDropdown.Item>Order History</NavDropdown.Item>
+      </LinkContainer>
+    )}
+    {userInfo.isAdmin && (
+      <LinkContainer to="/admin/products">
+        <NavDropdown.Item className="nav-dropdown-item">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png"
+            alt="Icono de Producto"
+            className="product-icon"
+          />
+          Products
+        </NavDropdown.Item>
+      </LinkContainer>
+    )}
     <NavDropdown.Item onClick={signoutHandler}>Sign Out</NavDropdown.Item>
   </NavDropdown>
 ) : (
@@ -119,20 +140,14 @@ function App() {
   </LinkContainer>
 )}
 
-
-                 
- <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/78/78948.png"  alt="Admin" className="admin-image" />} id="admin-nav-dropdown">
- <LinkContainer to="/admin/products">
-    <NavDropdown.Item className="nav-dropdown-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png" alt="Icono de Producto" className="product-icon" />
-       Products 
-    </NavDropdown.Item>
-  </LinkContainer>
-</NavDropdown>
               </Nav>
             </Container>
+            
           </Navbar>
         </header>
+        <FilterLogic/>
+
+        
         <div>
           <Nav className="flex-column text-white w-100 p-2">
           </Nav>
@@ -144,10 +159,16 @@ function App() {
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-              <Route path="/addproduct" element={<AddProductScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
+
+              
+
                 <Route path="/aboutUs" element={<AboutUs />} />
+
+                <Route path="/invoice" element={<Invoice />} />
+
               <Route path="/" element={<HomeScreen />} />
+
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
@@ -160,7 +181,14 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-                            <Route
+             <Route path="/addproduct" element=
+             {
+              <AdminRoute>
+                  <AddProductScreen />
+               </AdminRoute>
+             } 
+             />
+              <Route
                 path="/admin/product/:id"
                 element={
                   <AdminRoute>
@@ -168,6 +196,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+
                             <Route
                 path="/orderhistory"
                 element={
@@ -176,7 +205,7 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
-              
+
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route
                 path="/order/:id"
@@ -188,11 +217,14 @@ function App() {
               ></Route>
 
             </Routes>
-            
+
           </Container>
         </main>
+        
+
       </div>
     </BrowserRouter>
+    
   );
 }
 
