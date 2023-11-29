@@ -24,15 +24,14 @@
 }
 /* En tu archivo CSS (por ejemplo, homeScreen.css) */
 
-.product-container {
-  border: 1px solid #ddd; /* Borde opcional para resaltar los límites de los productos */
-  padding: 10px; /* Espaciado interno para separar los productos */
-  cursor: pointer; 
-  /* Cambia el cursor al pasar sobre los productos */
+.product-image {
+  max-width: 70%; /* La imagen no superará el ancho del contenedor */
 }
 
 .product-container img {
-  max-width: 50%; /* Asegura que la imagen del producto no exceda el ancho del contenedor */
+  border: none; /* Elimina cualquier borde que se haya establecido anteriormente */
+
+  max-width: 70%; /* Asegura que la imagen del producto no exceda el ancho del contenedor */
 }
 .filter-container {
   margin-left: 90px; /* Ajusta el margen izquierdo según tus preferencias */

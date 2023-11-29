@@ -230,12 +230,21 @@ const FilterLogic = () => {
     ) : (
           <Row>
 {filteredProducts.map((product) => (
-  <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-    <div className="product-container" onClick={() => handleProductClick(product.slug)}>
-      {product.slug ? <Product product={product} /> : <p></p>}
-    </div>
-  </Col>
-))}
+              <Col key={product.slug} lg={3} className="mb-3">
+                <div
+                  onClick={() => handleProductClick(product.slug)}
+                  style={{
+                    // Aplica estilos de tamaño al div que contiene cada producto
+                    width: '250px', // Puedes ajustar según tus necesidades
+                    height: '350px', // Puedes ajustar según tus necesidades
+                    margin: '0 auto 60px', // Puedes ajustar según tus necesidades
+                  
+                  }}
+                >
+                  {product.slug ? <Product product={product} /> : <p></p>}
+                </div>
+              </Col>
+            ))}
           </Row>
         )}
       </div>
