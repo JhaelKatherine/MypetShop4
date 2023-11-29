@@ -127,16 +127,19 @@ const FilterLogic = () => {
   };
   
   const handleProductClick = (productSlug) => {
-    console.log("Clicked product slug:", productSlug);
+    const clickedElement = document.activeElement;
   
-    if (productSlug) {
-      // Actualizar la ruta solo cuando se hace clic en el producto
-      navigate(`/product/${productSlug}`);
-    } else {
-      console.error("Product slug is undefined");
-      // Puedes elegir realizar alguna acción o simplemente no hacer nada
+    if (clickedElement.classList.contains("btn-add-to-cart")) {
+      // Redirige solo si el clic no proviene del botón "Add to cart"
+      if (productSlug) {
+        navigate(`/product/${productSlug}`);
+      } else {
+        console.error("Product slug is undefined");
+        // Puedes elegir realizar alguna acción o simplemente no hacer nada
+      }
     }
   };
+  
   
   
   useEffect(() => {
@@ -229,6 +232,7 @@ const FilterLogic = () => {
     <p>We are sorry but there are no products in the selected category, please continue browsing for more products.</p>
     ) : (
           <Row>
+            
 {filteredProducts.map((product) => (
               <Col key={product.slug} lg={3} className="mb-3">
                 <div
@@ -242,6 +246,7 @@ const FilterLogic = () => {
                   }}
                 >
                   {product.slug ? <Product product={product} /> : <p></p>}
+                  
                 </div>
               </Col>
             ))}
