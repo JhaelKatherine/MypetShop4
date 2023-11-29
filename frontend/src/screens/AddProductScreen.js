@@ -34,13 +34,19 @@ export default function AddProductScreen() {
 
   const [availableBrands, setAvailableBrands] = useState([]);
   const [brandDisabled, setBrandDisabled] = useState(true);
+  const [brandOptions, setBrandOptions] = useState([]);
 
   const loadBrands = async () => {
     try {
       const response = await Axios.get(`/api/brands/${species}/${category}`);
       setAvailableBrands(response.data);
       setBrandDisabled(false); // Habilitar el campo Brand después de obtener las marcas
-      brandOptions();
+      setBrandOptions(
+        response.data.map((brand) => (
+          <option key={brand._id} value={brand.name}>
+            {brand.name}
+          </option>
+        )))
     } catch (error) {
       // Manejo de errores
       console.error('Error fetching brands:', error);
@@ -51,7 +57,7 @@ export default function AddProductScreen() {
     setCategory(e.target.value);
     if (category!==null && species!==null){
         loadBrands();
-
+        
     }
     setAvailableBrands([]); // Limpiar las marcas al cambiar la categoría
      // Deshabilitar el campo Brand al cambiar la categoría
@@ -67,19 +73,6 @@ export default function AddProductScreen() {
      // Deshabilitar el campo Brand al cambiar la especie
   };
   
-  useEffect(() => {
-     // Deshabilitar el campo Brand cuando cambie la categoría o especie
-    if (species && category) {
-      loadBrands();
-      brandOptions(); // Cargar las marcas si se han seleccionado animal y categoría
-    }
-  }, [species, category]);
-
-  const brandOptions = availableBrands.map((brand) => (
-    <option key={brand._id} value={brand.name}>
-      {brand.name}
-    </option>
-  ));
 
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
