@@ -39,7 +39,7 @@ app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
-app.use("/app/brands", brandRouter);
+app.use("/api/brands", brandRouter);
 
 app.post('/api/send-email', async (req, res) => {
   let { to, subject, html } = req.body;
