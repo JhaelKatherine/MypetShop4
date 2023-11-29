@@ -13,12 +13,12 @@ button {
 
 .left-section {
   flex: 1;
-  max-width: 90%;
+  max-width: 100%;
 }
 
 .right-section {
   flex: 1;
-  max-width: 90%;
+  max-width: 100%;
 }
 @keyframes fade {
   from {
