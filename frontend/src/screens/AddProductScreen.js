@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Axios from 'axios';
@@ -31,6 +31,33 @@ export default function AddProductScreen() {
   const [status, setStatus] = useState('');
 
   const [loadingUpload, setLoadingUpload] = useState(false);
+
+  const [availableBrands, setAvailableBrands] = useState([]);
+  const [brandDisabled, setBrandDisabled] = useState(true);
+
+  const loadBrands = async () => {
+    try {
+      const response = await Axios.get(`/api/brands/${species}/${category}`);
+      setAvailableBrands(response.data);
+      setBrandDisabled(false); // Habilitar el campo Brand después de obtener las marcas
+    } catch (error) {
+      // Manejo de errores
+      console.error('Error fetching brands:', error);
+    }
+  };
+
+  useEffect(() => {
+    setBrandDisabled(true); // Deshabilitar el campo Brand cuando cambie la categoría o especie
+    if (species && category) {
+      loadBrands(); // Cargar las marcas si se han seleccionado animal y categoría
+    }
+  }, [species, category]);
+
+  const brandOptions = availableBrands.map((brand) => (
+    <option key={brand._id} value={brand.name}>
+      {brand.name}
+    </option>
+  ));
 
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -298,28 +325,18 @@ export default function AddProductScreen() {
 
             <div className="form-group">
               <label htmlFor="brand">Brand</label>
-              <input
-                type="text"
+              <select
                 id="brand"
-                maxLength="50"
-                className="form-control"
-                value={brand}
-                onChange={(e) => {
-                  const inputValue = e.target.value;
-                  const trimmedValue = inputValue.trim();
-                
-                  const hasSpecialCharacters = /[+=-]/.test(inputValue);
-                
-                  if (
-                    !hasSpecialCharacters && 
-                    (trimmedValue !== '' || inputValue === '') 
-                  ) {
-                    setBrand(inputValue);
-                  }
-                }}
-                title="Please enter only letters" 
-                required
-              />
+                 maxLength="50"
+                 className="form-control"
+                 value={brand}
+                 onChange={(e) => setBrand(e.target.value)}
+                 disabled={!species || !category} // Deshabilitar si no se ha seleccionado animal o categoría
+                  required
+              >
+              <option value="">Select Brand</option>
+                {brandOptions}
+                </select>
             </div>
 
             <div className="form-group">

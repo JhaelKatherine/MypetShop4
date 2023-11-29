@@ -7,21 +7,14 @@ import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
-<<<<<<< HEAD
 import brandRouter from "./routes/brandRoutes.js";
-=======
 import nodemailer from "nodemailer";
->>>>>>> 0c6f5d6ca22ec86f856d98f1bc56cfc7378703f3
 
 dotenv.config();
 // "mongodb+srv://novateammypetshop:PNe5EGUIt2OHALOH@cluster0.n4sbjz1.mongodb.net/mern-amazona-app-db"
 mongoose
-<<<<<<< HEAD
-  .connect("mongodb+srv://novateammypetshop:PNe5EGUIt2OHALOH@cluster0.n4sbjz1.mongodb.net/mern-amazona-app-db")
-=======
 .connect(process.env.MONGODB_URI)
 
->>>>>>> 0c6f5d6ca22ec86f856d98f1bc56cfc7378703f3
   .then(() => {
     console.log("connected to db");
   })

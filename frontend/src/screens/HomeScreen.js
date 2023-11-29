@@ -6,7 +6,7 @@ import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import FilterLogic from "./FilterLogic"; // Importa tu nuevo componente
+import FilterLogic from "./FilterLogic";
 import { useNavigate } from 'react-router-dom';
 
 const reducer = (state, action) => {
