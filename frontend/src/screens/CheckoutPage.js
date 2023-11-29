@@ -333,7 +333,7 @@ const CheckoutPage = () => {
 
   return (
     <div className="checkout-page">
-      <div className="left-section">
+      <div className="left-section" style={{ width: '70%' }}>
       <div className="AppWrapper">
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
       <h1>Card Details</h1>
