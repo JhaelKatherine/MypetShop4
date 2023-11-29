@@ -209,7 +209,7 @@ const CheckoutPage = () => {
     };
   
     return paymentMethod ? (
-      <div className="Result">
+      <div className="Result" style={{ width: '100%', padding: '20px' }}>
         <div className="ResultTitle" role="alert">
           Payment successful
         </div>
@@ -333,7 +333,7 @@ const CheckoutPage = () => {
 
   return (
     <div className="checkout-page">
-      <div className="left-section" style={{ width: '70%' }}>
+      <div className="left-section">
       <div className="AppWrapper">
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
       <h1>Card Details</h1>
