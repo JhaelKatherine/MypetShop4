@@ -14,12 +14,12 @@
 
   }
   .centered-title {
-    text-align: center; /* Centrar el texto */
-    margin-top: 20px; /* Ajustar margen superior según sea necesario */
+    text-align: center; 
+    margin-top: 20px; 
   }
   .custom-option {
-    background-color: #333; /* Puedes ajustar el color de fondo aquí */
-    color: #fff; /* Puedes ajustar el color del texto aquí */
+    background-color: #333; 
+    color: #fff; 
   }
   
   .title {
@@ -83,7 +83,7 @@
     font-size: 16px;
   }
   .form-group{
-    margin-bottom: 15px; /* Agregar margen inferior entre los campos de texto */
+    margin-bottom: 15px; 
 
   }
   
@@ -98,10 +98,9 @@
     font-size: 16px;
     background-color: #4285F4;
     color: #fff;
-    display: block; /* Cambiar el botón a un elemento de bloque */
-  margin: 0 auto; /* Hacer que el margen horizontal sea automático para centrarlo */
-  margin-top: 13px;
-
+    display: block; 
+    margin: 0 auto; 
+    margin-top: 13px;
   }
   
   .google-button {
@@ -172,31 +171,33 @@
   
  
   .blue-background {
-    background-color: #C9D4DB; /* Cambiar el color de fondo a azul */
-    padding: 20px; /* Opcional: agregar padding al contenedor */
-    border-radius: 15px; /* Añadir bordes redondos */
-    max-width: 700px; /* Establecer un ancho máximo para hacerlo más pequeño */
-    margin: 0 auto; /* Centrar horizontalmente */
+    background-color: #C9D4DB; 
+    padding: 20px; 
+    border-radius: 15px; 
+    max-width: 700px; 
+    margin: 0 auto; 
+    margin-bottom : 200px;
+    margin-top : 100px;
   }
   .mb-3 {
-    text-align: center; /* Centrar el texto */
+    text-align: center; 
     margin: 0 auto;
   }
   
   .mb-3 .signin a {
-    color: royalblue; /* Cambiar el color del texto "Sign-In" a azul */
+    color: royalblue; 
   }
   
   .form-group {
-    margin-bottom: 20px; /* Aumentar el margen inferior entre grupos */
+    margin-bottom: 20px; 
   }
   
-  /* Opción 1: Agregar margen inferior a los elementos individuales */
+  
   .form-group label,
   .form-group input {
-    margin-bottom: 10px; /* Ajustar el margen inferior de etiquetas y campos de entrada */
+    margin-bottom: 10px; 
   }
   
   .add-space {
-    margin-left: 8px; /* Ajusta el valor según sea necesario */
+    margin-left: 8px; 
   }

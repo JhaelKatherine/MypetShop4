@@ -39,7 +39,7 @@ export default function CartScreen() {
   };
 
   return (
-    <div>
+    <div style={{ marginBottom: '400px' }}>
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>
