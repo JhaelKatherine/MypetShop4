@@ -113,7 +113,7 @@ const fetchAllProducts = async () => {
     const products = response.data;
     setFilteredProducts(products);
     setFilterApplied(products.length === 0);
-      fetchProductsByCategoryAndSpecies(species, category);
+      fetchProductsByCategoryAndSpecies(selectedSpecies, selectedCategory);
   } catch (error) {
     console.error('Error fetching all products:', error);
     setFilteredProducts([]);
