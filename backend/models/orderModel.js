@@ -42,28 +42,6 @@ const orderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-orderSchema.pre('save', async function (next) {
-  try {
-    if (!this.isNew) {
-      return next();
-    }
-
-    if (this.user) {
-      const latestOrderForUser = await this.constructor
-        .findOne({ user: this.user }, {}, { sort: { NumberProduct: -1 } });
-
-      if (latestOrderForUser) {
-        this.NumberProduct = latestOrderForUser.NumberProduct + 1;
-      } else {
-        this.NumberProduct = 1;
-      }
-    }
-
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
 
 
 
