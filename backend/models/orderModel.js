@@ -42,6 +42,27 @@ const orderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+orderSchema.pre('save', async function (next) {
+  try {
+    if (!this.NumberProduct) {
+      // Obtener el último NumberProduct para este usuario
+      const lastOrder = await this.constructor
+        .findOne({ user: this.user }, {}, { sort: { NumberProduct: -1 } })
+        .exec();
+
+      if (lastOrder) {
+        this.NumberProduct = lastOrder.NumberProduct + 1;
+      } else {
+        // Si es la primera orden para este usuario, asignar 1
+        this.NumberProduct = 1;
+      }
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 
 
