@@ -51,7 +51,7 @@ export default function OrderScreen() {
         const { data } = await axios.get(`/api/orders/${orderId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` }
         });
-        console.log('Order Data:', data); // Agrega esta línea
+        console.log('Order Data:', data); // Agrega s línea
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -74,7 +74,8 @@ export default function OrderScreen() {
       </Helmet>
       <h2 className="my-3"> Information about your order </h2>
       <h6>
-  <span style={{ fontWeight: 'bold' }}>ID:</span> {orderId}
+      <span style={{ fontWeight: 'bold' }}>ID:</span> Order {' '}{order.NumberProduct}
+
 </h6>
 <h6>
   <span style={{ fontWeight: 'bold' }}>Date:</span>{' '}
