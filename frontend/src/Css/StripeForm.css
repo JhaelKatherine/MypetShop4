@@ -10,16 +10,15 @@ button {
   display: flex;
   max-width: -10000px;
   padding: 0 0px; 
+  margin: 0 auto;
 }
 
 .left-section {
   flex: 1;
-  max-width: 100%;
 }
 
 .right-section {
   flex: 1;
-  max-width: 100%;
 }
 @keyframes fade {
   from {

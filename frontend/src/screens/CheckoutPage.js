@@ -209,7 +209,7 @@ const CheckoutPage = () => {
     };
   
     return paymentMethod ? (
-      <div className="Result" style={{ width: '100%', padding: '20px' }}>
+      <div className="Result">
         <div className="ResultTitle" role="alert">
           Payment successful
         </div>
