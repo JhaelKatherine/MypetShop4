@@ -57,7 +57,7 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
   };
   
   const filterProductsByBrand = (selectedBrands) => {
-    if (notMatchingProducts.length > 0){
+    if (productsNotMatchingFilters.length > 0){
       productsNotMatchingFilters.forEach((product) => {
         filteredProducts.push(product);
       });
@@ -71,7 +71,7 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
 
   const handleResetBrands= () => {
       setSelectedBrands([]);
-      if (notMatchingProducts.length > 0){
+      if (productsNotMatchingFilters.length > 0){
         productsNotMatchingFilters.forEach((product) => {
           filteredProducts.push(product);
         });
