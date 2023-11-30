@@ -42,7 +42,7 @@ export default function AddProductScreen() {
     try {
       const {response} = await Axios.get(`/api/brands/animal/${species}/category/${category}`);
       setAvailableBrands(response.data);
-      console.log("Esto es lo que esta recuperando de la BD DATA : ", availableBrands.data)
+      
       console.log("Esto es lo que esta recuperando de la BD: ", availableBrands)
       setBrandDisabled(false); 
       setBrandOptions(
@@ -59,24 +59,23 @@ export default function AddProductScreen() {
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
-    if (category!==null && species!==null){
-        loadBrands();
-
-    }
-    setAvailableBrands([]); // Limpiar las marcas al cambiar la categoría
+  
+     // Limpiar las marcas al cambiar la categoría
      // Deshabilitar el campo Brand al cambiar la categoría
   };
 
   const handleSpeciesChange = (e) => {
     setSpecies(e.target.value);
- if (category!==null && species!==null){
-        loadBrands();
-        
-    }
-    setAvailableBrands([]); // Limpiar las marcas al cambiar la especie
+     // Limpiar las marcas al cambiar la especie
      // Deshabilitar el campo Brand al cambiar la especie
   };
-  
+
+  useEffect(() => {
+    if (category !== null && species !== null) {
+      loadBrands();
+    }
+    setAvailableBrands([]);
+  }, [category, species]);
 
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
