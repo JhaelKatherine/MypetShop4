@@ -127,7 +127,7 @@ export default function ShippingAddressScreen() {
 
 
   return (
-    <div className="container">
+    <div className="container" style={{ marginBottom: '200px' }}>
       <div className="row">
         <div className="col-md-6">
           <div className="small-container">

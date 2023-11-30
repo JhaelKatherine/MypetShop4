@@ -1,44 +1,46 @@
 .image-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 60px;
-    height: 65px;
-    margin-right: 30px;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    width: 20px;
+    height: 35px;
+    margin-right: 35px;
     border-radius: 10px;
     margin-left: 20px;
-    transition: background-color 0.3s; /* Agregamos una transición de color para que sea suave */
+    transition: background-color 0.3s; 
 }
 
 .button-content {
-    margin-top: 5px;
-
+  margin-top: 1px;
+  margin-bottom: 0px;
+  font-size: 14px;
 }
 
 .button-container {
-    
+    margin-bottom: 0px;
     display: flex;
-    margin-bottom: 45px;
+    width: 100%;
     justify-content: center;
-
-
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
 }
-/* En tu archivo CSS (por ejemplo, homeScreen.css) */
+
 
 .product-image {
-  max-width: 70%; /* La imagen no superará el ancho del contenedor */
+  max-width: 70%; 
 }
 
 .product-container img {
-  border: none; /* Elimina cualquier borde que se haya establecido anteriormente */
+  border: none; 
 
-  max-width: 70%; /* Asegura que la imagen del producto no exceda el ancho del contenedor */
+  max-width: 70%; 
 }
 .filter-container {
-  margin-left: 90px; /* Ajusta el margen izquierdo según tus preferencias */
-  margin-right: 90px; /* Ajusta el margen derecho según tus preferencias */
+  margin-left: 0px; 
+  margin-right: 0px; 
 }
 
-/* Ajusta el tamaño del texto y otros estilos según sea necesario */
+
 .product-details {
   font-size: 14px;
   color: #333;
@@ -56,7 +58,7 @@
 }
 
 .button-container button:hover {
-    background-color: #87CEFA; /* Cambiamos el color al azul celeste cuando el ratón está encima */
+    background-color: #87CEFA; 
 }
 
 .button-container {
@@ -81,64 +83,61 @@
 .image-container {
     display: flex;
     justify-content: center;
-    
-    margin-top: 20px; /* Ajusta el espacio según sea necesario */
+    margin-top: 15px; 
   }
   
   .image-container img {
     width: 100%;
-    margin-left: 20px; /* El ancho de la imagen será el 100% del contenedor */
-    max-width: 9100px; /* Ancho máximo de la imagen, ajusta según sea necesario */
-    height: auto; /* Altura automática para mantener la proporción */
-    margin: 10px; /* Ajusta el margen según sea necesario */
+    margin-left: 20px; 
+    max-width: 9100px; 
+    height: auto; 
+    margin: 10px; 
   }
   
   @media (max-width: 768px) {
     .image-container img {
-      max-width: 100%; /* Ajusta el ancho máximo para pantallas más pequeñas */
+      max-width: 100%; 
     }
   }
 
-  /* styles.css (o el nombre que prefieras) */
-
-/* Estilos para el contenedor de los botones de categoría de mascotas */
+ 
 .category-Pets-buttons-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 20px; /* Ajusta según sea necesario */
+    margin-top: 20px; 
     flex-wrap: wrap;
 
   }
   
-  /* Estilos para cada botón de categoría de mascotas */
+ 
   .category-Pet-button {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    margin-bottom: 10px; /* Espacio entre botones */
+    margin-bottom: 10px; 
 
   }
   
-  /* Estilos para el contenido dentro de cada botón */
+  
   .button-Pet-content {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  /* Estilos para la imagen dentro de cada botón */
+  
   .button-Pet-content img {
-    width: 220px; /* Ajusta según sea necesario */
-    height: 220px; /* Ajusta según sea necesario */
+    width: 220px; 
+    height: 220px; 
     object-fit: cover;
     border-radius: 50%;
-    margin-bottom: 10px; /* Ajusta según sea necesario */
+    margin-bottom: 50px; 
   }
   
-  /* Estilos para el texto dentro de cada botón */
+  
   .button-Pet-content span {
-    font-size: 20px; /* Ajusta según sea necesario */
+    font-size: 20px; 
     font-weight: bold;
     text-align: center;
   }
@@ -149,56 +148,54 @@
     }
   
     .category-Pet-button {
-      flex-basis: 100%; /* Ocupa todo el ancho disponible */
+      flex-basis: 100%; 
     }
   }
 
-  /* Agrega estos estilos al CSS de tu componente Product */
-
-/* Estilos para el contenedor del producto */
+  
 .Card {
-  margin-bottom: 20px; /* Ajusta según sea necesario para evitar espacio en blanco entre productos */
+  margin-bottom: 20px; 
 }
 
-/* Estilos para la imagen dentro del producto */
+
 .card-img-top {
-  width: 100%; /* Ajusta según sea necesario */
-  height: auto; /* Altura automática para mantener la proporción */
+  width: 90%; 
+  height: auto; 
 }
 
-/* Estilos para el cuerpo del producto */
+
 .Card.Body {
-  text-align: center; /* Centra el texto dentro del cuerpo del producto */
+  text-align: center; 
 }
 
-/* Estilos para el botón del producto */
+
 .Button {
-  width: 100%; /* Ocupa todo el ancho del contenedor */
+  width: 100%; 
 }
 
 .button-container {
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea en pantallas pequeñas */
+  flex-wrap: wrap; 
 }
 
 .image-button {
   position: relative;
-  min-width: 150px; /* Establece el ancho mínimo para el botón */
-  flex: 1; /* Permite que los botones se distribuyan de manera equitativa y se estiren si es necesario */
-  max-width: 150px; /* Ancho máximo para evitar que los botones se estiren demasiado */
+  min-width: 150px; 
+  flex: 1; 
+  max-width: 150px; 
 }
 
 
 .subcategories {
   position: absolute;
-  top: 100%; /* Coloca las subcategorías justo debajo del botón principal */
+  top: 100%; 
   left: 0;
   display: flex;
   flex-direction: column;
-  background-color: white; /* Fondo blanco para las subcategorías */
-  border: 1px solid #ccc; /* Borde para las subcategorías */
+  background-color: white; 
+  border: 1px solid #ccc; 
   padding: 10px;
-  z-index: 1; /* Asegura que las subcategorías estén sobre los demás elementos */
-  width: max-content; /* Ancho máximo basado en el contenido */
+  z-index: 1; 
+  width: max-content; 
 }
 
 .subcategory-button {
@@ -207,9 +204,9 @@
   cursor: pointer;
   padding: 5px;
   text-align: left;
-  width: 100%; /* Ocupa todo el ancho disponible */
+  width: 100%; 
 }
 
 .subcategory-button:hover {
-  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el ratón sobre las subcategorías */
+  background-color: #f0f0f0; 
 }

@@ -8,6 +8,11 @@ button {
 }
 .checkout-page {
   display: flex;
+  max-width: -10000px;
+  padding: 0 0px; 
+  margin: -220px;
+  margin-bottom: 50px;
+  margin-top: 30px;
 }
 
 .left-section {
