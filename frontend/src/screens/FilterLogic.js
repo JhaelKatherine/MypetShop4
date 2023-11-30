@@ -75,7 +75,7 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
         productsNotMatchingFilters.forEach((product) => {
           filteredProducts.push(product);
         });
-  };
+  }};
   useEffect(() => {
     
     if (selectedSpecies && selectedCategory) {
