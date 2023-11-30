@@ -21,6 +21,8 @@ const FilterLogic = () => {
   const [updateCounter, setUpdateCounter] = useState(0);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [availableBrands, setAvailableBrands] = useState([]);
+  const [productsMatchingFilters, setProductsMatchingFilters] = useState([]);
+const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([]);
 
   const loadBrands = async () => {
     try {
@@ -42,27 +44,38 @@ const FilterLogic = () => {
     if (index === -1) {
       console.log("Me estoy activando");
       updatedSelectedBrands = [...selectedBrands, brand];
-      
     } else {
       console.log("Me estoy desactivando");
       updatedSelectedBrands.splice(index, 1);
-      
     }
-    if (filteredProducts.length > 0) {
-      fetchAllProducts();
-      applyBrandFilter();
-    }
-    
-    
-  };
-
   
+    if (filteredProducts.length > 0) {
+      filterProductsByBrand(updatedSelectedBrands);
+    }else {
+      handleResetBrands();
+    }
+  };
+  
+  const filterProductsByBrand = (selectedBrands) => {
+    if (notMatchingProducts.length > 0){
+      productsNotMatchingFilters.forEach((product) => {
+        filteredProducts.push(product);
+      });
+    }
+    const notMatchingProducts = filteredProducts.filter(product =>
+      !selectedBrands.includes(product.brand)
+    );
+    setProductsNotMatchingFilters(notMatchingProducts);
+  };
 
 
   const handleResetBrands= () => {
       setSelectedBrands([]);
-      applyBrandFilter();
-  }
+      if (notMatchingProducts.length > 0){
+        productsNotMatchingFilters.forEach((product) => {
+          filteredProducts.push(product);
+        });
+  };
   useEffect(() => {
     
     if (selectedSpecies && selectedCategory) {
@@ -102,24 +115,6 @@ const applyBrandFilter = () => {
   }
   
 };
-
-const fetchAllProducts = async () => {
-  console.log("Fetcheando los productos");
-
-    console.log("categoy : ",selectedCategory);
-    console.log("species : ",selectedSpecies);
-  try {
-    const response = await axios.get(`/api/products/category/${selectedCategory}/species/${selectedSpecies}`);
-    const products = response.data;
-    setFilteredProducts(products);
-    setFilterApplied(products.length === 0);
-      fetchProductsByCategoryAndSpecies(selectedSpecies, selectedCategory);
-  } catch (error) {
-    console.error('Error fetching all products:', error);
-    setFilteredProducts([]);
-  }
-};
-
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.trim());
     setSelectedSpecies(null);
@@ -136,8 +131,7 @@ const fetchAllProducts = async () => {
   const handleSubCategoryClick = async (subCategory) => {
     const [category, species] = subCategory.split(' ');
   
-    
-  
+
     setSelectedCategory(category);
     setSelectedSpecies(species);
   
