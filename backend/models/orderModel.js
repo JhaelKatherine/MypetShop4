@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema(
   {
+    NumberProduct: { type: Number, default: 1 },  // Nuevo campo que se incrementará automáticamente
     orderItems: [
       {
         slug: { type: String, required: false },
@@ -41,23 +42,24 @@ const orderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+// Middleware para incrementar automáticamente el campo "NumberProduct" al crear una nueva orden
+orderSchema.pre('save', async function (next) {
+  try {
+    if (!this.isNew) {
+      return next();
+    }
 
-// Middleware para incrementar el orderID antes de guardar
-orderSchema.pre('save', function (next) {
-  // 'this' hace referencia a la instancia actual del documento
-  if (!this.orderID) {
-    // Incrementar el orderID en 1
-    Order.countDocuments({}, (err, count) => {
-      if (err) {
-        return next(err);
-      }
-      this.orderID = count + 1;
-      next();
-    });
-  } else {
+    const latestOrder = await this.constructor.findOne({}, {}, { sort: { NumberProduct: -1 } });
+    if (latestOrder) {
+      this.NumberProduct = latestOrder.NumberProduct + 1;
+    }
+
     next();
+  } catch (error) {
+    next(error);
   }
 });
+
 
 const Order = mongoose.model('Order', orderSchema);
 export default Order;
