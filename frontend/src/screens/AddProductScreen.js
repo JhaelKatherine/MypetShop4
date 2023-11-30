@@ -37,16 +37,12 @@ export default function AddProductScreen() {
   const [brandOptions, setBrandOptions] = useState([]);
 
   const loadBrands = async () => {
-    console.log("antes de hacer el await axios.get, species: ",species);
-    console.log("antes de hacer el await axios.get, category: ",category);
     try {
       const response = await Axios.get(`/api/brands/animal/${species}/category/${category}/brands`);
-      const brandsData = response.data; // Suponiendo que la respuesta es un array de marcas
+      const brandsData = response.data;
 
     setAvailableBrands(brandsData);
 
-      console.log("Esto es lo que esta recuperando de la BD availableBRands: ", availableBrands)
-      console.log("Esto es lo que esta recuperando de la BD brandsData: ", brandsData)
       setBrandDisabled(false); 
       setBrandOptions( brandsData.map((brand) => (
         <option key={brand} value={brand}>
@@ -54,7 +50,7 @@ export default function AddProductScreen() {
         </option>
       )))
     } catch (error) {
-      // Manejo de errores
+      
       console.error('Error fetching brands:', error);
     }
   };
@@ -62,14 +58,12 @@ export default function AddProductScreen() {
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   
-     // Limpiar las marcas al cambiar la categoría
-     // Deshabilitar el campo Brand al cambiar la categoría
+     
   };
 
   const handleSpeciesChange = (e) => {
     setSpecies(e.target.value);
-     // Limpiar las marcas al cambiar la especie
-     // Deshabilitar el campo Brand al cambiar la especie
+     
   };
 
   useEffect(() => {

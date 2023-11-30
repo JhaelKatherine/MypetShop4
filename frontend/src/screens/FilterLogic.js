@@ -19,6 +19,100 @@ const FilterLogic = () => {
   const location = useLocation();
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [updateCounter, setUpdateCounter] = useState(0);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [availableBrands, setAvailableBrands] = useState([]);
+
+  const loadBrands = async () => {
+    try {
+      const response = await axios.get(`/api/brands/animal/${selectedCategory}/category/${selectedSpecies}/brands`);
+      const brandsData = response.data;
+      console.log("selectedSpecies : ", selectedSpecies);
+      console.log("Category :", selectedCategory);
+      setAvailableBrands(brandsData);
+      
+    } catch (error) {
+      console.error('Error fetching brands:', error);
+    }
+  };
+
+  const handleBrandChange = (brand) => {
+    const index = selectedBrands.indexOf(brand);
+    let updatedSelectedBrands = [...selectedBrands];
+  
+    if (index === -1) {
+      // Agregar la marca seleccionada a la lista
+      updatedSelectedBrands = [...selectedBrands, brand];
+    } else {
+      // Remover la marca deseleccionada de la lista
+      updatedSelectedBrands.splice(index, 1);
+    }
+    if (filteredProducts.length > 0) {
+      applyBrandFilter();
+    }
+    
+    
+  };
+
+  
+
+
+  const handleResetBrands= () => {
+      setSelectedBrands([]);
+      applyBrandFilter();
+  }
+  useEffect(() => {
+    // Cargar marcas cuando cambie la especie y la categoría
+    if (selectedSpecies && selectedCategory) {
+      loadBrands();
+      setSelectedBrands([]); 
+    }
+  }, [selectedSpecies, selectedCategory]);
+
+  useEffect(() => {
+    // Cargar marcas cuando cambie la especie y la categoría
+    console.log("Brands Seleccionados actualizados:", selectedBrands);
+
+}, [selectedBrands]);
+
+useEffect(() => {
+  // Filtrar los productos cuando cambien las marcas seleccionadas
+  if (availableBrands.length > 0) {
+    if (selectedBrands.length > 0) {
+      const filteredProductsByBrands = filteredProducts.filter(product =>
+        selectedBrands.includes(product.brand)
+      );
+      setFilteredProducts(filteredProductsByBrands);
+    } else {
+      // Si no hay marcas seleccionadas, mostrar todos los productos originales
+      // o reiniciar el filtro según tu lógica original
+      // setFilteredProducts([...todos los productos originales]);
+      // o
+      // fetchProductsByCategoryAndSpecies(selectedCategory, selectedSpecies);
+    }
+  }
+}, [selectedBrands]);
+
+
+const applyBrandFilter = () => {
+  if (selectedBrands.length > 0) {
+    const filteredProductsByBrands = filteredProducts.filter(product =>
+      selectedBrands.includes(product.brand)
+    );
+    setFilteredProducts(filteredProductsByBrands);
+  }
+  // Si no hay marcas seleccionadas, mostrar todos los productos
+};
+
+const fetchAllProducts = async (category, species) => {
+  try {
+    const response = await axios.get(`/api/products/category/${category}/species/${species}`);
+    const products = response.data;
+    setFilteredProducts(products);
+  } catch (error) {
+    console.error('Error fetching all products:', error);
+    setFilteredProducts([]);
+  }
+};
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.trim());
@@ -225,6 +319,7 @@ const FilterLogic = () => {
               </div>
             )}
           </div>
+          
         ))}
       </label>
       <div className="products">
@@ -233,7 +328,9 @@ const FilterLogic = () => {
     ) : (
           <Row>
             
-{filteredProducts.map((product) => (
+{filteredProducts
+    .filter(product => availableBrands.length !== 0 || availableBrands.includes(product.brand))
+     .map((product) => (
               <Col key={product.slug} lg={3} className="mb-3">
                 <div
                   onClick={() => handleProductClick(product.slug)}
@@ -253,7 +350,26 @@ const FilterLogic = () => {
           </Row>
         )}
       </div>
+      <div>
+        <button onClick={handleResetBrands}>Clear All</button>
+        <h3>Brands:</h3>
+        
+        {availableBrands.map((brand) => (
+          <div key={brand}>
+            <input
+              type="checkbox"
+              id={brand}
+              name={brand}
+              checked={selectedBrands.includes(brand)}
+              onChange={() => handleBrandChange(brand)}
+              
+            />
+            <label htmlFor={brand}>{brand}</label>
+          </div>
+        ))}
+      </div>
     </div>
+    
   );
 };
 
