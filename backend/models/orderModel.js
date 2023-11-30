@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema(
   {
-    orderID: { type: Number, required: true, unique: true },
     orderItems: [
       {
         slug: { type: String, required: false },
@@ -43,7 +42,9 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
+// Middleware para incrementar el orderID antes de guardar
 orderSchema.pre('save', function (next) {
+  // 'this' hace referencia a la instancia actual del documento
   if (!this.orderID) {
     // Incrementar el orderID en 1
     Order.countDocuments({}, (err, count) => {
