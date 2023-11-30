@@ -10,7 +10,7 @@ button {
   display: flex;
   max-width: -10000px;
   padding: 0 0px; 
-  margin: 0 auto;
+  margin: -100 auto;
 }
 
 .left-section {
