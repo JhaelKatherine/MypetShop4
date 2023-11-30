@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Axios from 'axios';
@@ -31,6 +31,46 @@ export default function AddProductScreen() {
   const [status, setStatus] = useState('');
 
   const [loadingUpload, setLoadingUpload] = useState(false);
+
+  const [availableBrands, setAvailableBrands] = useState([]);
+  const [brandDisabled, setBrandDisabled] = useState(true);
+  const [brandOptions, setBrandOptions] = useState([]);
+
+  const loadBrands = async () => {
+    try {
+      const response = await Axios.get(`/api/brands/animal/${species}/category/${category}/brands`);
+      const brandsData = response.data;
+
+    setAvailableBrands(brandsData);
+
+      setBrandDisabled(false); 
+      setBrandOptions( brandsData.map((brand) => (
+        <option key={brand} value={brand}>
+          {brand}
+        </option>
+      )))
+    } catch (error) {
+      
+      console.error('Error fetching brands:', error);
+    }
+  };
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  
+     
+  };
+
+  const handleSpeciesChange = (e) => {
+    setSpecies(e.target.value);
+     
+  };
+
+  useEffect(() => {
+    if (species && category) {
+      loadBrands();
+    }
+  }, [species, category]);
 
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -264,7 +304,7 @@ export default function AddProductScreen() {
     id="category"
     className="form-control"
     value={category}
-    onChange={(e) => setCategory(e.target.value)}
+    onChange={handleCategoryChange}
     required
   >
     <option value="" className="custom-option">Select Category</option>
@@ -281,7 +321,7 @@ export default function AddProductScreen() {
     id="species"
     className="form-control"
     value={species}
-    onChange={(e) => setSpecies(e.target.value)}
+    onChange={handleSpeciesChange}
     required
   >
     <option value="" className="custom-option">Select Species</option>
@@ -298,28 +338,18 @@ export default function AddProductScreen() {
 
             <div className="form-group">
               <label htmlFor="brand">Brand</label>
-              <input
-                type="text"
+              <select
                 id="brand"
-                maxLength="50"
-                className="form-control"
-                value={brand}
-                onChange={(e) => {
-                  const inputValue = e.target.value;
-                  const trimmedValue = inputValue.trim();
-                
-                  const hasSpecialCharacters = /[+=-]/.test(inputValue);
-                
-                  if (
-                    !hasSpecialCharacters && 
-                    (trimmedValue !== '' || inputValue === '') 
-                  ) {
-                    setBrand(inputValue);
-                  }
-                }}
-                title="Please enter only letters" 
-                required
-              />
+                 maxLength="50"
+                 className="form-control"
+                 value={brand}
+                 onChange={(e) => setBrand(e.target.value)}
+                 disabled={!species || !category} 
+                  required
+              >
+              <option value="">Select Brand</option>
+                {brandOptions}
+                </select>
             </div>
 
             <div className="form-group">
