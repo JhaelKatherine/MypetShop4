@@ -40,13 +40,14 @@ export default function AddProductScreen() {
     console.log("antes de hacer el await axios.get, species: ",species);
     console.log("antes de hacer el await axios.get, category: ",category);
     try {
-      const response = await Axios.get(`/api/brands/animal/${species}/category/${category}`);
-      setAvailableBrands(response.data);
+      const response = await Axios.get(`/api/brands/animal/${species}/category/${category}/brands`);
+      const brandsData =response.data;
+      setAvailableBrands(brandsData);
       
-      console.log("Esto es lo que esta recuperando de la BD: ", availableBrands)
+      console.log("Esto es lo que esta recuperando de la BD: ", availableBrands.data)
       setBrandDisabled(false); 
       setBrandOptions(
-        response.data.map((brand) => (
+        availableBrands.data.map((brand) => (
           <option key={brand._id} value={brand.name}>
             {brand.name}
           </option>
@@ -71,11 +72,10 @@ export default function AddProductScreen() {
   };
 
   useEffect(() => {
-    if (category !== null && species !== null) {
+    if (species && category) {
       loadBrands();
     }
-    setAvailableBrands([]);
-  }, [category, species]);
+  }, [species, category]);
 
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;

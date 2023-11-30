@@ -14,14 +14,14 @@ const brandRouter = express.Router();
 
 
 
- brandRouter.get('/animal/:animal/category/:category',async (req, res) => {
+ brandRouter.get('/animal/:animal/category/:category/brands',async (req, res) => {
    //console.log("Parametros: ", animal, category);
    const { animal, category } = req.params;
    
    
    //console.log("Parametros: ", animal, category);
     try {
-      const brands = await Brand.find({ animal, category });
+      const brands = await Brand.distinct('brands', { animal, category });
       res.json(brands);
     } catch (error) {
       res.status(500).send({ message: 'An error occurred while obtaining brands.' });
