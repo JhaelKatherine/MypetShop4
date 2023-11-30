@@ -105,13 +105,11 @@ const applyBrandFilter = () => {
 
 const fetchAllProducts = async () => {
   console.log("Fetcheando los productos");
-    const params = new URLSearchParams(location.search);
-    const category = params.get("category");
-    const species = params.get("species");
-    console.log("categoy : ",category);
-    console.log("species : ",species );
+
+    console.log("categoy : ",selectedCategory);
+    console.log("species : ",selectedSpecies);
   try {
-    const response = await axios.get(`/api/products/category/${category}/species/${species}`);
+    const response = await axios.get(`/api/products/category/${selectedCategory}/species/${selectedSpecies}`);
     const products = response.data;
     setFilteredProducts(products);
     setFilterApplied(products.length === 0);
