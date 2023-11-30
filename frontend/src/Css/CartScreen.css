@@ -1,17 +1,20 @@
-/* CartScreen.css */
+
 
 .cart-item-container {
     display: flex;
     align-items: center;
+    margin-top: 0px; 
   }
   
   .cart-item-image {
-    max-width: 270px; /* Puedes ajustar el tamaño según tus necesidades */
-    margin-right: 20px; /* Ajusta el espacio entre la imagen y el texto */
+    max-width: 270px; 
+    margin-right: 20px; 
+    margin-top: 0px; 
   }
   
   .cart-item-description {
     flex-grow: 1;
+    margin-top: 0px;
   }
   
   .cart-item-buttons {
@@ -20,6 +23,6 @@
   }
   
   .cart-item-buttons button {
-    margin-right: 5px; /* Ajusta el espacio entre los botones */
+    margin-right: 5px; 
   }
   

@@ -133,7 +133,7 @@ function ProductScreen() {
   };
   
   return (
-    <div>
+    <div style={{ marginBottom: '200px' }}>
       <label htmlFor="toggleButtons" className="button-container" style={{ backgroundColor: buttonContainerColor }}>
 
       </label>

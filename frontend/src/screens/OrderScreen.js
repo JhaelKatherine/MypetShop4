@@ -51,7 +51,7 @@ export default function OrderScreen() {
         const { data } = await axios.get(`/api/orders/${orderId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` }
         });
-        console.log('Order Data:', data); // Agrega esta línea
+        console.log('Order Data:', data); // Agrega s línea
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -68,13 +68,14 @@ export default function OrderScreen() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div style={{ marginBottom: '400px' }}>
       <Helmet>
         <title>Order Details</title>
       </Helmet>
       <h2 className="my-3"> Information about your order </h2>
       <h6>
-  <span style={{ fontWeight: 'bold' }}>ID:</span> {orderId}
+      <span style={{ fontWeight: 'bold' }}>ID:</span> Order {' '}{order.NumberProduct}
+
 </h6>
 <h6>
   <span style={{ fontWeight: 'bold' }}>Date:</span>{' '}
@@ -107,10 +108,10 @@ export default function OrderScreen() {
                       <span>{item.quantity}</span>
                     </Col>
                     <Col md={2} className="text-left">
-                      ${item.price }
+                      ${' '}{item.price }
                     </Col>
                     <Col md={2} className="text-left">
-                      ${(item.price * item.quantity)}
+                      ${' '}{(item.price * item.quantity)}
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -128,7 +129,7 @@ export default function OrderScreen() {
         <ListGroup.Item>
           <Row>
             <Col className="text-left" style={{ textAlign: 'left' }}>Items</Col>
-            <Col className="text-right" style={{ textAlign: 'right' }}>${order.itemsPrice.toFixed(2)}</Col>
+            <Col className="text-right" style={{ textAlign: 'right' }}>${' '}{order.itemsPrice.toFixed(2)}</Col>
           </Row>
         </ListGroup.Item>
         <ListGroup.Item>
@@ -143,7 +144,7 @@ export default function OrderScreen() {
               <strong>Order Total</strong>
             </Col>
             <Col className="text-right" style={{ textAlign: 'right' }}>
-              <strong>${order.itemsPrice.toFixed(2)}</strong>
+              <strong>${' '}{order.itemsPrice.toFixed(2)}</strong>
             </Col>
           </Row>
         </ListGroup.Item>

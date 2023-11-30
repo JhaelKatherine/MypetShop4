@@ -27,6 +27,7 @@ const orderSchema = new mongoose.Schema(
       country: { type: String, required: false },
       cellPhone: { type: String, required: false },
     },
+    NumberProduct: { type: Number, required: false },  // Nuevo campo que se incrementará automáticamente
     itemsPrice: { type: Number, required: true },
     paymentMethod: { type: String, required: false },
     shippingPrice: { type: Number, required: false },
@@ -41,6 +42,27 @@ const orderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+orderSchema.pre('save', async function (next) {
+  try {
+    if (!this.NumberProduct) {
+      const lastOrder = await this.constructor
+        .findOne({ user: this.user }, {}, { sort: { NumberProduct: -1 } })
+        .exec();
+
+      if (lastOrder) {
+        this.NumberProduct = lastOrder.NumberProduct + 1;
+      } else {
+        this.NumberProduct = 1;
+      }
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 const Order = mongoose.model('Order', orderSchema);
 export default Order;
