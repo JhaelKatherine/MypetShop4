@@ -39,14 +39,18 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
 
   const handleBrandChange = (brand) => {
     const index = selectedBrands.indexOf(brand);
-    let updatedSelectedBrands = [...selectedBrands];
+    
   
-    if (index === -1) {
+    if (index !== -1) {
+      const updatedSelectedBrands = [...selectedBrands];
+    updatedSelectedBrands.splice(index, 1); // Elimina 1 elemento en la posición 'index'
+    setSelectedBrands(updatedSelectedBrands);
       console.log("Me estoy activando :", selectedBrands);
-      updatedSelectedBrands = [...selectedBrands, brand];
+      
     } else {
+      
+      setSelectedBrands([...selectedBrands, brand]);
       console.log("Me estoy desactivando", selectedBrands);
-      updatedSelectedBrands.splice(index, 1);
     }
   
     if (selectedBrands.length > 0) {
