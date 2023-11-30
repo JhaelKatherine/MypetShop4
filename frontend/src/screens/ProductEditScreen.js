@@ -87,7 +87,7 @@ export default function ProductEditScreen() {
    
   const loadBrands = async () => {
     try {
-      const response = await Axios.get(`/api/brands/animal/${category}/category/${species}/brands`);
+      const response = await axios.get(`/api/brands/animal/${category}/category/${species}/brands`);
       const brandsData = response.data;
 
     setAvailableBrands(brandsData);
