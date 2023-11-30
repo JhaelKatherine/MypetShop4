@@ -43,11 +43,11 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
     if (isSelected) {
       // Si la marca ya está seleccionada, eliminarla de la lista
       const updatedSelectedBrands = selectedBrands.filter(item => item !== brand);
-      setSelectedBrands(updatedSelectedBrands);
+      //setSelectedBrands(updatedSelectedBrands);
       console.log("Me estoy desactivando", selectedBrands);
     } else {
       // Si la marca no está seleccionada, agregarla a la lista
-      setSelectedBrands([...selectedBrands, brand]);
+      selectedBrands.push(brand);
       console.log("Me estoy activando :", selectedBrands);
     }
     
