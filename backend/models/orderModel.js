@@ -42,16 +42,21 @@ const orderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-// Middleware para incrementar automáticamente el campo "NumberProduct" al crear una nueva orden
 orderSchema.pre('save', async function (next) {
   try {
     if (!this.isNew) {
       return next();
     }
 
-    const latestOrder = await this.constructor.findOne({}, {}, { sort: { NumberProduct: -1 } });
-    if (latestOrder) {
-      this.NumberProduct = latestOrder.NumberProduct + 1;
+    if (this.user) {
+      const latestOrderForUser = await this.constructor
+        .findOne({ user: this.user }, {}, { sort: { NumberProduct: -1 } });
+
+      if (latestOrderForUser) {
+        this.NumberProduct = latestOrderForUser.NumberProduct + 1;
+      } else {
+        this.NumberProduct = 1;
+      }
     }
 
     next();
@@ -59,6 +64,7 @@ orderSchema.pre('save', async function (next) {
     next(error);
   }
 });
+
 
 
 const Order = mongoose.model('Order', orderSchema);
