@@ -42,14 +42,14 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
     let updatedSelectedBrands = [...selectedBrands];
   
     if (index === -1) {
-      console.log("Me estoy activando");
+      console.log("Me estoy activando :", selectedBrands.data);
       updatedSelectedBrands = [...selectedBrands, brand];
     } else {
-      console.log("Me estoy desactivando");
+      console.log("Me estoy desactivando", selectedBrands.data);
       updatedSelectedBrands.splice(index, 1);
     }
   
-    if (filteredProducts.length > 0) {
+    if (selectedBrands.length > 0) {
       filterProductsByBrand(updatedSelectedBrands);
     }else {
       handleResetBrands();
@@ -60,6 +60,7 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
     if (productsNotMatchingFilters.length > 0){
       productsNotMatchingFilters.forEach((product) => {
         filteredProducts.push(product);
+        setProductsNotMatchingFilters([]);
       });
     }
     const notMatchingProducts = filteredProducts.filter(product =>
@@ -75,6 +76,7 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
         productsNotMatchingFilters.forEach((product) => {
           filteredProducts.push(product);
         });
+        setProductsNotMatchingFilters([]);
   }};
   useEffect(() => {
     
