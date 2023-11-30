@@ -69,7 +69,6 @@ export default function ProductEditScreen() {
   const [description, setDescription] = useState('');
   const [loading2, setLoading] = useState(false);
   const [species, setSpecies] = useState(''); // Nueva variable para la especie
-  const [brandOptions, setBrandOptions] = useState([]);
 
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -84,31 +83,6 @@ export default function ProductEditScreen() {
       return false;
     }
   };
-   
-  const loadBrands = async () => {
-    try {
-      const response = await axios.get(`/api/brands/animal/${category}/category/${species}/brands`);
-      const brandsData = response.data;
-
-    setAvailableBrands(brandsData);
-
-      setBrandDisabled(false); 
-      setBrandOptions( brandsData.map((brand) => (
-        <option key={brand} value={brand}>
-          {brand}
-        </option>
-      )))
-    } catch (error) {
-      
-      console.error('Error fetching brands:', error);
-    }
-  };
-  
-  useEffect(() => {
-    if (species && category) {
-      loadBrands();
-    }
-  }, [species, category]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -342,20 +316,19 @@ export default function ProductEditScreen() {
   </select>
 </div>
 
-<div className="form-group">
+            <div className="form-group">
               <label htmlFor="brand">Brand</label>
-              <select
+              <input
+                type="text"
                 id="brand"
-                 maxLength="50"
-                 className="form-control"
-                 value={brand}
-                 onChange={(e) => setBrand(e.target.value)}
-                 disabled={!species || !category} 
-                  required
-              >
-              <option value="">Select Brand</option>
-                {brandOptions}
-                </select>
+                maxLength="50"
+                className="form-control"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+                pattern="[A-Za-z ]+" 
+                title="Please enter only letters" 
+                required
+              />
             </div>
             <div className="form-group">
               <label htmlFor="countInStock">Count In Stock</label>
