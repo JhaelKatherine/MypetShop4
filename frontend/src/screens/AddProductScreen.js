@@ -41,17 +41,18 @@ export default function AddProductScreen() {
     console.log("antes de hacer el await axios.get, category: ",category);
     try {
       const response = await Axios.get(`/api/brands/animal/${species}/category/${category}/brands`);
-      const brandsData =response.data;
-      setAvailableBrands(response.data);
-      
-      console.log("Esto es lo que esta recuperando de la BD: ", availableBrands)
+      const brandsData = response.data; // Suponiendo que la respuesta es un array de marcas
+
+    setAvailableBrands(brandsData);
+
+      console.log("Esto es lo que esta recuperando de la BD availableBRands: ", availableBrands.data)
+      console.log("Esto es lo que esta recuperando de la BD brandsData: ", brandsData.data)
       setBrandDisabled(false); 
-      setBrandOptions(
-        availableBrands.data.map((brand) => (
-          <option key={brand._id} value={brand.name}>
-            {brand.name}
-          </option>
-        )))
+      setBrandOptions = brandsData.map((brand) => (
+        <option key={brand} value={brand}>
+          {brand}
+        </option>
+      ))
     } catch (error) {
       // Manejo de errores
       console.error('Error fetching brands:', error);
