@@ -107,10 +107,10 @@ export default function OrderScreen() {
                       <span>{item.quantity}</span>
                     </Col>
                     <Col md={2} className="text-left">
-                      ${item.price }
+                      ${' '}{item.price }
                     </Col>
                     <Col md={2} className="text-left">
-                      ${(item.price * item.quantity)}
+                      ${' '}{(item.price * item.quantity)}
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -128,7 +128,7 @@ export default function OrderScreen() {
         <ListGroup.Item>
           <Row>
             <Col className="text-left" style={{ textAlign: 'left' }}>Items</Col>
-            <Col className="text-right" style={{ textAlign: 'right' }}>${order.itemsPrice.toFixed(2)}</Col>
+            <Col className="text-right" style={{ textAlign: 'right' }}>${' '}{order.itemsPrice.toFixed(2)}</Col>
           </Row>
         </ListGroup.Item>
         <ListGroup.Item>
@@ -143,7 +143,7 @@ export default function OrderScreen() {
               <strong>Order Total</strong>
             </Col>
             <Col className="text-right" style={{ textAlign: 'right' }}>
-              <strong>${order.itemsPrice.toFixed(2)}</strong>
+              <strong>${' '}{order.itemsPrice.toFixed(2)}</strong>
             </Col>
           </Row>
         </ListGroup.Item>
