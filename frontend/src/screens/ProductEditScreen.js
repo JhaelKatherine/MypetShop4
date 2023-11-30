@@ -70,7 +70,9 @@ export default function ProductEditScreen() {
   const [loading2, setLoading] = useState(false);
   const [species, setSpecies] = useState(''); // Nueva variable para la especie
   const [brandOptions, setBrandOptions] = useState([]);
-
+  const [availableBrands, setAvailableBrands] = useState([]);
+  const [brandDisabled, setBrandDisabled] = useState(true);
+  
   const isValidImageUrl = (url) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     return urlRegex.test(url);
