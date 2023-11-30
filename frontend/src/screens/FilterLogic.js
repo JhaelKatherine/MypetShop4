@@ -111,7 +111,7 @@ const fetchAllProducts = async () => {
     console.log("categoy : ",category);
     console.log("species : ",species );
   try {
-    const response = await axios.get(`/api/products/category/${species}/species/${category}`);
+    const response = await axios.get(`/api/products/category/${category}/species/${species}`);
     const products = response.data;
     setFilteredProducts(products);
     setFilterApplied(products.length === 0);
