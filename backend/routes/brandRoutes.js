@@ -4,14 +4,31 @@ import Brand from '../models/brandsModel.js';
 
 const brandRouter = express.Router();
 
-brandRouter.get('/brands/:animal/:category', expressAsyncHandler(async (req, res) => {
-  const { animal, category } = req.params;
-  try {
-    const brands = await Brand.find({ animal, category });
-    res.json(brands);
-  } catch (error) {
-    res.status(500).send({ message: 'An error occurred while obtaining brands.' });
-  }
-}));
+// brandRouter.get('/animal/:animal/category/:category', async (req, res) => {
+//   const animal = req.params.animal;
+//   const category = req.params.category;
+//   res.send(`El animal recibido es: ${animal}`);
+// });
+
+
+
+
+
+ brandRouter.get('/animal/:animal/category/:category',async (req, res) => {
+   //console.log("Parametros: ", animal, category);
+   const { animal, category } = req.params;
+   
+   
+   //console.log("Parametros: ", animal, category);
+    try {
+      const brands = await Brand.find({ animal, category });
+      res.json(brands);
+    } catch (error) {
+      res.status(500).send({ message: 'An error occurred while obtaining brands.' });
+    }
+ });
+
+
+
 export default brandRouter;
 

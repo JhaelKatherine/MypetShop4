@@ -37,10 +37,12 @@ export default function AddProductScreen() {
   const [brandOptions, setBrandOptions] = useState([]);
 
   const loadBrands = async () => {
+    console.log("antes de hacer el await axios.get, species and category: ",species,category);
     try {
-      const response = await Axios.get(`/api/brands/${species}/${category}`);
+      const response = await Axios.get(`/api/brands/animal/${species}/category/${category}`);
       setAvailableBrands(response.data);
-      setBrandDisabled(false); // Habilitar el campo Brand después de obtener las marcas
+      console.log("Esto es lo que esta recuperando de la BD: ", availableBrands)
+      setBrandDisabled(false); 
       setBrandOptions(
         response.data.map((brand) => (
           <option key={brand._id} value={brand.name}>
@@ -57,7 +59,7 @@ export default function AddProductScreen() {
     setCategory(e.target.value);
     if (category!==null && species!==null){
         loadBrands();
-        
+
     }
     setAvailableBrands([]); // Limpiar las marcas al cambiar la categoría
      // Deshabilitar el campo Brand al cambiar la categoría
