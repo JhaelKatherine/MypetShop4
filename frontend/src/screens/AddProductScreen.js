@@ -344,7 +344,7 @@ export default function AddProductScreen() {
                  className="form-control"
                  value={brand}
                  onChange={(e) => setBrand(e.target.value)}
-                 disabled={!species || !category} // Deshabilitar si no se ha seleccionado animal o categoría
+                 disabled={!species || !category} 
                   required
               >
               <option value="">Select Brand</option>
