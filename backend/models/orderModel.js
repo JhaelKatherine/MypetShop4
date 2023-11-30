@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema(
   {
+    orderID: { type: Number, required: true, unique: true },
     orderItems: [
       {
         slug: { type: String, required: false },
@@ -41,6 +42,21 @@ const orderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+orderSchema.pre('save', function (next) {
+  if (!this.orderID) {
+    // Incrementar el orderID en 1
+    Order.countDocuments({}, (err, count) => {
+      if (err) {
+        return next(err);
+      }
+      this.orderID = count + 1;
+      next();
+    });
+  } else {
+    next();
+  }
+});
 
 const Order = mongoose.model('Order', orderSchema);
 export default Order;
