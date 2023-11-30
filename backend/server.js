@@ -13,13 +13,10 @@ import nodemailer from "nodemailer";
 dotenv.config();
 // "mongodb+srv://novateammypetshop:PNe5EGUIt2OHALOH@cluster0.n4sbjz1.mongodb.net/mern-amazona-app-db"
 //process.env.MONGODB_URI
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> f6a9b9b7593cffdd64c1919c5338ce677a9cd012
 mongoose
 .connect(process.env.MONGODB_URI)
 
