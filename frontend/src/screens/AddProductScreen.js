@@ -37,10 +37,12 @@ export default function AddProductScreen() {
   const [brandOptions, setBrandOptions] = useState([]);
 
   const loadBrands = async () => {
-    console.log("antes de hacer el await axios.get, species and category: ",species,category);
+    console.log("antes de hacer el await axios.get, species: ",species);
+    console.log("antes de hacer el await axios.get, category: ",category);
     try {
       const response = await Axios.get(`/api/brands/animal/${species}/category/${category}`);
       setAvailableBrands(response.data);
+      console.log("Esto es lo que esta recuperando de la BD DATA : ", availableBrands.data)
       console.log("Esto es lo que esta recuperando de la BD: ", availableBrands)
       setBrandDisabled(false); 
       setBrandOptions(
