@@ -43,7 +43,7 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
   
     if (index !== -1) {
       const updatedSelectedBrands = [...selectedBrands];
-    updatedSelectedBrands.splice(index, 1); // Elimina 1 elemento en la posición 'index'
+    updatedSelectedBrands.splice(index, 1);
     setSelectedBrands(updatedSelectedBrands);
       console.log("Me estoy activando :", selectedBrands);
       
@@ -54,7 +54,7 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
     }
   
     if (selectedBrands.length > 0) {
-      filterProductsByBrand(updatedSelectedBrands);
+      filterProductsByBrand(selectedBrands);
     }else {
       handleResetBrands();
     }
