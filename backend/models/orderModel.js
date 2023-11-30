@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema(
   {
-    NumberProduct: { type: Number, default: 1 },  // Nuevo campo que se incrementará automáticamente
     orderItems: [
       {
         slug: { type: String, required: false },
@@ -28,6 +27,7 @@ const orderSchema = new mongoose.Schema(
       country: { type: String, required: false },
       cellPhone: { type: String, required: false },
     },
+    NumberProduct: { type: Number, default: 1 },  // Nuevo campo que se incrementará automáticamente
     itemsPrice: { type: Number, required: true },
     paymentMethod: { type: String, required: false },
     shippingPrice: { type: Number, required: false },
