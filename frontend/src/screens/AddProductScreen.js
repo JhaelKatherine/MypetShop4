@@ -45,14 +45,14 @@ export default function AddProductScreen() {
 
     setAvailableBrands(brandsData);
 
-      console.log("Esto es lo que esta recuperando de la BD availableBRands: ", availableBrands.data)
-      console.log("Esto es lo que esta recuperando de la BD brandsData: ", brandsData.data)
+      console.log("Esto es lo que esta recuperando de la BD availableBRands: ", availableBrands)
+      console.log("Esto es lo que esta recuperando de la BD brandsData: ", brandsData)
       setBrandDisabled(false); 
-      setBrandOptions = brandsData.map((brand) => (
+      setBrandOptions( brandsData.map((brand) => (
         <option key={brand} value={brand}>
           {brand}
         </option>
-      ))
+      )))
     } catch (error) {
       // Manejo de errores
       console.error('Error fetching brands:', error);
