@@ -38,24 +38,25 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
   };
 
   const handleBrandChange = (brand) => {
-    const index = selectedBrands.indexOf(brand);
     
-  
-    if (index !== -1) {
-      const updatedSelectedBrands = [...selectedBrands];
-    updatedSelectedBrands.splice(index, 1);
-    setSelectedBrands(updatedSelectedBrands);
-      console.log("Me estoy activando :", selectedBrands);
-      
-    } else {
-      
-      setSelectedBrands([...selectedBrands, brand]);
+    const isSelected = selectedBrands.includes(brand);
+    if (isSelected) {
+      // Si la marca ya está seleccionada, eliminarla de la lista
+      const updatedSelectedBrands = selectedBrands.filter(item => item !== brand);
+      setSelectedBrands(updatedSelectedBrands);
       console.log("Me estoy desactivando", selectedBrands);
+    } else {
+      // Si la marca no está seleccionada, agregarla a la lista
+      setSelectedBrands([...selectedBrands, brand]);
+      console.log("Me estoy activando :", selectedBrands);
     }
-  
+    
+    console.log("Vista general selectedBrands: ", selectedBrands);
     if (selectedBrands.length > 0) {
+      console.log("Aplicando filtros ...");
       filterProductsByBrand(selectedBrands);
     }else {
+      console.log("reseteando brands")
       handleResetBrands();
     }
   };
