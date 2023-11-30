@@ -76,7 +76,7 @@ export default function OrderHistoryScreen() {
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.createdAt ? format(new Date(order.createdAt), 'yyyy-MM-dd') : 'Invalid Date'}</td>       
-                <td>${order.itemsPrice ? order.itemsPrice.toFixed(2) : 'N/A'}</td>    
+                <td>${' '}{order.itemsPrice ? order.itemsPrice.toFixed(2) : 'N/A'}</td>    
                 <td>
                   <Button
                     type="button"
