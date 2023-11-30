@@ -42,10 +42,10 @@ const [productsNotMatchingFilters, setProductsNotMatchingFilters] = useState([])
     let updatedSelectedBrands = [...selectedBrands];
   
     if (index === -1) {
-      console.log("Me estoy activando :", selectedBrands.data);
+      console.log("Me estoy activando :", selectedBrands);
       updatedSelectedBrands = [...selectedBrands, brand];
     } else {
-      console.log("Me estoy desactivando", selectedBrands.data);
+      console.log("Me estoy desactivando", selectedBrands);
       updatedSelectedBrands.splice(index, 1);
     }
   
