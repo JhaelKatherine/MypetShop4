@@ -40,13 +40,16 @@ const FilterLogic = () => {
     let updatedSelectedBrands = [...selectedBrands];
   
     if (index === -1) {
-      // Agregar la marca seleccionada a la lista
+      console.log("Me estoy activando");
       updatedSelectedBrands = [...selectedBrands, brand];
+      
     } else {
-      // Remover la marca deseleccionada de la lista
+      console.log("Me estoy desactivando");
       updatedSelectedBrands.splice(index, 1);
+      
     }
     if (filteredProducts.length > 0) {
+      fetchAllProducts();
       applyBrandFilter();
     }
     
@@ -61,7 +64,7 @@ const FilterLogic = () => {
       applyBrandFilter();
   }
   useEffect(() => {
-    // Cargar marcas cuando cambie la especie y la categoría
+    
     if (selectedSpecies && selectedCategory) {
       loadBrands();
       setSelectedBrands([]); 
@@ -69,13 +72,13 @@ const FilterLogic = () => {
   }, [selectedSpecies, selectedCategory]);
 
   useEffect(() => {
-    // Cargar marcas cuando cambie la especie y la categoría
+    
     console.log("Brands Seleccionados actualizados:", selectedBrands);
 
 }, [selectedBrands]);
 
 useEffect(() => {
-  // Filtrar los productos cuando cambien las marcas seleccionadas
+  
   if (availableBrands.length > 0) {
     if (selectedBrands.length > 0) {
       const filteredProductsByBrands = filteredProducts.filter(product =>
@@ -83,11 +86,7 @@ useEffect(() => {
       );
       setFilteredProducts(filteredProductsByBrands);
     } else {
-      // Si no hay marcas seleccionadas, mostrar todos los productos originales
-      // o reiniciar el filtro según tu lógica original
-      // setFilteredProducts([...todos los productos originales]);
-      // o
-      // fetchProductsByCategoryAndSpecies(selectedCategory, selectedSpecies);
+      
     }
   }
 }, [selectedBrands]);
@@ -100,14 +99,19 @@ const applyBrandFilter = () => {
     );
     setFilteredProducts(filteredProductsByBrands);
   }
-  // Si no hay marcas seleccionadas, mostrar todos los productos
+  
 };
 
-const fetchAllProducts = async (category, species) => {
+const fetchAllProducts = async () => {
+    const params = new URLSearchParams(location.search);
+    const category = params.get("category");
+    const species = params.get("species");
   try {
     const response = await axios.get(`/api/products/category/${category}/species/${species}`);
     const products = response.data;
     setFilteredProducts(products);
+    setFilterApplied(products.length === 0);
+      fetchProductsByCategoryAndSpecies(species, category);
   } catch (error) {
     console.error('Error fetching all products:', error);
     setFilteredProducts([]);
@@ -130,7 +134,7 @@ const fetchAllProducts = async (category, species) => {
   const handleSubCategoryClick = async (subCategory) => {
     const [category, species] = subCategory.split(' ');
   
-    // Antes de llamar a axios.get, inicia la actualización de la URL
+    
   
     setSelectedCategory(category);
     setSelectedSpecies(species);
@@ -244,10 +248,10 @@ const fetchAllProducts = async (category, species) => {
     console.log('useEffect - category:', category, 'species:', species);
   
     if (category || species) {
-      // Filtrar productos cuando la URL tenga parámetros de filtro
+      
       handleSubCategoryClick(`${species} ${category}`);
     } else {
-      // En caso contrario, resetear los filtros
+      
       handleResetFilter();
     }
   }, [location.search]);
@@ -335,10 +339,10 @@ const fetchAllProducts = async (category, species) => {
                 <div
                   onClick={() => handleProductClick(product.slug)}
                   style={{
-                    // Aplica estilos de tamaño al div que contiene cada producto
-                    width: '250px', // Puedes ajustar según tus necesidades
-                    height: '350px', // Puedes ajustar según tus necesidades
-                    margin: '0 auto 60px', // Puedes ajustar según tus necesidades
+                    
+                    width: '250px', 
+                    height: '350px', 
+                    margin: '0 auto 60px', 
                   
                   }}
                 >
@@ -362,7 +366,6 @@ const fetchAllProducts = async (category, species) => {
               name={brand}
               checked={selectedBrands.includes(brand)}
               onChange={() => handleBrandChange(brand)}
-              
             />
             <label htmlFor={brand}>{brand}</label>
           </div>
