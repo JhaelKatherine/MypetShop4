@@ -12,7 +12,9 @@ export default function SearchBar() {
   const fetchResults = async (query) => {
     try {
       const response = await axios.get(`/api/products/search?query=${query}`);
-      setResults(response.data.products);
+      const products = response.data.products;
+      const availableProducts = products.filter(product => product.status === true);
+      setResults(availableProducts);
     } catch (error) {
       console.error('Error searching products: ', error);
     }
@@ -43,7 +45,6 @@ export default function SearchBar() {
     if (sanitizedQuery && sanitizedQuery!=="") {
       fetchResults(sanitizedQuery);
     } else {
-      // Limpiar resultados si la consulta está vacía
       setResults([]);
     }
   };
@@ -58,6 +59,7 @@ export default function SearchBar() {
             onChange={handleInputChange}
             placeholder="Search products..."
             className={'searchInput'}
+            maxLength={30}
         />
         {error && <div className="error">{error}</div>}
         {results.length > 0 && <div ref={resultsRef}><SearchResult results={results} clearResults={clearResults} /></div>}
