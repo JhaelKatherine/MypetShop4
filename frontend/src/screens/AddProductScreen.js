@@ -106,9 +106,9 @@ export default function AddProductScreen() {
 
       setLoading(false);
       toast.success('Product successfully added');
-      // Redirige a la página de detalles del nuevo producto, si es necesario.
+      
 
-      navigate(`/admin/products`); // Ajusta la ruta según tu configuración
+      navigate(`/admin/products`); 
 
     } catch (err) {
       setLoading(false);
