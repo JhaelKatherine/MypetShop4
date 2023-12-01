@@ -85,3 +85,78 @@ img.product-icon {
   object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
 }
 
+.cart-button {
+  /* Estilos del botón del carrito */
+  background-color: transparent;
+}
+
+/* Estilos del menú desplegable desde el lado derecho */
+.cart-menu-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 400px; /* Ancho del menú - ajusta según sea necesario */
+  background-color: #c5c1c1; /* Color de fondo del menú */
+  box-shadow: -3px 0 5px rgba(0, 0, 0, 0.2); /* Sombra para efecto de separación */
+  z-index: 999; /* Asegura que esté encima de otros elementos */
+  /* Agrega más estilos según tus necesidades de diseño */
+}
+
+/* Estilos para el contenido dentro del menú */
+.cart-menu-content {
+  padding: 20px;
+  /* Otros estilos para el contenido del menú */
+}
+
+.cart-items-container {
+  max-height: 750px; /* Altura máxima del contenedor, ajusta según sea necesario */
+  overflow-y: auto; /* Habilita el scroll vertical cuando sea necesario */
+}
+
+.disable-scroll {
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 78.4%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad aquí */
+  z-index: 1; /* Asegúrate de que esté encima del contenido */
+}
+
+.close-cart {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.bottom-cart-button {
+  position: fixed;
+  bottom: 20px; /* Ajusta la distancia del borde inferior según tu diseño */
+  right: 100px; /* Ajusta la distancia del borde derecho según tu diseño */
+  z-index: 999; /* Ajusta el z-index si es necesario */
+}
+
+.button-margin {
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+  margin-left: 15px;
+}
+
+.line-container {
+  width: 100%; /* Hace que la línea ocupe el ancho completo de la pantalla */
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.line {
+  position: absolute;
+  border-top: 1px solid #000; /* Ajusta el color y el grosor según sea necesario */
+  top: 50%; /* Centra verticalmente la línea */
+  width: calc(100vw - 40px); /* Extiende la línea a ambos lados */
+  transform: translateY(-50%);
+  left: 50%; /* Alinea el centro de la línea con el centro del contenedor */
+  margin-left: -11.5vw; /* Mueve la línea hacia la izquierda a la mitad del ancho de la ventana */
+}

@@ -1,4 +1,4 @@
-import React, { useContext,useState } from 'react';
+import React, { useContext,useState, useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,6 +32,9 @@ import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProductsScreen from './screens/ProductScreen';
 import FilterLogic from "./screens/FilterLogic"; // Importa tu nuevo componente
 import Invoice from "./screens/Invoice";
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 
 
@@ -39,6 +42,49 @@ function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
   const [forceFilterUpdate, setForceFilterUpdate] = useState(false); // Nuevo estado
+  const [showCartMenu, setShowCartMenu] = useState(false);
+  const {
+    cart: { cartItems },
+  } = state;
+
+  useEffect(() => {
+    // Verificar si hay elementos en el carrito y actualizar el estado del botón
+    setShowCartButton(cart.cartItems.length > 0);
+  }, [cart.cartItems]);
+
+  const toggleCartMenu = () => {
+    setShowCartMenu(!showCartMenu); // Alternar la visibilidad del menú
+    if (!showCartMenu) {
+      document.body.classList.add('disable-scroll');
+    } else {
+      document.body.classList.remove('disable-scroll');
+    }
+  };
+
+  const updateCartHandler = async (item, quantity) => {
+    const { data } = await axios.get(`/api/products/${item._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    }
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...item, quantity },
+    });
+    setShowCartButton(cart.cartItems.length > 0);
+  };
+
+  const removeItemHandler = (item) => {
+    ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+    setShowCartButton(cart.cartItems.length - 1 > 0); 
+  };
+
+  const closeCartMenu = () => {
+    setShowCartMenu(false);
+    document.body.classList.remove('disable-scroll');
+  };
+
+  const [showCartButton, setShowCartButton] = useState(true);
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -181,19 +227,109 @@ function App() {
                       />
                   </Link>
 
-                <Link to="/cart" className="nav-link">
+                  <button className="cart-button" onClick={toggleCartMenu}>
+          <img
+            alt="cart"
+            src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
+            height="30"
+            className="d-inline-block align-top"
+          />
+          {cart.cartItems.length > 0 && (
+            <Badge pill bg="danger">
+              {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+            </Badge>
+          )}
+        </button>
+        {/* Menú desplegable */}
+        {showCartMenu && (
+          
+          <div className="cart-menu-right">
+            <div className="overlay" onClick={closeCartMenu}></div>
+            <div className="cart-menu-content">
+              <span style={{ marginRight: '280px' }}>Your cart</span>
+              <span onClick={closeCartMenu} className="close-cart">
+                X
+              </span>
+              <pre>Product                            Total</pre>
+
+              {/* Condición para mostrar el contenido del carrito o el mensaje */}
+              {cartItems.length === 0 ? (
+                <div style={{ marginTop: '400px' }}>No products have been added to your cart yet.</div>
+              ) : (
+                
+                <div className="cart-items-container">
+                  
+                  
+                <ListGroup>
+                  {cartItems.map((item) => (
+                    <ListGroup.Item key={item._id}>
+                      {/* Resto del código para mostrar cada elemento */}
+                      <div className="cart-item-container">
                   <img
-                    alt="cart"
-                    src="https://i.ibb.co/ThQrF5g/shopping-Cart-Icon-1.png"
-                    height="30"
-                    className="d-inline-block align-top"
+                    src={item.image}
+                    alt={item.name}
+                    className="cart-item-image img-fluid rounded img-thumbnail"
                   />
-                  {cart.cartItems.length > 0 && (
-                    <Badge pill bg="danger">
-                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                    </Badge>
-                  )}
-                </Link>
+                  <div className="cart-item-description">
+                    <strong>{item.name}</strong>
+                    
+                    <p>{"$"+item.price}</p>
+                    <div className="cart-item-buttons">
+                    <Button
+                      onClick={() =>
+                        updateCartHandler(item, item.quantity - 1)
+                      }
+                      variant="light"
+                      disabled={item.quantity === 1}
+                    >
+                      <i className="fas fa-minus-circle"></i>
+                    </Button>{' '}
+                    <span>{item.quantity}</span>{' '}
+                    <Button
+                      variant="light"
+                      onClick={() =>
+                        updateCartHandler(item, item.quantity + 1)
+                      }
+                      disabled={item.quantity === item.countInStock}
+                    >
+                      <i className="fas fa-plus-circle"></i>
+                    </Button>
+                    <Button
+                      onClick={() => removeItemHandler(item)}
+                      variant="light"
+                    >
+                      <i className="fas fa-trash"></i>
+                    </Button>
+                  </div>
+                  </div>
+                  <div> ${item.quantity * item.price}</div>
+                </div>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+
+                
+              </div>
+              
+              )}
+              {showCartButton && (
+                
+                <div className="bottom-cart-button">
+                  <div className="line-container">
+                    <div className="line"></div>
+                  </div>
+                  <div className="subtotal">
+                    Subtotal:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                  </div>
+                  <Link to="/cart" className="button-margin">
+                  <Button variant="primary" className="button-margin">Chekout</Button>
+                  </Link>
+                </div>
+              )}
+             
+            </div>
+          </div>
+        )}
                 {userInfo ? (
   <NavDropdown
     title={
