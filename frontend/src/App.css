@@ -28,9 +28,9 @@
   color: #61dafb;
 }
 img.admin-image {
-  width: 30px; /* Ancho deseado */
-  height: 30px; /* Altura deseada */
-  object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
+  width: 30px; 
+  height: 30px; 
+  object-fit: cover; 
 }
 @keyframes App-logo-spin {
   from {
@@ -48,7 +48,7 @@ header {
 }
 
 .navbar {
-  background-color: #4180AB; /* Puedes cambiar esto según tu preferencia */
+  background-color: #4180AB; 
 }
 
 .navbar-brand,
@@ -60,33 +60,33 @@ header {
   background-color: white;
 }
 .nav-dropdown {
-  width: 80%; /* Ancho deseado para el contenedor */
+  width: 80%; 
 }
-/* styles.css */
 
-/* Otros estilos existentes */
+
+
 
 .nav-dropdown-item {
-  width: 100%; /* El ancho es del 100% para ocupar todo el ancho del contenedor */
+  width: 100%; 
 
-  transition: background-color 0.2s; /* Transición de color de fondo al asercarse el mouse */
+  transition: background-color 0.2s; 
 }
 
 .nav-dropdown-item:hover {
-  background-color: #87CEFA; /* Color de fondo al asercarse el mouse */
+  background-color: #87CEFA; 
 }
 
 
 
 img.product-icon {
   margin-right: 10px; 
-  width: 25px; /* Ancho deseado */
-  height: 25px; /* Altura deseada */
-  object-fit: cover; /* Otras opciones: contain, fill, none, scale-down */
+  width: 25px; 
+  height: 25px; 
+  object-fit: cover; 
 }
 
 .cart-button {
-  /* Estilos del botón del carrito */
+ 
   background-color: transparent;
 }
 
@@ -96,23 +96,23 @@ img.product-icon {
   top: 0;
   right: 0;
   height: 100%;
-  width: 400px; /* Ancho del menú - ajusta según sea necesario */
-  background-color: #c5c1c1; /* Color de fondo del menú */
-  box-shadow: -3px 0 5px rgba(0, 0, 0, 0.2); /* Sombra para efecto de separación */
-  z-index: 999; /* Asegura que esté encima de otros elementos */
-  /* Agrega más estilos según tus necesidades de diseño */
+  width: 400px; /* Ancho del menú  */
+  background-color: #c5c1c1; 
+  box-shadow: -3px 0 5px rgba(0, 0, 0, 0.2); 
+  z-index: 999;
 }
 
-/* Estilos para el contenido dentro del menú */
+
 .cart-menu-content {
   padding: 20px;
-  /* Otros estilos para el contenido del menú */
 }
 
 .cart-items-container {
-  max-height: 750px; /* Altura máxima del contenedor, ajusta según sea necesario */
-  overflow-y: auto; /* Habilita el scroll vertical cuando sea necesario */
+  max-height: 700px; 
+  overflow-y: auto; 
 }
+
+
 
 .disable-scroll {
   overflow: hidden;
@@ -121,11 +121,11 @@ img.product-icon {
 .overlay {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 78.4%;
+  left: 0px;
+  width: calc(100% - 400px); 
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad aquí */
-  z-index: 1; /* Asegúrate de que esté encima del contenido */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: -1; 
 }
 
 .close-cart {
@@ -135,28 +135,56 @@ img.product-icon {
 
 .bottom-cart-button {
   position: fixed;
-  bottom: 20px; /* Ajusta la distancia del borde inferior según tu diseño */
-  right: 100px; /* Ajusta la distancia del borde derecho según tu diseño */
-  z-index: 999; /* Ajusta el z-index si es necesario */
+  bottom: 20px; 
+  right: 100px; 
+  z-index: 999; 
 }
 
 .button-margin {
-  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+  margin-top: 10px; 
   margin-left: 15px;
 }
 
 .line-container {
-  width: 100%; /* Hace que la línea ocupe el ancho completo de la pantalla */
+  width: 100%; 
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .line {
   position: absolute;
-  border-top: 1px solid #000; /* Ajusta el color y el grosor según sea necesario */
-  top: 50%; /* Centra verticalmente la línea */
-  width: calc(100vw - 40px); /* Extiende la línea a ambos lados */
+  border-top: 1px solid #000; 
+  top: 50%; 
+  width: calc(100vw - 40px);
   transform: translateY(-50%);
-  left: 50%; /* Alinea el centro de la línea con el centro del contenedor */
-  margin-left: -11.5vw; /* Mueve la línea hacia la izquierda a la mitad del ancho de la ventana */
+  left: 50%; 
+  margin-left: -211px;
+}
+
+@media screen and (max-width: 568px), (max-height: 900px){
+  .cart-menu-right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 400px; 
+    background-color: #c5c1c1; 
+    box-shadow: -3px 0 5px rgba(0, 0, 0, 0.2); 
+    z-index: 999;
+    
+  }
+
+  .cart-menu-content {
+    max-height: 80vh; 
+    overflow-y: auto; 
+  }
+
+  .bottom-cart-button {
+    margin-top: 20px; 
+  }
+
+  .disable-scroll {
+    overflow: hidden;
+  }
+  
 }
