@@ -30,7 +30,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProductsScreen from './screens/ProductScreen';
-import FilterLogic from "./screens/FilterLogic"; // Importa tu nuevo componente
+import FilterLogic from "./screens/FilterLogic"; 
 import Invoice from "./screens/Invoice";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
@@ -41,19 +41,18 @@ import axios from 'axios';
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
-  const [forceFilterUpdate, setForceFilterUpdate] = useState(false); // Nuevo estado
+  const [forceFilterUpdate, setForceFilterUpdate] = useState(false); 
   const [showCartMenu, setShowCartMenu] = useState(false);
   const {
     cart: { cartItems },
   } = state;
 
   useEffect(() => {
-    // Verificar si hay elementos en el carrito y actualizar el estado del botón
     setShowCartButton(cart.cartItems.length > 0);
   }, [cart.cartItems]);
 
   const toggleCartMenu = () => {
-    setShowCartMenu(!showCartMenu); // Alternar la visibilidad del menú
+    setShowCartMenu(!showCartMenu); 
     if (!showCartMenu) {
       document.body.classList.add('disable-scroll');
     } else {
@@ -243,7 +242,7 @@ function App() {
         {/* Menú desplegable */}
         {showCartMenu && (
           
-          <div className="cart-menu-right">
+          <div className={`cart-menu-right ${showCartMenu ? 'show' : ''}`}>
             <div className="overlay" onClick={closeCartMenu}></div>
             <div className="cart-menu-content">
               <span style={{ marginRight: '280px' }}>Your cart</span>
@@ -322,7 +321,7 @@ function App() {
                     Subtotal:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                   </div>
                   <Link to="/cart" className="button-margin">
-                  <Button variant="primary" className="button-margin">Chekout</Button>
+                  <Button variant="primary" className="button-margin" onClick={closeCartMenu} >Chekout</Button>
                   </Link>
                 </div>
               )}
