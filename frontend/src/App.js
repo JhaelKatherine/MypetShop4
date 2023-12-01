@@ -322,7 +322,7 @@ function App() {
                     Subtotal:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                   </div>
                   <Link to="/cart" className="button-margin">
-                  <Button variant="primary" className="button-margin">Chekout to Cart</Button>
+                  <Button variant="primary" className="button-margin">Chek-out</Button>
                   </Link>
                 </div>
               )}
