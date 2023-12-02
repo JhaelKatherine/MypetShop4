@@ -49,8 +49,7 @@ const Invoice = () => {
                 </div>
 
                 <div>
-                    <p className={'date'} style={{textAlign: "end"}}><span
-                        style={{fontWeight: "bold", fontSize: "15px"}}>Invoice ID: </span>{invoiceData._id}</p>
+
                     <p className={'date'} style={{textAlign: "end"}}><span
                         style={{fontWeight: "bold", fontSize: "15px"}}>Date: </span>{format(new Date(invoiceData.createdAt), 'yyyy-MM-dd')}
 
@@ -135,7 +134,6 @@ const Invoice = () => {
                 </div>
 
                 <div>
-                    <p className={'date'}><span>Invoice ID: </span>{invoiceData._id}</p>
                     <p className={'date'}><span>Date: </span>{format(new Date(invoiceData.createdAt), 'yyyy-MM-dd')}</p>
                 </div>
 
