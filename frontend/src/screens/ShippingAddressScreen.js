@@ -34,11 +34,14 @@ export default function ShippingAddressScreen() {
   const [cityError, setCityError] = useState('');
   const [cellPhoneError, setCellPhoneError] = useState('');
   
-    useEffect(() => {
+  useEffect(() => {
+    // Validar si el usuario está autenticado al cargar el componente
     if (!userInfo) {
-      navigate('/shipping');
+      navigate('/signin'); // Si no hay usuario, redirigir a la página de inicio de sesión
+    } else {
+      navigate('/shipping'); // Si hay usuario, redirigir a la página de factura
     }
-  }, [userInfo, navigate]);
+  }, [navigate, userInfo]);
 
   const validateForm = () => {
     let isValid = true;
