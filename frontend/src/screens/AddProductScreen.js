@@ -243,46 +243,40 @@ export default function AddProductScreen() {
               />
             </div>
 
-
             <div className="form-group">
-  <label htmlFor="price">Price</label>
-  <input
-    type="text"
-    id="price"
-    className="form-control"
-    value={price}
-    onChange={(e) => {
-      const enteredValue = e.target.value;
-      
-      // Limitar la longitud a 4 dígitos y asegurar que sea un número válido
-      if (enteredValue.length === 0 || (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue))) {
-        const numericValue = parseFloat(enteredValue);
-        
-        // Asegurar que el valor esté en el rango de 1 a 1000
-        if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
-          setPrice(enteredValue);
-        }
-      }
-    }}
-    onKeyDown={(e) => {
-      if (
-        !(
-          (e.key >= '0' && e.key <= '9') ||
-          e.key === '.' ||
-          e.key === 'Backspace' ||
-          e.key === 'Delete' ||
-          e.key === 'ArrowLeft' ||
-          e.key === 'ArrowRight'
-        )
-      ) {
-        e.preventDefault();
-      }
-    }}
-    required
-  />
-</div>
-
-
+              <label htmlFor="price">Price</label>
+              <input
+                type="text"
+                id="price"
+                className="form-control"
+                value={price}
+                onChange={(e) => {
+                  const enteredValue = e.target.value;
+                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
+                    setPrice(enteredValue === '' ? '' : enteredValue);
+                  }
+                }}
+                
+                min="1"
+                max="1000"
+                maxLength="4"
+                onKeyDown={(e) => {
+                  if (
+                    !(
+                      (e.key >= '0' && e.key <= '9') ||
+                      e.key === '.' ||
+                      e.key === 'Backspace' ||
+                      e.key === 'Delete' ||
+                      e.key === 'ArrowLeft' ||
+                      e.key === 'ArrowRight'
+                    )
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
+                required
+              />
+            </div>
 
             <div className="form-group">
               <label htmlFor="description">Description</label>
