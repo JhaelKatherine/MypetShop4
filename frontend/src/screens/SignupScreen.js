@@ -41,6 +41,7 @@ export default function SignupScreen() {
   }, [name, lastName, userName, email, confirmPassword]);
 
 
+  
   const isPasswordStrong = (password) => {
     // La contraseña debe tener al menos 8 caracteres
     const minLengthMessage = 'Use 8 characters minimum for the password';
@@ -56,6 +57,11 @@ export default function SignupScreen() {
     }
 
     return '';
+  };
+
+  const handlePasswordChange = (e) => {
+    const passwordErrorMessage = isPasswordStrong(e.target.value);
+    e.target.setCustomValidity(passwordErrorMessage);
   };
  
   
@@ -73,10 +79,7 @@ export default function SignupScreen() {
       return;
     }
     
-    const passwordErrorMessage = isPasswordStrong(password);
-    if (passwordErrorMessage) {
-      e.target.elements.password.setCustomValidity(passwordErrorMessage);
-      e.target.reportValidity();
+    if (!isPasswordStrong(password)) {
       return;
     }
 
@@ -187,17 +190,20 @@ export default function SignupScreen() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              className="form-control"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-              onInput={(e) => e.target.setCustomValidity('')}
-              required
-            />
-          </div>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                className="form-control"
+                onChange={handlePasswordChange}
+                required
+              />
+              {e.target.elements.password.validationMessage && (
+                <div className="error-message">
+                  {e.target.elements.password.validationMessage}
+                </div>
+              )}
+            </div>
           <button className="submit" type="submit">Sign Up</button>
           <div>
             <p>
