@@ -42,10 +42,26 @@ export default function SignupScreen() {
     localStorage.setItem('signupFormData', JSON.stringify(formData));
   }, [name, lastName, userName, email, confirmPassword]);
 
+
   const isPasswordStrong = (password) => {
+    // La contraseña debe tener al menos 8 caracteres
+    const minLengthMessage = 'Use 8 characters minimum for the password';
+
+    if (password.length < 8) {
+      toast.error(minLengthMessage);
+      return false;
+    }
+
+    // La contraseña debe incluir al menos una minúscula, una mayúscula, un número y un carácter especial
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-    return passwordRegex.test(password);
+    if (!passwordRegex.test(password)) {
+      toast.error('Choose a stronger password. Try a combination of letters, numbers, and symbols.');
+      return false;
+    }
+
+    return true;
   };
+ 
   
   const handleUserNameChange = (e) => {
     const inputUserName = e.target.value;
@@ -60,8 +76,8 @@ export default function SignupScreen() {
       toast.error('Please complete all fields');
       return;
     }
+    
     if (!isPasswordStrong(password)) {
-      toast.error('Password must be at least 8 characters long and include a lowercase letter, an uppercase letter, a number, and a special character');
       return;
     }
 
