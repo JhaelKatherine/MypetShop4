@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/esm/Button';
 import { format } from 'date-fns';
 import '../Css/stile.css';
 import empty_plate from '../img/empty_plate.svg'
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -71,8 +72,8 @@ export default function OrderHistoryScreen() {
             <p>Explore our catalog to see what we have to offer.</p>
             <div className="empty-state-button">
             <Link to="/">
-    <Button>Explorar nuestro catálogo</Button>
-  </Link>
+              <Button>Explore our catalog</Button>
+           </Link>
             </div>
           </div>
           <div className="empty-state-image">
