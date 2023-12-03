@@ -244,38 +244,42 @@ export default function AddProductScreen() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="price">Price</label>
-              <input
-                type="text"
-                id="price"
-                className="form-control"
-                value={price}
-                onChange={(e) => {
-                  const enteredValue = e.target.value;
-                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
-                    setPrice(enteredValue === '' ? '' : enteredValue);
-                  }
-                }}
-                
-                min="1"
-                max="1000"
-                onKeyDown={(e) => {
-                  if (
-                    !(
-                      (e.key >= '0' && e.key <= '9') ||
-                      e.key === '.' ||
-                      e.key === 'Backspace' ||
-                      e.key === 'Delete' ||
-                      e.key === 'ArrowLeft' ||
-                      e.key === 'ArrowRight'
-                    )
-                  ) {
-                    e.preventDefault();
-                  }
-                }}
-                required
-              />
-            </div>
+  <label htmlFor="price">Price</label>
+  <input
+    type="text"
+    id="price"
+    className="form-control"
+    value={price}
+    onChange={(e) => {
+      let enteredValue = e.target.value;
+
+      // Limitar la longitud a 4 dígitos
+      enteredValue = enteredValue.slice(0, 4);
+
+      if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
+        setPrice(enteredValue === '' ? '' : enteredValue);
+      }
+    }}
+    min="1"
+    max="1000"
+    onKeyDown={(e) => {
+      if (
+        !(
+          (e.key >= '0' && e.key <= '9') ||
+          e.key === '.' ||
+          e.key === 'Backspace' ||
+          e.key === 'Delete' ||
+          e.key === 'ArrowLeft' ||
+          e.key === 'ArrowRight'
+        )
+      ) {
+        e.preventDefault();
+      }
+    }}
+    required
+  />
+</div>
+
 
             <div className="form-group">
               <label htmlFor="description">Description</label>
