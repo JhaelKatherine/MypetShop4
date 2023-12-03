@@ -34,11 +34,14 @@ export default function ShippingAddressScreen() {
   const [cityError, setCityError] = useState('');
   const [cellPhoneError, setCellPhoneError] = useState('');
   
-    useEffect(() => {
+  useEffect(() => {
+    // Validar si el usuario está autenticado al cargar el componente
     if (!userInfo) {
-      navigate('/shipping');
+      navigate('/signin'); // Si no hay usuario, redirigir a la página de inicio de sesión
+    } else {
+      navigate('/shipping'); // Si hay usuario, redirigir a la página de factura
     }
-  }, [userInfo, navigate]);
+  }, [navigate, userInfo]);
 
   const validateForm = () => {
     let isValid = true;
@@ -285,35 +288,6 @@ export default function ShippingAddressScreen() {
                       </div>
                       <div>
                       
-                      <ListGroup variant="flush">
-                        
-                        <ListGroup.Item className='gray-background'>
-                          <div className="mb-3">
-                            <Form.Check
-                              type="radio"
-                              id="PayPal"
-                              label="PayPal"
-                              value="PayPal"
-                              checked={paymentMethodName === 'PayPal'}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                              disabled={true} 
-                            />
-                          </div>
-                        </ListGroup.Item>
-                        
-                        <ListGroup.Item className='gray-background'>
-                          <div className="mb-3">
-                            <Form.Check
-                              type="radio"
-                              id="Stripe"
-                              label="Stripe"
-                              value="Stripe"
-                              checked={paymentMethodName === 'Stripe'}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                            />
-                          </div>
-                        </ListGroup.Item>
-                      </ListGroup>
                       </div>
                       
                       <div className="d-flex justify-content-end mt-3">
