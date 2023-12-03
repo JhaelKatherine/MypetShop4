@@ -5,12 +5,12 @@
 }
 
 .w-100-bg {
-    width: 100vw; /* Esto hará que la imagen tenga el ancho de la ventana del navegador */
-    position: relative; /* Esto es necesario para que left y right funcionen */
-    left: 50%; /* Esto moverá la imagen a la mitad de su contenedor */
-    right: 50%; /* Esto moverá la imagen a la mitad de su contenedor */
-    margin-left: -50vw; /* Esto compensará el movimiento anterior para alinear la imagen con el borde izquierdo de la ventana del navegador */
-    margin-right: -50vw; /* Esto compensará el movimiento anterior para alinear la imagen con el borde derecho de la ventana del navegador */
+    width: 100vw; 
+    position: relative;
+    left: 50%; 
+    right: 50%;
+    margin-left: -50vw; 
+    margin-right: -50vw; 
     margin-top: 0;
 }
 

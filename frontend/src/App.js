@@ -249,11 +249,11 @@ function App() {
           <div className={`cart-menu-right ${showCartMenu ? 'show' : ''}`}>
             <div className="overlay" onClick={closeCartMenu}></div>
             <div className="cart-menu-content">
-              <span style={{ marginRight: '280px' }}>Your cart</span>
+              <span className= "text-up" >Your shopping cart</span>
               <span onClick={closeCartMenu} className="close-cart">
                 X
               </span>
-              <pre>Product                            Total</pre>
+              
 
               {/* Condición para mostrar el contenido del carrito o el mensaje */}
               {cartItems.length === 0 ? (
