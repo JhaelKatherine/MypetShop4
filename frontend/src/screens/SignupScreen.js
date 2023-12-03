@@ -19,7 +19,6 @@ export default function SignupScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   const { dispatch: ctxDispatch } = useContext(Store);
 
 
@@ -63,6 +62,19 @@ export default function SignupScreen() {
     const passwordErrorMessage = isPasswordStrong(e.target.value);
     e.target.setCustomValidity(passwordErrorMessage);
   };
+
+  const handleConfirmPasswordChange = (e) => {
+    const confirmPassword = e.target.value;
+
+    if (password !== confirmPassword) {
+      setConfirmPasswordError('Passwords do not match');
+      e.target.setCustomValidity('Passwords do not match');
+    } else {
+      setConfirmPasswordError('');
+      e.target.setCustomValidity('');
+    }
+  };
+
  
   
   const handleUserNameChange = (e) => {
@@ -79,12 +91,17 @@ export default function SignupScreen() {
       return;
     }
     
-    if (!isPasswordStrong(password)) {
+    const passwordErrorMessage = isPasswordStrong(password);
+    if (passwordErrorMessage) {
+      e.target.elements.password.setCustomValidity(passwordErrorMessage);
+      e.target.reportValidity();
       return;
     }
-
+    const confirmPassword = e.target.elements.confirmPassword.value;
     if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
+      setConfirmPasswordError('Passwords do not match');
+      e.target.elements.confirmPassword.setCustomValidity('Passwords do not match');
+      e.target.reportValidity();
       return;
     }
     try {
@@ -178,18 +195,6 @@ export default function SignupScreen() {
 />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              className="form-control"
-              onChange={(e) => setPassword(e.target.value)}
-              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-              onInput={(e) => e.target.setCustomValidity('')}
-              required
-            />
-          </div>
-          <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -198,9 +203,24 @@ export default function SignupScreen() {
                 onChange={handlePasswordChange}
                 required
               />
-              {e.target.elements.password.validationMessage && (
+              {e.target && e.target.elements && e.target.elements.password.validationMessage && (
                 <div className="error-message">
                   {e.target.elements.password.validationMessage}
+                </div>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                className="form-control"
+                onChange={handleConfirmPasswordChange}
+                required
+              />
+              {confirmPasswordError && (
+                <div className="error-message">
+                  {confirmPasswordError}
                 </div>
               )}
             </div>
