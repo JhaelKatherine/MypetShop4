@@ -20,5 +20,5 @@
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  gap: 20px; /* Ajusta la separación entre iconos */
+  gap: 20px; 
 }
