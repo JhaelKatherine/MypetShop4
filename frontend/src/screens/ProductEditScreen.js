@@ -276,6 +276,7 @@ export default function ProductEditScreen() {
                       setPrice(enteredValue);
                     }
                   }}
+                  maxLength="4"
                   min="1"
                   max="1000"
                   onKeyDown={(e) => {
@@ -362,24 +363,35 @@ export default function ProductEditScreen() {
             <div className="form-group">
               <label htmlFor="countInStock">Count In Stock</label>
               <input
-                type="number"
+                type="text"
                 id="countInStock"
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
-                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
-                    if (regex.test(enteredValue)) {
-                      setCountInStock(enteredValue);
-                    }
-                  }}
-                  min="1"
-                  max="1000"
-                  onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
-                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
-                    }
-                  }}
+                  const enteredValue = e.target.value;
+                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
+                    setCountInStock(enteredValue === '' ? '' : enteredValue);
+                  }
+                }}
+
+                maxLength="4"
+                min="1"
+                max="1000"
+                
+                onKeyDown={(e) => {
+                  if (
+                    !(
+                      (e.key >= '0' && e.key <= '9') ||
+                      e.key === '.' ||
+                      e.key === 'Backspace' ||
+                      e.key === 'Delete' ||
+                      e.key === 'ArrowLeft' ||
+                      e.key === 'ArrowRight'
+                    )
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
                 required
               />
             </div>
