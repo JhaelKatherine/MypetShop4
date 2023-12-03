@@ -113,7 +113,6 @@ export default function SignupScreen() {
     }}
     required
     autoComplete="off"
-
     />
     </div>
     <div className="form-group">
@@ -154,6 +153,7 @@ export default function SignupScreen() {
     e.target.setCustomValidity('Use a maximum of 6 characters for your username');
     }
     }}
+
     required
     autoComplete="off"
 

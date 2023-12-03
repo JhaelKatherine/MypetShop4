@@ -88,7 +88,6 @@ export default function ShippingAddressScreen() {
 
   if (!areRequiredFieldsFilled) {
     console.log('Please complete all required fields except Nit.');
-    // Aquí puedes mostrar un mensaje al usuario indicando que todos los campos requeridos, excepto Nit, deben estar completos
     return;
   }
 
@@ -278,38 +277,7 @@ export default function ShippingAddressScreen() {
                         <CartScreen2/>
                       </div>
                       <div>
-                      
-                      <ListGroup variant="flush">
-                        
-                        <ListGroup.Item className='gray-background'>
-                          <div className="mb-3">
-                            <Form.Check
-                              type="radio"
-                              id="PayPal"
-                              label="PayPal"
-                              value="PayPal"
-                              checked={paymentMethodName === 'PayPal'}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                              disabled={true} 
-                            />
-                          </div>
-                        </ListGroup.Item>
-                        
-                        <ListGroup.Item className='gray-background'>
-                          <div className="mb-3">
-                            <Form.Check
-                              type="radio"
-                              id="Stripe"
-                              label="Stripe"
-                              value="Stripe"
-                              checked={paymentMethodName === 'Stripe'}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                            />
-                          </div>
-                        </ListGroup.Item>
-                      </ListGroup>
                       </div>
-                      
                       <div className="d-flex justify-content-end mt-3">
                       <Button variant="primary" type="submit" onClick={placeOrder}>Place the Order</Button>
       </div>

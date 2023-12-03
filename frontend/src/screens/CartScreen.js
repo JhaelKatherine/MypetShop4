@@ -111,7 +111,6 @@ export default function CartScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                <div className="d-grid">
-    {/* Comenta o elimina la línea siguiente para desactivar la funcionalidad */}
     {<Button
       type="button"
       variant="primary"
