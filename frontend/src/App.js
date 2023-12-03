@@ -112,10 +112,10 @@ function App() {
       let url = '';
       switch (socialMedia) {
         case 'instagram':
-          url = 'https://www.instagram.com/petshop_patitas_cbba/';
+          url = 'https://www.instagram.com/petshopcorp7/';
           break;
         case 'tiktok':
-          url = 'https://www.tiktok.com/@gaston_hdyxfhchvq?_t=8hksnUI89AM&_r=1';
+          url = 'https://www.tiktok.com/@my_pet_shop023';
           break;
         case 'facebook':
           url = 'https://www.facebook.com/profile.php?id=61550120834894';
