@@ -243,7 +243,9 @@ export default function AddProductScreen() {
               />
             </div>
 
-            <div className="form-group">
+
+
+<div className="form-group">
   <label htmlFor="price">Price</label>
   <input
     type="text"
@@ -251,21 +253,11 @@ export default function AddProductScreen() {
     className="form-control"
     value={price}
     onChange={(e) => {
-      let enteredValue = e.target.value;
-
-      // Permitir la eliminación del último dígito
-      if (enteredValue.length > 1) {
-        enteredValue = enteredValue.slice(0, 4);
-      }
-
-      if (/^\d+(\.\d*)?$|^$/.test(enteredValue)) {
-        const floatValue = parseFloat(enteredValue);
-        if (floatValue >= 0 && floatValue <= 1000) {
-          setPrice(enteredValue === '' ? '' : enteredValue);
-        } else {
-          // Mostrar un mensaje de alerta si el valor está fuera del rango
-          alert('Por favor, ingrese un número entre 1 y 1000.');
-        }
+      const enteredValue = e.target.value;
+      
+      // Limitar la longitud a 4 dígitos
+      if (enteredValue.length <= 4 && (/^\d+(\.\d*)?$|^$/.test(enteredValue) || enteredValue === '')) {
+        setPrice(enteredValue);
       }
     }}
     min="1"
@@ -287,10 +279,6 @@ export default function AddProductScreen() {
     required
   />
 </div>
-
-
-
-
 
 
             <div className="form-group">
@@ -367,38 +355,32 @@ export default function AddProductScreen() {
                 {brandOptions}
                 </select>
             </div>
+
             <div className="form-group">
-  <label htmlFor="countInStock">Count In Stock</label>
-  <input
-    type="number"
-    id="countInStock"
-    className="form-control"
-    value={countInStock}
-    onChange={(e) => {
-      const enteredValue = e.target.value.replace(/[e]/gi, '');
-      const regex = /^[0-9]*$/;
-      
-      // Limitar la longitud a 4 dígitos
-      const limitedValue = enteredValue.slice(0, 4);
+              <label htmlFor="countInStock">Count In Stock</label>
+              <input
+                type="number"
+                id="countInStock"
+                className="form-control"
+                value={countInStock}
+                onChange={(e) => {
+                    const enteredValue = e.target.value.replace(/[e]/gi, ''); 
+                    const regex = /^[0-9]*$/; 
+                    if (regex.test(enteredValue)) {
+                      setCountInStock(enteredValue);
+                    }
+                  }}
+                  min="1"
+                  max="1000"
 
-      if (regex.test(limitedValue)) {
-        const intValue = parseInt(limitedValue, 10);
-        if (intValue <= 1000) {
-          setCountInStock(limitedValue);
-        }
-      }
-    }}
-    min="1"
-    max="1000"
-    onKeyDown={(e) => {
-      if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
-        e.preventDefault(); // Evita la entrada de 'e', 'E', '+', '-', '*', '/' y otros caracteres no deseados
-      }
-    }}
-    required
-  />
-</div>
-
+                  onKeyDown={(e) => {
+                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
+                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
+                    }
+                  }}
+                required
+              />
+            </div>
 
             <div className="form-group">
               <label htmlFor="imageURL">Image URL</label>
