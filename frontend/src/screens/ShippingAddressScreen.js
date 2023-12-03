@@ -39,7 +39,7 @@ export default function ShippingAddressScreen() {
     if (!userInfo) {
       navigate('/signin'); // Si no hay usuario, redirigir a la página de inicio de sesión
     } else {
-      navigate('/invoice'); // Si hay usuario, redirigir a la página de factura
+      navigate('/shipping'); // Si hay usuario, redirigir a la página de factura
     }
   }, [navigate, userInfo]);
 
