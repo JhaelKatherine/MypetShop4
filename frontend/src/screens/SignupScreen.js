@@ -37,13 +37,6 @@ export default function SignupScreen() {
     localStorage.setItem('signupFormData', JSON.stringify(formData));
     }, [name, lastName, userName, email, confirmPassword]);
     
-  const handleUserNameChange = (e) => {
-    const inputUserName = e.target.value;
-    if (inputUserName.length <= 6) {
-      setUserName(inputUserName);
-    }
-  };
-
   const isPasswordValid = (password) => {
 
     const MIN_PASSWORD_LENGTH = 8; // Longitud mínima de la contraseña
@@ -119,6 +112,8 @@ export default function SignupScreen() {
     }
     }}
     required
+    autoComplete="off"
+
     />
     </div>
     <div className="form-group">
@@ -138,6 +133,8 @@ export default function SignupScreen() {
     }
     }}
     required
+    autoComplete="off"
+
     />
     </div>
     
@@ -158,6 +155,8 @@ export default function SignupScreen() {
     }
     }}
     required
+    autoComplete="off"
+
     />
     </div>
           <div className="form-group">
@@ -180,6 +179,8 @@ export default function SignupScreen() {
     }
   }}
   required
+  autoComplete="off"
+
 />
           </div>
           
@@ -205,6 +206,8 @@ e.target.setCustomValidity(error || "This field is required");
 }}
 onInput={(e) => e.target.setCustomValidity('')}
 required
+autoComplete="off"
+
 />
 </div>
 <div className="form-group">
@@ -217,6 +220,8 @@ onChange={(e) => setConfirmPassword(e.target.value)}
 onInvalid={(e) => e.target.setCustomValidity("This field is required")}
 onInput={(e) => e.target.setCustomValidity('')}
 required
+autoComplete="off"
+
 />
 </div>
 <button className="submit" type="submit">Sign Up</button>
