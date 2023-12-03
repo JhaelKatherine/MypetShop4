@@ -229,7 +229,9 @@ const FilterLogic = () => {
       </label>
       <div className="products">
         {filterApplied ? (
-    <p>We are sorry but there are no products in the selected category, please continue browsing for more products.</p>
+          
+    <p style={{ marginBottom: '490px' }}>We are sorry but there are no products in the selected category, please continue browsing for more products.</p>
+    
     ) : (
           <Row>
             
@@ -242,7 +244,7 @@ const FilterLogic = () => {
                     width: '250px', // Puedes ajustar según tus necesidades
                     height: '350px', // Puedes ajustar según tus necesidades
                     margin: '0 auto 60px', // Puedes ajustar según tus necesidades
-                    marginBottom: '300px',
+                    marginBottom: '400px',
                     marginTop: '50px',
                   }}
                 >
