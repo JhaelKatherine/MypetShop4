@@ -16,14 +16,13 @@ export default function SignupScreen() {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
-  const [emailExistsError, setEmailExistsError] = useState('');
 
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { dispatch: ctxDispatch } = useContext(Store);
 
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function SignupScreen() {
     setPassword('');
     setConfirmPassword('');
   }, []);
-  
+
   const handleUserNameChange = (e) => {
     const inputUserName = e.target.value;
     if (inputUserName.length <= 6) {
@@ -168,17 +167,10 @@ export default function SignupScreen() {
             />
           </div>
           <button className="submit" type="submit">Sign Up</button>
-                <p className="signin">Register with</p>
-                <div className="social-buttons-container">
-    <button className="social-button google-button" onClick={(e) => e.preventDefault()}>
-        <img src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg" alt="Google" />
-        Google
-    </button>
-    <button className="social-button facebook-button" onClick={(e) => e.preventDefault()}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
-        Facebook
-    </button>
-                
+          <div>
+            <p>
+              
+            </p>
           </div>
           <div className="mb-3">
             Already have an account? <Link to="/signin" className="signin">Sign-In</Link>

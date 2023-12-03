@@ -8,7 +8,6 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
-import validator from 'validator';
 import '../Css/AddUser.css';
 
 export default function SigninScreen() {
@@ -20,7 +19,6 @@ export default function SigninScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const isEmailValid = (email) => {
-    // Expresión regular más detallada para validar el formato del correo electrónico
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
@@ -29,7 +27,6 @@ export default function SigninScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      // Validar el formato del correo electrónico antes de enviar la solicitu  
       if (!isEmailValid(email)) {
         toast.error('Please enter a valid email address');
         return;
@@ -48,7 +45,7 @@ export default function SigninScreen() {
 
   return (
     <>
-      <div className="blue-background"> {/* Agregar esta línea */}
+      <div className="blue-background"> 
         <Helmet>
           <title>Sign In</title>
         </Helmet>
@@ -87,9 +84,6 @@ export default function SigninScreen() {
             <div className="mb-3 d-flex justify-content-start">
               New customer?{' '}
               <Link to={`/signup?redirect=${redirect}`} className="add-space">Create your account</Link>
-            </div>
-            <div className="mb-3 d-flex justify-content-start"> 
-              Forget Password? <Link to={`/forget-password`} className="add-space">Reset Password</Link>
             </div>
           </form>
         </div>
