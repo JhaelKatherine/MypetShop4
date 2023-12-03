@@ -1,0 +1,44 @@
+.empty-state-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  .empty-state-text {
+    width: 45%;
+    text-align: center; /* Alinear el texto al centro */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar los elementos internos */
+  }
+  
+  .empty-state-text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .empty-state-text p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .empty-state-button {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .empty-state-image {
+    width: 45%;
+  }
+  
+  .empty-state-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  
