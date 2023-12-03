@@ -369,6 +369,7 @@ export default function AddProductScreen() {
                   }}
                   min="1"
                   max="1000"
+                  maxLength="4"
 
                   onKeyDown={(e) => {
                     if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
