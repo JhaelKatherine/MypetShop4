@@ -82,7 +82,8 @@ export default function OrderHistoryScreen() {
                     type="button"
                     variant="light"
                     onClick={() => {
-                      navigate(`/order/youOrder`);
+                      setLinkVisibility(false);
+                      navigate(`/order/${order._id}`);
                     }}
                   >
                     Details
