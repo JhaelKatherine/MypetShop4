@@ -17,23 +17,33 @@ const Invoice = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                if (userInfo) {
-                    const {data} = await axios.get(`/api/orders/mine/${userInfo._id}`);
-                    if (data && data.length > 0) {
-                        const filteredData = data.filter(order => order.createdAt && order.updatedAt);
-                        const lastInvoice = filteredData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
-                        setInvoiceData(lastInvoice);
-                        console.log(lastInvoice.user.name)
-                    }
-                }
-            } catch (error) {
-                console.error('Error al obtener los datos de la factura:', error);
+          try {
+            // Verificar si userInfo es null o indefinido
+            if (userInfo !== null && userInfo !== undefined) {
+              const { data } = await axios.get(`/api/orders/mine/${userInfo._id}`);
+              if (data && data.length > 0) {
+                const filteredData = data.filter(order => order.createdAt && order.updatedAt);
+                const lastInvoice = filteredData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+                setInvoiceData(lastInvoice);
+                console.log(lastInvoice.user.name);
+              }
+            } else {
+              // Si userInfo es null o indefinido, obtener la última factura sin filtrar por usuario
+              const { data } = await axios.get('/api/orders/last');
+              if (data) {
+                const lastInvoice = data[0];
+                setInvoiceData(lastInvoice);
+                console.log(lastInvoice.user.name);
+              }
             }
+          } catch (error) {
+            console.error('Error al obtener los datos de la factura:', error);
+          }
         };
-
+      
         fetchData();
-    }, [userInfo]);
+      }, [userInfo]);
+      
 
     const sendEmail = async () => {
         let to = email.email;
