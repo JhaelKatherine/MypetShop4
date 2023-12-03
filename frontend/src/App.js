@@ -352,12 +352,7 @@ function App() {
     )}
     {userInfo.isAdmin && (
       <LinkContainer to="/admin/products">
-        <NavDropdown.Item className="nav-dropdown-item">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png"
-            alt="Icono de Producto"
-            className="product-icon"
-          />
+        <NavDropdown.Item >
           Products
         </NavDropdown.Item>
       </LinkContainer>

@@ -6,10 +6,9 @@ import gaston from '../img/members/gaston.png'
 import sebastian from '../img/members/sebastian.png'
 import emanuel from '../img/members/emanuel.png'
 import camila from '../img/members/camila.png'
-
 const AboutUs = () => {
     return (
-        <div className={'container-aboutUs'}>
+       <div className={'container-aboutUs'}>
 
             <img className={'w-100-bg'} src={imageBg}/>
             <h1>ABOUT US</h1>
