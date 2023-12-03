@@ -253,15 +253,19 @@ export default function AddProductScreen() {
     onChange={(e) => {
       let enteredValue = e.target.value;
 
-      // Limitar la longitud a 4 dígitos solo si la longitud excede 4
-      if (enteredValue.length > 4) {
+      // Permitir la eliminación del último dígito
+      if (enteredValue.length > 1) {
         enteredValue = enteredValue.slice(0, 4);
       }
 
       if (/^\d+(\.\d*)?$|^$/.test(enteredValue)) {
         const floatValue = parseFloat(enteredValue);
-        if (floatValue <= 1000) {
+        if (floatValue > 0 && floatValue <= 1000) {
           setPrice(enteredValue === '' ? '' : enteredValue);
+        } else {
+          // Mostrar un mensaje de error cuando el valor es 0 o está fuera del rango
+          setPrice('');
+          alert('Por favor, ingrese un número entre 1 y 1000.');
         }
       }
     }}
@@ -284,6 +288,7 @@ export default function AddProductScreen() {
     required
   />
 </div>
+
 
 
 
