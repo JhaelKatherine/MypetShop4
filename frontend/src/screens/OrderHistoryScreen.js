@@ -70,7 +70,9 @@ export default function OrderHistoryScreen() {
             <h2>Oops, this is empty!</h2>
             <p>Explore our catalog to see what we have to offer.</p>
             <div className="empty-state-button">
-              <Button onClick='/'>Explore our catalog</Button>
+            <Link to="/">
+    <Button>Explorar nuestro catálogo</Button>
+  </Link>
             </div>
           </div>
           <div className="empty-state-image">
