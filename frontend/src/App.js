@@ -30,7 +30,6 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProductsScreen from './screens/ProductScreen';
-import ReloadOnPathMatch from './screens/ReloadOnPathMatch'
 import FilterLogic from "./screens/FilterLogic"; 
 import Invoice from "./screens/Invoice";
 import ListGroup from 'react-bootstrap/ListGroup';
