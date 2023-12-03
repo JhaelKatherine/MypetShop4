@@ -244,39 +244,44 @@ export default function AddProductScreen() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="price">Price</label>
-              <input
-                type="text"
-                id="price"
-                className="form-control"
-                value={price}
-                onChange={(e) => {
-                  const enteredValue = e.target.value;
-                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
-                    setPrice(enteredValue === '' ? '' : enteredValue);
-                  }
-                }}
-                
-                min="1"
-                max="1000"
-                maxLength="4"
-                onKeyDown={(e) => {
-                  if (
-                    !(
-                      (e.key >= '0' && e.key <= '9') ||
-                      e.key === '.' ||
-                      e.key === 'Backspace' ||
-                      e.key === 'Delete' ||
-                      e.key === 'ArrowLeft' ||
-                      e.key === 'ArrowRight'
-                    )
-                  ) {
-                    e.preventDefault();
-                  }
-                }}
-                required
-              />
-            </div>
+  <label htmlFor="price">Price</label>
+  <input
+    type="text"
+    id="price"
+    className="form-control"
+    value={price}
+    onChange={(e) => {
+      const enteredValue = e.target.value;
+
+      // Verificar que la longitud sea menor o igual a 4 y que sea un número válido
+      if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+        const numericValue = parseFloat(enteredValue);
+
+        // Verificar que esté en el rango de 1 a 1000
+        if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+          setPrice(enteredValue);
+        }
+      }
+    }}
+    onKeyDown={(e) => {
+      if (
+        !(
+          (e.key >= '0' && e.key <= '9') ||
+          e.key === '.' ||
+          e.key === 'Backspace' ||
+          e.key === 'Delete' ||
+          e.key === 'ArrowLeft' ||
+          e.key === 'ArrowRight'
+        )
+      ) {
+        e.preventDefault();
+      }
+    }}
+    maxLength="4"
+    required
+  />
+</div>
+
 
             <div className="form-group">
               <label htmlFor="description">Description</label>
@@ -366,10 +371,11 @@ export default function AddProductScreen() {
                     setCountInStock(enteredValue === '' ? '' : enteredValue);
                   }
                 }}
-                
+
+                maxLength="4"
                 min="1"
                 max="1000"
-                maxLength="4"
+                
                 onKeyDown={(e) => {
                   if (
                     !(
