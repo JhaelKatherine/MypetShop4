@@ -88,13 +88,12 @@ export default function OrderScreen() {
         <Col md={8}>
           <Card className="mb-3">
             <Card.Body>
-            <Card.Title style={{ textAlign: 'left' }}>Items</Card.Title>  
+            <Card.Title style={{ textAlign: 'left' }}>Items {'   '} Name {'   '} Quantity {'   '} Unit price {'   '} Subtotal </Card.Title>
                         <ListGroup variant="flush">
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                   <Row className="align-items-center">
                     <Col md={3} className="text-left">
-                    <Card.Title style={{ textAlign: 'left' }}>Image:</Card.Title>
 
                       <img
                         src={item.image}
@@ -103,7 +102,6 @@ export default function OrderScreen() {
                       />
                     </Col>
                     <Col md={3} className="text-left">
-                    <Card.Title style={{ textAlign: 'left' }}>Name:</Card.Title>
 
                      <span>{item.name}</span>
                     </Col>
