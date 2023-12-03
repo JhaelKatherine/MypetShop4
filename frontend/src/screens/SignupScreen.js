@@ -39,13 +39,6 @@ export default function SignupScreen() {
   }, [name, lastName, userName, email, confirmPassword]);
 
 
-  const handleUserNameChange = (e) => {
-    const inputUserName = e.target.value;
-    if (inputUserName.length <= 6) {
-      setUserName(inputUserName);
-    }
-  };
-
   const isPasswordValid = (password) => {
 
     const MIN_PASSWORD_LENGTH = 8; // Longitud mínima de la contraseña
@@ -65,11 +58,6 @@ export default function SignupScreen() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    if (name.trim() === '' || lastName.trim() === '' || userName.trim() === '' || email.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') {
-      toast.error('Please complete all fields');
-      return;
-    }
 
 
     if (password !== confirmPassword) {
@@ -97,10 +85,6 @@ export default function SignupScreen() {
     return emailRegex.test(email);
   };
 
-  const isPassword = (password) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-    return passwordRegex.test(password);
-  };
   return (
     <>
     <div className="blue-background"> {/* Agregar esta línea */}
@@ -110,57 +94,91 @@ export default function SignupScreen() {
          <h1>Sign Up</h1>
       </div>
         <form onSubmit={submitHandler} className="custom-form">
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              className="form-control"
-              onChange={(e) => setName(e.target.value)}
-              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-              onInput={(e) => e.target.setCustomValidity('')}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              className="form-control"
-              onChange={(e) => setLastName(e.target.value)}
-              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
-              onInput={(e) => e.target.setCustomValidity('')}
-              required
-            />
-          </div>
-          <div className="form-group">
-  <label htmlFor="userName">User Name (Max 6 characters)</label>
+        <div className="form-group">
+  <label htmlFor="name">Name</label>
+  <input
+    type="text"
+    id="name"
+    className="form-control"
+    onChange={(e) => {
+      const newName = e.target.value;
+      if (newName.length <= 100) {
+        setName(newName);
+        e.target.setCustomValidity(''); // Limpiar cualquier mensaje de error personalizado
+      } else {
+        setName(newName.slice(0, 100)); // Truncar el nombre a 100 caracteres
+        e.target.setCustomValidity('Use a maximum of 100 characters for your name');
+      }
+    }}
+    required
+  />
+</div>
+<div className="form-group">
+  <label htmlFor="lastName">Last Name</label>
+  <input
+    type="text"
+    id="lastName"
+    className="form-control"
+    onChange={(e) => {
+      const newLastName = e.target.value;
+      if (newLastName.length <= 100) {
+        setLastName(newLastName);
+        e.target.setCustomValidity(''); // Limpiar cualquier mensaje de error personalizado
+      } else {
+        setLastName(newLastName.slice(0, 100)); // Truncar el apellido a 100 caracteres
+        e.target.setCustomValidity('Use a maximum of 100 characters for your last name');
+      }
+    }}
+    required
+  />
+</div>
+
+<div className="form-group">
+<label htmlFor="userName">User Name</label>
   <input
     type="text"
     id="userName"
     className="form-control"
-    value={userName}
-    onChange={handleUserNameChange}
-    maxLength={6} // Limitar a 6 caracteres
-    onInvalid={(e) => e.target.setCustomValidity("Please enter a maximum of 6 characters")}
-    onInput={(e) => e.target.setCustomValidity('')}
+    onChange={(e) => {
+      const newUserName = e.target.value;
+      if (newUserName.length <= 6) {
+        setUserName(newUserName);
+        e.target.setCustomValidity(''); 
+      } else {
+        setUserName(newUserName.slice(0, 6));
+        e.target.setCustomValidity('Use a maximum of 6 characters for your username');
+      }
+    }}
     required
   />
 </div>
+
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
   type="email"
   id="email"
   className="form-control"
-  onChange={(e) => setEmail(e.target.value)}
-  onInvalid={(e) => {
-    if (!isEmailValid(e.target.value)) {
-      e.target.setCustomValidity("Please enter a valid email address");
+  onChange={(e) => {
+    const newEmail = e.target.value;
+    if (newEmail.length <= 100) {
+      setUserName(newEmail);
+      e.target.setCustomValidity(''); 
     } else {
-      e.target.setCustomValidity("This field is required");
+      setUserName(newEmail.slice(0, 100));
+      e.target.setCustomValidity('Use a maximum of 100 characters for your email');
     }
+  }}
+  onInvalid={(e) => {
+    
+  
+    if (e.target.value === '') {
+              e.target.setCustomValidity("This field is required");
+            } else {
+              if (!isEmailValid(e.target.value)) {
+                e.target.setCustomValidity("Please enter a valid email address");
+              } 
+            }
   }}
   onInput={(e) => {
     if (isEmailValid(e.target.value)) {
@@ -207,19 +225,11 @@ export default function SignupScreen() {
             />
           </div>
           <button className="submit" type="submit">Sign Up</button>
-                <p className="signin">Register with</p>
-                <div className="social-buttons-container">
-    <button className="social-button google-button" onClick={(e) => e.preventDefault()}>
-        <img src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg" alt="Google" />
-        Google
-    </button>
-    <button className="social-button facebook-button" onClick={(e) => e.preventDefault()}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
-        Facebook
-    </button>
-                
-          </div>
-          <div className="mb-3">
+                <p > 
+                  
+                </p>
+    
+                    <div className="mb-3">
             Already have an account? <Link to="/signin" className="signin">Sign-In</Link>
             </div>
         </form>
