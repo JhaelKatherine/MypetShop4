@@ -206,7 +206,7 @@ userRouter.post(
   } catch (error) {
     if (error.code === 11000 && error.keyPattern && error.keyPattern.email) {
       // Código 11000 indica clave duplicada (E11000)
-      res.status(400).send({ message: 'Email already exists' });
+      res.status(400).send({ message: 'Email already registered' });
     } else {
       // Otro tipo de error
       res.status(500).send({ message: 'Internal Server Error' });
