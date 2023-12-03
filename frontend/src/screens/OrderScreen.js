@@ -88,7 +88,7 @@ export default function OrderScreen() {
         <Col md={8}>
           <Card className="mb-3">
             <Card.Body>
-            <Card.Title style={{ textAlign: 'left' }}>Items</Card.Title>  
+            <Card.Title style={{ textAlign: 'left' }}>   Items    Name     Quantity        Unit Price     Sub Total </Card.Title>  
                         <ListGroup variant="flush">
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
