@@ -89,7 +89,7 @@ export default function OrderScreen() {
           <Card className="mb-3">
             <Card.Body>
             <Card.Title style={{ textAlign: 'left' }}>
-            <span style={{ marginRight: '120px' }}>Items</span>
+            <span style={{ marginRight: '140px' }}>Items</span>
   <span style={{ marginRight: '100px' }}>Name</span>
   <span style={{ marginRight: '100px' }}>Quantity</span>
   <span style={{ marginRight: '70px' }}>Unit price</span>
