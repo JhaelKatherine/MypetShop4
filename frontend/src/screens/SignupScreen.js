@@ -24,6 +24,17 @@ export default function SignupScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
+
+
+  useEffect(() => {
+    setName('');
+    setLastName('');
+    setUserName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  }, []);
+  
   const handleUserNameChange = (e) => {
     const inputUserName = e.target.value;
     if (inputUserName.length <= 6) {
