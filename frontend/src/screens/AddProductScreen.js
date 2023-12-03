@@ -256,8 +256,11 @@ export default function AddProductScreen() {
       // Limitar la longitud a 4 dígitos
       enteredValue = enteredValue.slice(0, 4);
 
-      if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
-        setPrice(enteredValue === '' ? '' : enteredValue);
+      if (/^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+        const floatValue = parseFloat(enteredValue);
+        if (floatValue <= 1000) {
+          setPrice(enteredValue === '' ? '' : enteredValue);
+        }
       }
     }}
     min="1"
@@ -279,6 +282,7 @@ export default function AddProductScreen() {
     required
   />
 </div>
+
 
 
             <div className="form-group">
