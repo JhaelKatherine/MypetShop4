@@ -16,14 +16,27 @@ export default function SignupScreen() {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
-  const [emailExistsError, setEmailExistsError] = useState('');
-
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { dispatch: ctxDispatch } = useContext(Store);
+  useEffect(() => {
+    const storedFormData = localStorage.getItem('signupFormData');
+    if (storedFormData) {
+    const { name, lastName, userName, email, confirmPassword } = JSON.parse(storedFormData);
+    setName(name);
+    setLastName(lastName);
+    setUserName(userName);
+    setEmail(email);
+    setConfirmPassword(confirmPassword);
+    }
+    }, []);
+    
+    useEffect(() => {
+    const formData = { name, lastName, userName, email, confirmPassword };
+    localStorage.setItem('signupFormData', JSON.stringify(formData));
+    }, [name, lastName, userName, email, confirmPassword]);
+    
   const handleUserNameChange = (e) => {
     const inputUserName = e.target.value;
     if (inputUserName.length <= 6) {
