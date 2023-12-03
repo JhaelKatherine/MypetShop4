@@ -89,11 +89,11 @@ export default function OrderScreen() {
           <Card className="mb-3">
             <Card.Body>
             <Card.Title style={{ textAlign: 'left' }}>
-  Items{' '}
-  <span style={{ marginRight: '50px' }}>Name</span>
-  <span style={{ marginRight: '50px' }}>Quantity</span>
-  <span style={{ marginRight: '50px' }}>Unit price</span>
-  <span style={{ marginRight: '50px' }}>Subtotal</span>
+            <span style={{ marginRight: '50px' }}>Items</span>
+  <span style={{ marginRight: '80px' }}>Name</span>
+  <span style={{ marginRight: '80px' }}>Quantity</span>
+  <span style={{ marginRight: '80px' }}>Unit price</span>
+  <span style={{ marginRight: '80px' }}>Subtotal</span>
 </Card.Title>
                         <ListGroup variant="flush">
                 {order.orderItems.map((item) => (
