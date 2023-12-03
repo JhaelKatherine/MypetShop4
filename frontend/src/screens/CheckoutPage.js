@@ -261,15 +261,15 @@ const CheckoutPage = () => {
             placeholder="(941) 555-0123"
             required
             autoComplete="tel"
+            maxLength={8}
             value={billingDetails.phone}
             onChange={(e) =>  {
               const value = e.target.value;
-              if (isValidPhone(value) || value === '') {
+              if (/^\d{0,8}$/.test(value)) {
                 setBillingDetails({ ...billingDetails, phone: value });
-              } else {
-                setIsNameValid(false);
               }
             }}
+            
           />
            {!isNameValid && <ErrorMessage>Please enter only numbers</ErrorMessage>}
         </fieldset>

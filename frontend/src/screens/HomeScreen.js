@@ -93,7 +93,9 @@ function HomeScreen() {
       dispatch({ type: "FETCH_FAIL", payload: err.message });
     }
   };
- 
+  const handleResetClick = () => {
+    fetchProducts();
+  };
 
   return (
     <div>
@@ -119,8 +121,10 @@ function HomeScreen() {
         </button>
             ))}
       </div>
-      <h1>Most Selled Products</h1>
-
+      <div className="letters-container">
+        <h1>Most Selled Products</h1>
+      <button onClick={handleResetClick} className="button-reset" >RESET PRODUCTS </button>
+      </div>
       <div className="products">
         {loading ? (
           <LoadingBox />
