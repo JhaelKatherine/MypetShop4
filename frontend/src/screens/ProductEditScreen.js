@@ -270,15 +270,18 @@ export default function ProductEditScreen() {
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value;
-                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
-                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
+                  const enteredValue = e.target.value;
+
+                  if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                    const numericValue = parseFloat(enteredValue);
+            
+                    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+                      setPrice(enteredValue);
+                    } else if (enteredValue === '' || enteredValue === '-') {
                       setPrice(enteredValue);
                     }
-                  }}
-                  maxLength="4"
-                  min="1"
-                  max="1000"
+                  }
+                }}
                   onKeyDown={(e) => {
                     // Evita caracteres que no sean números o puntos decimales
                     if (
@@ -369,14 +372,17 @@ export default function ProductEditScreen() {
                 value={countInStock}
                 onChange={(e) => {
                   const enteredValue = e.target.value;
-                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
-                    setCountInStock(enteredValue === '' ? '' : enteredValue);
+
+                  if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                    const numericValue = parseFloat(enteredValue);
+            
+                    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+                      setPrice(enteredValue);
+                    } else if (enteredValue === '' || enteredValue === '-') {
+                      setPrice(enteredValue);
+                    }
                   }
                 }}
-
-                maxLength="4"
-                min="1"
-                max="1000"
                 
                 onKeyDown={(e) => {
                   if (

@@ -253,15 +253,12 @@ export default function AddProductScreen() {
     onChange={(e) => {
       const enteredValue = e.target.value;
 
-      // Verificar que la longitud sea menor o igual a 4 y que sea un número válido
       if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
         const numericValue = parseFloat(enteredValue);
 
-        // Verificar que esté en el rango de 1 a 1000
         if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
           setPrice(enteredValue);
         } else if (enteredValue === '' || enteredValue === '-') {
-          // Permitir eliminar el último número
           setPrice(enteredValue);
         }
       }
@@ -370,14 +367,17 @@ export default function AddProductScreen() {
                 value={countInStock}
                 onChange={(e) => {
                   const enteredValue = e.target.value;
-                  if (/^\d+(\.\d*)?$|^$/.test(enteredValue) && parseFloat(enteredValue) !== 0) {
-                    setCountInStock(enteredValue === '' ? '' : enteredValue);
+
+                  if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                    const numericValue = parseFloat(enteredValue);
+            
+                    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+                      setPrice(enteredValue);
+                    } else if (enteredValue === '' || enteredValue === '-') {
+                      setPrice(enteredValue);
+                    }
                   }
                 }}
-
-                maxLength="4"
-                min="1"
-                max="1000"
                 
                 onKeyDown={(e) => {
                   if (
