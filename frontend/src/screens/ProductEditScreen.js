@@ -270,14 +270,18 @@ export default function ProductEditScreen() {
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value;
-                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
-                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
+                  const enteredValue = e.target.value;
+
+                  if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                    const numericValue = parseFloat(enteredValue);
+            
+                    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+                      setPrice(enteredValue);
+                    } else if (enteredValue === '' || enteredValue === '-') {
                       setPrice(enteredValue);
                     }
-                  }}
-                  min="1"
-                  max="1000"
+                  }
+                }}
                   onKeyDown={(e) => {
                     // Evita caracteres que no sean números o puntos decimales
                     if (
@@ -362,24 +366,38 @@ export default function ProductEditScreen() {
             <div className="form-group">
               <label htmlFor="countInStock">Count In Stock</label>
               <input
-                type="number"
+                type="text"
                 id="countInStock"
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
-                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
-                    if (regex.test(enteredValue)) {
+                  const enteredValue = e.target.value;
+
+                  if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                    const numericValue = parseFloat(enteredValue);
+            
+                    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+                      setCountInStock(enteredValue);
+                    } else if (enteredValue === '' || enteredValue === '-') {
                       setCountInStock(enteredValue);
                     }
-                  }}
-                  min="1"
-                  max="1000"
-                  onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
-                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
-                    }
-                  }}
+                  }
+                }}
+                
+                onKeyDown={(e) => {
+                  if (
+                    !(
+                      (e.key >= '0' && e.key <= '9') ||
+                      e.key === '.' ||
+                      e.key === 'Backspace' ||
+                      e.key === 'Delete' ||
+                      e.key === 'ArrowLeft' ||
+                      e.key === 'ArrowRight'
+                    )
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
                 required
               />
             </div>
