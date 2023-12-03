@@ -244,8 +244,7 @@ export default function AddProductScreen() {
             </div>
 
 
-
-<div className="form-group">
+            <div className="form-group">
   <label htmlFor="price">Price</label>
   <input
     type="text"
@@ -255,13 +254,16 @@ export default function AddProductScreen() {
     onChange={(e) => {
       const enteredValue = e.target.value;
       
-      // Limitar la longitud a 4 dígitos
-      if (enteredValue.length <= 4 && (/^\d+(\.\d*)?$|^$/.test(enteredValue) || enteredValue === '')) {
-        setPrice(enteredValue);
+      // Limitar la longitud a 4 dígitos y asegurar que sea un número válido
+      if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+        const numericValue = parseFloat(enteredValue);
+        
+        // Asegurar que el valor esté en el rango de 1 a 1000
+        if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+          setPrice(enteredValue);
+        }
       }
     }}
-    min="1"
-    max="1000"
     onKeyDown={(e) => {
       if (
         !(
@@ -279,6 +281,7 @@ export default function AddProductScreen() {
     required
   />
 </div>
+
 
 
             <div className="form-group">
