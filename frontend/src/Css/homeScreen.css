@@ -196,6 +196,8 @@
   padding: 10px;
   z-index: 1; 
   width: max-content; 
+  margin-top: 22px; 
+
 }
 
 .subcategory-button {
@@ -204,7 +206,7 @@
   cursor: pointer;
   padding: 5px;
   text-align: left;
-  width: 100%; 
+  width: 100%;
 }
 
 .subcategory-button:hover {
