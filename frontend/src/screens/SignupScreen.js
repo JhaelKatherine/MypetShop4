@@ -153,32 +153,19 @@ export default function SignupScreen() {
   />
 </div>
 
-          <div className="form-group">
+<div className="form-group">
             <label htmlFor="email">Email</label>
             <input
   type="email"
   id="email"
   className="form-control"
-  onChange={(e) => {
-    const newEmail = e.target.value;
-    if (newEmail.length <= 100) {
-      setUserName(newEmail);
-      e.target.setCustomValidity(''); 
-    } else {
-      setUserName(newEmail.slice(0, 100));
-      e.target.setCustomValidity('Use a maximum of 100 characters for your email');
-    }
-  }}
+  onChange={(e) => setEmail(e.target.value)}
   onInvalid={(e) => {
-    
-  
-    if (e.target.value === '') {
-              e.target.setCustomValidity("This field is required");
-            } else {
-              if (!isEmailValid(e.target.value)) {
-                e.target.setCustomValidity("Please enter a valid email address");
-              } 
-            }
+    if (!isEmailValid(e.target.value)) {
+      e.target.setCustomValidity("Please enter a valid email address");
+    } else {
+      e.target.setCustomValidity("This field is required");
+    }
   }}
   onInput={(e) => {
     if (isEmailValid(e.target.value)) {
