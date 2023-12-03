@@ -24,7 +24,6 @@ export default function SignupScreen() {
 
 
   useEffect(() => {
-    // Load form data from localStorage
     const storedFormData = localStorage.getItem('signupFormData');
     if (storedFormData) {
       const { name, lastName, userName, email, confirmPassword } = JSON.parse(storedFormData);
@@ -37,7 +36,6 @@ export default function SignupScreen() {
   }, []);
 
   useEffect(() => {
-    // Save form data to localStorage whenever form data changes
     const formData = { name, lastName, userName, email, confirmPassword };
     localStorage.setItem('signupFormData', JSON.stringify(formData));
   }, [name, lastName, userName, email, confirmPassword]);
@@ -48,18 +46,16 @@ export default function SignupScreen() {
     const minLengthMessage = 'Use 8 characters minimum for the password';
 
     if (password.length < 8) {
-      toast.error(minLengthMessage);
-      return false;
+      return minLengthMessage;
     }
 
     // La contraseña debe incluir al menos una minúscula, una mayúscula, un número y un carácter especial
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
     if (!passwordRegex.test(password)) {
-      toast.error('Choose a stronger password. Try a combination of letters, numbers, and symbols.');
-      return false;
+      return 'Choose a stronger password. Try a combination of letters, numbers, and symbols.';
     }
 
-    return true;
+    return '';
   };
  
   
@@ -77,7 +73,10 @@ export default function SignupScreen() {
       return;
     }
     
-    if (!isPasswordStrong(password)) {
+    const passwordErrorMessage = isPasswordStrong(password);
+    if (passwordErrorMessage) {
+      e.target.elements.password.setCustomValidity(passwordErrorMessage);
+      e.target.reportValidity();
       return;
     }
 
