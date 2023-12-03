@@ -288,35 +288,6 @@ export default function ShippingAddressScreen() {
                       </div>
                       <div>
                       
-                      <ListGroup variant="flush">
-                        
-                        <ListGroup.Item className='gray-background'>
-                          <div className="mb-3">
-                            <Form.Check
-                              type="radio"
-                              id="PayPal"
-                              label="PayPal"
-                              value="PayPal"
-                              checked={paymentMethodName === 'PayPal'}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                              disabled={true} 
-                            />
-                          </div>
-                        </ListGroup.Item>
-                        
-                        <ListGroup.Item className='gray-background'>
-                          <div className="mb-3">
-                            <Form.Check
-                              type="radio"
-                              id="Stripe"
-                              label="Stripe"
-                              value="Stripe"
-                              checked={paymentMethodName === 'Stripe'}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                            />
-                          </div>
-                        </ListGroup.Item>
-                      </ListGroup>
                       </div>
                       
                       <div className="d-flex justify-content-end mt-3">
