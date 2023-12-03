@@ -255,7 +255,7 @@ export default function AddProductScreen() {
       const enteredValue = e.target.value;
       
       // Limitar la longitud a 4 dígitos y asegurar que sea un número válido
-      if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+      if (enteredValue.length === 0 || (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue))) {
         const numericValue = parseFloat(enteredValue);
         
         // Asegurar que el valor esté en el rango de 1 a 1000
