@@ -260,11 +260,10 @@ export default function AddProductScreen() {
 
       if (/^\d+(\.\d*)?$|^$/.test(enteredValue)) {
         const floatValue = parseFloat(enteredValue);
-        if (floatValue > 0 && floatValue <= 1000) {
+        if (floatValue >= 0 && floatValue <= 1000) {
           setPrice(enteredValue === '' ? '' : enteredValue);
         } else {
-          // Mostrar un mensaje de error cuando el valor es 0 o está fuera del rango
-          setPrice('');
+          // Mostrar un mensaje de alerta si el valor está fuera del rango
           alert('Por favor, ingrese un número entre 1 y 1000.');
         }
       }
@@ -288,6 +287,7 @@ export default function AddProductScreen() {
     required
   />
 </div>
+
 
 
 
