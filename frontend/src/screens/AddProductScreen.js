@@ -253,8 +253,10 @@ export default function AddProductScreen() {
     onChange={(e) => {
       let enteredValue = e.target.value;
 
-      // Limitar la longitud a 4 dígitos
-      enteredValue = enteredValue.slice(0, 4);
+      // Limitar la longitud a 4 dígitos solo si la longitud excede 4
+      if (enteredValue.length > 4) {
+        enteredValue = enteredValue.slice(0, 4);
+      }
 
       if (/^\d+(\.\d*)?$|^$/.test(enteredValue)) {
         const floatValue = parseFloat(enteredValue);
@@ -282,6 +284,7 @@ export default function AddProductScreen() {
     required
   />
 </div>
+
 
 
 
@@ -359,32 +362,38 @@ export default function AddProductScreen() {
                 {brandOptions}
                 </select>
             </div>
-
             <div className="form-group">
-              <label htmlFor="countInStock">Count In Stock</label>
-              <input
-                type="number"
-                id="countInStock"
-                className="form-control"
-                value={countInStock}
-                onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[e]/gi, ''); 
-                    const regex = /^[0-9]*$/; 
-                    if (regex.test(enteredValue)) {
-                      setCountInStock(enteredValue);
-                    }
-                  }}
-                  min="1"
-                  max="1000"
+  <label htmlFor="countInStock">Count In Stock</label>
+  <input
+    type="number"
+    id="countInStock"
+    className="form-control"
+    value={countInStock}
+    onChange={(e) => {
+      const enteredValue = e.target.value.replace(/[e]/gi, '');
+      const regex = /^[0-9]*$/;
+      
+      // Limitar la longitud a 4 dígitos
+      const limitedValue = enteredValue.slice(0, 4);
 
-                  onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
-                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
-                    }
-                  }}
-                required
-              />
-            </div>
+      if (regex.test(limitedValue)) {
+        const intValue = parseInt(limitedValue, 10);
+        if (intValue <= 1000) {
+          setCountInStock(limitedValue);
+        }
+      }
+    }}
+    min="1"
+    max="1000"
+    onKeyDown={(e) => {
+      if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
+        e.preventDefault(); // Evita la entrada de 'e', 'E', '+', '-', '*', '/' y otros caracteres no deseados
+      }
+    }}
+    required
+  />
+</div>
+
 
             <div className="form-group">
               <label htmlFor="imageURL">Image URL</label>
