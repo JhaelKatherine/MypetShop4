@@ -35,10 +35,7 @@ export default function ShippingAddressScreen() {
   const [cellPhoneError, setCellPhoneError] = useState('');
   
   useEffect(() => {
-    // Validar si el usuario está autenticado al cargar el componente
     if (!userInfo) {
-      navigate('/signin'); // Si no hay usuario, redirigir a la página de inicio de sesión
-    } else {
       navigate('/shipping'); // Si hay usuario, redirigir a la página de factura
     }
   }, [navigate, userInfo]);
@@ -121,12 +118,14 @@ export default function ShippingAddressScreen() {
     }
   };
   const placeOrder = () => {
-    if (validateForm()) {
-      ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
-      localStorage.setItem('shippingAddress', JSON.stringify({ nit, address, city , fullName}));
-      navigate('/checkoutpage');
+    // Validar si el usuario está autenticado al hacer clic en "Place the Order"
+    if (!userInfo) {
+      navigate('/signin'); // Si no hay usuario, redirigir a la página de inicio de sesión
     } else {
-      console.log('Please complete the required fields correctly.');
+      // Si hay usuario, guardar la información y redirigir a la página de checkout
+      ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
+      localStorage.setItem('shippingAddress', JSON.stringify({ nit, address, city, fullName }));
+      navigate('/checkoutpage');
     }
   };
 
