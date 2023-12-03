@@ -24,25 +24,11 @@ export default function SignupScreen() {
 
 
   useEffect(() => {
-    // Load form data from localStorage
-    const storedFormData = localStorage.getItem('signupFormData');
-    if (storedFormData) {
-      const { name, lastName, userName, email, confirmPassword } = JSON.parse(storedFormData);
-      setName(name);
-      setLastName(lastName);
-      setUserName(userName);
-      setEmail(email);
-      setConfirmPassword(confirmPassword);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Save form data to localStorage whenever form data changes
-    const formData = { name, lastName, userName, email, confirmPassword };
-    localStorage.setItem('signupFormData', JSON.stringify(formData));
+    // Remove the useEffect for saving form data to localStorage
+    // ... (rest of the component)
   }, [name, lastName, userName, email, confirmPassword]);
 
-  
+
   const handleUserNameChange = (e) => {
     const inputUserName = e.target.value;
     if (inputUserName.length <= 6) {
