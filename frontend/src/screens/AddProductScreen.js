@@ -372,9 +372,9 @@ export default function AddProductScreen() {
                     const numericValue = parseFloat(enteredValue);
             
                     if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
-                      setPrice(enteredValue);
+                      setCountInStock(enteredValue);
                     } else if (enteredValue === '' || enteredValue === '-') {
-                      setPrice(enteredValue);
+                      setCountInStock(enteredValue);
                     }
                   }
                 }}
