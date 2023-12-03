@@ -217,14 +217,7 @@ function App() {
                 <SearchBar />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
-                  <Link to="/aboutUs" className="nav-link">
-                      <img
-                          alt="cart"
-                          src="https://cdn-icons-png.flaticon.com/512/43/43921.png"
-                          height="30"
-                          className="d-inline-block align-top"
-                      />
-                  </Link>
+                  
 
                   <button className="cart-button" onClick={toggleCartMenu}>
           <img
