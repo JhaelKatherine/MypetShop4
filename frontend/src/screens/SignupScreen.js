@@ -65,7 +65,7 @@ export default function SignupScreen() {
 
   return (
     <>
-    <div className="blue-background"> {/* Agregar esta línea */}
+    <div className="blue-background"> 
 
       <div className="form-container">
       <div className="centered-title">
@@ -104,7 +104,7 @@ export default function SignupScreen() {
     className="form-control"
     value={userName}
     onChange={handleUserNameChange}
-    maxLength={6} // Limitar a 6 caracteres
+    maxLength={6} 
     onInvalid={(e) => e.target.setCustomValidity("Please enter a maximum of 6 characters")}
     onInput={(e) => e.target.setCustomValidity('')}
     required

@@ -20,7 +20,6 @@ export default function SigninScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const isEmailValid = (email) => {
-    // Expresión regular más detallada para validar el formato del correo electrónico
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
@@ -29,7 +28,6 @@ export default function SigninScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      // Validar el formato del correo electrónico antes de enviar la solicitu  
       if (!isEmailValid(email)) {
         toast.error('Please enter a valid email address');
         return;
@@ -48,7 +46,7 @@ export default function SigninScreen() {
 
   return (
     <>
-      <div className="blue-background"> {/* Agregar esta línea */}
+      <div className="blue-background"> 
         <Helmet>
           <title>Sign In</title>
         </Helmet>

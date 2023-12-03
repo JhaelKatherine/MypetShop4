@@ -21,7 +21,7 @@ const CheckoutPage = () => {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
-  const [countInStock, setCountInStock] = useState(0); // Ajusta el valor inicial según tus necesidades
+  const [countInStock, setCountInStock] = useState(0); 
 
   const CARD_OPTIONS = {
     iconStyle: "solid",

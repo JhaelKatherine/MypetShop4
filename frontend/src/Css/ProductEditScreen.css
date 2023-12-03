@@ -15,9 +15,9 @@
 
   }
 .form-container {
-    max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    padding: 20px; /* Añade espacio interno alrededor del contenedor */
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px; 
   }
   
   .centered-title {
@@ -39,14 +39,13 @@
     margin-bottom: 15px;
   }
   .custom-width {
-    width: 100%; /* Ajusta el ancho según sea necesario */
+    width: 100%;
   }
   
   
   .submit {
-    background-color: #007bff; /* Color de fondo del botón */
-    color: #fff; /* Color del texto del botón */
+    background-color: #007bff; 
+    color: #fff; 
   }
   
-  /* Agrega estilos adicionales según sea necesario */
   

@@ -45,7 +45,7 @@ const reducer = (state, action) => {
 };
 export default function ProductEditScreen() {
   const navigate = useNavigate();
-  const params = useParams(); // /product/:id
+  const params = useParams();
   const { id: productId } = params;
 
 
@@ -68,7 +68,7 @@ export default function ProductEditScreen() {
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
   const [loading2, setLoading] = useState(false);
-  const [species, setSpecies] = useState(''); // Nueva variable para la especie
+  const [species, setSpecies] = useState(''); 
   const [brandOptions, setBrandOptions] = useState([]);
   const [availableBrands, setAvailableBrands] = useState([]);
   const [brandDisabled, setBrandDisabled] = useState(true);
@@ -140,9 +140,8 @@ export default function ProductEditScreen() {
   const handleImageChange = async (e) => {
     const inputValue = e.target.value;
     setImage(inputValue);
-    setImageError(''); // Limpiar cualquier mensaje de error existente
+    setImageError(''); 
 
-    // Validación de la URL solo si hay algún valor
     if (inputValue.trim() !== '') {
       if (!isValidImageUrl(inputValue)) {
         setImageError('Please enter a valid image URL');
@@ -283,7 +282,6 @@ export default function ProductEditScreen() {
                   }
                 }}
                   onKeyDown={(e) => {
-                    // Evita caracteres que no sean números o puntos decimales
                     if (
                       !(
                         (e.key >= '0' && e.key <= '9') ||

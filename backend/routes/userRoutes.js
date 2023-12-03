@@ -72,9 +72,6 @@ userRouter.post(
       user.resetToken = token;
       await user.save();
 
-      //reset link
-      console.log(`${baseUrl()}/reset-password/${token}`);
-
       mailgun()
         .messages()
         .send(
@@ -184,8 +181,6 @@ userRouter.post(
 userRouter.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
-    try {
-
     const newUser = new User({
       name: req.body.name,
       lastName: req.body.name,
@@ -203,16 +198,7 @@ userRouter.post(
       isAdmin: user.isAdmin,
       token: generateToken(user),
     });
-  } catch (error) {
-    if (error.code === 11000 && error.keyPattern && error.keyPattern.email) {
-      // Código 11000 indica clave duplicada (E11000)
-      res.status(400).send({ message: 'Email already exists' });
-    } else {
-      // Otro tipo de error
-      res.status(500).send({ message: 'Internal Server Error' });
-    }
-  }
-})
+  })
 );
 
 export default userRouter;
