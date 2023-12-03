@@ -24,11 +24,29 @@ export default function SignupScreen() {
 
 
   useEffect(() => {
-    // Remove the useEffect for saving form data to localStorage
-    // ... (rest of the component)
+    // Load form data from localStorage
+    const storedFormData = localStorage.getItem('signupFormData');
+    if (storedFormData) {
+      const { name, lastName, userName, email, confirmPassword } = JSON.parse(storedFormData);
+      setName(name);
+      setLastName(lastName);
+      setUserName(userName);
+      setEmail(email);
+      setConfirmPassword(confirmPassword);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save form data to localStorage whenever form data changes
+    const formData = { name, lastName, userName, email, confirmPassword };
+    localStorage.setItem('signupFormData', JSON.stringify(formData));
   }, [name, lastName, userName, email, confirmPassword]);
 
-
+  const isPasswordStrong = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    return passwordRegex.test(password);
+  };
+  
   const handleUserNameChange = (e) => {
     const inputUserName = e.target.value;
     if (inputUserName.length <= 6) {
@@ -40,6 +58,10 @@ export default function SignupScreen() {
 
     if (name.trim() === '' || lastName.trim() === '' || userName.trim() === '' || email.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') {
       toast.error('Please complete all fields');
+      return;
+    }
+    if (!isPasswordStrong(password)) {
+      toast.error('Password must be at least 8 characters long and include a lowercase letter, an uppercase letter, a number, and a special character');
       return;
     }
 
