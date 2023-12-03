@@ -30,6 +30,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProductsScreen from './screens/ProductScreen';
+import ReloadOnPathMatch from './screens/ReloadOnPathMatch'
 import FilterLogic from "./screens/FilterLogic"; 
 import Invoice from "./screens/Invoice";
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -196,6 +197,9 @@ function App() {
   };
 
 
+
+  
+
   return (
     <BrowserRouter>
       <div>
@@ -203,13 +207,14 @@ function App() {
         <header>
           <Navbar>
             <Container>
-              <LinkContainer to="/">
+              <LinkContainer to={`/`} search={`?refresh=${new Date().getTime()}`}>
                 <Navbar.Brand>
                   <img
                     alt="My Pet Shop Logo"
                     src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
                     height="50"
-                    className="d-inline-block align-top"
+                    className="d-inline-block align-top" 
+                                       
                   />
                 </Navbar.Brand>
               </LinkContainer>
