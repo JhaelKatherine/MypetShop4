@@ -8,6 +8,10 @@ import { Store } from '../Store';
 import { getError } from '../utils';
 import Button from 'react-bootstrap/esm/Button';
 import { format } from 'date-fns';
+import '../Css/stile.css';
+import '../img/empty_plate.svg';
+
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -50,7 +54,10 @@ export default function OrderHistoryScreen() {
   }, [userInfo]);
 
   return (
-    <div style={{ marginBottom: '400px' }}>
+
+  
+ 
+  /*  <div style={{ marginBottom: '400px' }}>
       <Helmet>
         <title>Order History</title>
       </Helmet>
@@ -94,5 +101,18 @@ export default function OrderHistoryScreen() {
         </table>
       )}
     </div>
-  );
+
+    
+  );*/
+  <div className="empty-state-container">
+  <div className="empty-state-text">
+    <h2>¡Ups, esto está vacío!</h2>
+    <p>Explora nuestro catálogo para conocer lo que tenemos para ofrecer.</p>
+    <Button>Explorar nuestro catálogo</Button>
+  </div>
+  <div className="empty-state-image">
+    <img src="../img/empty_plate.svg" alt="Empty State" />
+  </div>
+</div>
+);
 }
