@@ -6,8 +6,6 @@ import { Store } from '../Store';
 import CartScreen2 from './CartScreen2';
 import '../Css/Shipping.css';
 
-import { ListGroup } from 'react-bootstrap';
-
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -131,16 +129,16 @@ export default function ShippingAddressScreen() {
         <div className="col-md-6">
           <div className="small-container">
             <h1 className="my-3">Billing Details</h1>
-            <p className='rojo'>Field are (*)required</p>
-            <form onSubmit={submitPaymentHandler} className="custom-form">
-            <div className="form-group">
-  <label htmlFor="fullName">Full Name(*)</label>
-  <input
-    type="text"
-    id="fullName"
-    className="form-control"
-    value={fullName}
-    onChange={(e) => {
+            <p className='rojo'>Fields marked with (*) are required</p>
+            <form onSubmit={submitShippingHandler} className="custom-form">
+              <div className="form-group">
+                <label htmlFor="fullName">Full Name(*)</label>
+                <input
+                  type="text"
+                  id="fullName"
+                  className="form-control"
+                  value={fullName}
+                  onChange={(e) => {
       const regex = /^[A-Za-z\s]+$/;
       const value = e.target.value;
       if (regex.test(value) || value === '') {
@@ -153,7 +151,9 @@ export default function ShippingAddressScreen() {
       }
     }}
     pattern="^[A-Za-z\s]+$"
-    title="Please enter only letters "
+    title="Please enter only letters"
+    onInvalid={(e) => e.target.setCustomValidity(fullNameError)}
+     onInput={(e) => e.target.setCustomValidity('')}
   />
   {fullNameError && (
     <div className="error-message">{fullNameError}</div>
