@@ -112,10 +112,10 @@ function App() {
       let url = '';
       switch (socialMedia) {
         case 'instagram':
-          url = 'https://www.instagram.com/petshop_patitas_cbba/';
+          url = 'https://www.instagram.com/petshopcorp7/';
           break;
         case 'tiktok':
-          url = 'https://www.tiktok.com/@gaston_hdyxfhchvq?_t=8hksnUI89AM&_r=1';
+          url = 'https://www.tiktok.com/@my_pet_shop023';
           break;
         case 'facebook':
           url = 'https://www.facebook.com/profile.php?id=61550120834894';
@@ -217,14 +217,7 @@ function App() {
                 <SearchBar />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
-                  <Link to="/aboutUs" className="nav-link">
-                      <img
-                          alt="cart"
-                          src="https://cdn-icons-png.flaticon.com/512/43/43921.png"
-                          height="30"
-                          className="d-inline-block align-top"
-                      />
-                  </Link>
+                  
 
                   <button className="cart-button" onClick={toggleCartMenu}>
           <img
@@ -321,7 +314,7 @@ function App() {
                     Subtotal:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                   </div>
                   <Link to="/cart" className="button-margin">
-                  <Button variant="primary" className="button-margin" onClick={closeCartMenu} >Chekout</Button>
+                  <Button variant="primary" className="button-margin" onClick={closeCartMenu} >Checkout</Button>
                   </Link>
                 </div>
               )}
