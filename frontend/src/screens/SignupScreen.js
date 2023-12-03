@@ -16,8 +16,6 @@ export default function SignupScreen() {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
-
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,14 +24,25 @@ export default function SignupScreen() {
 
 
   useEffect(() => {
-    setName('');
-    setLastName('');
-    setUserName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
+    // Load form data from localStorage
+    const storedFormData = localStorage.getItem('signupFormData');
+    if (storedFormData) {
+      const { name, lastName, userName, email, confirmPassword } = JSON.parse(storedFormData);
+      setName(name);
+      setLastName(lastName);
+      setUserName(userName);
+      setEmail(email);
+      setConfirmPassword(confirmPassword);
+    }
   }, []);
 
+  useEffect(() => {
+    // Save form data to localStorage whenever form data changes
+    const formData = { name, lastName, userName, email, confirmPassword };
+    localStorage.setItem('signupFormData', JSON.stringify(formData));
+  }, [name, lastName, userName, email, confirmPassword]);
+
+  
   const handleUserNameChange = (e) => {
     const inputUserName = e.target.value;
     if (inputUserName.length <= 6) {
@@ -169,7 +178,7 @@ export default function SignupScreen() {
           <button className="submit" type="submit">Sign Up</button>
           <div>
             <p>
-              
+
             </p>
           </div>
           <div className="mb-3">
