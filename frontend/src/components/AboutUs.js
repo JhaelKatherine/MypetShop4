@@ -6,10 +6,13 @@ import gaston from '../img/members/gaston.png'
 import sebastian from '../img/members/sebastian.png'
 import emanuel from '../img/members/emanuel.png'
 import camila from '../img/members/camila.png'
+import '../Css/stile.css';
+import Button from 'react-bootstrap/esm/Button';
+import empty_plate from '../img/empty_plate.svg'
 
 const AboutUs = () => {
     return (
-        <div className={'container-aboutUs'}>
+       /* <div className={'container-aboutUs'}>
 
             <img className={'w-100-bg'} src={imageBg}/>
             <h1>ABOUT US</h1>
@@ -48,7 +51,20 @@ const AboutUs = () => {
             <p className={'version'}>My Petshop Version 3.0</p>
 
         </div>
-    );
+    );*/
+    <div className="empty-state-container">
+      <div className="empty-state-text">
+        <h2>¡Ups, esto está vacío!</h2>
+        <p>Explora nuestro catálogo para conocer lo que tenemos para ofrecer.</p>
+        <div className="empty-state-button">
+          <Button>Explorar nuestro catálogo</Button>
+        </div>
+      </div>
+      <div className="empty-state-image">
+        <img src={empty_plate} alt="Empty State" />
+      </div>
+    </div>
+  );
 };
 
 export default AboutUs;

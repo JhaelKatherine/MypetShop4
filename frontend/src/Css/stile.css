@@ -12,6 +12,9 @@
   .empty-state-text {
     width: 45%;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
   .empty-state-text h2 {
@@ -24,6 +27,11 @@
     margin-bottom: 20px;
   }
   
+  .empty-state-button {
+    display: flex;
+    justify-content: center;
+  }
+  
   .empty-state-image {
     width: 45%;
   }
@@ -32,4 +40,5 @@
     max-width: 100%;
     height: auto;
   }
+  
   

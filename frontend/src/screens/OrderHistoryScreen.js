@@ -9,9 +9,7 @@ import { getError } from '../utils';
 import Button from 'react-bootstrap/esm/Button';
 import { format } from 'date-fns';
 import '../Css/stile.css';
-import '../img/empty_plate.svg';
-
-
+import empty_plate from '../img/empty_plate.svg'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -34,6 +32,7 @@ export default function OrderHistoryScreen() {
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
+    orders: [], // Initialize orders as an empty array
   });
   useEffect(() => {
     const fetchData = async () => {
@@ -54,10 +53,7 @@ export default function OrderHistoryScreen() {
   }, [userInfo]);
 
   return (
-
-  
- 
-  /*  <div style={{ marginBottom: '400px' }}>
+    <div style={{ marginBottom: '400px' }}>
       <Helmet>
         <title>Order History</title>
       </Helmet>
@@ -68,6 +64,19 @@ export default function OrderHistoryScreen() {
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
+      ) : orders.length === 0 ? ( // Check if there are no orders
+        <div className="empty-state-container">
+          <div className="empty-state-text">
+            <h2>Oops, this is empty!</h2>
+            <p>Explore our catalog to see what we have to offer.</p>
+            <div className="empty-state-button">
+              <Button onClick='/'>Explore our catalog</Button>
+            </div>
+          </div>
+          <div className="empty-state-image">
+            <img src={empty_plate} alt="Empty State" />
+          </div>
+        </div>
       ) : (
         <table className="table">
           <thead>
@@ -101,18 +110,5 @@ export default function OrderHistoryScreen() {
         </table>
       )}
     </div>
-
-    
-  );*/
-  <div className="empty-state-container">
-  <div className="empty-state-text">
-    <h2>¡Ups, esto está vacío!</h2>
-    <p>Explora nuestro catálogo para conocer lo que tenemos para ofrecer.</p>
-    <Button>Explorar nuestro catálogo</Button>
-  </div>
-  <div className="empty-state-image">
-    <img src="../img/empty_plate.svg" alt="Empty State" />
-  </div>
-</div>
-);
+  );
 }
