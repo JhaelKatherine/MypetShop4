@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import '../Css/AddUser.css';
 
-
 export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -19,8 +18,8 @@ export default function SignupScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const { dispatch: ctxDispatch } = useContext(Store);
 
+  const { state, dispatch: ctxDispatch } = useContext(Store);
 
   useEffect(() => {
     const storedFormData = localStorage.getItem('signupFormData');
@@ -40,17 +39,23 @@ export default function SignupScreen() {
   }, [name, lastName, userName, email, confirmPassword]);
 
 
-  
-  const isPasswordStrong = (password) => {
-    // La contraseña debe tener al menos 8 caracteres
-    const minLengthMessage = 'Use 8 characters minimum for the password';
+  const handleUserNameChange = (e) => {
+    const inputUserName = e.target.value;
+    if (inputUserName.length <= 6) {
+      setUserName(inputUserName);
+    }
+  };
 
-    if (password.length < 8) {
+  const isPasswordValid = (password) => {
+
+    const MIN_PASSWORD_LENGTH = 8; // Longitud mínima de la contraseña
+    const minLengthMessage = 'Use 8 characters minimum for the password';
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+
+    if (password.length < MIN_PASSWORD_LENGTH) {
       return minLengthMessage;
     }
 
-    // La contraseña debe incluir al menos una minúscula, una mayúscula, un número y un carácter especial
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
     if (!passwordRegex.test(password)) {
       return 'Choose a stronger password. Try a combination of letters, numbers, and symbols.';
     }
@@ -58,31 +63,6 @@ export default function SignupScreen() {
     return '';
   };
 
-  const handlePasswordChange = (e) => {
-    const passwordErrorMessage = isPasswordStrong(e.target.value);
-    e.target.setCustomValidity(passwordErrorMessage);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const confirmPassword = e.target.value;
-
-    if (password !== confirmPassword) {
-      setConfirmPasswordError('Passwords do not match');
-      e.target.setCustomValidity('Passwords do not match');
-    } else {
-      setConfirmPasswordError('');
-      e.target.setCustomValidity('');
-    }
-  };
-
- 
-  
-  const handleUserNameChange = (e) => {
-    const inputUserName = e.target.value;
-    if (inputUserName.length <= 6) {
-      setUserName(inputUserName);
-    }
-  };
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -90,18 +70,10 @@ export default function SignupScreen() {
       toast.error('Please complete all fields');
       return;
     }
-    
-    const passwordErrorMessage = isPasswordStrong(password);
-    if (passwordErrorMessage) {
-      e.target.elements.password.setCustomValidity(passwordErrorMessage);
-      e.target.reportValidity();
-      return;
-    }
-    const confirmPassword = e.target.elements.confirmPassword.value;
+
+
     if (password !== confirmPassword) {
-      setConfirmPasswordError('Passwords do not match');
-      e.target.elements.confirmPassword.setCustomValidity('Passwords do not match');
-      e.target.reportValidity();
+      toast.error('Passwords do not match');
       return;
     }
     try {
@@ -125,6 +97,10 @@ export default function SignupScreen() {
     return emailRegex.test(email);
   };
 
+  const isPassword = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    return passwordRegex.test(password);
+  };
   return (
     <>
     <div className="blue-background"> {/* Agregar esta línea */}
@@ -195,40 +171,53 @@ export default function SignupScreen() {
 />
           </div>
           <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                className="form-control"
-                onChange={handlePasswordChange}
-                required
-              />
-              {e.target && e.target.elements && e.target.elements.password.validationMessage && (
-                <div className="error-message">
-                  {e.target.elements.password.validationMessage}
-                </div>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                className="form-control"
-                onChange={handleConfirmPasswordChange}
-                required
-              />
-              {confirmPasswordError && (
-                <div className="error-message">
-                  {confirmPasswordError}
-                </div>
-              )}
-            </div>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          className="form-control"
+          onChange={(e) => {
+            const newPassword = e.target.value;
+            const error = isPasswordValid(newPassword);
+            e.target.setCustomValidity(error);
+            setPassword(newPassword);
+          }}
+          onInvalid={(e) => {
+            if (e.target.value === '') {
+              e.target.setCustomValidity("This field is required");
+            } else {
+              const error = isPasswordValid(e.target.value);
+              e.target.setCustomValidity(error || "This field is required");
+            }
+          }}
+          onInput={(e) => e.target.setCustomValidity('')}
+          required
+        />
+      </div>
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              className="form-control"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity("This field is required")}
+              onInput={(e) => e.target.setCustomValidity('')}
+              required
+            />
+          </div>
           <button className="submit" type="submit">Sign Up</button>
-          <div>
-            <p>
-
-            </p>
+                <p className="signin">Register with</p>
+                <div className="social-buttons-container">
+    <button className="social-button google-button" onClick={(e) => e.preventDefault()}>
+        <img src="https://static.vecteezy.com/system/resources/previews/010/353/285/original/colourful-google-logo-on-white-background-free-vector.jpg" alt="Google" />
+        Google
+    </button>
+    <button className="social-button facebook-button" onClick={(e) => e.preventDefault()}>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" />
+        Facebook
+    </button>
+                
           </div>
           <div className="mb-3">
             Already have an account? <Link to="/signin" className="signin">Sign-In</Link>
