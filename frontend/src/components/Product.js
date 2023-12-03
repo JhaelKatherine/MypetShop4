@@ -10,12 +10,10 @@ import Rating from './Rating';
 function Product(props) {
   const { product } = props;
 
-  // Mover el hook useContext fuera de la lógica condicional
   const { state, dispatch: ctxDispatch } = useContext(Store);
 
-  // Verificar si el producto tiene la propiedad status y si es true
   if (!product || product.status === false) {
-    return null; // No renderizar si no hay status o es false
+    return null;
   }
 
   const {

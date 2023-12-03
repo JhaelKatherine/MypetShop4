@@ -40,7 +40,7 @@ export default function ForgetPasswordScreen() {
 
   return (
     <>
-    <div className="blue-background"> {/* Agregar esta línea */}
+    <div className="blue-background">
     <Helmet>
         <title>Forget Password</title>
       </Helmet>

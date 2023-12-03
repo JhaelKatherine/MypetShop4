@@ -90,14 +90,15 @@ img.product-icon {
   background-color: transparent;
 }
 
-/* Estilos del menú desplegable desde el lado derecho */
 .cart-menu-right {
   position: fixed;
   top: 0;
   right: 0;
   height: 100%;
+
   width: 400px; /* Ancho del menú  */
   background-color: #8ab3cf; 
+
   box-shadow: -3px 0 5px rgba(0, 0, 0, 0.2); 
   z-index: 999;
 }
