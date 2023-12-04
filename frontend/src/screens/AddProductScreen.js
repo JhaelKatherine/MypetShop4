@@ -67,6 +67,25 @@ export default function AddProductScreen() {
      
   };
 
+  const handleImageChange = async (e) => {
+    const imageURL = e.target.value;
+    setImage(imageURL);
+
+    // Perform URL validation
+    const isValidURL = /^(ftp|http|https):\/\/[^ "]+$/i.test(imageURL);
+
+    if (isValidURL) {
+      // Check if the URL contains an image
+      const imageExists = await checkImageExists(imageURL);
+      setIsValidImage(imageExists);
+      return true;
+    } else {
+      // If the URL format is invalid, reset the validation state
+      setIsValidImage(false);
+      return false;
+    }
+  };
+
   useEffect(() => {
     if (species && category) {
       loadBrands();
@@ -81,7 +100,7 @@ export default function AddProductScreen() {
   const checkImageExists = async (url) => {
     try {
       const response = await Axios.head(url);
-      return response.headers['content-type'].includes('image');
+      return response.headers['content-type']?.includes('image');
     } catch (error) {
       return false;
     }
@@ -91,7 +110,7 @@ export default function AddProductScreen() {
     e.preventDefault();
     setLoading(true);
 
-    if (!isValidImageUrl(image)) {
+    if (!isValidImageUrl()) {
       setLoading(false);
       toast.error('Please enter a valid image URL');
       return;
@@ -406,9 +425,14 @@ export default function AddProductScreen() {
                 maxLength="1500"
                 className="form-control"
                 value={image}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={handleImageChange}
                 required
               />
+              {isValidImage ? (
+        <p style={{ color: 'green' }}>Image found at the provided URL</p>
+      ) : (
+        <p style={{ color: 'red' }}>No valid image found at the provided URL</p>
+      )}
             </div>
             <button className="submit" type="submit">Add</button>
           </form>
