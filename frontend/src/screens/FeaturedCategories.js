@@ -77,11 +77,7 @@ const FeaturedCategories= () => {
 
   return (
     <div className="filter-container">
-         {filterApplied ? (
-          
-          <h3 style={{ marginBottom: '490px' }}>We are sorry but there are no products in the selected category, please continue browsing for more products.</h3>
-          
-          ) : (
+         
         <Row>
             
 {filteredProducts.map((product) => (
@@ -103,7 +99,7 @@ const FeaturedCategories= () => {
               </Col>
             ))}
           </Row>
-          )}
+          
     </div>
   );
 };
