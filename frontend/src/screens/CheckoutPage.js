@@ -263,11 +263,14 @@ const CheckoutPage = () => {
             autoComplete="tel"
             value={billingDetails.phone}
             onChange={(e) => {
-              const value = e.target.value.replace(/\D/g, '').slice(0, 8);
-    setBillingDetails({ ...billingDetails, phone: value });
-    setIsPhoneValid(value.length === 8); 
-  }}
-            
+              if (/^\d{0,8}$/.test(value)) { 
+                setBillingDetails({ ...billingDetails, phone: value });	         
+                setIsPhoneValid(value.length === 8); 
+              } else {
+                setIsPhoneValid(false);
+              }	              
+    
+  }}        
           />
            
         </fieldset>
