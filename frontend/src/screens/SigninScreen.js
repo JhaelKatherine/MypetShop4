@@ -61,6 +61,7 @@ export default function SigninScreen() {
                 onInvalid={(e) => e.target.setCustomValidity('Please enter a valid email address')}
                 onInput={(e) => e.target.setCustomValidity('')}
                 required
+                autoComplete="off"
               />
             </div>
             <div className="form-group">
@@ -73,6 +74,7 @@ export default function SigninScreen() {
                 onInvalid={(e) => e.target.setCustomValidity('This field is required')}
                 onInput={(e) => e.target.setCustomValidity('')}
                 required
+                autoComplete="off"
               />
             </div>
             <button className="submit" type="submit">
