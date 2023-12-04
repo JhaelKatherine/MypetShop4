@@ -162,7 +162,7 @@ function App() {
                   className="social-icon"
                 />
               </a>
-                {/* Otros íconos... */}
+               
               </div>
             </div>
           </div>
@@ -170,9 +170,10 @@ function App() {
             <div className="buy-with-us">
               <p style={{ color: 'black' }}>BUY WITH US:</p>
               <ul className="product-list">
-                <li>Dog Food</li>
-                <li>Cat Food</li>
-                <li>Rodents Food</li>
+                <li>- FOOD</li>
+                <li>- SNACKS</li>
+                <li>- TOYS</li>
+                <li>- HYGIENE</li>
               </ul>
             </div>
           </div>
@@ -185,8 +186,7 @@ function App() {
                   About us
                 </Link>
                 </li>
-                <li>Terms and Conditions</li>
-                <li>Privacy Policy</li>
+                
               </ul>
             </div>
           </div>
