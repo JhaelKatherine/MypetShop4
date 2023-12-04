@@ -264,7 +264,7 @@ const CheckoutPage = () => {
             value={billingDetails.phone}
             onChange={(e) =>  {
               let value = e.target.value.replace(/\D/g, '');
-              value = value.slice(0, 8);
+              value = value.slice(0, 12);
               setBillingDetails({ ...billingDetails, phone: value });
             }}
           />

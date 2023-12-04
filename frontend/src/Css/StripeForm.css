@@ -35,8 +35,8 @@ button {
 
 .Form {
   animation: fade 200ms ease-out;
-  margin-top: 65px;
-  margin-right: 25px;
+  margin-top: 25px;
+  margin-right: 0px;
 
 }
 
