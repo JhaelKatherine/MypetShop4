@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   padding: 5px; /* Aumentar el espacio interno */
-  margin-top: 1000px; /* Agregar margen superior */
+  margin-top: 100px; /* Agregar margen superior */
 }
 
 .column {
@@ -48,6 +48,11 @@
   list-style: none;
   padding: 0;
   text-align: left; /* Alinear elementos de la lista a la izquierda */
+}
+.menu-list1{
+  text-align: left; /* Alinear texto de cada ítem a la izquierda */
+  margin: 5px 0;
+
 }
 
 .menu-list li {

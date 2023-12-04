@@ -18,10 +18,10 @@ const Footer = () => {
       </div>
       <div className="column">
   <div className="buy-with-us-text">BUY WITH US:</div>
-  <ul className="menu-list">
-    <li>Dog Food</li>
-    <li>Cat Food</li>
-    <li>Rodents Food</li>
+  <ul className="menu-list1">
+    <li>Toys</li>
+    <li>Food</li>
+    <li>Snack</li>
   </ul>
 </div>
       <div className="column">
@@ -29,8 +29,6 @@ const Footer = () => {
         <ul className="menu-list">
       
     <li><a href="/aboutUs">About Us</a></li>
-    <li>Terms and Conditions</li>
-    <li>Privacy Policy</li>
 
         </ul>
       </div>
