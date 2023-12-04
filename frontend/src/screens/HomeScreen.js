@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer} from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -31,7 +31,8 @@ function HomeScreen() {
     loading: true,
     error: "",
   });
-  
+
+  const navigatelink = useNavigate();
   const [successDelete, setSuccessDelete] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
@@ -40,12 +41,23 @@ function HomeScreen() {
   const [buttonContainerColor, setButtonContainerColor] = useState("#4180AB");
 
   const categoryButtonsPets = [
-    { label: "Dog Food", imageUrl: "https://images.ecestaticos.com/RYyHCyWe7IE6v1LNdx-ud8zj-KM=/0x0:2121x1414/1200x1200/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd67%2Fa8d%2F860%2Fd67a8d8604edeac49386e96e2890fe7a.jpg", onClick: () => console.log("Acción para Dog Food") },
-    { label: "Cat Food", imageUrl: "https://laverdadnoticias.com/__export/1679601873554/sites/laverdad/img/2023/03/23/mishicomiendo.jpg_1953115887.jpg", onClick: () => console.log("Acción para Cat Food") },
-    { label: "Dog Accessories", imageUrl: "https://img.freepik.com/fotos-premium/cumpleanos-animales-lindos_759095-115240.jpg", onClick: () => console.log("Acción para Dog Accessories") },
-    { label: "Cat Litter", imageUrl: "https://s.alicdn.com/@sc04/kf/H8494b319e9de4996845a361b9758d82et.jpg", onClick: () => console.log("Acción para Cat Litter") },
-    { label: "Cat Accessories", imageUrl: "https://us.123rf.com/450wm/colnihko/colnihko2306/colnihko230600052/205883575-cute-fluffy-cat-celebrates-birthday-in-cap-on-festive-balloons-background-generative-ai-illustration.jpg?ver=6", onClick: () => console.log("Acción para Cat Accessories") },
+    { label: "DOG FOOD", imageUrl: "https://images.ecestaticos.com/RYyHCyWe7IE6v1LNdx-ud8zj-KM=/0x0:2121x1414/1200x1200/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd67%2Fa8d%2F860%2Fd67a8d8604edeac49386e96e2890fe7a.jpg", onClick: () => console.log("Acción para Dog Food") },
+    { label: "CAT FOOD", imageUrl: "https://laverdadnoticias.com/__export/1679601873554/sites/laverdad/img/2023/03/23/mishicomiendo.jpg_1953115887.jpg", onClick: () => console.log("Acción para Cat Food") },
+    { label: "RODENTS FOOD", imageUrl: "https://www.tierpark-berlin.de/fileadmin/_processed_/e/1/csm_Feldhamster_16zu9_9b99387161.jpg", onClick: () => console.log("Acción para Dog Accessories") },
+    { label: "BIRDS FOOD", imageUrl: "https://www.stodels.com/wp-content/uploads/2014/10/Stodels-Blogpost-feeding-tips-for-birds-940x705-2023.jpg", onClick: () => console.log("Acción para Cat Litter") },
+    { label: "REPTILES", imageUrl: "https://www.jabberwockreptiles.com/wp-content/uploads/2022/01/Reptiles-Favorite-Food.jpg", onClick: () => console.log("Acción para Cat Accessories") },
   ];
+
+  const handleSubCategoryClick = async (category, species) => {
+   
+    try {
+      navigatelink(`/featured?category=${category}&species=${species}`);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      
+    }
+    
+  };
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -53,7 +65,7 @@ function HomeScreen() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get("/api/products");
-        console.log("Data on HomeScreen:", result.data); // Agrega este log para verificar los datos
+        console.log("Data on HomeScreen:", result.data); 
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
@@ -70,7 +82,7 @@ function HomeScreen() {
         <title>MY PET SHOP</title>
       </Helmet>
 
-      {/* Checkbox for toggling buttons */}
+     
 
      
 
@@ -81,13 +93,13 @@ function HomeScreen() {
 
       <div className="category-Pets-buttons-container">
         {categoryButtonsPets.map((button, index) => (
-          <button key={index} onClick={button.onClick} className="category-Pet-button">
-            <div className="button-Pet-content">
-              <img src={button.imageUrl} alt={button.label} />
-              <span>{button.label}</span>
-            </div>
-          </button>
-        ))}
+        <button key={index} onClick={() => handleSubCategoryClick('FOOD', button.label.split(' ')[0])} className="category-Pet-button">
+           <div className="button-Pet-content">
+             <img src={button.imageUrl} alt={button.label} />
+             <span>{button.label}</span>
+           </div>
+        </button>
+            ))}
       </div>
       <h1>Most Selled Products</h1>
 

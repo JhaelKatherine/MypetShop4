@@ -14,7 +14,7 @@ const FilterLogic = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSpecies, setSelectedSpecies] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [filterApplied, setFilterApplied] = useState(false); // Nuevo estado
+  const [filterApplied, setFilterApplied] = useState(false); 
   const navigate = useNavigate();
   const location = useLocation();
   const [loadingProducts, setLoadingProducts] = useState(true);
@@ -23,7 +23,7 @@ const FilterLogic = () => {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.trim());
     setSelectedSpecies(null);
-    // Actualiza para llamar a la nueva función
+    
     fetchProductsByCategoryAndSpecies(category.trim(), null);
     setActiveCategoryButton(category);
     setActiveSpeciesButton(null);
@@ -36,7 +36,7 @@ const FilterLogic = () => {
   const handleSubCategoryClick = async (subCategory) => {
     const [category, species] = subCategory.split(' ');
   
-    // Antes de llamar a axios.get, inicia la actualización de la URL
+    
   
     setSelectedCategory(category);
     setSelectedSpecies(species);
@@ -49,17 +49,17 @@ const FilterLogic = () => {
       fetchProductsByCategoryAndSpecies(species, category);
 
     } catch (error) {
-      console.error('Error fetching products:', error);
+      
       if (error.response) {
-        // La solicitud se realizó y el servidor respondió con un estado de error
+        
         console.error('Error response:', error.response.data);
         console.error('Error status:', error.response.status);
         console.error('Error headers:', error.response.headers);
       } else if (error.request) {
-        // La solicitud se realizó pero no se recibió respuesta
+        
         console.error('No response received:', error.request);
       } else {
-        // Algo sucedió en la configuración de la solicitud que generó un error
+        
         console.error('Error setting up the request:', error.message);
       }
       setFilteredProducts([]);
@@ -87,14 +87,9 @@ const FilterLogic = () => {
     try {
 
 
-      // Construir la URL basada en los parámetros de filtro
+      
       const filterURL = `/products?category=${category}&species=${species}`;
-      console.log('filterURL:', filterURL);
-
-      // Navegar a la nueva URL sin recargar la página
       navigate(filterURL);
-
-      console.log('Después de navigate');
     } catch (error) {
       console.error('Error fetching products:', error);
       setFilteredProducts([]);
@@ -130,12 +125,12 @@ const FilterLogic = () => {
     const clickedElement = document.activeElement;
   
     if (clickedElement.classList.contains("btn-add-to-cart")) {
-      // Redirige solo si el clic no proviene del botón "Add to cart"
+      
       if (productSlug) {
         navigate(`/product/${productSlug}`);
       } else {
         console.error("Product slug is undefined");
-        // Puedes elegir realizar alguna acción o simplemente no hacer nada
+        
       }
     }
   };
@@ -147,22 +142,35 @@ const FilterLogic = () => {
     const category = params.get("category");
     const species = params.get("species");
   
-    console.log('useEffect - category:', category, 'species:', species);
   
     if (category || species) {
-      // Filtrar productos cuando la URL tenga parámetros de filtro
+      
       handleSubCategoryClick(`${species} ${category}`);
     } else {
-      // En caso contrario, resetear los filtros
+      
       handleResetFilter();
     }
   }, [location.search]);
   
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const category = params.get("category");
+    const species = params.get("species");
   
+ 
+  
+    if (category || species) {
+      
+      handleSubCategoryClick(`${species} ${category}`);
+    } else {
+      
+      handleResetFilter();
+    }
+  }, [location.search]);
   
 
   useEffect(() => {
-    // Limpiar filtros y productos cuando cambie la ruta
+    
     handleResetFilter();
   }, [location.pathname]);
 
@@ -240,10 +248,10 @@ const FilterLogic = () => {
                 <div
                   onClick={() => handleProductClick(product.slug)}
                   style={{
-                    // Aplica estilos de tamaño al div que contiene cada producto
-                    width: '250px', // Puedes ajustar según tus necesidades
-                    height: '350px', // Puedes ajustar según tus necesidades
-                    margin: '0 auto 60px', // Puedes ajustar según tus necesidades
+                    
+                    width: '250px', 
+                    height: '350px', 
+                    margin: '0 auto 60px', 
                     marginBottom: '400px',
                     marginTop: '50px',
                   }}

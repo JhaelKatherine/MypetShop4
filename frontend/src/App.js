@@ -31,6 +31,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProductsScreen from './screens/ProductScreen';
 import FilterLogic from "./screens/FilterLogic"; 
+import FeaturedCategories from './screens/FeaturedCategories';
 import Invoice from "./screens/Invoice";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
@@ -196,6 +197,9 @@ function App() {
   };
 
 
+
+  
+
   return (
     <BrowserRouter>
       <div>
@@ -203,13 +207,14 @@ function App() {
         <header>
           <Navbar>
             <Container>
-              <LinkContainer to="/">
+              <LinkContainer to={`/`} search={`?refresh=${new Date().getTime()}`}>
                 <Navbar.Brand>
                   <img
                     alt="My Pet Shop Logo"
                     src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
                     height="50"
-                    className="d-inline-block align-top"
+                    className="d-inline-block align-top" 
+                                       
                   />
                 </Navbar.Brand>
               </LinkContainer>
@@ -385,8 +390,8 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
-
-              
+              <Route path="/filterPage" element={<FilterLogic/>}/>
+              <Route path="/featured" element={<FeaturedCategories/>}/>
 
                 <Route path="/aboutUs" element={<AboutUs />} />
 
