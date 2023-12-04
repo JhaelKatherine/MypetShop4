@@ -146,7 +146,7 @@ const CheckoutPage = () => {
         return;
       }
     
-      if (error || !isPhoneValid) {
+      if (error) {
         elements.getElement("card").focus();
         return;
       }
