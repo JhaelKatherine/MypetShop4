@@ -21,10 +21,11 @@ export default function SigninScreen() {
   };
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
+  email = email.toLowerCase
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      if (!isEmailValid(email)) {
+      if (!isEmailValid(email.toLowerCase)) {
         toast.error('Please enter a valid email address');
         return;
       }

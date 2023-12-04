@@ -66,11 +66,12 @@ export default function SignupScreen() {
       return;
     }
     try {
+      correctEmail = email.toLowerCase
       const { data } = await Axios.post('/api/users/signup', {
         name,
         lastName,
         userName,
-        email,
+        correctEmail,
         password,
       });
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
@@ -98,24 +99,27 @@ export default function SignupScreen() {
     <div className="form-group">
     <label htmlFor="name">Name</label>
     <input
-    type="text"
-    id="name"
-    className="form-control"
-
-    onChange={(e) => {
+  type="text"
+  id="name"
+  className="form-control"
+  value={name}
+  onChange={(e) => {
     const newName = e.target.value;
     if (newName.length <= 100) {
     setName(newName);
     e.target.setCustomValidity(''); // Limpiar cualquier mensaje de error personalizado
     } else {
-    setName(newName.slice(0, 100)); // Truncar el nombre a 100 caracteres
-    e.target.setCustomValidity('Use a maximum of 100 characters for your name');
+    setName(newName.slice(0, 100)); // Truncar el apellido a 100 caracteres
+    e.target.setCustomValidity('Use a maximum of 100 characters for your last name');
     }
     }}
-    maxLength="100"
-    required
-    autoComplete="off"
-    />
+  maxLength="100"
+  required
+  autoComplete="off"
+/>
+
+
+
     </div>
     <div className="form-group">
     <label htmlFor="lastName">Last Name</label>
@@ -135,7 +139,7 @@ export default function SignupScreen() {
     }}
     required
     autoComplete="off"
-
+    maxLength={100}
     />
     </div>
     
@@ -155,7 +159,7 @@ export default function SignupScreen() {
     e.target.setCustomValidity('Use a maximum of 6 characters for your username');
     }
     }}
-    maxLength="100"
+    maxLength="6"
     required
     autoComplete="off"
 
@@ -209,6 +213,7 @@ e.target.setCustomValidity(error || "This field is required");
 onInput={(e) => e.target.setCustomValidity('')}
 required
 autoComplete="off"
+maxLength={100}
 
 />
 </div>
@@ -223,7 +228,7 @@ onInvalid={(e) => e.target.setCustomValidity("This field is required")}
 onInput={(e) => e.target.setCustomValidity('')}
 required
 autoComplete="off"
-
+maxLength={100}
 />
 </div>
 <button className="submit" type="submit">Sign Up</button>
