@@ -279,9 +279,7 @@ function App() {
             
           </Navbar>
           <div>
-
           <FilterLogic/>
-          
           </div>
        
         </header>
