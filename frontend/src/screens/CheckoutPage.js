@@ -264,11 +264,10 @@ const CheckoutPage = () => {
             maxLength={8}
             value={billingDetails.phone}
             onChange={(e) => {
-              const value = e.target.value;
-              const digitsOnly = value.replace(/\D/g, ''); // Remover todos los caracteres no numéricos
-              setBillingDetails({ ...billingDetails, phone: digitsOnly });
-              setIsPhoneValid(digitsOnly.length === 8);
-            }}
+              const value = e.target.value.replace(/\D/g, '').slice(0, 8);
+    setBillingDetails({ ...billingDetails, phone: value });
+    setIsPhoneValid(value.length === 8); 
+  }}
             
           />
            
