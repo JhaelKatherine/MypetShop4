@@ -18,6 +18,10 @@ export default function CartScreen() {
   const {
     cart: { cartItems },
   } = state;
+  
+  const {
+    userInfo,
+  } = state;
 
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
@@ -34,10 +38,16 @@ export default function CartScreen() {
     ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
 
-  const checkoutHandler = () => {
-    navigate('/shipping');
-  };
 
+  const checkoutHandler = () => {
+
+    if (!userInfo){
+      navigate('/signin');
+    }else{
+      navigate('/shipping');
+    }
+    
+  };
   return (
     <div style={{ marginBottom: '400px' }}>
       <Helmet>

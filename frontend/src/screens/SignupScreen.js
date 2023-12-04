@@ -111,7 +111,9 @@ export default function SignupScreen() {
     e.target.setCustomValidity('Use a maximum of 100 characters for your name');
     }
     }}
+    maxLength="100"
     required
+  
     autoComplete="off"
     />
     </div>
@@ -131,6 +133,8 @@ export default function SignupScreen() {
     e.target.setCustomValidity('Use a maximum of 100 characters for your last name');
     }
     }}
+    maxLength="100"
+
     required
     autoComplete="off"
 
@@ -153,6 +157,7 @@ export default function SignupScreen() {
     e.target.setCustomValidity('Use a maximum of 6 characters for your username');
     }
     }}
+    maxLength="6"
 
     required
     autoComplete="off"
