@@ -37,7 +37,7 @@ button {
   animation: fade 200ms ease-out;
   margin-top: 25px;
   margin-right: 0px;
-
+  margin-left: 50px;
 }
 
 .FormGroup {
