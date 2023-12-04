@@ -31,6 +31,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProductsScreen from './screens/ProductScreen';
 import FilterLogic from "./screens/FilterLogic"; 
+import FeaturedCategories from './screens/FeaturedCategories';
 import Invoice from "./screens/Invoice";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
@@ -401,8 +402,8 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/checkoutpage" element={<CheckoutPage />} />
-
-              
+              <Route path="/filterPage" element={<FilterLogic/>}/>
+              <Route path="/featured" element={<FeaturedCategories/>}/>
 
                 <Route path="/aboutUs" element={<AboutUs />} />
 
