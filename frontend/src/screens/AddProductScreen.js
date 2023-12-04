@@ -22,6 +22,7 @@ export default function AddProductScreen() {
   const [slug, setSlug] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [isValidImage, setIsValidImage] = useState(false);
   const [category, setCategory] = useState('');
   const [species, setSpecies] = useState('');
 
@@ -79,8 +80,8 @@ export default function AddProductScreen() {
 
   const checkImageExists = async (url) => {
     try {
-      const response = await Axios.head(url);
-      return response.status === 200;
+      const response = await fetch(url, { method: 'HEAD' });
+      return response.ok && response.headers.get('Content-Type')?.includes('image');
     } catch (error) {
       return false;
     }
