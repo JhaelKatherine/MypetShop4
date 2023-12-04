@@ -12,6 +12,27 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.image-container {
+  position: relative;
+  overflow: hidden;
+  width: 1300px; 
+  height: 450px;
+  max-width: 1300px;
+  margin: 0 auto; /* Centramos el contenedor */
+
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+@media screen and (max-width: 1300px) {
+  .image-container {
+    max-width: 100%;
+  }
+}
 
 .App-header {
   background-color: #282c34;

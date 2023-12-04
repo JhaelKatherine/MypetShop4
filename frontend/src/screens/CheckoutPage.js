@@ -263,12 +263,9 @@ const CheckoutPage = () => {
             autoComplete="tel"
             value={billingDetails.phone}
             onChange={(e) =>  {
-              const value = e.target.value;
-              if (isValidPhone(value) || value === '') {
-                setBillingDetails({ ...billingDetails, phone: value });
-              } else {
-                setIsNameValid(false);
-              }
+              let value = e.target.value.replace(/\D/g, '');
+              value = value.slice(0, 8);
+              setBillingDetails({ ...billingDetails, phone: value });
             }}
           />
            {!isNameValid && <ErrorMessage>Please enter only numbers</ErrorMessage>}
