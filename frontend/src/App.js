@@ -22,7 +22,6 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import "./Css/homeScreen.css";
-import "./Css/Footer.css";
 import CheckoutPage from './screens/CheckoutPage';
 import AboutUs from "./components/AboutUs";
 import OrderScreen from './screens/OrderScreen';
