@@ -260,7 +260,7 @@ export default function ShippingAddressScreen() {
     onChange={(e) => {
       let value = e.target.value.replace(/\D/g, '');
       value = value.slice(0, 12);
-      if (regex.test(value) || value === '') {
+      if (value === '') {
         setCellPhone(value);
         e.target.setCustomValidity('');
         setCellPhoneError('');
