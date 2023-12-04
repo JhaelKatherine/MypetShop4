@@ -22,7 +22,6 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import './App.css';
 import "./Css/homeScreen.css";
-import "./Css/Footer.css";
 import CheckoutPage from './screens/CheckoutPage';
 import AboutUs from "./components/AboutUs";
 import OrderScreen from './screens/OrderScreen';
@@ -36,7 +35,7 @@ import Invoice from "./screens/Invoice";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
+import Footer from './screens/Footer';
 
 
 function App() {
@@ -106,99 +105,6 @@ function App() {
   const handleButtonClick = (color) => {
     setButtonContainerColor(color);
   };
-
-  const Footer = () => {
-    const openSocialMedia = (socialMedia) => {
-
-      let url = '';
-      switch (socialMedia) {
-        case 'instagram':
-          url = 'https://www.instagram.com/petshopcorp7/';
-          break;
-        case 'tiktok':
-          url = 'https://www.tiktok.com/@my_pet_shop023';
-          break;
-        case 'facebook':
-          url = 'https://www.facebook.com/profile.php?id=61550120834894';
-          break;
-
-        default:
-          url = '';
-      }
-      window.open(url, '_blank'); 
-    };
-    return (
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="left-section">
-            <div className="logo">
-              <img
-                alt="My Pet Shop Logo"
-                src="https://www.mypetshop.co.za/wp-content/uploads/2019/11/My-petshop-LOGO.png"
-                height="50"
-                className="d-inline-block align-top"
-              />
-            </div>
-            <div className="follow-us">
-              <p>FOLLOW US ON:</p>
-              <div className="social-icons">
-              <a href="#" onClick={() => openSocialMedia('instagram')}>
-                <img
-                  alt="Instagram"
-                  src="https://i.ibb.co/bJdCgX7/instagram-Icon.png"
-                  className="social-icon"
-                />
-              </a>
-              <a href="#" onClick={() => openSocialMedia('tiktok')}>
-                <img
-                  alt="Tiktok"
-                  src="https://i.ibb.co/x89mcW1/tiktokk-Icon.png"
-                  className="social-icon"
-                />
-              </a>
-              <a href="#" onClick={() => openSocialMedia('facebook')}>
-                <img
-                  alt="Facebook"
-                  src="https://i.ibb.co/zsVxMJJ/facebook-Icon.png"
-                  className="social-icon"
-                />
-              </a>
-               
-              </div>
-            </div>
-          </div>
-          <div className="center-section">
-            <div className="buy-with-us">
-              <p style={{ color: 'black' }}>BUY WITH US:</p>
-              <ul className="product-list">
-                <li>- FOOD</li>
-                <li>- SNACKS</li>
-                <li>- TOYS</li>
-                <li>- HYGIENE</li>
-              </ul>
-            </div>
-          </div>
-          <div className="right-section">
-            <div className="any-questions">
-              <p style={{ color: 'black' }}>ANY QUESTIONS?</p>
-              <ul className="additional-links">
-                <li>
-                <Link to="/aboutUs" style={{ textDecoration: 'none', color: 'inherit' }}>
-                  About us
-                </Link>
-                </li>
-                
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
-    );
-  };
-
-
-
-  
 
   return (
     <BrowserRouter>
@@ -374,7 +280,10 @@ function App() {
             </Container>
             
           </Navbar>
+          <div>
           <FilterLogic/>
+          </div>
+       
         </header>
         
         
@@ -450,7 +359,8 @@ function App() {
 
           </Container>
         </main>
-        <Footer/>
+        <Footer />
+
       </div>
     </BrowserRouter>
     
