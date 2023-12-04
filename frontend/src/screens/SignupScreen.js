@@ -101,6 +101,7 @@ export default function SignupScreen() {
     type="text"
     id="name"
     className="form-control"
+
     onChange={(e) => {
     const newName = e.target.value;
     if (newName.length <= 100) {
@@ -111,6 +112,7 @@ export default function SignupScreen() {
     e.target.setCustomValidity('Use a maximum of 100 characters for your name');
     }
     }}
+    maxLength="100"
     required
     autoComplete="off"
     />
@@ -153,7 +155,7 @@ export default function SignupScreen() {
     e.target.setCustomValidity('Use a maximum of 6 characters for your username');
     }
     }}
-
+    maxLength="100"
     required
     autoComplete="off"
 
