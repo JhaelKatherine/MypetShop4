@@ -137,9 +137,6 @@ export default function ShippingAddressScreen() {
       ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
       localStorage.setItem('shippingAddress', JSON.stringify({ nit, address, city , fullName}));
       navigate('/checkoutpage');
-      if (!userInfo) {
-        navigate('/signin');
-      }
     } else {
       console.log('Please complete the required fields correctly.');
     }
