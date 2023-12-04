@@ -36,11 +36,12 @@ button {
 .Form {
   animation: fade 200ms ease-out;
   margin-top: 25px;
-  margin-left: 50px;
+  margin-right: 25px;
+
 }
 
 .FormGroup {
-  margin: 0 5px 5px;
+  margin: 0 15px 20px;
   padding: 5px;
   border-style: none;
   background-color: #4180ab;
