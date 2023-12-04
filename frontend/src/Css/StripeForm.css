@@ -10,9 +10,9 @@ button {
   display: flex;
   max-width: -10000px;
   padding: 0 0px; 
-  margin: -220px;
-  margin-bottom: 50px;
-  margin-top: 30px;
+  margin: -250px;
+  margin-bottom: 100px;
+  margin-top: 65px;
 }
 
 .left-section {
@@ -35,7 +35,7 @@ button {
 
 .Form {
   animation: fade 200ms ease-out;
-  margin-top: 65px;
+  margin-top: 10px;
   margin-right: 25px;
 
 }

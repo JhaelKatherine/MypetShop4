@@ -34,6 +34,20 @@ export default function ShippingAddressScreen() {
   const [cityError, setCityError] = useState('');
   const [cellPhoneError, setCellPhoneError] = useState('');
   
+  const handleChange = (e) => {
+    const regex = /^[0-9]*$/;
+    let value = e.target.value;
+    value = value.slice(0, 12);
+    if (regex.test(value) || value === '') {
+      setCellPhone(value);
+      e.target.setCustomValidity('');
+      setCellPhoneError('');
+    } else {
+      e.target.setCustomValidity('Please enter only numbers');
+      setCellPhoneError('Please enter only numbers');
+    }
+  };
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/shipping');
@@ -257,18 +271,7 @@ export default function ShippingAddressScreen() {
     id="cellPhone"
     className="form-control"
     value={cellPhone}
-    onChange={(e) => {
-      const regex = /^[0-9]*$/;
-      const value = e.target.value;
-      if (regex.test(value) || value === '') {
-        setCellPhone(value);
-        e.target.setCustomValidity('');
-        setCellPhoneError('');
-      } else {
-        e.target.setCustomValidity("Please enter only numbers");
-        setCellPhoneError('Please enter only numbers');
-      }
-    }}
+    onChange={handleChange}
     required
   />
   {cellPhoneError && (
