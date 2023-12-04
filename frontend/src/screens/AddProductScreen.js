@@ -80,8 +80,8 @@ export default function AddProductScreen() {
 
   const checkImageExists = async (url) => {
     try {
-      const response = await fetch(url, { method: 'HEAD' });
-      return response.ok && response.headers.get('Content-Type')?.includes('image');
+      const response = await Axios.head(url);
+      return response.headers['content-type'].includes('image');
     } catch (error) {
       return false;
     }
