@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import Button from 'react-bootstrap/esm/Button';
 import { format } from 'date-fns';
+import '../Css/stile.css';
+import empty_plate from '../img/empty_plate.svg'
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,6 +33,7 @@ export default function OrderHistoryScreen() {
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
+    orders: [], // Initialize orders as an empty array
   });
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +65,21 @@ export default function OrderHistoryScreen() {
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
+      ) : orders.length === 0 ? ( // Check if there are no orders
+        <div className="empty-state-container">
+          <div className="empty-state-text">
+            <h2>Oops, this is empty!</h2>
+            <p>Explore our catalog to see what we have to offer.</p>
+            <div className="empty-state-button">
+            <Link to="/">
+              <Button>Explore our catalog</Button>
+           </Link>
+            </div>
+          </div>
+          <div className="empty-state-image">
+            <img src={empty_plate} alt="Empty State" />
+          </div>
+        </div>
       ) : (
         <table className="table">
           <thead>
@@ -75,7 +94,7 @@ export default function OrderHistoryScreen() {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order.NumberProduct}</td>
-                <td>{order.createdAt ? format(new Date(order.createdAt), 'yyyy-MM-dd') : 'Invalid Date'}</td>       
+                <td>{order.createdAt ? format(new Date(order.createdAt), 'MM-dd-yyyy') : 'Invalid Date'}</td>
                 <td>${' '}{order.itemsPrice ? order.itemsPrice.toFixed(2) : 'N/A'}</td>    
                 <td>
                   <Button

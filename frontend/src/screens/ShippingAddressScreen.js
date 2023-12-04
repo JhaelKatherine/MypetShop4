@@ -16,23 +16,25 @@ export default function ShippingAddressScreen() {
     userInfo,
     cart: { shippingAddress, paymentMethod },
   } = state;
+  const MAX_LENGTH = 20;
+
 
   const [fullName, setFullName] = useState(shippingAddress.fullName || '');
   const [nit, setNit] = useState(shippingAddress.nit || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
   const [city, setCity] = useState(shippingAddress.city || '');
   const [cellPhone, setCellPhone] = useState(shippingAddress.cellPhone || '');
-
+  const [fullNameError, setFullNameError] = useState('');
+  const [fullNameExceedError, setFullNameExceedError] = useState('');
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
 
-  const [fullNameError, setFullNameError] = useState('');
   const [nitError,setNitError] = useState('');
 
   const [addressError, setAddressError] = useState('');
   const [cityError, setCityError] = useState('');
   const [cellPhoneError, setCellPhoneError] = useState('');
   
-    useEffect(() => {
+  useEffect(() => {
     if (!userInfo) {
       navigate('/shipping');
     }
@@ -88,6 +90,7 @@ export default function ShippingAddressScreen() {
 
   if (!areRequiredFieldsFilled) {
     console.log('Please complete all required fields except Nit.');
+    // Aquí puedes mostrar un mensaje al usuario indicando que todos los campos requeridos, excepto Nit, deben estar completos
     return;
   }
 
@@ -115,10 +118,14 @@ export default function ShippingAddressScreen() {
     }
   };
   const placeOrder = () => {
+ 
     if (validateForm()) {
       ctxDispatch({ type: 'SAVE_SHIPPING_ADDRESS', payload: { nit, address } });
       localStorage.setItem('shippingAddress', JSON.stringify({ nit, address, city , fullName}));
       navigate('/checkoutpage');
+      if (!userInfo) {
+        navigate('/signin');
+      }
     } else {
       console.log('Please complete the required fields correctly.');
     }
@@ -141,23 +148,27 @@ export default function ShippingAddressScreen() {
     className="form-control"
     value={fullName}
     onChange={(e) => {
-      const regex = /^[A-Za-z\s]+$/;
       const value = e.target.value;
-      if (regex.test(value) || value === '') {
+      if (value.length <= MAX_LENGTH) {
         setFullName(value);
-        e.target.setCustomValidity('');
-        setFullNameError(''); 
+        setFullNameError('');
+        if (value.length === MAX_LENGTH) {
+          setFullNameExceedError('Solo se permiten 20 caracteres');
+        } else {
+          setFullNameExceedError('');
+        }
       } else {
-        e.target.setCustomValidity("Please enter only letters");
-        setFullNameError('Please enter only letters');
+        setFullNameExceedError('Solo se permiten 20 caracteres');
       }
     }}
-    pattern="^[A-Za-z\s]+$"
-    title="Please enter only letters "
   />
   {fullNameError && (
     <div className="error-message">{fullNameError}</div>
   )}
+  {fullNameExceedError && (
+    <div className="error-message">{fullNameExceedError}</div>
+  )}
+  
 </div>
 
 
@@ -277,7 +288,9 @@ export default function ShippingAddressScreen() {
                         <CartScreen2/>
                       </div>
                       <div>
+                      
                       </div>
+                      
                       <div className="d-flex justify-content-end mt-3">
                       <Button variant="primary" type="submit" onClick={placeOrder}>Place the Order</Button>
       </div>
