@@ -23,10 +23,7 @@ const FeaturedCategories= () => {
     const category = params.get("category");
     const species = params.get("species");
   
-    console.log('Featured /useEffect - category:', category, 'species:', species);
-  
     if (category || species) {
-      console.log(' paso del if despues de useEffect - category:', category, 'species:', species);
       handleSubCategoryClick(`${species} ${category}`);
     } else {
     }
