@@ -112,10 +112,10 @@ function App() {
       let url = '';
       switch (socialMedia) {
         case 'instagram':
-          url = 'https://www.instagram.com/petshop_patitas_cbba/';
+          url = 'https://www.instagram.com/petshopcorp7/';
           break;
         case 'tiktok':
-          url = 'https://www.tiktok.com/@gaston_hdyxfhchvq?_t=8hksnUI89AM&_r=1';
+          url = 'https://www.tiktok.com/@my_pet_shop023';
           break;
         case 'facebook':
           url = 'https://www.facebook.com/profile.php?id=61550120834894';
@@ -217,14 +217,7 @@ function App() {
                 <SearchBar />
               </Nav>
               <Nav className="me-auto  w-100  justify-content-end">
-                  <Link to="/aboutUs" className="nav-link">
-                      <img
-                          alt="cart"
-                          src="https://cdn-icons-png.flaticon.com/512/43/43921.png"
-                          height="30"
-                          className="d-inline-block align-top"
-                      />
-                  </Link>
+                  
 
                   <button className="cart-button" onClick={toggleCartMenu}>
           <img
@@ -245,11 +238,11 @@ function App() {
           <div className={`cart-menu-right ${showCartMenu ? 'show' : ''}`}>
             <div className="overlay" onClick={closeCartMenu}></div>
             <div className="cart-menu-content">
-              <span style={{ marginRight: '280px' }}>Your cart</span>
+              <span className= "text-up" >Your shopping cart</span>
               <span onClick={closeCartMenu} className="close-cart">
                 X
               </span>
-              <pre>Product                            Total</pre>
+              
 
               {/* Condición para mostrar el contenido del carrito o el mensaje */}
               {cartItems.length === 0 ? (
@@ -321,7 +314,7 @@ function App() {
                     Subtotal:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                   </div>
                   <Link to="/cart" className="button-margin">
-                  <Button variant="primary" className="button-margin" onClick={closeCartMenu} >Chekout</Button>
+                  <Button variant="primary" className="button-margin" onClick={closeCartMenu} >Checkout</Button>
                   </Link>
                 </div>
               )}
@@ -352,12 +345,7 @@ function App() {
     )}
     {userInfo.isAdmin && (
       <LinkContainer to="/admin/products">
-        <NavDropdown.Item className="nav-dropdown-item">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/4689/4689790.png"
-            alt="Icono de Producto"
-            className="product-icon"
-          />
+        <NavDropdown.Item >
           Products
         </NavDropdown.Item>
       </LinkContainer>

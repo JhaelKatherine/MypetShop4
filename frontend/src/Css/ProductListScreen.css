@@ -1,48 +1,40 @@
-/* Estilo para la fila que contiene el título "Products" */
 .row h1 {
     font-size: 2rem;
     margin-bottom: 20px;
   }
   
-  /* Estilo para el contenedor de los botones */
   .row .col.text-end {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
   }
   
-  /* Estilo para cada producto */
   .col {
-    margin-right: 20px; /* Agregado para dejar espacio entre los productos */
+    margin-right: 20px; 
   }
   
-  /* Estilo para la imagen de cada producto */
   .col img {
     max-width: 150px;
     max-height: 150px;
   }
   
-  /* Estilo para la información del producto */
   .col div {
     text-align: center;
     margin-top: 10px;
   }
   
-  /* Estilo para los botones de Edit y Delete */
   .col div button {
     margin-top: 10px;
   }
   
-  /* Estilo para la paginación */
   .d-flex.justify-content-center.mt-4 {
     margin-top: 20px;
   }
-  /* Agrega este código al final de tu archivo CSS */
 
   .product-container {
-    border: 1px solid #808080; /* Cambia #ffcc00 al color que desees */
-    border-radius: 10px; /* Ajusta el radio de la curvatura según tus preferencias */
-    padding: 10px; /* Ajusta el espacio interno del contenedor según tus preferencias */
-    margin: 10px; /* Ajusta el espacio externo del contenedor según tus preferencias */
+    border: 1px solid #808080; 
+    border-radius: 10px; 
+    padding: 10px; 
+    margin: 10px; 
   }
   

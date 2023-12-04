@@ -45,7 +45,7 @@ const reducer = (state, action) => {
 };
 export default function ProductEditScreen() {
   const navigate = useNavigate();
-  const params = useParams(); // /product/:id
+  const params = useParams();
   const { id: productId } = params;
 
 
@@ -68,7 +68,7 @@ export default function ProductEditScreen() {
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
   const [loading2, setLoading] = useState(false);
-  const [species, setSpecies] = useState(''); // Nueva variable para la especie
+  const [species, setSpecies] = useState(''); 
   const [brandOptions, setBrandOptions] = useState([]);
   const [availableBrands, setAvailableBrands] = useState([]);
   const [brandDisabled, setBrandDisabled] = useState(true);
@@ -140,9 +140,8 @@ export default function ProductEditScreen() {
   const handleImageChange = async (e) => {
     const inputValue = e.target.value;
     setImage(inputValue);
-    setImageError(''); // Limpiar cualquier mensaje de error existente
+    setImageError(''); 
 
-    // Validación de la URL solo si hay algún valor
     if (inputValue.trim() !== '') {
       if (!isValidImageUrl(inputValue)) {
         setImageError('Please enter a valid image URL');
@@ -270,16 +269,19 @@ export default function ProductEditScreen() {
                 className="form-control"
                 value={price}
                 onChange={(e) => {
-                    const enteredValue = e.target.value;
-                    // Verifica si el formato del número decimal es correcto (al menos un dígito seguido opcionalmente por un punto y uno o más dígitos)
-                    if (/^\d+(\.\d*)?$/.test(enteredValue)) {
+                  const enteredValue = e.target.value;
+
+                  if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                    const numericValue = parseFloat(enteredValue);
+            
+                    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+                      setPrice(enteredValue);
+                    } else if (enteredValue === '' || enteredValue === '-') {
                       setPrice(enteredValue);
                     }
-                  }}
-                  min="1"
-                  max="1000"
+                  }
+                }}
                   onKeyDown={(e) => {
-                    // Evita caracteres que no sean números o puntos decimales
                     if (
                       !(
                         (e.key >= '0' && e.key <= '9') ||
@@ -362,24 +364,38 @@ export default function ProductEditScreen() {
             <div className="form-group">
               <label htmlFor="countInStock">Count In Stock</label>
               <input
-                type="number"
+                type="text"
                 id="countInStock"
                 className="form-control"
                 value={countInStock}
                 onChange={(e) => {
-                    const enteredValue = e.target.value.replace(/[e]/gi, ''); // Elimina la letra 'e' en cualquier caso
-                    const regex = /^[0-9]*$/; // Expresión regular para permitir solo números
-                    if (regex.test(enteredValue)) {
+                  const enteredValue = e.target.value;
+
+                  if (enteredValue.length <= 4 && /^\d+(\.\d*)?$|^$/.test(enteredValue)) {
+                    const numericValue = parseFloat(enteredValue);
+            
+                    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 1000) {
+                      setCountInStock(enteredValue);
+                    } else if (enteredValue === '' || enteredValue === '-') {
                       setCountInStock(enteredValue);
                     }
-                  }}
-                  min="1"
-                  max="1000"
-                  onKeyDown={(e) => {
-                    if (e.key === 'e' || e.key === 'E' || ['+', '-', '*', '/', ';', '.', ','].includes(e.key)) {
-                      e.preventDefault(); // Evita la entrada de 'e', 'E', '+' , '-' , '*' y '/'
-                    }
-                  }}
+                  }
+                }}
+                
+                onKeyDown={(e) => {
+                  if (
+                    !(
+                      (e.key >= '0' && e.key <= '9') ||
+                      e.key === '.' ||
+                      e.key === 'Backspace' ||
+                      e.key === 'Delete' ||
+                      e.key === 'ArrowLeft' ||
+                      e.key === 'ArrowRight'
+                    )
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
                 required
               />
             </div>
