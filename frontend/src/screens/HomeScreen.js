@@ -30,7 +30,7 @@ function HomeScreen() {
   const images = [
     'https://i0.wp.com/www.russellfeedandsupply.com/wp-content/uploads/2022/01/canidae-25-off-may-23-banner-1.jpg?ssl=1',
     'https://globalpetfoods.com/wp-content/uploads/2021/10/MicrosoftTeams-image-16-1024x365.png?_t=1636729969',
-    'https://cdn.shoplightspeed.com/shops/614283/files/33298133/primal-freeze-dried-raw-dog-cat-food.jpg',
+    'https://cdn.etailpet.com/media/petcentral/pictures/Primal_Freeze_Dried_-_Banner_-_Oct_2023_.png',
 
   ];
   const [{ loading, error, products }, dispatch] = useReducer(reducer, {
@@ -72,7 +72,7 @@ function HomeScreen() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get("/api/products");
-        console.log("Data on HomeScreen:", result.data); 
+        
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });

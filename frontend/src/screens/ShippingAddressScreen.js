@@ -104,7 +104,7 @@ export default function ShippingAddressScreen() {
 
   if (!areRequiredFieldsFilled) {
     console.log('Please complete all required fields except Nit.');
-    // Aquí puedes mostrar un mensaje al usuario indicando que todos los campos requeridos, excepto Nit, deben estar completos
+    
     return;
   }
 

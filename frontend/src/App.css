@@ -43,6 +43,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-bottom: 50px; /* Agregar margen en la parte inferior del header */
 }
 
 .App-link {
@@ -186,7 +187,7 @@ img.product-icon {
 }
 
 .text-up {
-  margin-right: 210px;
+  margin-right: 190px;
 }
 
 @media screen and (max-width: 568px), (max-height: 900px){
@@ -202,9 +203,7 @@ img.product-icon {
     
   }
 
-  .text-up {
-    margin-right: 180px;
-  }
+
 
   .cart-menu-content {
     max-height: 80vh; 

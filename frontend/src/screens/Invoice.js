@@ -28,7 +28,7 @@ const Invoice = () => {
                     }
                 }
             } catch (error) {
-                console.error('Error al obtener los datos de la factura:', error);
+                console.error('Error getting invoice details:', error);
             }
         };
 
@@ -110,7 +110,7 @@ const Invoice = () => {
 
         let res = await axios.post('/api/send-email', { to, subject, html });
 
-        console.log(res.data);
+        
     };
 
     const sendEmailAndRedirect = () => {
