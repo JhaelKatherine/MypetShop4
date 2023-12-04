@@ -13,6 +13,9 @@
     width: 100px; 
     margin-right: 20px; 
   }
+  .custom-listgroup{
+    margin-bottom: 100px;
+  }
   
   .cart-item-details {
     flex: 1;

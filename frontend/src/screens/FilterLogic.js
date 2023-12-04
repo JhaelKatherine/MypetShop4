@@ -181,6 +181,13 @@ const FilterLogic = () => {
     BIRDS: ["BIRDS FOOD", "BIRDS SNACKS", "BIRDS TOYS", "BIRDS HYGIENE"],
     REPTILES: ["REPTILES FOOD", "REPTILES SNACKS", "REPTILES TOYS", "REPTILES HYGIENE"],
   };
+// Obtén el número total de productos y el número de productos por fila
+const totalProducts = filteredProducts.length;
+const productsPerRow = 4; // Ajusta según la cantidad deseada por fila
+
+// Calcula la cantidad de filas y productos en la última fila
+const rowCount = Math.ceil(totalProducts / productsPerRow);
+const productsInLastRow = totalProducts % productsPerRow || productsPerRow;
 
   return (
     <div key={forceUpdate} className="filter-container">
@@ -241,27 +248,29 @@ const FilterLogic = () => {
     <p style={{ marginBottom: '490px' }}>We are sorry but there are no products in the selected category, please continue browsing for more products.</p>
     
     ) : (
-          <Row>
-            
-{filteredProducts.map((product) => (
-              <Col key={product.slug} lg={3} className="mb-3">
-                <div
-                  onClick={() => handleProductClick(product.slug)}
-                  style={{
-                    
-                    width: '250px', 
-                    height: '350px', 
-                    margin: '0 auto 60px', 
-                    marginBottom: '400px',
-                    marginTop: '50px',
-                  }}
-                >
-                  {product.slug ? <Product product={product} /> : <p></p>}
-                  
-                </div>
-              </Col>
-            ))}
-          </Row>
+      <Row>
+      {filteredProducts.map((product, index) => {
+        const isLastRow = Math.floor(index / productsPerRow) === rowCount - 1;
+        const marginBottom = isLastRow ? '200px' : '0';
+  
+        return (
+          <Col key={product.slug} lg={3} className="mb-3">
+            <div
+              onClick={() => handleProductClick(product.slug)}
+              style={{
+                width: '250px',
+                height: '350px',
+                margin: '0 auto 60px',
+                marginBottom,
+                marginTop: '50px',
+              }}
+            >
+              {product.slug ? <Product product={product} /> : <p></p>}
+            </div>
+          </Col>
+        );
+      })}
+    </Row>
         )}
       </div>
     </div>
