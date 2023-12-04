@@ -26,6 +26,13 @@ const reducer = (state, action) => {
 
 
 function HomeScreen() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = [
+    'https://i0.wp.com/www.russellfeedandsupply.com/wp-content/uploads/2022/01/canidae-25-off-may-23-banner-1.jpg?ssl=1',
+    'https://globalpetfoods.com/wp-content/uploads/2021/10/MicrosoftTeams-image-16-1024x365.png?_t=1636729969',
+    'https://cdn.shoplightspeed.com/shops/614283/files/33298133/primal-freeze-dried-raw-dog-cat-food.jpg',
+
+  ];
   const [{ loading, error, products }, dispatch] = useReducer(reducer, {
     products: [],
     loading: true,
@@ -74,7 +81,21 @@ function HomeScreen() {
     fetchData();
   }, [successDelete]);
   
+  useEffect(() => {
+    const intervalId = setInterval(changeImage, 5000);
 
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [currentImageIndex]);
+
+  const changeImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+  const handleImageClick = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+  
   return (
     <div>
       <Helmet>
@@ -87,7 +108,7 @@ function HomeScreen() {
      
 
       <div className="image-container">
-        <img src="https://i0.wp.com/www.russellfeedandsupply.com/wp-content/uploads/2022/01/canidae-25-off-may-23-banner-1.jpg?ssl=1" alt="promotion" />
+        <img src={images[currentImageIndex]} alt="promotion" />
       </div>
       <h1>Featured Categories</h1>
 
