@@ -261,7 +261,6 @@ const CheckoutPage = () => {
             placeholder="78659542"
             required
             autoComplete="tel"
-            maxLength={8}
             value={billingDetails.phone}
             onChange={(e) => {
               const value = e.target.value.replace(/\D/g, '').slice(0, 8);
