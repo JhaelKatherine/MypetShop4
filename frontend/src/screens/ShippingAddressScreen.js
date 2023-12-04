@@ -258,8 +258,7 @@ export default function ShippingAddressScreen() {
     className="form-control"
     value={cellPhone}
     onChange={(e) => {
-      const regex = /^[0-9]*$/;
-      const value = e.target.value;
+      let value = e.target.value.replace(/\D/g, '');
       value = value.slice(0, 12);
       if (regex.test(value) || value === '') {
         setCellPhone(value);
