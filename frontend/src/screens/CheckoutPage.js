@@ -258,7 +258,7 @@ const CheckoutPage = () => {
             label="Phone"
             id="phone"
             type="tel"
-            placeholder="(941) 555-0123"
+            placeholder="78659542"
             required
             autoComplete="tel"
             maxLength={8}
