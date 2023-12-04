@@ -260,14 +260,7 @@ export default function ShippingAddressScreen() {
     onChange={(e) => {
       let value = e.target.value.replace(/\D/g, '');
       value = value.slice(0, 12);
-      if (value === '') {
-        setCellPhone(value);
-        e.target.setCustomValidity('');
-        setCellPhoneError('');
-      } else {
-        e.target.setCustomValidity("Please enter only numbers");
-        setCellPhoneError('Please enter only numbers');
-      }
+      
     }}
     required
   />
