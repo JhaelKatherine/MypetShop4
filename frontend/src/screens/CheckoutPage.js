@@ -265,8 +265,11 @@ const CheckoutPage = () => {
             value={billingDetails.phone}
             onChange={(e) =>  {
               const value = e.target.value;
-              if (/^\d{0,8}$/.test(value)) {
+              if (/^\d{0,8}$/.test(value)) { 
                 setBillingDetails({ ...billingDetails, phone: value });
+                setIsPhoneValid(value.length === 8); 
+              } else {
+                setIsPhoneValid(false);
               }
             }}
             
