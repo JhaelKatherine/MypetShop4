@@ -258,22 +258,21 @@ const CheckoutPage = () => {
             label="Phone"
             id="phone"
             type="tel"
-            placeholder="78659542"
+            placeholder="(941) 555-0123"
             required
             autoComplete="tel"
             value={billingDetails.phone}
-            onChange={(e) => {
+            onChange={(e) =>  {
               const value = e.target.value;
               if (/^\d{0,8}$/.test(value)) { 
-                setBillingDetails({ ...billingDetails, phone: value });	         
+                setBillingDetails({ ...billingDetails, phone: value });
                 setIsPhoneValid(value.length === 8); 
               } else {
                 setIsPhoneValid(false);
-              }	              
-    
-  }}        
+              }
+            }}
           />
-           
+           {!isNameValid && <ErrorMessage>Please enter only numbers</ErrorMessage>}
         </fieldset>
         <fieldset className="FormGroup">
           <CardField
