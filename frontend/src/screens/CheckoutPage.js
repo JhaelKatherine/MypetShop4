@@ -262,7 +262,7 @@ const CheckoutPage = () => {
             required
             autoComplete="tel"
             value={billingDetails.phone}
-            onChange={(e) => {
+            onChange={(value) => {
               if (/^\d{0,8}$/.test(value)) { 
                 setBillingDetails({ ...billingDetails, phone: value });	         
                 setIsPhoneValid(value.length === 8); 
