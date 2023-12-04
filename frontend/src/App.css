@@ -187,7 +187,7 @@ img.product-icon {
 }
 
 .text-up {
-  margin-right: 210px;
+  margin-right: 190px;
 }
 
 @media screen and (max-width: 568px), (max-height: 900px){
@@ -203,9 +203,7 @@ img.product-icon {
     
   }
 
-  .text-up {
-    margin-right: 180px;
-  }
+
 
   .cart-menu-content {
     max-height: 80vh; 
