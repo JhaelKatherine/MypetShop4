@@ -258,9 +258,17 @@ export default function ShippingAddressScreen() {
     className="form-control"
     value={cellPhone}
     onChange={(e) => {
-      let value = e.target.value.replace(/\D/g, '');
+      const regex = /^[0-9]*$/;
+      const value = e.target.value;
       value = value.slice(0, 12);
-      
+      if (regex.test(value) || value === '') {
+        setCellPhone(value);
+        e.target.setCustomValidity('');
+        setCellPhoneError('');
+      } else {
+        e.target.setCustomValidity("Please enter only numbers");
+        setCellPhoneError('Please enter only numbers');
+      }
     }}
     required
   />
