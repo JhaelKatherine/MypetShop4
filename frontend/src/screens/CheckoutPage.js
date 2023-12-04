@@ -146,7 +146,7 @@ const CheckoutPage = () => {
         return;
       }
     
-      if (error) {
+      if (error || !isPhoneValid) {
         elements.getElement("card").focus();
         return;
       }
@@ -274,7 +274,7 @@ const CheckoutPage = () => {
             }}
             
           />
-           {!isNameValid && <ErrorMessage>Please enter only numbers</ErrorMessage>}
+           
         </fieldset>
         <fieldset className="FormGroup">
           <CardField
@@ -286,7 +286,7 @@ const CheckoutPage = () => {
           {error && <ErrorMessage>Please enter valid data in all fields</ErrorMessage>}
         </fieldset>
         
-        <SubmitButton processing={processing} error={error} disabled={!stripe}>
+        <SubmitButton processing={processing} error={error} disabled={!stripe  || !isPhoneValid} onClick >
           Pay Now
         </SubmitButton>
         
