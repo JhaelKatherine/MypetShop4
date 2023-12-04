@@ -281,7 +281,7 @@ const CheckoutPage = () => {
           {error && <ErrorMessage>Please enter valid data in all fields</ErrorMessage>}
         </fieldset>
         
-        <SubmitButton processing={processing} error={error} disabled={!stripe  || !isPhoneValid} onClick >
+        <SubmitButton processing={processing} error={error} disabled={!stripe}>
           Pay Now
         </SubmitButton>
         
