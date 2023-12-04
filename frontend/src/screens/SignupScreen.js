@@ -39,7 +39,7 @@ export default function SignupScreen() {
     
   const isPasswordValid = (password) => {
 
-    const MIN_PASSWORD_LENGTH = 8; // Longitud mínima de la contraseña
+    const MIN_PASSWORD_LENGTH = 8;
     const minLengthMessage = 'Use 8 characters minimum for the password';
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
     
