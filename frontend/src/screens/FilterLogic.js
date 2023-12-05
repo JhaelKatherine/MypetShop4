@@ -19,6 +19,7 @@ const FilterLogic = () => {
   const location = useLocation();
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [updateCounter, setUpdateCounter] = useState(0);
+  const [pageTitle, setPageTitle] = useState('');
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.trim());
@@ -85,9 +86,6 @@ const FilterLogic = () => {
     setLoadingProducts(true);
 
     try {
-
-
-      
       const filterURL = `/products?category=${category}&species=${species}`;
       navigate(filterURL);
     } catch (error) {
@@ -109,11 +107,11 @@ const FilterLogic = () => {
   
 
   const categoryButtons = [
-    { label: "\u00A0\u00A0\u00A0\u00A0DOG\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png" },
-    { label: "\u00A0\u00A0\u00A0\u00A0CAT\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn.icon-icons.com/icons2/2242/PNG/512/gato_icon_134883.png" },
-    { label: " RODENTS", imageUrl: "https://cdn-icons-png.flaticon.com/512/1905/1905235.png"},
-    { label: "\u00A0\u00A0\u00A0\u00A0\u00A0BIRDS\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/6622/6622649.png" },
-    { label: " REPTILES\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/2809/2809783.png"},
+    { label: "\u00A0\u00A0\u00A0\u00A0DOG\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://icones.pro/wp-content/uploads/2021/11/icone-de-chien-noir.png" },
+    { label: "\u00A0\u00A0\u00A0\u00A0CAT\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://i.ibb.co/K6pnYW5/gato.png" },
+    { label: " RODENTS", imageUrl: "https://i.ibb.co/qdvv97P/raton.png"},
+    { label: "\u00A0\u00A0\u00A0\u00A0\u00A0BIRDS\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://i.ibb.co/YkNhK7r/pajaro.png" },
+    { label: " REPTILES\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://i.ibb.co/yXRPJy2/tortuga-4.png"},
   ];
 
   const extractCategoryAndSpecies = (label) => {
@@ -139,15 +137,15 @@ const FilterLogic = () => {
   
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const category = params.get("category");
-    const species = params.get("species");
-  
-  
+    const category = params.get('category');
+    const species = params.get('species');
+ 
     if (category || species) {
-      
+      const title = `${species ? `${species} ` : ''}${category}`;
+      setPageTitle(title);
       handleSubCategoryClick(`${species} ${category}`);
     } else {
-      
+      setPageTitle('');
       handleResetFilter();
     }
   }, [location.search]);
@@ -181,6 +179,11 @@ const FilterLogic = () => {
     BIRDS: ["BIRDS FOOD", "BIRDS SNACKS", "BIRDS TOYS", "BIRDS HYGIENE"],
     REPTILES: ["REPTILES FOOD", "REPTILES SNACKS", "REPTILES TOYS", "REPTILES HYGIENE"],
   };
+const totalProducts = filteredProducts.length;
+const productsPerRow = 4; 
+
+const rowCount = Math.ceil(totalProducts / productsPerRow);
+const productsInLastRow = totalProducts % productsPerRow || productsPerRow;
 
   return (
     <div key={forceUpdate} className="filter-container">
@@ -212,7 +215,7 @@ const FilterLogic = () => {
                 <img
                   src={button.imageUrl}
                   alt={button.label}
-                  style={{ width: '50px', height: '50px' }}
+                  style={{ width: '35px', height: '35px' }}
                 />
                 <span style={{ marginBottom: '5px' }}>{button.label}</span>
               </div>
@@ -235,33 +238,37 @@ const FilterLogic = () => {
           </div>
         ))}
       </label>
+      {pageTitle && (       <h3 style={{ marginTop: '40px', marginLeft: '312px', fontWeight: 'bold' }}>{pageTitle}</h3>    )}
+
       <div className="products">
         {filterApplied ? (
           
     <p style={{ marginBottom: '490px' }}>We are sorry but there are no products in the selected category, please continue browsing for more products.</p>
     
     ) : (
-          <Row>
-            
-{filteredProducts.map((product) => (
-              <Col key={product.slug} lg={3} className="mb-3">
-                <div
-                  onClick={() => handleProductClick(product.slug)}
-                  style={{
-                    
-                    width: '250px', 
-                    height: '350px', 
-                    margin: '0 auto 60px', 
-                    marginBottom: '400px',
-                    marginTop: '50px',
-                  }}
-                >
-                  {product.slug ? <Product product={product} /> : <p></p>}
-                  
-                </div>
-              </Col>
-            ))}
-          </Row>
+      <Row>
+      {filteredProducts.map((product, index) => {
+        const isLastRow = Math.floor(index / productsPerRow) === rowCount - 1;
+        const marginBottom = isLastRow ? '200px' : '0';
+  
+        return (
+          <Col key={product.slug} lg={3} className="mb-3">
+            <div
+              onClick={() => handleProductClick(product.slug)}
+              style={{
+                width: '250px',
+                height: '350px',
+                margin: '0 auto 60px',
+                marginBottom,
+                marginTop: '50px',
+              }}
+            >
+              {product.slug ? <Product product={product} /> : <p></p>}
+            </div>
+          </Col>
+        );
+      })}
+    </Row>
         )}
       </div>
     </div>

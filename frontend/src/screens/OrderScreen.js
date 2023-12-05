@@ -68,9 +68,7 @@ export default function OrderScreen() {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div style={{ marginBottom: '400px' }}>
-      <Helmet>
-        <title>Order Details</title>
-      </Helmet>
+
       <h2 className="my-3"> Information about your order </h2>
       <h6>
       <span style={{ fontWeight: 'bold' }}>ID:</span> {order.NumberProduct}
@@ -87,37 +85,55 @@ export default function OrderScreen() {
        <Row>
         <Col md={8}>
           <Card className="mb-3">
-            <Card.Body>
-            <Card.Title style={{ textAlign: 'left' }}>Items</Card.Title>  
-                        <ListGroup variant="flush">
-                {order.orderItems.map((item) => (
-                  <ListGroup.Item key={item._id}>
-                  <Row className="align-items-center">
-                    <Col md={3} className="text-left">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="img-fluid rounded img-thumbnail"
-                      />
-                    </Col>
-                    <Col md={3} className="text-left">
-                     <span>{item.name}</span>
-                    </Col>
-                    <Col md={2} className="text-left">
-                      <span>{item.quantity}</span>
-                    </Col>
-                    <Col md={2} className="text-left">
-                      ${' '}{item.price }
-                    </Col>
-                    <Col md={2} className="text-left">
-                      ${' '}{(item.price * item.quantity)}
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-                
-                ))}
-              </ListGroup>
-            </Card.Body>
+          <Card.Body>
+  <Card.Title style={{ textAlign: 'left' }}>Items</Card.Title>  
+  <ListGroup variant="flush">
+    <ListGroup.Item key="header">
+      <Row className="align-items-center">
+        <Col md={3} className="text-left">
+          <strong>Image</strong>
+        </Col>
+        <Col md={3} className="text-left">
+          <strong>Name</strong>
+        </Col>
+        <Col md={2} className="text-left">
+          <strong>Quantity</strong>
+        </Col>
+        <Col md={2} className="text-left">
+          <strong>Price</strong>
+        </Col>
+        <Col md={2} className="text-left">
+          <strong>Total</strong>
+        </Col>
+      </Row>
+    </ListGroup.Item>
+    {order.orderItems.map((item) => (
+      <ListGroup.Item key={item._id}>
+        <Row className="align-items-center">
+          <Col md={3} className="text-left">
+            <img
+              src={item.image}
+              alt={item.name}
+              className="img-fluid rounded img-thumbnail"
+            />
+          </Col>
+          <Col md={3} className="text-left">
+            <span>{item.name}</span>
+          </Col>
+          <Col md={2} className="text-left">
+            <span>{item.quantity}</span>
+          </Col>
+          <Col md={2} className="text-left">
+            ${' '}{item.price}
+          </Col>
+          <Col md={2} className="text-left">
+            ${' '}{(item.price * item.quantity)}
+          </Col>
+        </Row>
+      </ListGroup.Item>
+    ))}
+  </ListGroup>
+</Card.Body>
           </Card>
         </Col>
         <Col md={4}>

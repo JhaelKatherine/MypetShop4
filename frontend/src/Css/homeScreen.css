@@ -43,11 +43,7 @@
   max-width: 70%; 
 }
 
-.product-container img {
-  border: none; 
 
-  max-width: 70%; 
-}
 .filter-container {
   margin-left: 0px; 
   margin-right: 0px; 
@@ -225,3 +221,19 @@
 .subcategory-button:hover {
   background-color: #f0f0f0; 
 }
+
+
+/* Tu hoja de estilos existente */
+.mb-3.last-row {
+  /* Estilos específicos para la última fila */
+  margin-bottom: 200px; /* O ajusta según tus necesidades */
+}
+
+
+
+
+
+
+
+
+

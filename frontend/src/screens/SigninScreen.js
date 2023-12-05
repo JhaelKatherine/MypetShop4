@@ -43,9 +43,7 @@ export default function SigninScreen() {
   return (
     <>
       <div className="blue-background"> 
-        <Helmet>
-          <title>Sign In</title>
-        </Helmet>
+
         <div className="form-container">
           <div className="centered-title">
             <h1>Sign In</h1>

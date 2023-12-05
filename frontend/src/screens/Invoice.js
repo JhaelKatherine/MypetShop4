@@ -121,7 +121,7 @@ const Invoice = () => {
 
 
     if (!invoiceData) {
-        return <div>Cargando factura...</div>;
+        return <div>Loading invoice...</div>;
     }
 
     return (
