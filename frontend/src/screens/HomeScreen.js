@@ -52,7 +52,7 @@ function HomeScreen() {
     { label: "CAT FOOD", imageUrl: "https://laverdadnoticias.com/__export/1679601873554/sites/laverdad/img/2023/03/23/mishicomiendo.jpg_1953115887.jpg", onClick: () => console.log("Acción para Cat Food") },
     { label: "RODENTS FOOD", imageUrl: "https://www.tierpark-berlin.de/fileadmin/_processed_/e/1/csm_Feldhamster_16zu9_9b99387161.jpg", onClick: () => console.log("Acción para Dog Accessories") },
     { label: "BIRDS FOOD", imageUrl: "https://www.stodels.com/wp-content/uploads/2014/10/Stodels-Blogpost-feeding-tips-for-birds-940x705-2023.jpg", onClick: () => console.log("Acción para Cat Litter") },
-    { label: "REPTILES", imageUrl: "https://www.jabberwockreptiles.com/wp-content/uploads/2022/01/Reptiles-Favorite-Food.jpg", onClick: () => console.log("Acción para Cat Accessories") },
+    { label: "REPTILES FOOD", imageUrl: "https://www.jabberwockreptiles.com/wp-content/uploads/2022/01/Reptiles-Favorite-Food.jpg", onClick: () => console.log("Acción para Cat Accessories") },
   ];
 
   const handleSubCategoryClick = async (category, species) => {
@@ -100,7 +100,7 @@ function HomeScreen() {
     <div>
       <Helmet>
         
-        <title>MY PET SHOP</title>
+        <title>My pet shop</title>
       </Helmet>
 
      

@@ -109,11 +109,11 @@ const FilterLogic = () => {
   
 
   const categoryButtons = [
-    { label: "\u00A0\u00A0\u00A0\u00A0DOG\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/91/91544.png" },
-    { label: "\u00A0\u00A0\u00A0\u00A0CAT\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn.icon-icons.com/icons2/2242/PNG/512/gato_icon_134883.png" },
-    { label: " RODENTS", imageUrl: "https://cdn-icons-png.flaticon.com/512/1905/1905235.png"},
-    { label: "\u00A0\u00A0\u00A0\u00A0\u00A0BIRDS\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/6622/6622649.png" },
-    { label: " REPTILES\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://cdn-icons-png.flaticon.com/512/2809/2809783.png"},
+    { label: "\u00A0\u00A0\u00A0\u00A0DOG\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://icones.pro/wp-content/uploads/2021/11/icone-de-chien-noir.png" },
+    { label: "\u00A0\u00A0\u00A0\u00A0CAT\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://i.ibb.co/K6pnYW5/gato.png" },
+    { label: " RODENTS", imageUrl: "https://i.ibb.co/qdvv97P/raton.png"},
+    { label: "\u00A0\u00A0\u00A0\u00A0\u00A0BIRDS\u00A0\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://i.ibb.co/YkNhK7r/pajaro.png" },
+    { label: " REPTILES\u00A0\u00A0\u00A0\u00A0", imageUrl: "https://i.ibb.co/yXRPJy2/tortuga-4.png"},
   ];
 
   const extractCategoryAndSpecies = (label) => {
@@ -219,7 +219,7 @@ const productsInLastRow = totalProducts % productsPerRow || productsPerRow;
                 <img
                   src={button.imageUrl}
                   alt={button.label}
-                  style={{ width: '50px', height: '50px' }}
+                  style={{ width: '35px', height: '35px' }}
                 />
                 <span style={{ marginBottom: '5px' }}>{button.label}</span>
               </div>
