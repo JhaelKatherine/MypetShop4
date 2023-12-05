@@ -50,9 +50,6 @@ export default function CartScreen() {
   };
   return (
     <div style={{ marginBottom: '400px' }}>
-      <Helmet>
-        <title>Shopping Cart</title>
-      </Helmet>
       <h1>Shopping Cart</h1>
       <Row>
         <Col md={8}>

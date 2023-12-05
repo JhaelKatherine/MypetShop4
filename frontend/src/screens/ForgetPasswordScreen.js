@@ -41,9 +41,6 @@ export default function ForgetPasswordScreen() {
   return (
     <>
     <div className="blue-background">
-    <Helmet>
-        <title>Forget Password</title>
-      </Helmet>
       <div className="form-container">
       <div className="centered-title">
          <h1>Forget Password</h1>

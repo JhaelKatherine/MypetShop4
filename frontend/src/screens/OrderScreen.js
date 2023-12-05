@@ -68,9 +68,7 @@ export default function OrderScreen() {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div style={{ marginBottom: '400px' }}>
-      <Helmet>
-        <title>Order Details</title>
-      </Helmet>
+
       <h2 className="my-3"> Information about your order </h2>
       <h6>
       <span style={{ fontWeight: 'bold' }}>ID:</span> {order.NumberProduct}
