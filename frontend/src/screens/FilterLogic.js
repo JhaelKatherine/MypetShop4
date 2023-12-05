@@ -19,6 +19,7 @@ const FilterLogic = () => {
   const location = useLocation();
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [updateCounter, setUpdateCounter] = useState(0);
+  const [pageTitle, setPageTitle] = useState('');
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.trim());
@@ -85,9 +86,6 @@ const FilterLogic = () => {
     setLoadingProducts(true);
 
     try {
-
-
-      
       const filterURL = `/products?category=${category}&species=${species}`;
       navigate(filterURL);
     } catch (error) {
@@ -139,15 +137,15 @@ const FilterLogic = () => {
   
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const category = params.get("category");
-    const species = params.get("species");
-  
-  
+    const category = params.get('category');
+    const species = params.get('species');
+ 
     if (category || species) {
-      
+      const title = `${species ? `${species} ` : ''}${category}`;
+      setPageTitle(title);
       handleSubCategoryClick(`${species} ${category}`);
     } else {
-      
+      setPageTitle('');
       handleResetFilter();
     }
   }, [location.search]);
@@ -181,11 +179,9 @@ const FilterLogic = () => {
     BIRDS: ["BIRDS FOOD", "BIRDS SNACKS", "BIRDS TOYS", "BIRDS HYGIENE"],
     REPTILES: ["REPTILES FOOD", "REPTILES SNACKS", "REPTILES TOYS", "REPTILES HYGIENE"],
   };
-// Obtén el número total de productos y el número de productos por fila
 const totalProducts = filteredProducts.length;
-const productsPerRow = 4; // Ajusta según la cantidad deseada por fila
+const productsPerRow = 4; 
 
-// Calcula la cantidad de filas y productos en la última fila
 const rowCount = Math.ceil(totalProducts / productsPerRow);
 const productsInLastRow = totalProducts % productsPerRow || productsPerRow;
 
@@ -242,6 +238,8 @@ const productsInLastRow = totalProducts % productsPerRow || productsPerRow;
           </div>
         ))}
       </label>
+      {pageTitle && (       <h3 style={{ marginTop: '40px', marginLeft: '312px', fontWeight: 'bold' }}>{pageTitle}</h3>    )}
+
       <div className="products">
         {filterApplied ? (
           
